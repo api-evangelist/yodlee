@@ -1,0 +1,43 @@
+aid: yodlee
+name: Yodlee
+description: >-
+  Yodlee is a financial data aggregation platform providing unified API access
+  to bank accounts, transactions, and financial data across institutions.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Unified API
+  - Financial Data
+  - Data Aggregation
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: yodlee:yodlee
+    name: Yodlee
+    description: >-
+      Yodlee is a financial data aggregation platform providing unified API
+      access to bank accounts, transactions, and financial data across
+      institutions.
+    humanURL: https://www.yodlee.com/
+    tags:
+      - Unified API
+      - Financial Data
+      - Aggregation
+    properties:
+      - type: Documentation
+        url: https://developer.yodlee.com/
+      - type: Getting Started
+        url: https://developer.yodlee.com/docs/getting-started
+common:
+  - type: Website
+    url: https://www.yodlee.com/
+  - type: Documentation
+    url: https://developer.yodlee.com/
+  - type: GitHub Organization
+    url: https://github.com/yodlee
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
