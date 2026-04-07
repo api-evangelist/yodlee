@@ -6,9 +6,9 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Unified API
-  - Financial Data
   - Data Aggregation
+  - Financial Data
+  - Unified API
 url: >-
   https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/apis.yml
 created: '2026-03-27'
@@ -23,9 +23,9 @@ apis:
       institutions.
     humanURL: https://www.yodlee.com/
     tags:
-      - Unified API
-      - Financial Data
       - Aggregation
+      - Financial Data
+      - Unified API
     properties:
       - type: Documentation
         url: https://developer.yodlee.com/
