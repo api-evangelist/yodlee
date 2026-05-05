@@ -1,0 +1,68 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://production.api.yodlee.com/ysl/transactions?baseType=DEBIT&fromDate=2026-01-01&toDate=2026-01-31&top=10",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Api-Version": "1.1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8"
+    },
+    "body": {
+      "transaction": [
+        {
+          "id": 10024815,
+          "amount": {
+            "amount": 45.67,
+            "currency": "USD"
+          },
+          "baseType": "DEBIT",
+          "categoryType": "EXPENSE",
+          "category": "Food & Dining",
+          "categoryId": 1,
+          "date": "2026-01-15",
+          "description": {
+            "original": "STARBUCKS STORE 12345",
+            "consumer": "Starbucks",
+            "simple": "Coffee Shop"
+          },
+          "accountId": 12345678,
+          "status": "POSTED",
+          "type": "DEBIT",
+          "sourceId": "TXN_001",
+          "merchant": {
+            "name": "Starbucks",
+            "categoryLabel": ["Food & Beverage"]
+          }
+        },
+        {
+          "id": 10024816,
+          "amount": {
+            "amount": 120.00,
+            "currency": "USD"
+          },
+          "baseType": "DEBIT",
+          "categoryType": "EXPENSE",
+          "category": "Utilities",
+          "categoryId": 8,
+          "date": "2026-01-10",
+          "description": {
+            "original": "ELECTRIC SERVICE PAYMENT",
+            "consumer": "Electric Company",
+            "simple": "Utilities"
+          },
+          "accountId": 12345678,
+          "status": "POSTED",
+          "type": "DEBIT"
+        }
+      ],
+      "link": {
+        "next": "https://production.api.yodlee.com/ysl/transactions?skip=10&top=10"
+      }
+    }
+  }
+}
