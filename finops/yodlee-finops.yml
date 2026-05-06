@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,145 +9,62 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Yodlee
 providerId: yodlee
-publisherName: Yodlee
-serviceCategory: API
+publisherName: Yodlee, Inc.
+serviceCategory: Financial Data Aggregation
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Financial Data
   - Data Aggregation
-  - Banking
-  - Fintech
-  - Open Finance
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Yodlee API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: |
+  Yodlee's commercial model is a sales-negotiated B2B contract; this artifact is a
+  Contact Sales placeholder pending the customer's master agreement.
+sources:
+  - https://www.yodlee.com/products
+notes: |
+  Yodlee does not publish per-meter pricing publicly. Meter and FOCUS column values
+  below are minimal placeholders pending the signed Yodlee data-services agreement.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Contact Sales
+  billingFrequency: Per-Invoice
   billingCurrency: USD
   chargeCategories:
     - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Yodlee
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Financial Data Aggregation
   ProviderName: Yodlee
-  PublisherName: Yodlee
-  InvoiceIssuerName: Yodlee
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Yodlee, Inc.
+  InvoiceIssuerName: Yodlee, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
+  - name: linked_accounts
+    description: Aggregated end-user financial accounts under the cobrand; commonly the
+      primary commercial unit on Yodlee invoices.
+    unit: account
+    aggregation: count
+  - name: api_calls
+    description: API call volume (FastLink / Aggregation / Verification / Transactions);
+      priced per the cobrand agreement.
     unit: request
     aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Yodlee Core API
-    baseURL: https://production.api.yodlee.com/ysl
-    tags:
-      - Financial Data
-      - Aggregation
-      - Transactions
-      - Accounts
-      - Banking
-      - Investments
-    serviceName: Yodlee Core API
-    serviceCategory: API
-  - name: Yodlee Account Verification API
-    baseURL: https://production.api.yodlee.com/ysl
-    tags:
-      - Account Verification
-      - Banking
-      - Fintech
-      - KYC
-    serviceName: Yodlee Account Verification API
-    serviceCategory: API
-  - name: Yodlee FastLink
-    baseURL: ''
-    tags:
-      - Account Linking
-      - Widget
-      - Embedded Finance
-    serviceName: Yodlee FastLink
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+principles:
+  - name: Visibility
+    description: Visibility comes from cobrand-level reports issued by the Yodlee account
+      team rather than a self-serve usage API.
+  - name: Allocation
+    description: Allocate Yodlee spend by cobrand identifier and by downstream product /
+      use case (origination, verification, PFM).
+  - name: Optimization
+    description: Optimize via refresh-cadence policy, MFA / OAuth coverage, and pruning
+      stale linked accounts to reduce billable account counts.
+  - name: Accountability
+    description: Spend ownership sits with the data / risk / lending product owner who
+      signed the Yodlee master agreement.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
