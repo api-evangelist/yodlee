@@ -43,7 +43,7 @@ apis:
         url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developer.yodlee.com/docs/getting-started
 
   - aid: yodlee:yodlee-account-verification-api
@@ -87,11 +87,11 @@ common:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs
   - type: OpenAPI
     url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/yodlee
   - type: SDK
     url: https://github.com/Yodlee/java-sdk
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
   - type: Vocabulary
     url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/vocabulary/yodlee-vocabulary.yml
