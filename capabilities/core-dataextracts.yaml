@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — DataExtracts
+  description: 'Yodlee Core APIs — DataExtracts. 2 operations. Lead operation: Get Events. Self-contained Naftiko capability
+    covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - DataExtracts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-dataextracts
+    baseUri: ''
+    description: Yodlee Core APIs — DataExtracts business capability. Self-contained, no shared references.
+    resources:
+    - name: dataExtracts-events
+      path: /dataExtracts/events
+      operations:
+      - name: getdataextractsevents
+        method: GET
+        description: Get Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: query
+          type: string
+          description: Event Name
+          required: true
+        - name: fromDate
+          in: query
+          type: string
+          description: From DateTime (YYYY-MM-DDThh:mm:ssZ)
+          required: true
+        - name: toDate
+          in: query
+          type: string
+          description: To DateTime (YYYY-MM-DDThh:mm:ssZ)
+          required: true
+    - name: dataExtracts-userData
+      path: /dataExtracts/userData
+      operations:
+      - name: getdataextractsuserdata
+        method: GET
+        description: Get userData
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fromDate
+          in: query
+          type: string
+          description: From DateTime (YYYY-MM-DDThh:mm:ssZ)
+          required: true
+        - name: loginName
+          in: query
+          type: string
+          description: Login Name
+          required: true
+        - name: toDate
+          in: query
+          type: string
+          description: To DateTime (YYYY-MM-DDThh:mm:ssZ)
+          required: true
+  exposes:
+  - type: rest
+    namespace: core-dataextracts-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — DataExtracts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/dataextracts/events
+      name: dataextracts-events
+      description: REST surface for dataExtracts-events.
+      operations:
+      - method: GET
+        name: getdataextractsevents
+        description: Get Events
+        call: core-dataextracts.getdataextractsevents
+        with:
+          eventName: rest.eventName
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/dataextracts/userdata
+      name: dataextracts-userdata
+      description: REST surface for dataExtracts-userData.
+      operations:
+      - method: GET
+        name: getdataextractsuserdata
+        description: Get userData
+        call: core-dataextracts.getdataextractsuserdata
+        with:
+          fromDate: rest.fromDate
+          loginName: rest.loginName
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-dataextracts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — DataExtracts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-events
+      description: Get Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-dataextracts.getdataextractsevents
+      with:
+        eventName: tools.eventName
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-userdata
+      description: Get userData
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-dataextracts.getdataextractsuserdata
+      with:
+        fromDate: tools.fromDate
+        loginName: tools.loginName
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.

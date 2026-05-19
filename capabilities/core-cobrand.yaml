@@ -1,0 +1,308 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — Cobrand
+  description: 'Yodlee Core APIs — Cobrand. 7 operations. Lead operation: Get Subscribed Events. Self-contained Naftiko capability
+    covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - Cobrand
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-cobrand
+    baseUri: ''
+    description: Yodlee Core APIs — Cobrand business capability. Self-contained, no shared references.
+    resources:
+    - name: cobrand-config-notifications-events
+      path: /cobrand/config/notifications/events
+      operations:
+      - name: getsubscribedevents
+        method: GET
+        description: Get Subscribed Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: query
+          type: string
+          description: eventName
+    - name: cobrand-config-notifications-events-eventName
+      path: /cobrand/config/notifications/events/{eventName}
+      operations:
+      - name: createsubscriptionevent
+        method: POST
+        description: Subscribe Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: path
+          type: string
+          description: eventName
+          required: true
+        - name: eventRequest
+          in: body
+          type: string
+          description: eventRequest
+          required: true
+      - name: deletesubscribedevent
+        method: DELETE
+        description: Delete Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: path
+          type: string
+          description: eventName
+          required: true
+      - name: updatesubscribedevent
+        method: PUT
+        description: Update Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: path
+          type: string
+          description: eventName
+          required: true
+        - name: eventRequest
+          in: body
+          type: string
+          description: eventRequest
+          required: true
+    - name: cobrand-login
+      path: /cobrand/login
+      operations:
+      - name: cobrandlogin
+        method: POST
+        description: Cobrand Login
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cobrandLoginRequest
+          in: body
+          type: string
+          description: cobrandLoginRequest
+          required: true
+    - name: cobrand-logout
+      path: /cobrand/logout
+      operations:
+      - name: cobrandlogout
+        method: POST
+        description: Cobrand Logout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cobrand-publicKey
+      path: /cobrand/publicKey
+      operations:
+      - name: getpublickey
+        method: GET
+        description: Get Public Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: core-cobrand-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — Cobrand. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/cobrand/config/notifications/events
+      name: cobrand-config-notifications-events
+      description: REST surface for cobrand-config-notifications-events.
+      operations:
+      - method: GET
+        name: getsubscribedevents
+        description: Get Subscribed Events
+        call: core-cobrand.getsubscribedevents
+        with:
+          eventName: rest.eventName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cobrand/config/notifications/events/{eventname}
+      name: cobrand-config-notifications-events-eventname
+      description: REST surface for cobrand-config-notifications-events-eventName.
+      operations:
+      - method: POST
+        name: createsubscriptionevent
+        description: Subscribe Event
+        call: core-cobrand.createsubscriptionevent
+        with:
+          eventName: rest.eventName
+          eventRequest: rest.eventRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesubscribedevent
+        description: Delete Subscription
+        call: core-cobrand.deletesubscribedevent
+        with:
+          eventName: rest.eventName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatesubscribedevent
+        description: Update Subscription
+        call: core-cobrand.updatesubscribedevent
+        with:
+          eventName: rest.eventName
+          eventRequest: rest.eventRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cobrand/login
+      name: cobrand-login
+      description: REST surface for cobrand-login.
+      operations:
+      - method: POST
+        name: cobrandlogin
+        description: Cobrand Login
+        call: core-cobrand.cobrandlogin
+        with:
+          cobrandLoginRequest: rest.cobrandLoginRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cobrand/logout
+      name: cobrand-logout
+      description: REST surface for cobrand-logout.
+      operations:
+      - method: POST
+        name: cobrandlogout
+        description: Cobrand Logout
+        call: core-cobrand.cobrandlogout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cobrand/publickey
+      name: cobrand-publickey
+      description: REST surface for cobrand-publicKey.
+      operations:
+      - method: GET
+        name: getpublickey
+        description: Get Public Key
+        call: core-cobrand.getpublickey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-cobrand-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — Cobrand. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-subscribed-events
+      description: Get Subscribed Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-cobrand.getsubscribedevents
+      with:
+        eventName: tools.eventName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: subscribe-event
+      description: Subscribe Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-cobrand.createsubscriptionevent
+      with:
+        eventName: tools.eventName
+        eventRequest: tools.eventRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-subscription
+      description: Delete Subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: core-cobrand.deletesubscribedevent
+      with:
+        eventName: tools.eventName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-subscription
+      description: Update Subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-cobrand.updatesubscribedevent
+      with:
+        eventName: tools.eventName
+        eventRequest: tools.eventRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cobrand-login
+      description: Cobrand Login
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-cobrand.cobrandlogin
+      with:
+        cobrandLoginRequest: tools.cobrandLoginRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cobrand-logout
+      description: Cobrand Logout
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-cobrand.cobrandlogout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-public-key
+      description: Get Public Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-cobrand.getpublickey
+      outputParameters:
+      - type: object
+        mapping: $.

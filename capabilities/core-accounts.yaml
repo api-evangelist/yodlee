@@ -1,0 +1,532 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — Accounts
+  description: 'Yodlee Core APIs — Accounts. 10 operations. Lead operation: Add Manual Account. Self-contained Naftiko capability
+    covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-accounts
+    baseUri: ''
+    description: Yodlee Core APIs — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts
+      path: /accounts
+      operations:
+      - name: createmanualaccount
+        method: POST
+        description: Add Manual Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountParam
+          in: body
+          type: string
+          description: accountParam
+          required: true
+      - name: getallaccounts
+        method: GET
+        description: Get Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: query
+          type: string
+          description: Comma separated accountIds.
+        - name: container
+          in: query
+          type: string
+          description: bank/creditCard/investment/insurance/loan/reward/realEstate/otherAssets/otherLiabilities
+        - name: convertToCurrency
+          in: query
+          type: string
+          description: On-demand currency conversion parameter
+        - name: include
+          in: query
+          type: string
+          description: profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b><br><li>fullAccountNumber
+            is deprecated and is replaced wi
+        - name: providerAccountId
+          in: query
+          type: string
+          description: Comma separated providerAccountIds.
+        - name: requestId
+          in: query
+          type: string
+          description: The unique identifier that returns contextual data
+        - name: status
+          in: query
+          type: string
+          description: ACTIVE,INACTIVE,TO_BE_CLOSED,CLOSED
+    - name: accounts-associatedAccounts-providerAccountId
+      path: /accounts/associatedAccounts/{providerAccountId}
+      operations:
+      - name: getassociatedaccounts
+        method: GET
+        description: Associated Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: providerAccountId
+          in: path
+          type: integer
+          description: providerAccountId
+          required: true
+    - name: accounts-evaluateAddress
+      path: /accounts/evaluateAddress
+      operations:
+      - name: evaluateaddress
+        method: POST
+        description: Evaluate Address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: addressParam
+          in: body
+          type: string
+          description: addressParam
+          required: true
+    - name: accounts-historicalBalances
+      path: /accounts/historicalBalances
+      operations:
+      - name: gethistoricalbalances
+        method: GET
+        description: Get Historical Balances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: query
+          type: string
+          description: accountId
+        - name: fromDate
+          in: query
+          type: string
+          description: from date for balance retrieval (YYYY-MM-DD)
+        - name: includeCF
+          in: query
+          type: boolean
+          description: Consider carry forward logic for missing balances
+        - name: interval
+          in: query
+          type: string
+          description: D-daily, W-weekly or M-monthly
+        - name: skip
+          in: query
+          type: integer
+          description: skip (Min 0)
+        - name: toDate
+          in: query
+          type: string
+          description: toDate for balance retrieval (YYYY-MM-DD)
+        - name: top
+          in: query
+          type: integer
+          description: top (Max 500)
+    - name: accounts-latestBalances
+      path: /accounts/latestBalances
+      operations:
+      - name: getlatestbalances
+        method: GET
+        description: Get Latest Balances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: query
+          type: string
+          description: Comma separated accountIds.
+          required: true
+        - name: providerAccountId
+          in: query
+          type: string
+          description: providerAccountId.
+          required: true
+    - name: accounts-migrateAccounts-providerAccountId
+      path: /accounts/migrateAccounts/{providerAccountId}
+      operations:
+      - name: migrateaccounts
+        method: PUT
+        description: Migrate Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: providerAccountId
+          in: path
+          type: integer
+          description: providerAccountId
+          required: true
+    - name: accounts-accountId
+      path: /accounts/{accountId}
+      operations:
+      - name: getaccount
+        method: GET
+        description: Get Account Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: integer
+          description: accountId
+          required: true
+        - name: convertToCurrency
+          in: query
+          type: string
+          description: On-demand currency conversion parameter
+        - name: include
+          in: query
+          type: string
+          description: profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b>fullAccountNumber
+            is deprecated and is replaced with fullA
+      - name: deleteaccount
+        method: DELETE
+        description: Delete Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: integer
+          description: accountId
+          required: true
+      - name: updateaccount
+        method: PUT
+        description: Update Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: integer
+          description: accountId
+          required: true
+        - name: accountRequest
+          in: body
+          type: string
+          description: accountRequest
+          required: true
+  exposes:
+  - type: rest
+    namespace: core-accounts-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — Accounts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: REST surface for accounts.
+      operations:
+      - method: POST
+        name: createmanualaccount
+        description: Add Manual Account
+        call: core-accounts.createmanualaccount
+        with:
+          accountParam: rest.accountParam
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getallaccounts
+        description: Get Accounts
+        call: core-accounts.getallaccounts
+        with:
+          accountId: rest.accountId
+          container: rest.container
+          convertToCurrency: rest.convertToCurrency
+          include: rest.include
+          providerAccountId: rest.providerAccountId
+          requestId: rest.requestId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/associatedaccounts/{provideraccountid}
+      name: accounts-associatedaccounts-provideraccountid
+      description: REST surface for accounts-associatedAccounts-providerAccountId.
+      operations:
+      - method: GET
+        name: getassociatedaccounts
+        description: Associated Accounts
+        call: core-accounts.getassociatedaccounts
+        with:
+          providerAccountId: rest.providerAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/evaluateaddress
+      name: accounts-evaluateaddress
+      description: REST surface for accounts-evaluateAddress.
+      operations:
+      - method: POST
+        name: evaluateaddress
+        description: Evaluate Address
+        call: core-accounts.evaluateaddress
+        with:
+          addressParam: rest.addressParam
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/historicalbalances
+      name: accounts-historicalbalances
+      description: REST surface for accounts-historicalBalances.
+      operations:
+      - method: GET
+        name: gethistoricalbalances
+        description: Get Historical Balances
+        call: core-accounts.gethistoricalbalances
+        with:
+          accountId: rest.accountId
+          fromDate: rest.fromDate
+          includeCF: rest.includeCF
+          interval: rest.interval
+          skip: rest.skip
+          toDate: rest.toDate
+          top: rest.top
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/latestbalances
+      name: accounts-latestbalances
+      description: REST surface for accounts-latestBalances.
+      operations:
+      - method: GET
+        name: getlatestbalances
+        description: Get Latest Balances
+        call: core-accounts.getlatestbalances
+        with:
+          accountId: rest.accountId
+          providerAccountId: rest.providerAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/migrateaccounts/{provideraccountid}
+      name: accounts-migrateaccounts-provideraccountid
+      description: REST surface for accounts-migrateAccounts-providerAccountId.
+      operations:
+      - method: PUT
+        name: migrateaccounts
+        description: Migrate Accounts
+        call: core-accounts.migrateaccounts
+        with:
+          providerAccountId: rest.providerAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}
+      name: accounts-accountid
+      description: REST surface for accounts-accountId.
+      operations:
+      - method: GET
+        name: getaccount
+        description: Get Account Details
+        call: core-accounts.getaccount
+        with:
+          accountId: rest.accountId
+          convertToCurrency: rest.convertToCurrency
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteaccount
+        description: Delete Account
+        call: core-accounts.deleteaccount
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateaccount
+        description: Update Account
+        call: core-accounts.updateaccount
+        with:
+          accountId: rest.accountId
+          accountRequest: rest.accountRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — Accounts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: add-manual-account
+      description: Add Manual Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-accounts.createmanualaccount
+      with:
+        accountParam: tools.accountParam
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-accounts
+      description: Get Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-accounts.getallaccounts
+      with:
+        accountId: tools.accountId
+        container: tools.container
+        convertToCurrency: tools.convertToCurrency
+        include: tools.include
+        providerAccountId: tools.providerAccountId
+        requestId: tools.requestId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: associated-accounts
+      description: Associated Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-accounts.getassociatedaccounts
+      with:
+        providerAccountId: tools.providerAccountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: evaluate-address
+      description: Evaluate Address
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-accounts.evaluateaddress
+      with:
+        addressParam: tools.addressParam
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-historical-balances
+      description: Get Historical Balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-accounts.gethistoricalbalances
+      with:
+        accountId: tools.accountId
+        fromDate: tools.fromDate
+        includeCF: tools.includeCF
+        interval: tools.interval
+        skip: tools.skip
+        toDate: tools.toDate
+        top: tools.top
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-latest-balances
+      description: Get Latest Balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-accounts.getlatestbalances
+      with:
+        accountId: tools.accountId
+        providerAccountId: tools.providerAccountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-accounts
+      description: Migrate Accounts
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-accounts.migrateaccounts
+      with:
+        providerAccountId: tools.providerAccountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account-details
+      description: Get Account Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-accounts.getaccount
+      with:
+        accountId: tools.accountId
+        convertToCurrency: tools.convertToCurrency
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-account
+      description: Delete Account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: core-accounts.deleteaccount
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-account
+      description: Update Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-accounts.updateaccount
+      with:
+        accountId: tools.accountId
+        accountRequest: tools.accountRequest
+      outputParameters:
+      - type: object
+        mapping: $.

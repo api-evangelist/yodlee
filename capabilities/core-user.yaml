@@ -1,0 +1,306 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — User
+  description: 'Yodlee Core APIs — User. 7 operations. Lead operation: Get User Details. Self-contained Naftiko capability
+    covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - User
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-user
+    baseUri: ''
+    description: Yodlee Core APIs — User business capability. Self-contained, no shared references.
+    resources:
+    - name: user
+      path: /user
+      operations:
+      - name: getuser
+        method: GET
+        description: Get User Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuser
+        method: PUT
+        description: Update User Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userRequest
+          in: body
+          type: string
+          description: userRequest
+          required: true
+    - name: user-accessTokens
+      path: /user/accessTokens
+      operations:
+      - name: getaccesstokens
+        method: GET
+        description: Get Access Tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appIds
+          in: query
+          type: string
+          description: appIds
+          required: true
+    - name: user-logout
+      path: /user/logout
+      operations:
+      - name: userlogout
+        method: POST
+        description: User Logout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-register
+      path: /user/register
+      operations:
+      - name: registeruser
+        method: POST
+        description: Register User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userRequest
+          in: body
+          type: string
+          description: userRequest
+          required: true
+    - name: user-samlLogin
+      path: /user/samlLogin
+      operations:
+      - name: samllogin
+        method: POST
+        description: Saml Login
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: issuer
+          in: query
+          type: string
+          description: issuer
+          required: true
+        - name: samlResponse
+          in: query
+          type: string
+          description: samlResponse
+          required: true
+        - name: source
+          in: query
+          type: string
+          description: source
+          required: true
+    - name: user-unregister
+      path: /user/unregister
+      operations:
+      - name: unregister
+        method: DELETE
+        description: Delete User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: core-user-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — User. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/user
+      name: user
+      description: REST surface for user.
+      operations:
+      - method: GET
+        name: getuser
+        description: Get User Details
+        call: core-user.getuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuser
+        description: Update User Details
+        call: core-user.updateuser
+        with:
+          userRequest: rest.userRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/accesstokens
+      name: user-accesstokens
+      description: REST surface for user-accessTokens.
+      operations:
+      - method: GET
+        name: getaccesstokens
+        description: Get Access Tokens
+        call: core-user.getaccesstokens
+        with:
+          appIds: rest.appIds
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/logout
+      name: user-logout
+      description: REST surface for user-logout.
+      operations:
+      - method: POST
+        name: userlogout
+        description: User Logout
+        call: core-user.userlogout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/register
+      name: user-register
+      description: REST surface for user-register.
+      operations:
+      - method: POST
+        name: registeruser
+        description: Register User
+        call: core-user.registeruser
+        with:
+          userRequest: rest.userRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/samllogin
+      name: user-samllogin
+      description: REST surface for user-samlLogin.
+      operations:
+      - method: POST
+        name: samllogin
+        description: Saml Login
+        call: core-user.samllogin
+        with:
+          issuer: rest.issuer
+          samlResponse: rest.samlResponse
+          source: rest.source
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/unregister
+      name: user-unregister
+      description: REST surface for user-unregister.
+      operations:
+      - method: DELETE
+        name: unregister
+        description: Delete User
+        call: core-user.unregister
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-user-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — User. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-user-details
+      description: Get User Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-user.getuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user-details
+      description: Update User Details
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-user.updateuser
+      with:
+        userRequest: tools.userRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-access-tokens
+      description: Get Access Tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-user.getaccesstokens
+      with:
+        appIds: tools.appIds
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-logout
+      description: User Logout
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-user.userlogout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: register-user
+      description: Register User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-user.registeruser
+      with:
+        userRequest: tools.userRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: saml-login
+      description: Saml Login
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-user.samllogin
+      with:
+        issuer: tools.issuer
+        samlResponse: tools.samlResponse
+        source: tools.source
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user
+      description: Delete User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: core-user.unregister
+      outputParameters:
+      - type: object
+        mapping: $.

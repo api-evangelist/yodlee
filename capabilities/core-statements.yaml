@@ -1,0 +1,100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — Statements
+  description: 'Yodlee Core APIs — Statements. 1 operations. Lead operation: Get Statements. Self-contained Naftiko capability
+    covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - Statements
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-statements
+    baseUri: ''
+    description: Yodlee Core APIs — Statements business capability. Self-contained, no shared references.
+    resources:
+    - name: statements
+      path: /statements
+      operations:
+      - name: getstatements
+        method: GET
+        description: Get Statements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: query
+          type: string
+          description: accountId
+        - name: container
+          in: query
+          type: string
+          description: creditCard/loan/insurance
+        - name: fromDate
+          in: query
+          type: string
+          description: from date for statement retrieval (YYYY-MM-DD)
+        - name: isLatest
+          in: query
+          type: string
+          description: isLatest (true/false)
+        - name: status
+          in: query
+          type: string
+          description: ACTIVE,TO_BE_CLOSED,CLOSED
+  exposes:
+  - type: rest
+    namespace: core-statements-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — Statements. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/statements
+      name: statements
+      description: REST surface for statements.
+      operations:
+      - method: GET
+        name: getstatements
+        description: Get Statements
+        call: core-statements.getstatements
+        with:
+          accountId: rest.accountId
+          container: rest.container
+          fromDate: rest.fromDate
+          isLatest: rest.isLatest
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-statements-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — Statements. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-statements
+      description: Get Statements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-statements.getstatements
+      with:
+        accountId: tools.accountId
+        container: tools.container
+        fromDate: tools.fromDate
+        isLatest: tools.isLatest
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.

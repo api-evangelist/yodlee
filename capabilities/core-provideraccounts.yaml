@@ -1,0 +1,386 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — ProviderAccounts
+  description: 'Yodlee Core APIs — ProviderAccounts. 8 operations. Lead operation: Add Account. Self-contained Naftiko capability
+    covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - ProviderAccounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-provideraccounts
+    baseUri: ''
+    description: Yodlee Core APIs — ProviderAccounts business capability. Self-contained, no shared references.
+    resources:
+    - name: providerAccounts
+      path: /providerAccounts
+      operations:
+      - name: linkprovideraccount
+        method: POST
+        description: Add Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: providerAccountRequest
+          in: body
+          type: string
+          description: loginForm or field entity
+          required: true
+        - name: providerId
+          in: query
+          type: integer
+          description: providerId
+          required: true
+      - name: getallprovideraccounts
+        method: GET
+        description: Get Provider Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: string
+          description: include
+        - name: providerIds
+          in: query
+          type: string
+          description: Comma separated providerIds.
+      - name: editcredentialsorrefreshprovideraccount
+        method: PUT
+        description: Update Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: providerAccountIds
+          in: query
+          type: string
+          description: comma separated providerAccountIds
+          required: true
+        - name: providerAccountRequest
+          in: body
+          type: string
+          description: loginForm or field entity
+    - name: providerAccounts-profile
+      path: /providerAccounts/profile
+      operations:
+      - name: getprovideraccountprofiles
+        method: GET
+        description: Get User Profile Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: providerAccountId
+          in: query
+          type: string
+          description: Comma separated providerAccountIds.
+    - name: providerAccounts-refresh
+      path: /providerAccounts/refresh
+      operations:
+      - name: refreshprovideraccount
+        method: PUT
+        description: Refresh Provider Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: refreshRequest
+          in: body
+          type: string
+          description: refreshRequest
+          required: true
+    - name: providerAccounts-providerAccountId
+      path: /providerAccounts/{providerAccountId}
+      operations:
+      - name: getprovideraccount
+        method: GET
+        description: Get Provider Account Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: string
+          description: include credentials,questions
+        - name: providerAccountId
+          in: path
+          type: integer
+          description: providerAccountId
+          required: true
+        - name: requestId
+          in: query
+          type: string
+          description: The unique identifier for the request that returns contextual data
+      - name: deleteprovideraccount
+        method: DELETE
+        description: Delete Provider Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: providerAccountId
+          in: path
+          type: integer
+          description: providerAccountId
+          required: true
+    - name: providerAccounts-providerAccountId-preferences
+      path: /providerAccounts/{providerAccountId}/preferences
+      operations:
+      - name: updatepreferences
+        method: PUT
+        description: Update Preferences
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: preferences
+          in: body
+          type: string
+          description: preferences
+          required: true
+        - name: providerAccountId
+          in: path
+          type: integer
+          description: providerAccountId
+          required: true
+  exposes:
+  - type: rest
+    namespace: core-provideraccounts-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — ProviderAccounts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/provideraccounts
+      name: provideraccounts
+      description: REST surface for providerAccounts.
+      operations:
+      - method: POST
+        name: linkprovideraccount
+        description: Add Account
+        call: core-provideraccounts.linkprovideraccount
+        with:
+          providerAccountRequest: rest.providerAccountRequest
+          providerId: rest.providerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getallprovideraccounts
+        description: Get Provider Accounts
+        call: core-provideraccounts.getallprovideraccounts
+        with:
+          include: rest.include
+          providerIds: rest.providerIds
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editcredentialsorrefreshprovideraccount
+        description: Update Account
+        call: core-provideraccounts.editcredentialsorrefreshprovideraccount
+        with:
+          providerAccountIds: rest.providerAccountIds
+          providerAccountRequest: rest.providerAccountRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/provideraccounts/profile
+      name: provideraccounts-profile
+      description: REST surface for providerAccounts-profile.
+      operations:
+      - method: GET
+        name: getprovideraccountprofiles
+        description: Get User Profile Details
+        call: core-provideraccounts.getprovideraccountprofiles
+        with:
+          providerAccountId: rest.providerAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/provideraccounts/refresh
+      name: provideraccounts-refresh
+      description: REST surface for providerAccounts-refresh.
+      operations:
+      - method: PUT
+        name: refreshprovideraccount
+        description: Refresh Provider Account
+        call: core-provideraccounts.refreshprovideraccount
+        with:
+          refreshRequest: rest.refreshRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/provideraccounts/{provideraccountid}
+      name: provideraccounts-provideraccountid
+      description: REST surface for providerAccounts-providerAccountId.
+      operations:
+      - method: GET
+        name: getprovideraccount
+        description: Get Provider Account Details
+        call: core-provideraccounts.getprovideraccount
+        with:
+          include: rest.include
+          providerAccountId: rest.providerAccountId
+          requestId: rest.requestId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprovideraccount
+        description: Delete Provider Account
+        call: core-provideraccounts.deleteprovideraccount
+        with:
+          providerAccountId: rest.providerAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/provideraccounts/{provideraccountid}/preferences
+      name: provideraccounts-provideraccountid-preferences
+      description: REST surface for providerAccounts-providerAccountId-preferences.
+      operations:
+      - method: PUT
+        name: updatepreferences
+        description: Update Preferences
+        call: core-provideraccounts.updatepreferences
+        with:
+          preferences: rest.preferences
+          providerAccountId: rest.providerAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-provideraccounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — ProviderAccounts. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: add-account
+      description: Add Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-provideraccounts.linkprovideraccount
+      with:
+        providerAccountRequest: tools.providerAccountRequest
+        providerId: tools.providerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-provider-accounts
+      description: Get Provider Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-provideraccounts.getallprovideraccounts
+      with:
+        include: tools.include
+        providerIds: tools.providerIds
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-account
+      description: Update Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-provideraccounts.editcredentialsorrefreshprovideraccount
+      with:
+        providerAccountIds: tools.providerAccountIds
+        providerAccountRequest: tools.providerAccountRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-profile-details
+      description: Get User Profile Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-provideraccounts.getprovideraccountprofiles
+      with:
+        providerAccountId: tools.providerAccountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: refresh-provider-account
+      description: Refresh Provider Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-provideraccounts.refreshprovideraccount
+      with:
+        refreshRequest: tools.refreshRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-provider-account-details
+      description: Get Provider Account Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-provideraccounts.getprovideraccount
+      with:
+        include: tools.include
+        providerAccountId: tools.providerAccountId
+        requestId: tools.requestId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-provider-account
+      description: Delete Provider Account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: core-provideraccounts.deleteprovideraccount
+      with:
+        providerAccountId: tools.providerAccountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-preferences
+      description: Update Preferences
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-provideraccounts.updatepreferences
+      with:
+        preferences: tools.preferences
+        providerAccountId: tools.providerAccountId
+      outputParameters:
+      - type: object
+        mapping: $.

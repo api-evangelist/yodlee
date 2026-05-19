@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — Account Token
+  description: 'Yodlee Core APIs — Account Token. 2 operations. Lead operation: Create Account Token. Self-contained Naftiko
+    capability covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - Account Token
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-account-token
+    baseUri: ''
+    description: Yodlee Core APIs — Account Token business capability. Self-contained, no shared references.
+    resources:
+    - name: paymentProcessor-token
+      path: /paymentProcessor/token
+      operations:
+      - name: generatepaymentprocessortoken
+        method: POST
+        description: Create Account Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tokenRequest
+          in: body
+          type: string
+          description: account information
+          required: true
+      - name: revokepaymentprocessortoken
+        method: DELETE
+        description: Delete Account Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: processorToken
+          in: header
+          type: string
+          description: The token that you want to delete.
+          required: true
+  exposes:
+  - type: rest
+    namespace: core-account-token-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — Account Token. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/paymentprocessor/token
+      name: paymentprocessor-token
+      description: REST surface for paymentProcessor-token.
+      operations:
+      - method: POST
+        name: generatepaymentprocessortoken
+        description: Create Account Token
+        call: core-account-token.generatepaymentprocessortoken
+        with:
+          tokenRequest: rest.tokenRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: revokepaymentprocessortoken
+        description: Delete Account Token
+        call: core-account-token.revokepaymentprocessortoken
+        with:
+          processorToken: rest.processorToken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-account-token-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — Account Token. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-account-token
+      description: Create Account Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-account-token.generatepaymentprocessortoken
+      with:
+        tokenRequest: tools.tokenRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-account-token
+      description: Delete Account Token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: core-account-token.revokepaymentprocessortoken
+      with:
+        processorToken: tools.processorToken
+      outputParameters:
+      - type: object
+        mapping: $.

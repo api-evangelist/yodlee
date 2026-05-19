@@ -1,0 +1,240 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — Holdings
+  description: 'Yodlee Core APIs — Holdings. 5 operations. Lead operation: Add Holding. Self-contained Naftiko capability
+    covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - Holdings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-holdings
+    baseUri: ''
+    description: Yodlee Core APIs — Holdings business capability. Self-contained, no shared references.
+    resources:
+    - name: holdings
+      path: /holdings
+      operations:
+      - name: addholding
+        method: POST
+        description: Add Holding
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: addHoldingRequest
+          in: body
+          type: string
+          description: addHoldingRequest
+          required: true
+      - name: getholdings
+        method: GET
+        description: Get Holdings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: query
+          type: string
+          description: Comma separated accountId
+        - name: assetClassification.classificationType
+          in: query
+          type: string
+          description: e.g. Country, Sector, etc.
+        - name: classificationValue
+          in: query
+          type: string
+          description: e.g. US
+        - name: include
+          in: query
+          type: string
+          description: assetClassification
+        - name: providerAccountId
+          in: query
+          type: string
+          description: providerAccountId
+    - name: holdings-assetClassificationList
+      path: /holdings/assetClassificationList
+      operations:
+      - name: getassetclassificationlist
+        method: GET
+        description: Get Asset Classification List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: holdings-holdingTypeList
+      path: /holdings/holdingTypeList
+      operations:
+      - name: getholdingtypelist
+        method: GET
+        description: Get Holding Type List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: holdings-securities
+      path: /holdings/securities
+      operations:
+      - name: getsecurities
+        method: GET
+        description: Get Security Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: holdingId
+          in: query
+          type: string
+          description: Comma separated holdingId
+  exposes:
+  - type: rest
+    namespace: core-holdings-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — Holdings. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/holdings
+      name: holdings
+      description: REST surface for holdings.
+      operations:
+      - method: POST
+        name: addholding
+        description: Add Holding
+        call: core-holdings.addholding
+        with:
+          addHoldingRequest: rest.addHoldingRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getholdings
+        description: Get Holdings
+        call: core-holdings.getholdings
+        with:
+          accountId: rest.accountId
+          assetClassification.classificationType: rest.assetClassification.classificationType
+          classificationValue: rest.classificationValue
+          include: rest.include
+          providerAccountId: rest.providerAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/holdings/assetclassificationlist
+      name: holdings-assetclassificationlist
+      description: REST surface for holdings-assetClassificationList.
+      operations:
+      - method: GET
+        name: getassetclassificationlist
+        description: Get Asset Classification List
+        call: core-holdings.getassetclassificationlist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/holdings/holdingtypelist
+      name: holdings-holdingtypelist
+      description: REST surface for holdings-holdingTypeList.
+      operations:
+      - method: GET
+        name: getholdingtypelist
+        description: Get Holding Type List
+        call: core-holdings.getholdingtypelist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/holdings/securities
+      name: holdings-securities
+      description: REST surface for holdings-securities.
+      operations:
+      - method: GET
+        name: getsecurities
+        description: Get Security Details
+        call: core-holdings.getsecurities
+        with:
+          holdingId: rest.holdingId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-holdings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — Holdings. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: add-holding
+      description: Add Holding
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-holdings.addholding
+      with:
+        addHoldingRequest: tools.addHoldingRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-holdings
+      description: Get Holdings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-holdings.getholdings
+      with:
+        accountId: tools.accountId
+        assetClassification.classificationType: tools.assetClassification.classificationType
+        classificationValue: tools.classificationValue
+        include: tools.include
+        providerAccountId: tools.providerAccountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-asset-classification-list
+      description: Get Asset Classification List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-holdings.getassetclassificationlist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-holding-type-list
+      description: Get Holding Type List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-holdings.getholdingtypelist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-security-details
+      description: Get Security Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-holdings.getsecurities
+      with:
+        holdingId: tools.holdingId
+      outputParameters:
+      - type: object
+        mapping: $.

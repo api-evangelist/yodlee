@@ -1,0 +1,234 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Yodlee Core APIs — Configs
+  description: 'Yodlee Core APIs — Configs. 5 operations. Lead operation: Get Subscribed Notification Events. Self-contained
+    Naftiko capability covering one Yodlee business surface.'
+  tags:
+  - Yodlee
+  - Configs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YODLEE_API_KEY: YODLEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: core-configs
+    baseUri: ''
+    description: Yodlee Core APIs — Configs business capability. Self-contained, no shared references.
+    resources:
+    - name: configs-notifications-events
+      path: /configs/notifications/events
+      operations:
+      - name: getsubscribednotificationevents
+        method: GET
+        description: Get Subscribed Notification Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: query
+          type: string
+          description: Name of the webhook subscription event
+    - name: configs-notifications-events-eventName
+      path: /configs/notifications/events/{eventName}
+      operations:
+      - name: createsubscriptionnotificationevent
+        method: POST
+        description: Subscribe For Notification Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: path
+          type: string
+          description: Name of the webhook subscription event
+          required: true
+        - name: eventRequest
+          in: body
+          type: string
+          description: eventRequest
+          required: true
+      - name: deletesubscribednotificationevent
+        method: DELETE
+        description: Delete Notification Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: path
+          type: string
+          description: Name of the webhook subscription event
+          required: true
+      - name: updatesubscribednotificationevent
+        method: PUT
+        description: Update Notification Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventName
+          in: path
+          type: string
+          description: Name of the webhook subscription event
+          required: true
+        - name: eventRequest
+          in: body
+          type: string
+          description: eventRequest
+          required: true
+    - name: configs-publicKey
+      path: /configs/publicKey
+      operations:
+      - name: getpublicencryptionkey
+        method: GET
+        description: Get Public Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: core-configs-rest
+    port: 8080
+    description: REST adapter for Yodlee Core APIs — Configs. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/configs/notifications/events
+      name: configs-notifications-events
+      description: REST surface for configs-notifications-events.
+      operations:
+      - method: GET
+        name: getsubscribednotificationevents
+        description: Get Subscribed Notification Events
+        call: core-configs.getsubscribednotificationevents
+        with:
+          eventName: rest.eventName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/notifications/events/{eventname}
+      name: configs-notifications-events-eventname
+      description: REST surface for configs-notifications-events-eventName.
+      operations:
+      - method: POST
+        name: createsubscriptionnotificationevent
+        description: Subscribe For Notification Event
+        call: core-configs.createsubscriptionnotificationevent
+        with:
+          eventName: rest.eventName
+          eventRequest: rest.eventRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesubscribednotificationevent
+        description: Delete Notification Subscription
+        call: core-configs.deletesubscribednotificationevent
+        with:
+          eventName: rest.eventName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatesubscribednotificationevent
+        description: Update Notification Subscription
+        call: core-configs.updatesubscribednotificationevent
+        with:
+          eventName: rest.eventName
+          eventRequest: rest.eventRequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/publickey
+      name: configs-publickey
+      description: REST surface for configs-publicKey.
+      operations:
+      - method: GET
+        name: getpublicencryptionkey
+        description: Get Public Key
+        call: core-configs.getpublicencryptionkey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: core-configs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Yodlee Core APIs — Configs. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-subscribed-notification-events
+      description: Get Subscribed Notification Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-configs.getsubscribednotificationevents
+      with:
+        eventName: tools.eventName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: subscribe-notification-event
+      description: Subscribe For Notification Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: core-configs.createsubscriptionnotificationevent
+      with:
+        eventName: tools.eventName
+        eventRequest: tools.eventRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-notification-subscription
+      description: Delete Notification Subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: core-configs.deletesubscribednotificationevent
+      with:
+        eventName: tools.eventName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-notification-subscription
+      description: Update Notification Subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: core-configs.updatesubscribednotificationevent
+      with:
+        eventName: tools.eventName
+        eventRequest: tools.eventRequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-public-key
+      description: Get Public Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: core-configs.getpublicencryptionkey
+      outputParameters:
+      - type: object
+        mapping: $.
