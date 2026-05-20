@@ -7,123 +7,125 @@ description: Yodlee (Envestnet | Yodlee) is a financial data aggregation platfor
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Financial Data
-- Data Aggregation
-- Banking
-- Fintech
-- Open Finance
+  - Financial Data
+  - Data Aggregation
+  - Banking
+  - Fintech
+  - Open Finance
 created: '2026-03-27'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: yodlee:yodlee-core-api
-  name: Yodlee Core API
-  description: The Yodlee Core APIs v1.1 provide a flexible RESTful API for accessing personal financial data. Key capabilities
-    include account aggregation across banks and brokerages, transaction history and enrichment, holdings and investment data,
-    consent and provider account management, documents, statements, data extracts, risk analytics, and account verification.
-    Supports 90% of top US, UK, Australia, and India financial institutions.
-  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
-  baseURL: https://production.api.yodlee.com/ysl
-  tags:
-  - Financial Data
-  - Aggregation
-  - Transactions
-  - Accounts
-  - Banking
-  - Investments
-  properties:
+  - aid: yodlee:yodlee-core-api
+    name: Yodlee Core API
+    description: The Yodlee Core APIs v1.1 provide a flexible RESTful API for accessing personal financial data. Key capabilities
+      include account aggregation across banks and brokerages, transaction history and enrichment, holdings and investment data,
+      consent and provider account management, documents, statements, data extracts, risk analytics, and account verification.
+      Supports 90% of top US, UK, Australia, and India financial institutions.
+    humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+    baseURL: https://production.api.yodlee.com/ysl
+    tags:
+    - Financial Data
+    - Aggregation
+    - Transactions
+    - Accounts
+    - Banking
+    - Investments
+    properties:
+    - type: Documentation
+      url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+    - type: OpenAPI
+      url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml
+    - type: GettingStarted
+      url: https://developer.yodlee.com/docs/getting-started
+    - type: NaftikoCapability
+      url: capabilities/core-account-token.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-accounts.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-auth.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-cobrand.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-configs.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-consents.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-dataextracts.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-derived.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-documents.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-holdings.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-institutions.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-payment-processor.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-provideraccounts.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-providers.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-risk-analytics.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-statements.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-transactions.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-user.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-user-documents.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-verification.yaml
+    - type: NaftikoCapability
+      url: capabilities/core-verify-account.yaml
+  - aid: yodlee:yodlee-account-verification-api
+    name: Yodlee Account Verification API
+    description: The Yodlee Account Verification API enables real-time verification of bank account ownership and balance. Supports
+      verification workflows via FastLink 4, holder profile retrieval, verified account status, and account classification summaries.
+    humanURL: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
+    baseURL: https://production.api.yodlee.com/ysl
+    tags:
+    - Account Verification
+    - Banking
+    - Fintech
+    - KYC
+    properties:
+    - type: Documentation
+      url: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
+  - aid: yodlee:yodlee-fastlink
+    name: Yodlee FastLink
+    description: FastLink 4 is Yodlee's white-label account aggregation widget that enables users to securely link their financial
+      accounts. Provides a customizable embedded UI for account login, MFA, account selection, verification, and consent management.
+    humanURL: https://developer.yodlee.com/
+    tags:
+    - Account Linking
+    - Widget
+    - Embedded Finance
+    properties:
+    - type: Documentation
+      url: https://developer.yodlee.com/
+common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/yodlee
+  - type: Website
+    url: https://www.yodlee.com/
+  - type: Developer Portal
+    url: https://developer.yodlee.com/
   - type: Documentation
-    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs
   - type: OpenAPI
     url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml
+  - type: GitHubOrganization
+    url: https://github.com/yodlee
+  - type: SDK
+    url: https://github.com/Yodlee/java-sdk
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: NaftikoCapability
-    url: capabilities/core-account-token.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-accounts.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-auth.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-cobrand.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-configs.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-consents.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-dataextracts.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-derived.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-documents.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-holdings.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-institutions.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-payment-processor.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-provideraccounts.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-providers.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-risk-analytics.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-statements.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-transactions.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-user.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-user-documents.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-verification.yaml
-  - type: NaftikoCapability
-    url: capabilities/core-verify-account.yaml
-- aid: yodlee:yodlee-account-verification-api
-  name: Yodlee Account Verification API
-  description: The Yodlee Account Verification API enables real-time verification of bank account ownership and balance. Supports
-    verification workflows via FastLink 4, holder profile retrieval, verified account status, and account classification summaries.
-  humanURL: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
-  baseURL: https://production.api.yodlee.com/ysl
-  tags:
-  - Account Verification
-  - Banking
-  - Fintech
-  - KYC
-  properties:
-  - type: Documentation
-    url: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
-- aid: yodlee:yodlee-fastlink
-  name: Yodlee FastLink
-  description: FastLink 4 is Yodlee's white-label account aggregation widget that enables users to securely link their financial
-    accounts. Provides a customizable embedded UI for account login, MFA, account selection, verification, and consent management.
-  humanURL: https://developer.yodlee.com/
-  tags:
-  - Account Linking
-  - Widget
-  - Embedded Finance
-  properties:
-  - type: Documentation
-    url: https://developer.yodlee.com/
-common:
-- type: Website
-  url: https://www.yodlee.com/
-- type: Developer Portal
-  url: https://developer.yodlee.com/
-- type: Documentation
-  url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs
-- type: OpenAPI
-  url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml
-- type: GitHubOrganization
-  url: https://github.com/yodlee
-- type: SDK
-  url: https://github.com/Yodlee/java-sdk
-- type: GettingStarted
-  url: https://developer.yodlee.com/docs/getting-started
-- type: Vocabulary
-  url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/vocabulary/yodlee-vocabulary.yml
+  - type: Vocabulary
+    url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/vocabulary/yodlee-vocabulary.yml
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
