@@ -1,0 +1,1096 @@
+"""
+Yodlee (Envestnet | Yodlee) Financial Data Aggregation - Conceptual GraphQL Schema
+Source: Yodlee Core APIs v1.1 (REST)
+Developer Portal: https://developer.yodlee.com/
+This is a conceptual schema derived from the Yodlee REST API surface.
+"""
+
+# ─── Scalars ─────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar JSON
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Container {
+  bank
+  creditCard
+  investment
+  insurance
+  loan
+  reward
+  bill
+  realEstate
+  other
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  TO_BE_CLOSED
+  CLOSED
+  DELETED
+}
+
+enum TransactionStatus {
+  POSTED
+  PENDING
+  SCHEDULED
+  FAILED
+  CLEARED
+}
+
+enum TransactionBaseType {
+  CREDIT
+  DEBIT
+}
+
+enum TransactionType {
+  BUY
+  SELL
+  DIVIDEND
+  DIVIDENDREINVEST
+  TRANSFER
+  DEPOSIT
+  WITHDRAWAL
+  DIRECTDEPOSIT
+  DIRECTDEBIT
+  REPAYMENT
+  FEE
+  OTHER
+}
+
+enum DataExtractEvent {
+  START
+  END
+}
+
+enum LoginFormType {
+  LOGIN
+  SECURITY_QA
+  TOKEN
+  IMAGE
+  CAPTCHA
+  OAUTH
+}
+
+enum FieldType {
+  TEXT
+  PASSWORD
+  OPTION
+  CHECK_BOX
+  RADIO
+  IMAGE
+  FILE
+}
+
+enum ProviderAccountStatus {
+  LOGIN_IN_PROGRESS
+  USER_INPUT_REQUIRED
+  IN_PROGRESS
+  PARTIAL_SUCCESS
+  SUCCESS
+  FAILED
+  MIGRATION_IN_PROGRESS
+  MIGRATION_SUCCESS
+  MIGRATION_FAILED
+}
+
+enum HoldingType {
+  stock
+  mutualFund
+  bond
+  ETF
+  option
+  moneyMarketFund
+  other
+  REMIC
+  futuresFFA
+  insurance
+  CD
+  annuity
+  currency
+  unitInvestmentTrust
+  employeeStockOption
+  certificateOfParticipation
+}
+
+enum AssetClassificationType {
+  ALLOCATION
+  SUBTYPE
+  STYLE
+}
+
+enum DocumentType {
+  STMT
+  TAX
+  EBILL
+}
+
+enum BudgetType {
+  MONTHLY
+  QUARTERLY
+  ANNUAL
+  CUSTOM
+}
+
+enum NetworthType {
+  ASSET
+  LIABILITY
+}
+
+enum CashFlowType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
+enum PolicyStatus {
+  ACTIVE
+  INACTIVE
+  LAPSED
+  CANCELLED
+}
+
+# ─── Shared / Money ───────────────────────────────────────────────────────────
+
+"""Monetary amount with currency."""
+type MoneyData {
+  amount: Float
+  currency: String
+}
+
+# ─── User ─────────────────────────────────────────────────────────────────────
+
+"""Top-level user registered with Yodlee."""
+type User {
+  id: ID!
+  loginName: String
+  email: String
+  name: UserDetail
+  preferences: UserPreference
+  session: AccessToken
+  roleType: String
+  segmentName: String
+}
+
+"""Full name details for a user."""
+type UserDetail {
+  first: String
+  middle: String
+  last: String
+  fullName: String
+}
+
+"""User locale and display preferences."""
+type UserPreference {
+  currency: String
+  timeZone: String
+  dateFormat: String
+  locale: String
+}
+
+# ─── Account ──────────────────────────────────────────────────────────────────
+
+"""A financial account linked to a user (bank, credit, investment, etc.)."""
+type Account {
+  id: ID!
+  accountName: String
+  accountNumber: String
+  accountStatus: AccountStatus
+  accountType: String
+  aggregationSource: String
+  availableBalance: MoneyData
+  availableCash: MoneyData
+  availableCredit: MoneyData
+  balance: MoneyData
+  cash: MoneyData
+  classification: String
+  container: Container
+  createdDate: DateTime
+  currentBalance: MoneyData
+  dataset: [DatasetAttributes]
+  displayedName: String
+  dueDate: Date
+  enrollmentDate: Date
+  expirationDate: Date
+  include: Boolean
+  interestRate: Float
+  isAsset: Boolean
+  isManual: Boolean
+  lastPaymentAmount: MoneyData
+  lastPaymentDate: Date
+  lastUpdated: DateTime
+  memo: String
+  minimumAmountDue: MoneyData
+  nextPaymentAmount: MoneyData
+  nextPaymentDueDate: Date
+  nickname: String
+  policyStatus: PolicyStatus
+  primaryAccountNumber: String
+  profile: AccountProfile
+  providerAccountId: ID
+  providerId: ID
+  providerName: String
+  remainingBalance: MoneyData
+  runningBalance: MoneyData
+  sourceId: String
+  totalCashLimit: MoneyData
+  totalCreditLine: MoneyData
+  totalMinimumAmountDue: MoneyData
+  totalUnvestedBalance: MoneyData
+  totalVestedBalance: MoneyData
+  userClassification: String
+  userSiteAccountId: ID
+  includeInNetWorth: Boolean
+}
+
+"""Dataset attributes describing the freshness of data for an account."""
+type DatasetAttributes {
+  name: String
+  additionalStatus: String
+  nextUpdateScheduled: DateTime
+  lastUpdated: DateTime
+  updateEligibility: String
+}
+
+"""Profile information for account holder(s)."""
+type AccountProfile {
+  address: [AccountAddress]
+  email: [AccountEmail]
+  identifier: [AccountIdentifier]
+  phoneNumber: [PhoneNumber]
+  holder: [AccountHolder]
+}
+
+"""Postal address associated with an account."""
+type AccountAddress {
+  address1: String
+  address2: String
+  address3: String
+  city: String
+  country: String
+  state: String
+  zip: String
+  type: String
+}
+
+"""Email address associated with an account."""
+type AccountEmail {
+  value: String
+  type: String
+}
+
+"""External identifier for an account (routing number, etc.)."""
+type AccountIdentifier {
+  value: String
+  type: String
+}
+
+"""Phone number associated with an account."""
+type PhoneNumber {
+  value: String
+  type: String
+}
+
+"""Account holder information."""
+type AccountHolder {
+  name: UserDetail
+  ownership: String
+  identifier: [AccountIdentifier]
+}
+
+"""Balance snapshot for a specific date."""
+type AccountBalance {
+  accountId: ID
+  balance: MoneyData
+  date: Date
+  isAsset: Boolean
+  container: Container
+}
+
+# ─── Provider ─────────────────────────────────────────────────────────────────
+
+"""A financial institution (bank, brokerage, etc.) supported by Yodlee."""
+type Provider {
+  id: ID!
+  name: String
+  loginUrl: String
+  baseUrl: String
+  favicon: String
+  logo: String
+  status: String
+  isAutoRefreshEnabled: Boolean
+  isCredentialNested: Boolean
+  isAddedByUser: Boolean
+  languageISOCode: String
+  primaryLanguageISOCode: String
+  countryISOCode: String
+  authType: String
+  help: String
+  forgetPasswordUrl: String
+  associatedProviderId: [ID]
+  containers: [Container]
+  dataset: [DatasetAttributes]
+  lastModified: DateTime
+  oAuthSites: Boolean
+}
+
+"""Extended details for a provider including login form."""
+type ProviderDetail {
+  id: ID!
+  name: String
+  loginUrl: String
+  baseUrl: String
+  favicon: String
+  logo: String
+  status: String
+  authType: String
+  help: String
+  forgetPasswordUrl: String
+  languageISOCode: String
+  primaryLanguageISOCode: String
+  countryISOCode: String
+  isAutoRefreshEnabled: Boolean
+  isCredentialNested: Boolean
+  isAddedByUser: Boolean
+  oAuthSites: Boolean
+  loginForm: [LoginForm]
+  associatedProviderId: [ID]
+  containers: [Container]
+  dataset: [DatasetAttributes]
+  lastModified: DateTime
+}
+
+"""A provider account represents a user's linked account at a provider."""
+type ProviderAccount {
+  id: ID!
+  aggregationSource: String
+  createdDate: DateTime
+  dataset: [DatasetAttributes]
+  isManual: Boolean
+  lastUpdated: DateTime
+  loginForm: [LoginForm]
+  preferences: ProviderAccountPreference
+  providerId: ID
+  refreshInfo: RefreshInfo
+  requestId: String
+  status: ProviderAccountStatus
+}
+
+"""Preferences controlling the behavior of a provider account."""
+type ProviderAccountPreference {
+  isAutoRefreshEnabled: Boolean
+  isMFAEnabled: Boolean
+  isDataExtractsEnabled: Boolean
+}
+
+"""Status and timing of the last refresh attempt for a provider account."""
+type RefreshInfo {
+  additionalStatus: String
+  lastRefreshed: DateTime
+  lastRefreshAttempt: DateTime
+  nextRefreshScheduled: DateTime
+  statusCode: Int
+  statusMessage: String
+  status: String
+}
+
+# ─── Credentials / Login ──────────────────────────────────────────────────────
+
+"""Credential used for logging into a provider."""
+type UserCredential {
+  enclosedType: String
+  fieldType: FieldType
+  id: ID
+  isEditable: Boolean
+  maxLength: Int
+  memo: String
+  name: String
+  option: [FieldChoice]
+  prefix: String
+  suffix: String
+  type: String
+  validations: FieldValidation
+  value: String
+}
+
+"""Validation rules for a form field."""
+type FieldValidation {
+  maxLength: Int
+  minLength: Int
+  regEx: String
+}
+
+"""A login form presented to the user for provider authentication."""
+type LoginForm {
+  formType: LoginFormType
+  help: String
+  id: ID
+  mfaInfoText: String
+  mfaInfoTitle: String
+  mfaTimeout: Int
+  row: [FormRow]
+}
+
+"""A row within a login form, grouping related fields."""
+type FormRow {
+  field: [FormField]
+  fieldRowChoice: String
+  form: String
+  hint: String
+  id: ID
+  label: String
+  maxChoices: Int
+  minChoices: Int
+  subField: [FormField]
+}
+
+"""An individual input field within a login form."""
+type FormField {
+  id: ID
+  image: String
+  isEditable: Boolean
+  isMandatory: Boolean
+  maxLength: Int
+  minLength: Int
+  name: String
+  option: [FieldChoice]
+  prefix: String
+  relatedField: [FieldRelativeField]
+  suffix: String
+  type: FieldType
+  validations: FieldValidation
+  value: String
+  valueEditable: String
+}
+
+"""A selectable option within a dropdown or radio form field."""
+type FieldChoice {
+  displayText: String
+  isSelected: Boolean
+  optionValue: String
+}
+
+"""A relative field dependency (e.g., show field B when field A has value X)."""
+type FieldRelativeField {
+  fieldId: ID
+  responseFieldId: ID
+  value: String
+}
+
+# ─── Site / Login ─────────────────────────────────────────────────────────────
+
+"""A site account aggregating a user's presence at a financial site."""
+type SiteAccount {
+  id: ID!
+  siteId: ID
+  siteAccountStatus: String
+  siteLoginForm: LoginForm
+  isCustom: Boolean
+  createdDate: DateTime
+  lastUpdated: DateTime
+}
+
+"""Login credentials and status for a site."""
+type Login {
+  id: ID
+  credentials: [UserCredential]
+  defaultDisplays: [String]
+  isOAuth: Boolean
+  loginForm: LoginForm
+  status: String
+  siteId: ID
+}
+
+"""Profile associated with a login (username, display name)."""
+type LoginProfile {
+  displayName: String
+  loginName: String
+  siteId: ID
+  userId: ID
+}
+
+# ─── Access Token ─────────────────────────────────────────────────────────────
+
+"""OAuth or session access token for authenticating API calls."""
+type AccessToken {
+  accessToken: String
+  issuedAt: DateTime
+  expiresIn: Int
+}
+
+"""Request payload for obtaining an access token."""
+type AccessTokenRequest {
+  clientId: String
+  secret: String
+  loginName: String
+}
+
+# ─── Transaction ──────────────────────────────────────────────────────────────
+
+"""An individual financial transaction on an account."""
+type Transaction {
+  id: ID!
+  accountId: ID
+  amount: MoneyData
+  baseType: TransactionBaseType
+  category: String
+  categoryId: ID
+  categorySource: String
+  categoryType: String
+  checkNumber: String
+  container: Container
+  createdDate: DateTime
+  date: Date
+  description: TransactionDescription
+  holdingDescription: String
+  interest: MoneyData
+  isManual: Boolean
+  isRecurring: Boolean
+  lastUpdated: DateTime
+  matchInfo: TransactionMatchInfo
+  memo: String
+  merchant: Merchant
+  postDate: Date
+  principal: MoneyData
+  quantity: Float
+  runningBalance: MoneyData
+  settleDate: Date
+  sourceId: String
+  sourceType: String
+  status: TransactionStatus
+  subType: String
+  symbol: String
+  transactionDate: Date
+  type: TransactionType
+  unitPrice: MoneyData
+  valoren: String
+}
+
+"""Description details for a transaction (simple and consumer-facing)."""
+type TransactionDescription {
+  consumer: String
+  original: String
+  simple: String
+}
+
+"""Merchant details attached to a transaction."""
+type Merchant {
+  address: AccountAddress
+  categoryLabel: [String]
+  id: ID
+  name: String
+  source: String
+  websiteURL: String
+}
+
+"""Match information when a transaction is matched to a reference."""
+type TransactionMatchInfo {
+  detailCategoryId: ID
+  factCategoryId: ID
+  miCategory: String
+}
+
+"""A system or user-defined category for transactions."""
+type TransactionCategory {
+  category: String
+  classification: String
+  defaultCategoryName: String
+  defaultHighLevelCategoryId: ID
+  detailCategory: [DetailCategory]
+  highLevelCategoryId: ID
+  highLevelCategoryName: String
+  id: ID!
+  source: String
+  subType: String
+  type: String
+}
+
+"""A detail-level category within a transaction category."""
+type DetailCategory {
+  id: ID!
+  name: String
+}
+
+"""Filters for querying transactions."""
+type TransactionFilter {
+  baseType: TransactionBaseType
+  categoryId: ID
+  categoryType: String
+  container: Container
+  fromDate: Date
+  keyword: String
+  toDate: Date
+}
+
+"""Parameters for creating or updating a transaction."""
+type TransactionRequest {
+  amount: MoneyData
+  categoryId: ID
+  container: Container
+  date: Date
+  description: TransactionDescription
+  isManual: Boolean
+  memo: String
+  merchant: Merchant
+  transactionType: TransactionType
+}
+
+# ─── Statement ────────────────────────────────────────────────────────────────
+
+"""A periodic account statement."""
+type Statement {
+  id: ID!
+  accountId: ID
+  apr: Float
+  cashApr: Float
+  closingBalance: MoneyData
+  creditLimit: MoneyData
+  dueDate: Date
+  isLatest: Boolean
+  lastPaymentAmount: MoneyData
+  lastPaymentDate: Date
+  lastUpdated: DateTime
+  minimumPayment: MoneyData
+  newCharges: MoneyData
+  statementDate: Date
+}
+
+"""A credit entry on a statement."""
+type StatementCredit {
+  amount: MoneyData
+  date: Date
+  description: String
+  transactionId: ID
+}
+
+"""A debit entry on a statement."""
+type StatementDebit {
+  amount: MoneyData
+  date: Date
+  description: String
+  transactionId: ID
+}
+
+# ─── Holdings ─────────────────────────────────────────────────────────────────
+
+"""An investment holding within an account."""
+type Holding {
+  id: ID!
+  accountId: ID
+  accruedIncome: MoneyData
+  accruedInterest: MoneyData
+  assetClassification: [AssetClassification]
+  contractQuantity: Float
+  couponRate: Float
+  createdDate: DateTime
+  cusipNumber: String
+  description: String
+  enrichedDescription: String
+  exercisedQuantity: Float
+  expirationDate: Date
+  failedQuantity: Float
+  holdingType: HoldingType
+  interestRate: Float
+  isin: String
+  isShort: Boolean
+  lastUpdated: DateTime
+  matchStatus: String
+  maturityDate: Date
+  optionType: String
+  price: MoneyData
+  principal: MoneyData
+  purchasedPrice: MoneyData
+  quantity: Float
+  securityStyle: String
+  securityType: String
+  sedol: String
+  spread: Float
+  strikePrice: MoneyData
+  symbol: String
+  term: String
+  unvestedQuantity: Float
+  unvestedValue: MoneyData
+  value: MoneyData
+  vestedQuantity: Float
+  vestedSharesExercisable: Float
+  vestedValue: MoneyData
+}
+
+"""Asset classification breakdown for a holding."""
+type AssetClassification {
+  allocation: Float
+  classificationValue: String
+  classificationType: AssetClassificationType
+}
+
+# ─── Investment / Insurance ───────────────────────────────────────────────────
+
+"""An investment record associated with an account."""
+type Investment {
+  id: ID!
+  accountId: ID
+  description: String
+  fundFamily: String
+  holdingType: HoldingType
+  isin: String
+  price: MoneyData
+  quantity: Float
+  symbol: String
+  value: MoneyData
+}
+
+"""An investment plan (e.g., 401k, IRA) linked to an account."""
+type InvestmentPlan {
+  id: ID!
+  accountId: ID
+  contribution: MoneyData
+  employerContribution: MoneyData
+  planType: String
+  vestingSchedule: String
+}
+
+"""An insurance policy linked to an account."""
+type InsurancePolicy {
+  id: ID!
+  accountId: ID
+  coverage: MoneyData
+  deductible: MoneyData
+  expirationDate: Date
+  policyStatus: PolicyStatus
+  policyTerm: String
+  policyType: String
+  premium: MoneyData
+  startDate: Date
+}
+
+# ─── Document ─────────────────────────────────────────────────────────────────
+
+"""A financial document (tax form, statement, e-bill) on an account."""
+type Document {
+  id: ID!
+  accountID: ID
+  docType: DocumentType
+  formType: String
+  lastUpdated: DateTime
+  name: String
+  status: String
+  taxYear: String
+}
+
+"""Tax status details associated with an account or document."""
+type TaxStatus {
+  taxYear: String
+  taxForm: String
+  status: String
+}
+
+# ─── Payment ──────────────────────────────────────────────────────────────────
+
+"""A bill payment record."""
+type BillPayment {
+  id: ID!
+  accountId: ID
+  amount: MoneyData
+  dueDate: Date
+  paymentDate: Date
+  paymentMethodId: ID
+  status: String
+}
+
+"""A payment method (bank account, credit card) registered for payments."""
+type PaymentMethod {
+  id: ID!
+  accountId: ID
+  bankTransferCode: String
+  isPreferred: Boolean
+  name: String
+  type: String
+}
+
+"""Details for a specific payment transaction."""
+type PaymentDetail {
+  confirmationNumber: String
+  memo: String
+  paymentDate: Date
+  paymentMethod: PaymentMethod
+  scheduledPaymentAmount: MoneyData
+  status: String
+}
+
+# ─── Budget ───────────────────────────────────────────────────────────────────
+
+"""A user-defined budget tracking spending against a target."""
+type Budget {
+  id: ID!
+  amount: MoneyData
+  budgetType: BudgetType
+  category: [BudgetCategory]
+  endDate: Date
+  frequency: String
+  isEnabled: Boolean
+  name: String
+  startDate: Date
+  userId: ID
+}
+
+"""A category-level breakdown within a budget."""
+type BudgetCategory {
+  categoryId: ID
+  categoryName: String
+  currentAmount: MoneyData
+  targetAmount: MoneyData
+  periods: [BudgetPeriod]
+}
+
+"""A time period within a budget showing actuals vs. targets."""
+type BudgetPeriod {
+  actualAmount: MoneyData
+  endDate: Date
+  startDate: Date
+  targetAmount: MoneyData
+}
+
+# ─── Derived / Analytics ──────────────────────────────────────────────────────
+
+"""An aggregated transaction record used in derived analytics."""
+type DerivedTransaction {
+  accountId: ID
+  amount: MoneyData
+  baseType: TransactionBaseType
+  category: String
+  categoryId: ID
+  date: Date
+  description: TransactionDescription
+  id: ID!
+}
+
+"""An account record enriched with derived balance analytics."""
+type DerivedAccount {
+  accountId: ID!
+  container: Container
+  historicalBalances: [AccountBalance]
+}
+
+"""Net worth summary combining assets and liabilities."""
+type NetworthSummary {
+  date: Date
+  networthType: NetworthType
+  asset: MoneyData
+  liability: MoneyData
+  networth: MoneyData
+  account: [AccountBalance]
+}
+
+"""Allocation summary across asset classes or account types."""
+type AllocationSummary {
+  allocationType: String
+  date: Date
+  holding: [HoldingAllocation]
+}
+
+"""Allocation detail for a single holding within an allocation summary."""
+type HoldingAllocation {
+  classification: String
+  value: MoneyData
+  percentage: Float
+}
+
+"""Cash flow summary (income vs. expenses) for a period."""
+type CashFlow {
+  cashFlowType: CashFlowType
+  creditTotal: MoneyData
+  debitTotal: MoneyData
+  date: Date
+  details: [CashFlowDetail]
+}
+
+"""Line-level detail within a cash flow summary."""
+type CashFlowDetail {
+  amount: MoneyData
+  category: String
+  date: Date
+  transactionCount: Int
+}
+
+"""Summary of assets by container or account type."""
+type AssetSummary {
+  asset: MoneyData
+  container: Container
+  date: Date
+  account: [AccountBalance]
+}
+
+"""Summary of liabilities by container or account type."""
+type LiabilitySummary {
+  container: Container
+  date: Date
+  liability: MoneyData
+  account: [AccountBalance]
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  """Get the currently authenticated user."""
+  user: User
+
+  """List all accounts for the current user."""
+  accounts(container: Container, status: AccountStatus): [Account]
+
+  """Get a single account by ID."""
+  account(accountId: ID!): Account
+
+  """Get balance history for accounts."""
+  accountBalances(accountIds: [ID!], fromDate: Date, toDate: Date): [AccountBalance]
+
+  """List all providers (financial institutions) supported by Yodlee."""
+  providers(name: String, countryISOCode: String, containers: [Container]): [Provider]
+
+  """Get a provider by ID including its login form."""
+  provider(providerId: ID!): ProviderDetail
+
+  """List provider accounts linked by the current user."""
+  providerAccounts: [ProviderAccount]
+
+  """Get a specific provider account."""
+  providerAccount(providerAccountId: ID!): ProviderAccount
+
+  """List transactions for the current user."""
+  transactions(
+    accountId: ID
+    baseType: TransactionBaseType
+    categoryId: ID
+    container: Container
+    fromDate: Date
+    toDate: Date
+    keyword: String
+    skip: Int
+    top: Int
+  ): [Transaction]
+
+  """Get a single transaction by ID."""
+  transaction(transactionId: ID!): Transaction
+
+  """List transaction categories."""
+  transactionCategories: [TransactionCategory]
+
+  """List statements for an account."""
+  statements(accountId: ID!, fromDate: Date, toDate: Date): [Statement]
+
+  """List holdings for the current user."""
+  holdings(accountId: ID, holdingType: HoldingType): [Holding]
+
+  """List documents for the current user."""
+  documents(accountId: ID, docType: DocumentType, fromDate: Date, toDate: Date): [Document]
+
+  """Get net worth summary."""
+  networthSummary(fromDate: Date, toDate: Date): [NetworthSummary]
+
+  """Get allocation summary."""
+  allocationSummary(fromDate: Date, toDate: Date): [AllocationSummary]
+
+  """Get cash flow summary."""
+  cashFlow(fromDate: Date, toDate: Date): [CashFlow]
+
+  """Get asset summary."""
+  assetSummary(fromDate: Date, toDate: Date): [AssetSummary]
+
+  """Get liability summary."""
+  liabilitySummary(fromDate: Date, toDate: Date): [LiabilitySummary]
+
+  """List budgets for the current user."""
+  budgets: [Budget]
+
+  """List bill payments for the current user."""
+  billPayments(accountId: ID, fromDate: Date, toDate: Date): [BillPayment]
+
+  """List payment methods for the current user."""
+  paymentMethods: [PaymentMethod]
+
+  """Get insurance policies for the current user."""
+  insurancePolicies: [InsurancePolicy]
+
+  """Get investment plans for the current user."""
+  investmentPlans: [InvestmentPlan]
+
+  """Get derived transactions for analytics."""
+  derivedTransactions(fromDate: Date, toDate: Date, categoryId: ID): [DerivedTransaction]
+
+  """Get derived account balances for analytics."""
+  derivedAccounts(accountIds: [ID!], fromDate: Date, toDate: Date): [DerivedAccount]
+}
+
+type Mutation {
+  """Register a new user."""
+  registerUser(loginName: String!, email: String!, currency: String, locale: String): User
+
+  """Update user preferences."""
+  updateUserPreferences(currency: String, timeZone: String, dateFormat: String, locale: String): UserPreference
+
+  """Delete the current user."""
+  deleteUser: Boolean
+
+  """Add a provider account (link a financial institution)."""
+  addProviderAccount(providerId: ID!, credentials: [UserCredentialInput!]!): ProviderAccount
+
+  """Edit a linked provider account (re-authenticate or update MFA)."""
+  editProviderAccount(providerAccountId: ID!, credentials: [UserCredentialInput!]!): ProviderAccount
+
+  """Delete a linked provider account."""
+  deleteProviderAccount(providerAccountId: ID!): Boolean
+
+  """Update account preferences (nickname, include in net worth, etc.)."""
+  updateAccount(accountId: ID!, nickname: String, includeInNetWorth: Boolean, container: Container): Account
+
+  """Add a manual account."""
+  addManualAccount(container: Container!, accountName: String!, balance: Float, currency: String): Account
+
+  """Delete an account."""
+  deleteAccount(accountId: ID!): Boolean
+
+  """Add a manual transaction."""
+  addTransaction(accountId: ID!, amount: Float!, date: Date!, description: String, baseType: TransactionBaseType): Transaction
+
+  """Update a transaction's category or details."""
+  updateTransaction(transactionId: ID!, categoryId: ID, memo: String, description: String): Transaction
+
+  """Delete a manual transaction."""
+  deleteTransaction(transactionId: ID!): Boolean
+
+  """Create a custom transaction category."""
+  createTransactionCategory(category: String!, parentCategoryId: ID): TransactionCategory
+
+  """Update a transaction category."""
+  updateTransactionCategory(categoryId: ID!, category: String!): TransactionCategory
+
+  """Delete a custom transaction category."""
+  deleteTransactionCategory(categoryId: ID!): Boolean
+
+  """Create a budget."""
+  createBudget(name: String!, amount: Float!, currency: String!, budgetType: BudgetType!, startDate: Date!, endDate: Date): Budget
+
+  """Update a budget."""
+  updateBudget(budgetId: ID!, amount: Float, endDate: Date, isEnabled: Boolean): Budget
+
+  """Delete a budget."""
+  deleteBudget(budgetId: ID!): Boolean
+
+  """Initiate a bill payment."""
+  createBillPayment(accountId: ID!, amount: Float!, currency: String!, paymentMethodId: ID!, paymentDate: Date!): BillPayment
+
+  """Generate an access token for API authentication."""
+  generateAccessToken(loginName: String!): AccessToken
+
+  """Refresh a provider account's data."""
+  refreshProviderAccount(providerAccountId: ID!): ProviderAccount
+}
+
+"""Input type for user credentials when linking provider accounts."""
+input UserCredentialInput {
+  id: ID
+  value: String!
+  isEditable: Boolean
+}
