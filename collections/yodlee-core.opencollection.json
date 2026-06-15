@@ -1,0 +1,2455 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds"
+              },
+              {
+                "name": "baseType",
+                "value": "",
+                "type": "query",
+                "description": "DEBIT/CREDIT"
+              },
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated categoryIds"
+              },
+              {
+                "name": "categoryType",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "detailCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "highLevelCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated highLevelCategoryIds"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Transaction search text"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500)"
+              },
+              {
+                "name": "transactionSourceId",
+                "value": "",
+                "type": "query",
+                "description": "A unique ID that the provider site has assigned to the transaction"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Type(SELL,SWEEP, etc.) for bank/creditCard/investment"
+              }
+            ]
+          },
+          "docs": "The Transaction service is used to get a list of transactions for a user.<br>By default, this service returns the last 30 days of transactions from today's date when fromDate and toDate are not passed.<br>When fromDate and toDate are passed, the API will only return up to 2 years of transaction history. If the difference between fromDate and toDate is more than 2 years, API will return only last 2 years from the toDate.<br>The keyword parameter performs a contains search on the original, consume"
+        },
+        {
+          "info": {
+            "name": "Update Transaction for Transaction Source ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions"
+          },
+          "docs": "Update the category, consumer description, memo, isPhysical, merchantType, and detailCategory for a transaction by filtering it using the Transaction Source ID.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Run Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transactions/categories/rules/:ruleId",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique id of the categorization rule"
+              }
+            ]
+          },
+          "docs": "The run transaction categorization rule service is used to run a rule on transactions, to categorize the transactions.<br>The HTTP response code is 204 (Success with no content).<br>"
+        },
+        {
+          "info": {
+            "name": "Update Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions/categories/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "ruleId"
+              }
+            ]
+          },
+          "docs": "The update transaction categorization rule service is used to update a categorization rule for both system-defined category as well as user-defined category.<br>ruleParam JSON input should be as explained in the create transaction categorization rule service.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Delete Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/transactions/categories/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "ruleId"
+              }
+            ]
+          },
+          "docs": "The delete transaction categorization rule service is used to delete the given user-defined transaction categorization rule for both system-defined category as well as user-defined category.<br>This will delete all the corresponding rule clauses associated with the rule.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Transactions Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/count",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds\t"
+              },
+              {
+                "name": "baseType",
+                "value": "",
+                "type": "query",
+                "description": "DEBIT/CREDIT"
+              },
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated categoryIds"
+              },
+              {
+                "name": "categoryType",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan"
+              },
+              {
+                "name": "detailCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "highLevelCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated highLevelCategoryIds"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Transaction search text\t"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Type(SELL,SWEEP, etc.)"
+              }
+            ]
+          },
+          "docs": "The count service provides the total number of transactions for a specific user depending on the input parameters passed.<br>If you are implementing pagination for transactions, call this endpoint before calling GET /transactions to know the number of transactions that are returned for the input parameters passed.<br>The functionality of the input parameters remains the same as that of the GET /transactions endpoint.<br>If the difference between fromDate and toDate is more than 2 years, API will"
+        },
+        {
+          "info": {
+            "name": "Get Transaction Categorization Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/categories/txnRules"
+          },
+          "docs": "The get transaction categorization rule service is used to get all the categorization rules.<br>"
+        },
+        {
+          "info": {
+            "name": "Delete Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/transactions/categories/:categoryId",
+            "params": [
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "path",
+                "description": "categoryId"
+              }
+            ]
+          },
+          "docs": "The delete transaction categories service is used to delete the given user-defined category.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Transaction Category List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/categories"
+          },
+          "docs": "The categories service returns the list of available transaction categories.<br>High level category is returned in the response only if it is opted by the customer.<br>When invoked by passing the cobrand session or admin access token, this service returns the supported transaction categories at the cobrand level. <br>When invoked by passing the cobrand session and the user session or user access token, this service returns the transaction categories <br>along with user-defined categories.<br>Dou"
+        },
+        {
+          "info": {
+            "name": "Create Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transactions/categories"
+          },
+          "docs": "The create transaction categories service is used to create user-defined categories for a system-defined category.<br>The parentCategoryId is the system-defined category id.This can be retrieved using get transaction categories service.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 201 (Created successfully).<br>"
+        },
+        {
+          "info": {
+            "name": "Update Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions/categories"
+          },
+          "docs": "The update transaction categories service is used to update the transaction category name<br>for a high level category, a system-defined category and a user-defined category.<br>The renamed category can be set back to the original name by passing an empty string for categoryName.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Transaction Categorization Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/categories/rules"
+          },
+          "docs": "The get transaction categorization rule service is used to get all the categorization rules.<br>"
+        },
+        {
+          "info": {
+            "name": "Create or Run Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transactions/categories/rules",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "To run rules, pass action=run. Only value run is supported"
+              },
+              {
+                "name": "ruleParam",
+                "value": "",
+                "type": "query",
+                "description": "rules(JSON format) to categorize the transactions"
+              }
+            ]
+          },
+          "docs": "The Create or Run Transaction Categorization Rule endpoint is used to: <br>Create transaction categorization rules for both system and user-defined categories.<br>Run all the transaction categorization rules to categorize transactions by calling the endpoint with action=run as the query parameter. <br><br>The input body parameters to create transaction categorization rules follow:<br>     categoryId - This field is mandatory and numeric<br>     priority - This field is optional and numeric. Prio"
+        },
+        {
+          "info": {
+            "name": "Get Transactions using Transaction ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/:transactionId",
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "An unique identifier for the transaction. The combination of the id and account container are unique in the system."
+              }
+            ]
+          },
+          "docs": "The Transaction service is used to get a list of transactions for a user using Transaction ID.<br>"
+        },
+        {
+          "info": {
+            "name": "Update Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "transactionId"
+              }
+            ]
+          },
+          "docs": "The update transaction service is used to update the category,consumer description, memo, isPhysical, merchantType, detailCategory for a transaction.<br>The HTTP response code is 204 (Success without content).<br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Associated Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/associatedAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers.<br>This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may merge their subsidiaries and provide data as a single OB provider.<br>Before the OB solution, this data was aggregated with different provider IDs.<br>This service accepts the providerAccountId and returns all accounts of the associated providerAccounts that belong to the subsidiary of the"
+        },
+        {
+          "info": {
+            "name": "Get Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds."
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan/reward/realEstate/otherAssets/otherLiabilities"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b><br><li>fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.</li><br><li>profile is deprecated, and to retrieve the profile information, call the GET /verification/holderProfile API instead.</li>"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated providerAccountIds."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier that returns contextual data"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "ACTIVE,INACTIVE,TO_BE_CLOSED,CLOSED"
+              }
+            ]
+          },
+          "docs": "The get accounts service provides information about accounts added by the user.<br>By default, this service returns information for active and to be closed accounts.<br>If requestId is provided, the accounts that are updated in the context of the requestId will be provided in the response.<br>Pagination is made available to the advisors to retrieve account data of all users assigned to them. The skip and top parameters are used for pagination. In the skip and top parameters pass the number of re"
+        },
+        {
+          "info": {
+            "name": "Add Manual Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounts"
+          },
+          "docs": "The add account service is used to add manual accounts.<br>The response of add account service includes the account name , account number and Yodlee generated account id.<br>All manual accounts added will be included as part of networth calculation by default.<br>Add manual account support is available for bank, card, investment, insurance and loan container only.<br><br><b>Note:</b><ul> <li>A real estate account addition is only supported for SYSTEM and MANUAL valuation type.</li></ul>"
+        },
+        {
+          "info": {
+            "name": "Migrate Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/accounts/migrateAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "This service is associated with the open banking (OB) flow.<br>Before invoking this service, display all the associated accounts to the user by calling the GET /associatedAccounts API.<br>The migrate accounts API treats the user's consent acceptance to initiate account migration. Invoking this service indicates that the user has given the consent to access the associated account information from the financial institution.<br>If an existing provider supports bank, card, and loan accounts, and cho"
+        },
+        {
+          "info": {
+            "name": "Evaluate Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounts/evaluateAddress"
+          },
+          "docs": "Use this service to validate the address before adding the real estate account.<br>If the address is valid, the service will return the complete address information.<br>The response will contain multiple addresses if the user-provided input matches with multiple entries in the vendor database.<br>In the case of multiple matches, the user can select the appropriate address from the list and then invoke the add account service with the complete address.<br><br><b>Note:</b> <ul><li>Yodlee recommend"
+        },
+        {
+          "info": {
+            "name": "Get Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "accountId"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b>fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response."
+              }
+            ]
+          },
+          "docs": "The get account details service provides detailed information of an account.<br><br><b>Note:</b><li> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.</li>"
+        },
+        {
+          "info": {
+            "name": "Update Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "accountId"
+              }
+            ]
+          },
+          "docs": "The update account service is used to update manual and aggregated accounts.<br>The HTTP response code is 204 (Success without content).<br>Update manual account support is available for bank, card, investment, insurance, loan, otherAssets, otherLiabilities and realEstate containers only.<br><br><b>Note:</b><li> A real estate account update is only supported for SYSTEM and MANUAL valuation type.</li> <li> A real estate account can be linked to a loan account by passing accountId of a loan accoun"
+        },
+        {
+          "info": {
+            "name": "Delete Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "accountId"
+              }
+            ]
+          },
+          "docs": "The delete account service allows an account to be deleted.<br>This service does not return a response. The HTTP response code is 204 (Success with no content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Historical Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/historicalBalances",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date for balance retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "includeCF",
+                "value": "",
+                "type": "query",
+                "description": "Consider carry forward logic for missing balances"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "D-daily, W-weekly or M-monthly"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "toDate for balance retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500)"
+              }
+            ]
+          },
+          "docs": "The historical balances service is used to retrieve the historical balances for an account or a user.<br>Historical balances are daily (D), weekly (W), and monthly (M). <br>The interval input should be passed as D, W, and M to retrieve the desired historical balances. The default interval is daily (D). <br>When no account id is provided, historical balances of the accounts that are active, to be closed, and closed are provided in the response. <br>If the fromDate and toDate are not passed, the l"
+        },
+        {
+          "info": {
+            "name": "Get Latest Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/latestBalances",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds."
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "providerAccountId."
+              }
+            ]
+          },
+          "docs": "The latest balances service provides the latest account balance by initiating a new balance refresh request"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Verified Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/verification/verifiedAccounts",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds."
+              },
+              {
+                "name": "isSelected",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated isSelected. Allowed values are true, false. <br>"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "providerAccountId."
+              },
+              {
+                "name": "verificationStatus",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated verificationStatus. Allowed values are SUCCESS, FAILED <br><b>Note:</b> If no value is passed, the implicit default value is SUCCESS."
+              }
+            ]
+          },
+          "docs": "The Verified Accounts API v1.1 provides information about the bank and investment accounts that the user  has selected for verification, during the Account Verification flow on FastLink 4. By default, the API only returns information of the accounts that were selected and have been successfully verified. <br><br>"
+        },
+        {
+          "info": {
+            "name": "Get Holder Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/verification/holderProfile",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "providerAccountId."
+              }
+            ]
+          },
+          "docs": "The Holder Profile API service allows retrieving the user's profile details (i.e., PII data such as name, email, phone number, and address) that are available at the provider account and each account level. The API accepts the providerAccountId and retrieves the profile information available under it and all the details available under each of the associated accounts.  <br><br>This service can only be invoked by Yodlee API v1.1, FastLink 3, and FastLink 4 customers. <br><br>"
+        },
+        {
+          "info": {
+            "name": "Get Classification Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/verification/classification/summary",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              }
+            ]
+          },
+          "docs": "The get classification summary API service returns attributes that provide account-level and transaction-level summary for a user's account.<br><br>As a prerequisite, the Account Verification customers should have Transactions enabled to fetch a response. The API can be invoked only for an account verified by the user following the get verified accounts API call. If the prerequisite is not satisfied, an appropriate error will be returned on invoking the API.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Verification Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/verification",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountId"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated providerAccountId"
+              },
+              {
+                "name": "verificationType",
+                "value": "",
+                "type": "query",
+                "description": "verificationType"
+              }
+            ]
+          },
+          "docs": "The get verification status service is used to retrieve the verification status of all accounts for which the MS or CDV process has been initiated.<br>For the MS process, the account details object returns the aggregated information of the verified accounts. For the CDV process, the account details object returns the user provided account information.<br>"
+        },
+        {
+          "info": {
+            "name": "Initiaite Challenge Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/verification"
+          },
+          "docs": "The post verification service is used to initiate the matching service (MS) and the challenge deposit account verification (CDV) process to verify account ownership.<br>The MS and CDV process can verify ownership of only bank accounts (i.e., checking and savings).<br>The MS verification can be initiated only for an already aggregated account or a providerAccount.<br>The prerequisite for the MS verification process is to request the ACCT_PROFILE dataset with the HOLDER_NAME attribute.<br>In the M"
+        },
+        {
+          "info": {
+            "name": "Verify Challenge Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/verification"
+          },
+          "docs": "The put verification service is used to complete the challenge deposit verification (CDV) process.<br>This service is used only by the customer of CDV flow.<br>In the CDV process, the user-provided microtransaction details (i.e., credit and debit) is matched against the microtransactions posted by Yodlee. For a successful verification of the account's ownership both the microtransaction details should match.<br>The CDV process is currently supported only in the United States.<br><br><b>Notes:</b"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cobrand",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cobrand Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/cobrand/login"
+          },
+          "docs": "The cobrand login service authenticates a cobrand.<br>Cobrand session in the response includes the cobrand session token (cobSession) <br>which is used in subsequent API calls like registering or signing in the user. <br>The idle timeout for a cobrand session is 2 hours and the absolute timeout is 24 hours. This service can be <br>invoked to create a new cobrand session token. <br><b>Note:</b> This endpoint is deprecated for customers using the API Key-based authentication and is applicable only"
+        },
+        {
+          "info": {
+            "name": "Subscribe Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/cobrand/config/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "eventName"
+              }
+            ]
+          },
+          "docs": "<b>Refer POST /configs/notifications/events/{eventName}.</b><br>The subscribe events service is used to subscribe to an event for receiving notifications.<br>The callback URL, where the notification will be posted should be provided to this service.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br>Customers can subscribe to REFRESH,DATA_UPDATES and AUTO_REFRESH_UPDATES event.<br><br><b>Notes</b>:<br>This service is not avai"
+        },
+        {
+          "info": {
+            "name": "Update Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/cobrand/config/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "eventName"
+              }
+            ]
+          },
+          "docs": "<b>Refer PUT /configs/notifications/events/{eventName}.</b><br>The update events service is used to update the callback URL.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br><b>Note:</b> The content type has to be passed as application/json for the body parameter. <br>"
+        },
+        {
+          "info": {
+            "name": "Delete Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/cobrand/config/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "eventName"
+              }
+            ]
+          },
+          "docs": "<b>Refer DELETE /configs/notifications/events/{eventName}.</b><br>The delete events service is used to unsubscribe from an events service.<br>"
+        },
+        {
+          "info": {
+            "name": "Cobrand Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/cobrand/logout"
+          },
+          "docs": "The cobrand logout service is used to log out the cobrand.<br>This service does not return a response. The HTTP response code is 204 (Success with no content).<br><b>Note:</b> This endpoint is deprecated for customers using the API Key-based authentication and is applicable only to customers who use the SAML-based authentication.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Subscribed Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/cobrand/config/notifications/events",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "query",
+                "description": "eventName"
+              }
+            ]
+          },
+          "docs": "<b>Refer GET /configs/notifications/events.</b><br>The get events service provides the list of events for which consumers subscribed <br>to receive notifications. <br>"
+        },
+        {
+          "info": {
+            "name": "Get Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/cobrand/publicKey"
+          },
+          "docs": "<b>Refer GET /configs/publicKey.</b><br>The get public key service provides the customer the public key that should be used to encrypt the user credentials before sending it to Yodlee.<br>This endpoint is useful only for PKI enabled.<br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DataExtracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get userData",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dataExtracts/userData",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "From DateTime (YYYY-MM-DDThh:mm:ssZ)"
+              },
+              {
+                "name": "loginName",
+                "value": "",
+                "type": "query",
+                "description": "Login Name"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "To DateTime (YYYY-MM-DDThh:mm:ssZ)"
+              }
+            ]
+          },
+          "docs": "The get user data service is used to get a user's modified data for a particular period of time for accounts, transactions, holdings, and provider account information.<br>The time difference between fromDate and toDate fields cannot be more than 60 minutes.<br>By default, pagination is available for the transaction entity in this API. In the first response, the API will retrieve 500 transactions along with other data. The response header will provide a link to retrieve the next set of transactio"
+        },
+        {
+          "info": {
+            "name": "Get Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dataExtracts/events",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "query",
+                "description": "Event Name"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "From DateTime (YYYY-MM-DDThh:mm:ssZ)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "To DateTime (YYYY-MM-DDThh:mm:ssZ)"
+              }
+            ]
+          },
+          "docs": "The get extracts events service is used to learn about occurrences of data extract related events. This service currently supports only the DATA_UPDATES event.<br>Passing the event name as DATA_UPDATES provides information about users for whom data has been modified in the system for the specified time range. To learn more, please refer to the <a href=\"https://developer.yodlee.com/resources/yodlee/data-extracts/docs/overview\">Data Extracts</a> page.<br>You can retrieve data in increments of no m"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providers",
+            "params": [
+              {
+                "name": "capability",
+                "value": "",
+                "type": "query",
+                "description": "CHALLENGE_DEPOSIT_VERIFICATION - capability search is deprecated"
+              },
+              {
+                "name": "dataset$filter",
+                "value": "",
+                "type": "query",
+                "description": "Expression to filter the providers by dataset(s) or dataset attribute(s). The default value will be the dataset or dataset attributes configured as default for the customer."
+              },
+              {
+                "name": "fullAccountNumberFields",
+                "value": "",
+                "type": "query",
+                "description": "Specify to filter the providers with values paymentAccountNumber,unmaskedAccountNumber."
+              },
+              {
+                "name": "institutionId",
+                "value": "",
+                "type": "query",
+                "description": "Institution Id for Single site selection"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name in minimum 1 character or routing number."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Search priority"
+              },
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "query",
+                "description": "Max 5 Comma seperated Provider Ids"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0) - This is not applicable along with 'name' parameter."
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500) - This is not applicable along with 'name' parameter."
+              }
+            ]
+          },
+          "docs": "The get provider service is used to get all the providers that are enabled, search a provider service by name or routing number and get popular sites of a region. <br>Searching for a provider using a routing number is applicable only to the USA and Canada regions.<br>The valid values for priority are: <br>   1. cobrand: Returns providers enabled for the cobrand (Default priority)<br>   2. popular: Returns providers popular among users of the customer<br><br>Only the datasets, attributes, and con"
+        },
+        {
+          "info": {
+            "name": "Get Provider Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providers/:providerId",
+            "params": [
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "path",
+                "description": "providerId"
+              }
+            ]
+          },
+          "docs": "The get provider detail service is used to get detailed information including the login form for a provider.<br>The response is a provider object that includes information such as name of the provider, <br>provider's base URL, a list of containers supported by the provider, the login form details of the provider, etc.<br>Only enabled datasets, attributes and containers gets returned in the response.<br><br><b>Note:</b><li>This service supports the localization feature and accepts locale as a hea"
+        },
+        {
+          "info": {
+            "name": "Get Providers Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providers/count",
+            "params": [
+              {
+                "name": "capability",
+                "value": "",
+                "type": "query",
+                "description": "CHALLENGE_DEPOSIT_VERIFICATION - capability search is deprecated"
+              },
+              {
+                "name": "dataset$filter",
+                "value": "",
+                "type": "query",
+                "description": "Expression to filter the providers by dataset(s) or dataset attribute(s). The default value will be the dataset or dataset attributes configured as default for the customer."
+              },
+              {
+                "name": "fullAccountNumberFields",
+                "value": "",
+                "type": "query",
+                "description": "Specify to filter the providers with values paymentAccountNumber,unmaskedAccountNumber."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name in minimum 1 character or routing number."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Search priority"
+              }
+            ]
+          },
+          "docs": "The count service provides the total number of providers that get returned in the GET /providers depending on the input parameters passed.<br>If you are implementing pagination for providers, call this endpoint before calling GET /providers to know the number of providers that are returned for the input parameters passed.<br>The functionality of the input parameters remains the same as that of the GET /providers endpoint<br><br><b>Note:</b> <li>The capability has been deprecated in the query par"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Configs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subscribed Notification Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/configs/notifications/events",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The get events service provides the list of events for which consumers subscribed to receive notifications. <br>"
+        },
+        {
+          "info": {
+            "name": "Get Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/configs/publicKey"
+          },
+          "docs": "The get public key service provides the public key that should be used to encrypt user credentials while invoking POST /providerAccounts and PUT /providerAccounts endpoints.<br>This service will only work if the PKI (public key infrastructure) feature is enabled for the customer.<br><br><b>Note:</b><li> The key in the response is a string in PEM format.</li><li>This endpoint is not available in the Sandbox environment and it is useful only if the PKI feature is enabled.</li>"
+        },
+        {
+          "info": {
+            "name": "Subscribe For Notification Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/configs/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The subscribe events service is used to subscribe to an event for receiving notifications.<br>The callback URL, where the notification will be posted should be provided to this service.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br>Customers can subscribe to REFRESH,DATA_UPDATES,AUTO_REFRESH_UPDATES,LATEST_BALANCE_UPDATES and CREDIT_MATRIX_REPORT_UPDATES event.<br><br><b>Notes:</b><li>This service is not available in dev"
+        },
+        {
+          "info": {
+            "name": "Update Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/configs/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The update events service is used to update the callback URL.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br><br><b>Note:</b> <li>The content type has to be passed as application/json for the body parameter. <br>"
+        },
+        {
+          "info": {
+            "name": "Delete Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/configs/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The delete events service is used to unsubscribe from an events service.<br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Consents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Consent History Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/history/count",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "query",
+                "description": "Consent Id generated through POST Consent."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History end date (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "The count service provides the total number of history records for a specific consent. <br/>If you are implementing pagination for consent history, call this endpoint before calling GET /consents/history to know the number of records for the given consent that are returned for the input parameters passed.<br/>"
+        },
+        {
+          "info": {
+            "name": "Get Consent History ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/history",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "query",
+                "description": "Consent Id generated through POST Consent."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500)"
+              }
+            ]
+          },
+          "docs": "The get consent history service is used to retrieve all the history related to the consent. <br/>All history event details for few fields like userDataPurge, deidentificationPreference and consentCollectionPeriod may not be available for older AU Open Banking consents and other Open Banking regions.<br/>For any consent, history will be captured and available from consent authorization (consent status Active) event onwards.<br/><b>Note:</b><br/>  i. Duration (fromDate and toDate) is optional. In "
+        },
+        {
+          "info": {
+            "name": "Get Authorization Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/:consentId",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "path",
+                "description": "Consent Id generated through POST Consent."
+              }
+            ]
+          },
+          "docs": "The get authorization URL for consent service provides the authorization URL for the renew consent flow, within the consent dashboard.<b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>"
+        },
+        {
+          "info": {
+            "name": "Put Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/consents/:consentId",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "path",
+                "description": "Consent Id generated through POST Consent."
+              }
+            ]
+          },
+          "docs": "The update consent service is used to capture the user acceptance of the consent presented to him or her. <br/>This service returns the authorization-redirect URL that should be used to display to the user, the bank's authentication interface.<b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Consents Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/preferences",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "query",
+                "description": "consentId"
+              }
+            ]
+          },
+          "docs": "This API service provides user's preferences for the consent"
+        },
+        {
+          "info": {
+            "name": "Renew Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/consents/:consentId/renewal",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "path",
+                "description": "Consent Id to be renewed."
+              }
+            ]
+          },
+          "docs": "The consent renewal service is used to renew the consent by validating the consent state. This API supports both UK and AU Open Banking. </br><b>Renewing an UK Open Banking consent:</b><br><li>Before the grace period of 90 days: The consent will be renewed using the third-party provider (TPP) renewal process that Yodlee does, and no consent reauthorisation is required.The API response will contain the complete renewed consent object.</li><li>After the grace period of 90 days: The API will provid"
+        },
+        {
+          "info": {
+            "name": "Get Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents",
+            "params": [
+              {
+                "name": "consentIds",
+                "value": "",
+                "type": "query",
+                "description": "Consent Id generated through POST Consent."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "The flag responsible to include renew details like sharing duration and reauthorization required"
+              },
+              {
+                "name": "providerAccountIds",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the provider account resource. This is created during account addition."
+              }
+            ]
+          },
+          "docs": "The get consent service is used to retrieve all the consents submitted to Yodlee. <br>The service can be used to build a manage consent interface or a consent dashboard to implement the renew and revoke consent flows.<br><b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>"
+        },
+        {
+          "info": {
+            "name": "Post Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/consents"
+          },
+          "docs": "The generate consent service is used to generate all the consent information and permissions associated to a provider. <br/>The scope provided in the response is based on the providerId and the datasets provided in the input. <br/>If no dataset value is provided, the datasets that are configured for the customer will be considered. <br/>The configured dataset can be overridden by providing the dataset as an input. <br/>If no applicationName is provided in the input, the default applicationName w"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Derived",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Networth Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/derived/networth",
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "query",
+                "description": "comma separated accountIds"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan/realEstate/otherAssets/otherLiabilities"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date for balance retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "details"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "D-daily, W-weekly or M-monthly"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "toDate for balance retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500)"
+              }
+            ]
+          },
+          "docs": "The get networth service is used to get the networth for the user.<br>If the include parameter value is passed as details then networth with historical balances is returned. <br>"
+        },
+        {
+          "info": {
+            "name": "Get Transaction Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/derived/transactionSummary",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "comma separated account Ids"
+              },
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "query",
+                "description": "comma separated categoryIds"
+              },
+              {
+                "name": "categoryType",
+                "value": "",
+                "type": "query",
+                "description": "LOAN, INCOME, EXPENSE, TRANSFER, UNCATEGORIZE or DEFERRED_COMPENSATION"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD format"
+              },
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query",
+                "description": "CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "details"
+              },
+              {
+                "name": "includeUserCategory",
+                "value": "",
+                "type": "query",
+                "description": "TRUE/FALSE"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "D-daily, W-weekly, M-mothly or Y-yearly"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD format"
+              }
+            ]
+          },
+          "docs": "The transaction summary service provides the summary values of transactions for the given date range by category type, high-level categories, or system-defined categories.<br><br>Yodlee has the transaction data stored for a day, month, year and week per category as per the availability of user's data. If the include parameter value is passed as details, then summary details will be returned depending on the interval passed-monthly is the default.<br><br><b>Notes:</b><ol> <li> Details can be requ"
+        },
+        {
+          "info": {
+            "name": "Get Holding Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/derived/holdingSummary",
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds"
+              },
+              {
+                "name": "classificationType",
+                "value": "",
+                "type": "query",
+                "description": "e.g. Country, Sector, etc."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "details"
+              }
+            ]
+          },
+          "docs": "The get holding summary service is used to get the summary of asset classifications for the user.<br>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>If the include parameter value is passed as details then a summary with holdings and account information is returned.<br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Saml Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user/samlLogin",
+            "params": [
+              {
+                "name": "issuer",
+                "value": "",
+                "type": "query",
+                "description": "issuer"
+              },
+              {
+                "name": "samlResponse",
+                "value": "",
+                "type": "query",
+                "description": "samlResponse"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "source"
+              }
+            ]
+          },
+          "docs": "The SAML login service is used to authenticate system users with a SAML response.<br>A new user will be created with the input provided if that user isn't already in the system.<br>For existing users, the system will make updates based on changes or new information.<br>When authentication is successful, a user session token is returned.<br><br><b>Note:</b> <li>The content type has to be passed as application/x-www-form-urlencoded. <li>issuer, source and samlResponse should be passed as body para"
+        },
+        {
+          "info": {
+            "name": "Get Access Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user/accessTokens",
+            "params": [
+              {
+                "name": "appIds",
+                "value": "",
+                "type": "query",
+                "description": "appIds"
+              }
+            ]
+          },
+          "docs": "The Get Access Tokens service is used to retrieve the access tokens for the application id(s) provided.<br>URL in the response can be used to launch the application for which token is requested.<br><br><b>Note:</b> <li>This endpoint is deprecated for customers using the API Key-based authentication and is applicable only to customers who use the SAML-based authentication.<br>"
+        },
+        {
+          "info": {
+            "name": "Get User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user"
+          },
+          "docs": "The get user details service is used to get the user profile information and the application preferences set at the time of user registration.<br>"
+        },
+        {
+          "info": {
+            "name": "Update User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/user"
+          },
+          "docs": "The update user details service is used to update user details like name, address, currency preference, etc.<br>This service can also be used to change the business unit of the user for FL4 customers.<br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>The HTTP response code is 204 (Success without content). <br><br> <b>Login Name Change Feature:</b> loginName can be passed to update the "
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/user/unregister"
+          },
+          "docs": "The delete user service is used to delete or unregister a user from Yodlee. <br>Once deleted, the information related to the users cannot be retrieved. <br>The HTTP response code is 204 (Success without content)<br>"
+        },
+        {
+          "info": {
+            "name": "Register User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user/register"
+          },
+          "docs": "The register user service is used to register a user in Yodlee.<br>The loginName cannot include spaces and must be between 3 and 150 characters.<br>locale passed must be one of the supported locales for the customer. <br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>userParam is accepted as a body parameter. <br><br><b>Note:</b> <li>The content type has to be passed as application/json"
+        },
+        {
+          "info": {
+            "name": "User Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user/logout"
+          },
+          "docs": "<b>Deprecated</b>: This endpoint is deprecated for API Key-based authentication. The user logout service allows the user to log out of the application.<br>The service does not return a response body. The HTTP response code is 204 (Success with no content).<br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "documentId"
+              }
+            ]
+          },
+          "docs": "The get document details service allows consumers to download a document. The document is provided in base64.<br>This API is a premium service which requires subscription in advance to use.  Please contact Yodlee Client Services for more information. <br>"
+        },
+        {
+          "info": {
+            "name": "Delete Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "documentId"
+              }
+            ]
+          },
+          "docs": "The delete document service allows the consumer to delete a document. The deleted document will not be returned in the get documents API. The HTTP response code is 204 (success without content).<br>Documents can be deleted only if the document related dataset attributes are subscribed.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/documents",
+            "params": [
+              {
+                "name": "Keyword",
+                "value": "",
+                "type": "query",
+                "description": "The string used to search a document by its name."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of an account. Retrieve documents for a given accountId."
+              },
+              {
+                "name": "docType",
+                "value": "",
+                "type": "query",
+                "description": "Accepts only one of the following valid document types: STMT, TAX, and EBILL."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The date from which documents have to be retrieved."
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to which documents have to be retrieved."
+              }
+            ]
+          },
+          "docs": "The get documents service allows customers to search or retrieve metadata related to documents. <br>The API returns the document as per the input parameters passed. If no date range is provided then all downloaded documents will be retrieved. Details of deleted documents or documents associated to closed providerAccount will not be returned. <br>This API is a premium service which requires subscription in advance to use.  Please contact Yodlee Client Services for more information. <br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Processor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Account Holder Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/partner/paymentProcessor/account/holder",
+            "headers": [
+              {
+                "name": "processorToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The get account holder details service retrieves the account holder information such as name, email, phone number, address, etc. of the verified financial account associated with the <code>processorToken</code>. The <code>lastUpdated</code> field indicates when the account information was last updated. We recommend using this service when looking for information related to the account holder(s), for instance, to confirm the account holder's name. <br><br><b>Note: </b>Remember to include the <cod"
+        },
+        {
+          "info": {
+            "name": "Get Account Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/partner/paymentProcessor/account/balance",
+            "headers": [
+              {
+                "name": "processorToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The get account balance service retrieves the account balance information of the verified account associated with the <code>processorToken</code>. The response returns additional account information including account names, type and status, along with the account balance information. <br>This service forces an update of the account balances. While other services also return the account balances, this service attempts to refresh the account balances in real-time rather than return a cached value."
+        },
+        {
+          "info": {
+            "name": "Get Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/partner/paymentProcessor/account",
+            "headers": [
+              {
+                "name": "processorToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The get account details service retrieves account information such as account name, type, status, balance, account number and transfer code (for example, routing number of the bank account in the US) of the verified account associated with the <code>processorToken</code>. The <code>lastUpdated</code> field indicates when the account information was last updated. We recommend using this service when looking for details related to the financial account, for instance, the full account number and ba"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProviderAccounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/providerAccounts/:providerAccountId/preferences",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to update preferences like data extracts and auto refreshes without triggering refresh for the providerAccount.<br>Setting isDataExtractsEnabled to false will not trigger data extracts notification and dataExtracts/events will not reflect any data change that is happening for the providerAccount.<br>Modified data will not be provided in the dataExtracts/userData endpoint.<br>Setting isAutoRefreshEnabled to false will not trigger auto refreshes for the provider account.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Provider Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "include credentials,questions"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for the request that returns contextual data"
+              }
+            ]
+          },
+          "docs": "The get provider account details service is used to learn the status of adding accounts and updating accounts.<br>This service has to be called continuously to know the progress level of the triggered process. This service also provides the MFA information requested by the provider site.<br>When <i>include = credentials</i>, questions is passed as input, the service returns the credentials (non-password values) and questions stored in the Yodlee system for that provider account. <br><br><b>Note:"
+        },
+        {
+          "info": {
+            "name": "Delete Provider Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/providerAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "The delete provider account service is used to delete a provider account from the Yodlee system. This service also deletes the accounts that are created in the Yodlee system for that provider account. <br>This service does not return a response. The HTTP response code is 204 (Success with no content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Provider Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerAccounts",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "include"
+              },
+              {
+                "name": "providerIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated providerIds."
+              }
+            ]
+          },
+          "docs": "The get provider accounts service is used to return all the provider accounts added by the user. <br>This includes the failed and successfully added provider accounts.<br>"
+        },
+        {
+          "info": {
+            "name": "Add Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/providerAccounts",
+            "params": [
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "query",
+                "description": "providerId"
+              }
+            ]
+          },
+          "docs": "The add account service is used to link the user's account with the provider site in the Yodlee system. Providers that require multifactor authentication or open banking are also supported by this service. The response includes the Yodlee generated ID (providerAccountId) of the account along with the refresh information.<br><br>Open Banking Implementation Notes: <br>To link the user's account of the Open Banking provider site in the Yodlee system, pass the field entity that contains:<br>1. id - "
+        },
+        {
+          "info": {
+            "name": "Update Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/providerAccounts",
+            "params": [
+              {
+                "name": "providerAccountIds",
+                "value": "",
+                "type": "query",
+                "description": "comma separated providerAccountIds"
+              }
+            ]
+          },
+          "docs": "<b>Credential-based Implementation Notes:</b> <br>The update account API is used to:  &bull; Retrieve the latest information for accounts that belong to one providerAccount from the provider site. You must allow at least 15 min between requests. <br> &bull; Update account credentials when the user has changed the authentication information at the provider site. <br> &bull; Post MFA information for the MFA-enabled provider accounts during add and update accounts. <br> &bull; Retrieve the latest i"
+        },
+        {
+          "info": {
+            "name": "Refresh Provider Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/providerAccounts/refresh"
+          },
+          "docs": "This api service will allow you to refresh the Non-MFA provider accounts against a configName, i.e refresh will respect the configurations of the configName while refreshing the account.<br>Note: this service will only work with FastLink 4 users.<br>"
+        },
+        {
+          "info": {
+            "name": "Get User Profile Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerAccounts/profile",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated providerAccountIds."
+              }
+            ]
+          },
+          "docs": "<b>Refer GET /verification/holderProfile</b><br>The get provider accounts profile service is used to return the user profile details that are associated to the provider account. <br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/token"
+          },
+          "docs": "<b>Generate Access Token using client credential authentication.</b><br>This service returns access tokens required to access Yodlee 1.1 APIs. These tokens are the simplest and easiest of several alternatives for authenticating with Yodlee servers.<br>The most commonly used services obtain data specific to an end user (your customer). For these services, you need a <b>user access token</b>. These are simply tokens created with the user name parameter (<b>loginName</b>) set to the id of your end "
+        },
+        {
+          "info": {
+            "name": "Delete Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/auth/token"
+          },
+          "docs": "This endpoint revokes the token passed in the Authorization header. This service is applicable for JWT-based (and all API key-based) authentication and also client credential (clientId and secret) based authentication. This service does not return a response body. The HTTP response code is 204 (success with no content). <br>Tokens generally have limited lifetime of up to 30 minutes. You will call this service when you finish working with one user, and you want to delete the valid token rather th"
+        },
+        {
+          "info": {
+            "name": "Delete API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/auth/apiKey/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "key"
+              }
+            ]
+          },
+          "docs": "This endpoint allows an existing API key to be deleted.<br>You can use one of the following authorization methods to access this API:<br><ol><li>cobsession</li><li>JWT token</li></ol> <b>Notes:</b> <li>This service is not available in developer sandbox environment and will be made availablefor testing in your dedicated environment. "
+        },
+        {
+          "info": {
+            "name": "Get API Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/apiKey"
+          },
+          "docs": "This endpoint provides the list of API keys that exist for a customer.<br>You can use one of the following authorization methods to access this API:<br><ol><li>cobsession</li><li>JWT token</li></ol><b>Notes:</b><li>This service is not available in developer sandbox environment and will be made available for testing in your dedicated environment. "
+        },
+        {
+          "info": {
+            "name": "Generate API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/apiKey"
+          },
+          "docs": "This endpoint is used to generate an API key. The RSA public key you provide should be in 2048 bit PKCS#8 encoded format. <br>A public key is a mandatory input for generating the API key.<br/>The public key should be a unique key. The apiKeyId you get in the response is what you should use to generate the JWT token.<br> You can use one of the following authorization methods to access<br/>this API:<br><ol><li>cobsession</li><li>JWT token</li></ol> Alternatively, you can use base 64 encoded cobran"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Holdings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Asset Classification List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings/assetClassificationList"
+          },
+          "docs": "The get asset classifications list service is used to get the supported asset classifications. <br>The response includes different classification types like assetClass, country, sector, style, etc. and the values corresponding to each type.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Security Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings/securities",
+            "params": [
+              {
+                "name": "holdingId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated holdingId"
+              }
+            ]
+          },
+          "docs": "The get security details service is used to get all the security information for the holdings<br>"
+        },
+        {
+          "info": {
+            "name": "Get Holdings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountId"
+              },
+              {
+                "name": "assetClassification.classificationType",
+                "value": "",
+                "type": "query",
+                "description": "e.g. Country, Sector, etc."
+              },
+              {
+                "name": "classificationValue",
+                "value": "",
+                "type": "query",
+                "description": "e.g. US"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "assetClassification"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "The get holdings service is used to get the list of holdings of a user.<br>Supported holding types can be employeeStockOption, moneyMarketFund, bond, etc. and is obtained using get holding type list service. <br>Asset classifications for the holdings need to be requested through the \"include\" parameter.<br>Asset classification information for holdings are not available by default, as it is a premium feature.<br>"
+        },
+        {
+          "info": {
+            "name": "Add Holding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/holdings"
+          },
+          "docs": "The add manual holding service is used to add manual holdings. The response of add manual holding service includes the Yodlee generated holding id.<br><br>Add manual holding can only be added to a manual account of investment type container only."
+        },
+        {
+          "info": {
+            "name": "Get Holding Type List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings/holdingTypeList"
+          },
+          "docs": "The get holding types list service is used to get the supported holding types.<br>The response includes different holding types such as future, moneyMarketFund, stock, etc. and it returns the supported holding types <br>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Verify Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Verify Accounts Using Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/verifyAccount/:providerAccountId",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "The verify account service is used to verify the account's ownership by  matching the transaction details with the accounts aggregated for the user.<br><ul><li>If a match is identified, the service returns details of all the accounts along with the matched transaction's details.<li>If no transaction match is found, an empty response will be returned.<li>A maximum of 5 transactionCriteria can be passed in a request.<li>The baseType, date, and amount parameters should mandatorily be passed.<li>The"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Account Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/paymentProcessor/token"
+          },
+          "docs": "The create account token service allows you to create a secure <code>processorToken</code> for a user's verified financial account. This <code>processorToken</code> can then be shared with one of our payment processor partners."
+        },
+        {
+          "info": {
+            "name": "Delete Account Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/paymentProcessor/token",
+            "headers": [
+              {
+                "name": "processorToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The delete account token service allows you to revoke a previously generated <code>processorToken</code>. It is recommended to use this service when you want to disallow further access to the user's financial account, for instance when a user removes their account from your application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/documents/search"
+          },
+          "docs": "The Get User Documents service will allow customers to search or retrieve metadata related to PDF documents uploaded by user through the FastLink 4 flow."
+        },
+        {
+          "info": {
+            "name": "Delete User Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/documents"
+          },
+          "docs": "The Delete User Documents service allows the consumer to delete the PDF documents uploaded by user through FastLink 4 flow.<br>The deleted documents will not be returned in the Get User Documents API.<br>The HTTP response code is 204 (success without content)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Risk Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Risk Analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/riskAnalytics",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              }
+            ]
+          },
+          "docs": "The Account Verification service checks for any fraud pattern but does not derive any risk information with respect to the verified account. The risk analytics feature introduced enables customers to gain deeper insights into potential risks associated with their consumers, helping them to identify, assess, and effectively manage those risks. <br>Risk analytics will be generated only for accounts verified using FastLink 4 Instant Account Verification service and not the Micro Entries service. On"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Institutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get institutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/institutions",
+            "params": [
+              {
+                "name": "dataset$filter",
+                "value": "",
+                "type": "query",
+                "description": "Expression to filter the providers by dataset(s) or dataset attribute(s). The default value will be the dataset or dataset attributes configured as default for the customer."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name in minimum 1 character or routing number."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Search priority"
+              },
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "query",
+                "description": "providerId"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0) - This is not applicable along with 'name' parameter."
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500) - This is not applicable along with 'name' parameter."
+              }
+            ]
+          },
+          "docs": "Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers. The get institutions service helps in identifying credential and related OB sites in a financial institution. The service searches for an institution regardless of the authentication types associated with the providers. Using the get institutions service, retrieve institutions enabled for the customer, search an institution by its name or routing number, and retrieve the popular institutions for a regi"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/statements",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "creditCard/loan/insurance"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date for statement retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "isLatest",
+                "value": "",
+                "type": "query",
+                "description": "isLatest (true/false)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "ACTIVE,TO_BE_CLOSED,CLOSED"
+              }
+            ]
+          },
+          "docs": "The statements service is used to get the list of statement related information. <br>By default, all the latest statements of active and to be closed accounts are retrieved for the user. <br>Certain sites do not have both a statement date and a due date. When a fromDate is passed as an input, all the statements that have the due date on or after the passed date are retrieved. <br>For sites that do not have the due date, statements that have the statement date on or after the passed date are retr"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
