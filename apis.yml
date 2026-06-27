@@ -79,7 +79,7 @@ common:
   url: https://www.linkedin.com/company/yodlee
 - type: Website
   url: https://www.yodlee.com/
-- type: Developer Portal
+- type: DeveloperPortal
   url: https://developer.yodlee.com/
 - type: Documentation
   url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs
@@ -87,7 +87,7 @@ common:
   url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml
 - type: GitHubOrganization
   url: https://github.com/yodlee
-- type: SDK
+- type: SDKs
   url: https://github.com/Yodlee/java-sdk
 - type: GettingStarted
   url: https://developer.yodlee.com/docs/getting-started
