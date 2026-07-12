@@ -75,6 +75,8 @@ apis:
   - type: Documentation
     url: https://developer.yodlee.com/
 common:
+- type: DomainSecurity
+  url: security/yodlee-domain-security.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/yodlee
 - type: Website
