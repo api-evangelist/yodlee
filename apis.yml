@@ -75,6 +75,8 @@ apis:
   - type: Documentation
     url: https://developer.yodlee.com/
 common:
+- type: AgenticAccess
+  url: agentic-access/yodlee-agentic-access.yml
 - type: DomainSecurity
   url: security/yodlee-domain-security.yml
 - type: LinkedIn
