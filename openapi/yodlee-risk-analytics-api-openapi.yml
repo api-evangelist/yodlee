@@ -1,0 +1,238 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token Risk Analytics API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Risk Analytics
+  description: Risk Analytics API
+paths:
+  /riskAnalytics:
+    get:
+      summary: Risk Analytics
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The Account Verification service checks for any fraud pattern but does not derive any risk information with respect to the verified account. The risk analytics feature introduced enables customers to gain deeper insights into potential risks associated with their consumers, helping them to identify, assess, and effectively manage those risks. <br>Risk analytics will be generated only for accounts verified using FastLink 4 Instant Account Verification service and not the Micro Entries service. Once account verification is complete, risk analytics for the selected account(s) will be initiated and made available in near real time. <br>Contact the Yodlee Client Services team to enable this feature, however, the plan to automate this feature is in the roadmap. <br>Once the risk information is generated for the verified accounts, the webhook RISK_ANALYTICS will be notified to the customers. The customers can invoke GET /riskAnalytics?accountId={accountId} to get the risk analytics for the selected account(s). <br>
+      operationId: riskAnalytics
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/RiskAnalyticsResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for accountId<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: accountId
+        type: string
+        required: true
+      tags:
+      - Risk Analytics
+definitions:
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string
+  MajorCharges:
+    type: object
+    title: MajorCharges
+    properties:
+      ageOfRecentOccurence:
+        format: int32
+        description: No. of days elapsed since latest occurrence date.
+        readOnly: true
+        type: integer
+      ageOfFirstOccurence:
+        format: int32
+        description: No. of days elapsed since first occurrence date.
+        readOnly: true
+        type: integer
+      amount:
+        format: double
+        description: Amount corresponding to the feature.
+        readOnly: true
+        type: number
+      featureName:
+        description: Risk analytics feature.
+        readOnly: true
+        type: string
+      countDistinctMonths:
+        format: int32
+        description: Months of feature.
+        readOnly: true
+        type: integer
+      countTxn:
+        format: int32
+        description: Total count of transactions for feature.
+        readOnly: true
+        type: integer
+  Transfers:
+    type: object
+    title: Transfers
+    properties:
+      ageOfRecentOccurence:
+        format: int32
+        description: No. of days elapsed since latest occurrence date.
+        readOnly: true
+        type: integer
+      ageOfFirstOccurence:
+        format: int32
+        description: No. of days elapsed since first occurrence date.
+        readOnly: true
+        type: integer
+      amount:
+        format: double
+        description: Amount corresponding to the feature.
+        readOnly: true
+        type: number
+      featureName:
+        description: Risk analytics feature.
+        readOnly: true
+        type: string
+      countDistinctMonths:
+        format: int32
+        description: Months of feature.
+        readOnly: true
+        type: integer
+      countTxn:
+        format: int32
+        description: Total count of transactions for feature.
+        readOnly: true
+        type: integer
+  RiskAnalyticsResponse:
+    type: object
+    title: RiskAnalyticsResponse
+    properties:
+      debitCount:
+        format: int32
+        description: Total number of debits.
+        readOnly: true
+        type: integer
+      accountName:
+        description: The account name as it appears at the site.
+        readOnly: true
+        type: string
+      completenessScore:
+        format: double
+        description: Score indicating completeness of an account across a variety of transaction categories. Closer the  score is to 1, higher the level of completeness of an account.
+        readOnly: true
+        type: number
+      accountType:
+        description: The aggregated account type, such as savings, checking, etc. The account type is derived based on the attributes of the account.
+        readOnly: true
+        type: string
+      currentBalance:
+        format: double
+        description: The balance in the account that is available at the beginning of the business day; is equal to the account's ledger balance. Applicable only for bank container.
+        readOnly: true
+        type: number
+      displayedName:
+        description: The name or identification of the account owner as it appears at the financial institution (FI) site.
+        readOnly: true
+        type: string
+      transactionsPresent:
+        description: Yes/ No Flag indicating the presence of transactional data.
+        readOnly: true
+        type: string
+      creditCount:
+        format: int32
+        description: Total number of credits.
+        readOnly: true
+        type: integer
+      debitAmount:
+        format: double
+        description: Total amount of debits.
+        readOnly: true
+        type: number
+      accountNumber:
+        description: The account number as it appears on the site.
+        readOnly: true
+        type: string
+      avgNetMonthlyCashflow:
+        format: double
+        description: Average of all EOM cashflow values belonging to months within the requested timeframe.
+        readOnly: true
+        type: number
+      majorCharges:
+        type: array
+        items:
+          $ref: '#/definitions/MajorCharges'
+      transactionBeginDate:
+        description: Earliest Transaction Date present in the transactional data  (mm/dd/ccyy).
+        readOnly: true
+        type: string
+      noOfNegativeCashflowMonths:
+        format: int32
+        description: Unique number of months wherein the EOM cashflow value was less than zero.
+        readOnly: true
+        type: integer
+      accountClassification:
+        description: Type of account ownership  - Personal, Business, Trust, etc.
+        readOnly: true
+        type: string
+      availableBalance:
+        format: double
+        description: The balance in the account that is available for spending. For checking accounts with overdrafts, the available balance may include an overdraft amount if the site adds an overdraft balance to the available balance.
+        readOnly: true
+        type: number
+      accountId:
+        format: int64
+        description: The primary key of the account resource and the unique identifier for the account.
+        readOnly: true
+        type: integer
+      transactionEndDate:
+        description: Latest Transaction Date present in the transactional data  (mm/dd/ccyy).
+        readOnly: true
+        type: string
+      transactionDays:
+        format: int32
+        description: Number of days where there was a transaction on the account.
+        readOnly: true
+        type: integer
+      transfers:
+        type: array
+        items:
+          $ref: '#/definitions/Transfers'
+      providerAccountId:
+        format: int64
+        description: The primary key of the account resource and the unique identifier for the account.
+        readOnly: true
+        type: integer
+      creditAmount:
+        format: double
+        description: Total amount of credits.
+        readOnly: true
+        type: number
+      transactionsCount:
+        format: int32
+        description: Total number of transactions.
+        readOnly: true
+        type: integer

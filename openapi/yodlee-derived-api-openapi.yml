@@ -1,0 +1,1135 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token Derived API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Derived
+  description: Derived API
+paths:
+  /derived/networth:
+    get:
+      summary: Get Networth Summary
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get networth service is used to get the networth for the user.<br>If the include parameter value is passed as details then networth with historical balances is returned. <br>
+      operationId: getNetworth
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/DerivedNetworthResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for accountIds<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for toDate<br>Y809 : Invalid date range<br>Y800 : Invalid value for interval<br>Y802 : Future date not allowed<br>Y814 : Exchange rate not available for currency<br>Y800 : Invalid value for container'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountIds
+        description: comma separated accountIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: container
+        description: bank/creditCard/investment/insurance/loan/realEstate/otherAssets/otherLiabilities
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: fromDate
+        description: from date for balance retrieval (YYYY-MM-DD)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: include
+        description: details
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: interval
+        description: D-daily, W-weekly or M-monthly
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: skip
+        format: int32
+        description: skip (Min 0)
+        type: integer
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: toDate
+        description: toDate for balance retrieval (YYYY-MM-DD)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: top
+        format: int32
+        description: top (Max 500)
+        type: integer
+        required: false
+      tags:
+      - Derived
+  /derived/transactionSummary:
+    get:
+      summary: Get Transaction Summary
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The transaction summary service provides the summary values of transactions for the given date range by category type, high-level categories, or system-defined categories.<br><br>Yodlee has the transaction data stored for a day, month, year and week per category as per the availability of user's data. If the include parameter value is passed as details, then summary details will be returned depending on the interval passed-monthly is the default.<br><br><b>Notes:</b><ol> <li> Details can be requested for only one system-defined category<li>Passing categoryType is mandatory except when the groupBy value is CATEGORY_TYPE<li>Dates will not be respected for monthly, yearly, and weekly details<li>When monthly details are requested, only the fromDate and toDate month will be respected<li>When yearly details are requested, only the fromDate and toDate year will be respected<li>For weekly data points, details will be provided for every Sunday date available within the fromDate and toDate<li>This service supports the localization feature and accepts locale as a header parameter</li></ol>
+      operationId: getTransactionSummary
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/DerivedTransactionSummaryResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y010 : Invalid session<br>Y800 : Invalid value for accountId<br>Y800 : Invalid value for groupBy<br>Y803 : groupBy required<br>Y803 : categoryType required<br>Y800 : Invalid value for categoryId<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for toDate<br>Y800 : Invalid value for fromDate or toDate<br>Y814 : Exchange rate not available for currency<br>Y815 : Cannot apply filter on categoryId if groupBy value is CATEGORY_TYPE<br>Y816 : User-defined category details can only be requested for one system categoryId with groupBy=''CATEGORY''<br>Y824 : The maximum number of accountIds permitted is 100<br>Y824 : The maximum number of categoryIds permitted is 100<br>Y824 : The maximum number of categoryTypes permitted is 100'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: comma separated account Ids
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: categoryId
+        description: comma separated categoryIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: categoryType
+        description: LOAN, INCOME, EXPENSE, TRANSFER, UNCATEGORIZE or DEFERRED_COMPENSATION
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: fromDate
+        description: YYYY-MM-DD format
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: groupBy
+        description: CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY
+        type: string
+        required: true
+      - in: query
+        allowEmptyValue: false
+        name: include
+        description: details
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: includeUserCategory
+        description: TRUE/FALSE
+        type: boolean
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: interval
+        description: D-daily, W-weekly, M-mothly or Y-yearly
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: toDate
+        description: YYYY-MM-DD format
+        type: string
+        required: false
+      tags:
+      - Derived
+  /derived/holdingSummary:
+    get:
+      summary: Get Holding Summary
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get holding summary service is used to get the summary of asset classifications for the user.<br>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>If the include parameter value is passed as details then a summary with holdings and account information is returned.<br>
+      operationId: getHoldingSummary
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/DerivedHoldingSummaryResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for classificationType<br>Y814 : Exchange rate not available for currency<br>Y824 : The maximum number of accountIds permitted is 100<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountIds
+        description: Comma separated accountIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: classificationType
+        description: e.g. Country, Sector, etc.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: include
+        description: details
+        type: string
+        required: false
+      tags:
+      - Derived
+definitions:
+  DerivedCategorySummary:
+    type: object
+    title: DerivedCategorySummary
+    properties:
+      creditTotal:
+        description: 'The total of credit transactions for the category.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      details:
+        description: 'Credit and debit summary per date.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedCategorySummaryDetails'
+      links:
+        description: 'Link of the API services that corresponds to the value derivation.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/DerivedTransactionsLinks'
+      categoryName:
+        description: 'The name of the category.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        type: string
+      categoryId:
+        format: int64
+        description: 'Id of the category. This information is provided by transactions/categories service.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        type: integer
+      debitTotal:
+        description: 'The total of debit transactions for the category.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+  DerivedNetworthResponse:
+    type: object
+    title: DerivedNetworthResponse
+    properties:
+      networth:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedNetworth'
+  DerivedHolding:
+    type: object
+    title: DerivedHolding
+    properties:
+      symbol:
+        description: 'The symbol of the security.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      exercisedQuantity:
+        format: double
+        description: 'The quantity of the employee stock options that are already exercised or bought by the employee.<br><b>Note</b>: Once the employee stock options is exercised, they are either converted to cash value or equity positions depending on the FI. The exercised quantity field is only applicable to employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      cusipNumber:
+        description: 'The CUSIP (Committee on Uniform Securities Identification Procedures) identifies most the financial instruments in the United States and Canada.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      assetClassification:
+        description: 'Asset classification applied to the holding. <br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/AssetClassification'
+      vestedQuantity:
+        format: double
+        description: 'The quantity of units or shares that are already vested on a vest date.<br><b>Note</b>: The vested quantity field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      description:
+        description: 'The description (name) for the holding (E.g., Cisco Systems)<br>For insurance container, the field is only applicable for insurance annuity and variable life insurance types. <br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      unvestedValue:
+        description: 'Indicates the estimated market value of the unvested units.<br><b>Note</b>: FIs usually calculates the unvested value as the market price unvested quantity. The unvested value field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      securityStyle:
+        description: 'Indicates the security style of holding identified through the security service.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      vestedValue:
+        description: 'Indicates the estimated market value of the vested units.<br><b>Note</b>: FIs usually calculates the vested value as the market price vested quantity. The vested value field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      optionType:
+        description: 'The type of the option position (i.e., put or call).<br><b>Note</b>: The option type field is only applicable to options.<br><br><b>Applicable containers</b>: investment<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - put
+        - call
+        - unknown
+        - other
+      lastUpdated:
+        description: 'The date when the information was last updated in the system.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      matchStatus:
+        description: 'Indicates the security match status id of the investment option identified during security normalization.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      holdingType:
+        description: 'Type of holding<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+        enum:
+        - stock
+        - mutualFund
+        - bond
+        - CD
+        - option
+        - moneyMarketFund
+        - other
+        - remic
+        - future
+        - commodity
+        - currency
+        - unitInvestmentTrust
+        - employeeStockOption
+        - insuranceAnnuity
+        - unknown
+        - preferredStock
+        - ETF
+        - warrants
+        - digitalAsset
+      maturityDate:
+        description: 'The stated maturity date of a bond or CD.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      price:
+        description: 'The current price of the security.<br><b>Note</b>: Only for bonds the price field indicates the normalized price and not the price aggregated from the site. For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      term:
+        description: 'The fixed duration for which the bond or CD is issued.<br><b>Note</b>: The term field is only applicable to CD.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      contractQuantity:
+        format: double
+        description: 'The quantity of tradeable units in a contract.<br><b>Note</b>: The contract quantity field is only applicable to commodity and currency.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      id:
+        format: int64
+        description: 'Unique identifier for the security added in the system. This is the primary key of the holding resource.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: integer
+      isShort:
+        description: 'Indicates that the holding is a short trading.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: boolean
+      value:
+        description: 'The total market value of the security. For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      expirationDate:
+        description: 'The date on which an option, right or warrant expires.<br><b>Note</b>: The expiration date field is only applicable to options and employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      interestRate:
+        format: double
+        description: 'The interest rate on a CD.<br><b>Note</b>: The interest rate field is only applicable to CD.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      quantity:
+        format: double
+        description: 'The quantity held for the holding.<br><b>Note</b>: Only for bonds the quantity field indicates the normalized quantity and not the quantity aggregated from the site. The quantity field is only applicable to restricted stock units/awards, performance units, currency, and commodity.<br>For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: number
+      accruedInterest:
+        description: 'The accruedInterest of the  holding.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      grantDate:
+        description: 'The date on which equity awards like ESOP, RSU, etc., are issued or granted.<br><b>Note</b>: The grant date field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      sedol:
+        description: 'The SEDOL (Stock Exchange Daily Official List) is a set of security identifiers used in the United Kingdom and Ireland for clearing purposes.<br><b>Note</b>: The SEDOL field is only applicable to the trade related transactions<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      vestedSharesExercisable:
+        format: double
+        description: 'The number of vested shares that can be exercised by the employee. It is usually equal to the vested quantity.<br><b>Note</b>: The vested shares exercisable field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      spread:
+        description: 'The difference between the current market value of a stock and the strike price of the employee stock option, when the market value of the shares are greater than the stock price.<br><b>Note</b>: The spread field is only applicable to employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      accountId:
+        format: int64
+        description: 'Unique identifier of the account to which the security is linked.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: integer
+      enrichedDescription:
+        description: 'The enrichedDescription is the security description of the normalized holding<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      couponRate:
+        format: double
+        description: 'The stated interest rate for a bond.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      createdDate:
+        description: 'The date on which the holding is created in the Yodlee system.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      accruedIncome:
+        description: 'The accruedIncome of the  holding.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      securityType:
+        description: 'Indicates the security type of holding identified through the security service.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      providerAccountId:
+        format: int64
+        description: 'Unique identifier for the user''s association with the provider.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: integer
+      unvestedQuantity:
+        format: double
+        description: 'Indicates the number of unvested quantity or units.<br><b>Note</b>: The unvested quantity field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      costBasis:
+        description: 'In a one-off security purchase, the cost basis is the quantity acquired multiplied by the price per unit paid plus any commission paid. In case, the same position is acquired in different lots on different days at different prices, the sum total of the cost incurred is divided by the total units acquired to arrive at the average cost basis.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      vestingDate:
+        description: 'The date on which a RSU, RSA, or an employee stock options become vested.<br><b>Note</b>: The vesting date field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      isin:
+        description: 'The ISIN (International Securities Identification Number) is used worldwide to identify specific securities. It is equivalent to CUSIP for international markets.<br><br><b>Note</b>: The ISIN field is only applicable to the trade related transactions<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      strikePrice:
+        description: 'The strike (exercise) price for the option position.<br><b>Note</b>: The strike price field is only applicable to options and employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+  AssetClassification:
+    type: object
+    title: AssetClassification
+    properties:
+      allocation:
+        format: double
+        description: 'The allocation percentage of the holding.<br><br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      classificationType:
+        description: 'The type of classification to which the investment belongs (assetClass, country, sector, and style).<br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      classificationValue:
+        description: 'The value for each classificationType.<br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+  DerivedTransactionSummaryResponse:
+    type: object
+    title: DerivedTransactionSummaryResponse
+    properties:
+      links:
+        readOnly: true
+        $ref: '#/definitions/DerivedTransactionsLinks'
+      transactionSummary:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedTransactionsSummary'
+  DerivedHoldingSummaryResponse:
+    type: object
+    title: DerivedHoldingSummaryResponse
+    properties:
+      holdingSummary:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedHoldingsSummary'
+      link:
+        readOnly: true
+        $ref: '#/definitions/DerivedHoldingsLinks'
+  Money:
+    type: object
+    title: Money
+    properties:
+      amount:
+        format: double
+        description: Value of amount.
+        type: number
+      convertedAmount:
+        format: double
+        description: Value of the converted amount.
+        type: number
+      currency:
+        description: Currency should be a valid three-letter ISO Code.
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK
+      convertedCurrency:
+        description: Currency should be a valid three-letter ISO Code.
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK
+  DerivedTransactionsLinks:
+    type: object
+    title: DerivedTransactionsLinks
+    properties:
+      transactions:
+        description: 'Link of the transaction API service that corresponds to the value derivation.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        type: string
+  DerivedHoldingsAccount:
+    type: object
+    title: DerivedHoldingsAccount
+    properties:
+      id:
+        format: int64
+        description: 'The primary key of the account resource and the unique identifier for the account.<br>Required Feature Enablement: Asset classification feature.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: integer
+      value:
+        description: 'The investment accounts cash balance.<br>Required Feature Enablement: Asset classification feature.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+  DerivedNetworthHistoricalBalance:
+    type: object
+    title: DerivedNetworthHistoricalBalance
+    properties:
+      date:
+        description: 'Date for which the account balance was provided.  This balance could be a carryforward, calculated or a scraped balance. AdditIonal Details: scraped: Balance shown in the provider site. This balance gets stored in Yodlee system during system/user account updates. carryForward : Balance carried forward from the scraped balance to the days for which the balance was not available in the system. Balance may not be available for all the days in the system due to MFA information required, error in the site, credential changes, etc. calculated: Balances that gets calculated for the days that are prior to the account added date.<br><br><b>Account Type</b>: Aggregated and Manual<br><b>Applicable containers</b>: bank, creditCard, investment, insurance, realEstate, loan<br><b>Endpoints</b>:<ul><li>GET accounts/historicalBalances</li><li>GET derived/networth</li></ul>'
+        readOnly: true
+        type: string
+      accountId:
+        format: int64
+        readOnly: true
+        type: integer
+      isAsset:
+        description: 'Indicates whether the balance is an asset or liability.<br><br><b>Account Type</b>: Aggregated and Manual<br><b>Applicable containers</b>: bank, creditCard, investment, insurance, realEstate, loan<br><b>Endpoints</b>:<ul><li>GET accounts/historicalBalances</li></ul>'
+        readOnly: true
+        type: boolean
+      balance:
+        description: 'Balance amount of the account.<br><br><b>Account Type</b>: Aggregated and Manual<br><b>Applicable containers</b>: bank, creditCard, investment, insurance, realEstate, loan<br><b>Endpoints</b>:<ul><li>GET accounts/historicalBalances</li></ul>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      asOfDate:
+        description: 'Date as of when the balance is last  updated due to the auto account updates or user triggered updates. This balance will be carry forward for the days where there is no balance available in the system. <br><br><b>Account Type</b>: Aggregated and Manual<br><b>Applicable containers</b>: bank, creditCard, investment, insurance, realEstate, loan<br><b>Endpoints</b>:<ul><li>GET accounts/historicalBalances</li></ul>'
+        readOnly: true
+        type: string
+      dataSourceType:
+        description: 'The source of balance information.<br><br><b>Account Type</b>: Aggregated and Manual<br><b>Applicable containers</b>: bank, creditCard, investment, insurance, realEstate, loan<br><b>Endpoints</b>:<ul><li>GET accounts/historicalBalances</li></ul><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - S
+        - C
+        - CF
+  DerivedCategorySummaryDetails:
+    type: object
+    title: DerivedCategorySummaryDetails
+    properties:
+      date:
+        description: 'Date on which the credit and debit transactions had occured.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        type: string
+      creditTotal:
+        description: 'Total of credit transaction amounts that had occured on the date.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      debitTotal:
+        description: 'Total of debit transaction amounts that had occured on the date.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+  DerivedHoldingsSummary:
+    type: object
+    title: DerivedHoldingsSummary
+    properties:
+      holding:
+        description: 'Securities that belong to the asset classification type and contributed to the summary value.<br><b>Required Feature Enablement</b>: Asset classification feature.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedHolding'
+      classificationType:
+        description: 'The classification type of the security. The supported asset classification type and the values are provided in the /holdings/assetClassificationList.<br><b>Required Feature Enablement</b>: Asset classification feature.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      classificationValue:
+        description: 'The classification value that corresponds to the classification type of the holding. The supported asset classification type and the values are provided in the /holdings/assetClassificationList.<br><b>Required Feature Enablement</b>: Asset classification feature.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: string
+      value:
+        description: 'Summary value of the securities.<br><b>Required Feature Enablement</b>: Asset classification feature.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      account:
+        description: 'Accounts that contribute to the classification. <br><b>Required Feature Enablement</b>: Asset classification feature.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedHoldingsAccount'
+  DerivedNetworth:
+    type: object
+    title: DerivedNetworth
+    properties:
+      date:
+        description: 'The date as of when the networth information is provided.<br><br><b>Applicable containers</b>: bank, creditcard, investment, insurance, realEstate, loan<br>'
+        readOnly: true
+        type: string
+      liability:
+        description: 'The liability amount that the user owes.<br><br><b>Applicable containers</b>: bank, creditcard, investment, insurance, realEstate, loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      historicalBalances:
+        description: 'Balances of the accounts over the period of time.<br><br><b>Applicable containers</b>: bank, creditcard, investment, insurance, realEstate, loan<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedNetworthHistoricalBalance'
+      networth:
+        description: 'Networth of the user.<br><br><b>Applicable containers</b>: bank, creditcard, investment, insurance, realEstate, loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      asset:
+        description: 'The asset value that the user owns.<br><br><b>Applicable containers</b>: bank, creditcard, investment, insurance, realEstate, loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+  DerivedTransactionsSummary:
+    type: object
+    title: DerivedTransactionsSummary
+    properties:
+      categoryType:
+        description: 'Type of categories provided by transactions/categories service.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - TRANSFER
+        - DEFERRED_COMPENSATION
+        - UNCATEGORIZE
+        - INCOME
+        - EXPENSE
+        - LOAN
+      categorySummary:
+        description: 'Summary of transaction amouts at category level.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DerivedCategorySummary'
+      creditTotal:
+        description: 'The total of credit transactions for the category type.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      links:
+        description: 'Link of the API services that corresponds to the value derivation.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/DerivedTransactionsLinks'
+      debitTotal:
+        description: 'The total of debit transactions for the category type.<br><br><b>Applicable containers</b>: creditCard, bank, investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+  DerivedHoldingsLinks:
+    type: object
+    title: DerivedHoldingsLinks
+    properties:
+      holdings:
+        readOnly: true
+        type: string
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string

@@ -1,0 +1,1557 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token Verification API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Verification
+  description: Verification API
+paths:
+  /verification/verifiedAccounts:
+    get:
+      summary: Get Verified Accounts
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The Verified Accounts API v1.1 provides information about the bank and investment accounts that the user  has selected for verification, during the Account Verification flow on FastLink 4. By default, the API only returns information of the accounts that were selected and have been successfully verified. <br><br>
+      operationId: getVerifiedAccounts
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/VerifiedAccountResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y813 : providerAccountId should be provided<br>Y800 : Invalid value for providerAccountId<br>Y800 : Invalid value for verificationStatus<br>Y800 : Invalid value for isSelected<br>Y800 : Invalid value for accountId<br>Y807 : Resource not found<br>Y871 : The verification process for the request is still in progress. This API can only be invoked after the verification process is completed<br>Y824 : The maximum number of accountIds permitted is 10'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: Comma separated accountIds.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: isSelected
+        description: Comma separated isSelected. Allowed values are true, false. <br>
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: providerAccountId
+        description: providerAccountId.
+        type: string
+        required: true
+      - in: query
+        allowEmptyValue: false
+        name: verificationStatus
+        description: Comma separated verificationStatus. Allowed values are SUCCESS, FAILED <br><b>Note:</b> If no value is passed, the implicit default value is SUCCESS.
+        type: string
+        required: false
+      tags:
+      - Verification
+  /verification/holderProfile:
+    get:
+      summary: Get Holder Profile
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The Holder Profile API service allows retrieving the user's profile details (i.e., PII data such as name, email, phone number, and address) that are available at the provider account and each account level. The API accepts the providerAccountId and retrieves the profile information available under it and all the details available under each of the associated accounts.  <br><br>This service can only be invoked by Yodlee API v1.1, FastLink 3, and FastLink 4 customers. <br><br>
+      operationId: getHolderProfile
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/HolderProfileResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y901 : Service not supported<br>Y800 : Invalid value for providerAccountId<br>Y800 : Invalid value for accountId. Only ACTIVE accountIds are supported<br>Y800 : Invalid value for accountId. All accountIds should belong to the same providerAccountId<br>Y803 : providerAccountId required<br>Y805 : Multiple providerAccountId not supported<br>Y820 : The accountId is not supported for containers other than bank and investment<br>can only be invoked after the verification process is completed<br>Y824 : The maximum number of accountIds permitted is 10<br>Y878 : Profile data is not yet requested for this account'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: accountId
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: providerAccountId
+        description: providerAccountId.
+        type: string
+        required: true
+      tags:
+      - Verification
+  /verification/classification/summary:
+    get:
+      summary: Get Classification Summary
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get classification summary API service returns attributes that provide account-level and transaction-level summary for a user's account.<br><br>As a prerequisite, the Account Verification customers should have Transactions enabled to fetch a response. The API can be invoked only for an account verified by the user following the get verified accounts API call. If the prerequisite is not satisfied, an appropriate error will be returned on invoking the API.<br>
+      operationId: getClassificationSummary
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/ClassificationSummaryResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y847 : resource cannot be requested, as feature not enabled<br>Y812 : Required field/value - accountId missing in the request<br>Y800 : Invalid value for accountId. Only ACTIVE and verified bank account ID belonging to the user is allowed.<br>Y805 : Multiple accountId not supported<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        name: accountId
+        description: accountId
+        type: string
+        required: true
+      tags:
+      - Verification
+  /verification:
+    post:
+      summary: Initiaite Challenge Deposit
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The post verification service is used to initiate the matching service (MS) and the challenge deposit account verification (CDV) process to verify account ownership.<br>The MS and CDV process can verify ownership of only bank accounts (i.e., checking and savings).<br>The MS verification can be initiated only for an already aggregated account or a providerAccount.<br>The prerequisite for the MS verification process is to request the ACCT_PROFILE dataset with the HOLDER_NAME attribute.<br>In the MS verification process, a string-match of the account holder name with the registered user name is performed instantaneously. You can contact the Yodlee CustomerCare to configure the full name or only the last name match.<br>Once the CDV process is initiated Yodlee will post the microtransaction (i.e., credit and debit) in the user's account. The CDV process takes 2 to 3 days to complete as it requires the user to provide the microtransaction details.<br>The CDV process is currently supported only in the United States.<br>The verificationId in the response can be used to track the verification request.<br><br><b>Notes:</b><li>This endpoint cannot be used to test the CDV functionality in the developer sandbox or test environment. You will need a money transmitter license to implement the CDV functionality and also require the Yodlee Professional Services team's assistance to set up a dedicated environment.
+      operationId: initiateMatchingOrChallengeDepositeVerification
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/VerificationResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y901 : Service not supported<br>Y812 : Required field/value - verification.verificationType missing in the verificationParam<br>Y812 : Required field/value - accountNumber missing in the verificationParam<br>Y812 : Required field/value - accountType missing in the verificationParam<br>Y812 : Required field/value - bankTransferCode missing in the verificationParam<br>Y812 : Required field/value - bankTransferCode.id missing in the verificationParam<br>Y812 : Required field/value - bankTransferCode.type missing in the verificationParam<br>Y800 : Invalid value for verification.verificationType<br>Y800 : Invalid value for verificationParam<br>Y800 : Invalid value for bankTransferCode.type<br>Y800 : Invalid value for bankTransferCode.id<br>Y800 : Invalid value for accountType<br>Y800 : Invalid value for accountId<br>Y813 : Account details should be provided<br>Y801 : Invalid length for accountNumber<br>Y835 : Account(s) not eligible for Challenge Deposit verification<br>Y806 : Invalid Input<br>Y840 : Verification has been initiated already<br>Y837 : Account has been verified already<br>Y800 : Invalid value for userClassification'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/VerificationRequest'
+        in: body
+        name: verificationParam
+        description: verification information
+        required: true
+      tags:
+      - Verification
+      consumes:
+      - application/json
+    get:
+      summary: Get Verification Status
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get verification status service is used to retrieve the verification status of all accounts for which the MS or CDV process has been initiated.<br>For the MS process, the account details object returns the aggregated information of the verified accounts. For the CDV process, the account details object returns the user provided account information.<br>
+      operationId: getVerificationStatus
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/VerificationStatusResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y901 : Service not supported<br>Y813 : Either of accountId or providerAccountId should be provided<br>Y800 : Invalid value for accountId<br>Y800 : Invalid value for verification.verificationType<br>Y800 : Invalid value for providerAccountId<br>Y835 : Account(s) not eligible for Matching verification<br>Y836 : No verification initiated'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: Comma separated accountId
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: providerAccountId
+        description: Comma separated providerAccountId
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: verificationType
+        description: verificationType
+        type: string
+        required: false
+      tags:
+      - Verification
+    put:
+      summary: Verify Challenge Deposit
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The put verification service is used to complete the challenge deposit verification (CDV) process.<br>This service is used only by the customer of CDV flow.<br>In the CDV process, the user-provided microtransaction details (i.e., credit and debit) is matched against the microtransactions posted by Yodlee. For a successful verification of the account's ownership both the microtransaction details should match.<br>The CDV process is currently supported only in the United States.<br><br><b>Notes:</b><ul><li>This endpoint cannot be used to test the CDV functionality in the developer sandbox or test environment. You will need a money transmitter license to implement the CDV functionality and also require the Yodlee Professional Services team's assistance to set up a dedicated environment.</li></ul>
+      operationId: verifyChallengeDeposit
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/VerificationResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y901 : Service not supported<br>Y812 : Required field/value - verification.verificationType missing in the verificationParam<br>Y812 : Required field/value - amount.amount missing in the verificationParam<br>Y812 : Required field/value - baseType missing in the verificationParam<br>Y812 : Required field/value - currency missing in the verificationParam<br>Y812 : Required field/value - providerAccountId missing in the verificationParam<br>Y812 : Required field/value - accountId missing in the verificationParam<br>Y800 : Invalid value for verificationParam<br>Y800 : Invalid value for verification.verificationType<br>Y800 : Invalid value for baseType<br>Y800 : Invalid value for providerAccountId<br>Y800 : Invalid value for accountId<br>Y813 : Transaction should be provided<br>Y801 : Invalid length for accountNumber<br>Y801 : Invalid length for amount<br>Y835 : Account(s) not eligible for Challenge Deposit verification<br>Y806 : Invalid Input<br>Y840 : Verification has been initiated already<br>Y837 : Account has been verified already<br>Y838 : The currency code provided does not match with the currency of the transaction executed on the target account<br>Y846 : The number of financial transactions made on the target account does not match with the number of transactions entered by the user.<br>Y842 : Number of retries exceeded the maximum Challenge Deposit verification limit<br>Y844 : Financial Instructions were not executed successfully on the target account<br>Y845 : Verification time expired. Please try initiating challenge deposit again<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>Y813 : Either transactionReferenceText or transaction should be provided<br>Y800 : Invalid value for transactionReferenceText<br>Y801 : Invalid length for transactionReferenceText<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/UpdateVerificationRequest'
+        in: body
+        name: verificationParam
+        description: verification information
+        required: true
+      tags:
+      - Verification
+      consumes:
+      - application/json
+definitions:
+  VerifiedAccounts:
+    type: object
+    title: VerifiedAccounts
+    properties:
+      accountName:
+        description: 'The account name as it appears at the site.<br>(The POST accounts service response return this field as name)<br><b>Applicable containers</b>: bank, investment<br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<br><ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: string
+      verificationStatus:
+        description: The status of the account verification.
+        readOnly: true
+        type: string
+        enum:
+        - SUCCESS
+        - FAILED
+      accountType:
+        description: The type of account that is aggregated, i.e., savings, checking, charge, HELOC, etc. The account type is derived based on the attributes of the account. <br><b>Valid Values:</b><br><b>Aggregated Account Type</b><br><b>bank</b><ul><li>CHECKING</li><li>SAVINGS</li><li>MONEY_MARKET</li></ul><b>investment (SN 1.0)</b><ul><li>BROKERAGE_MARGIN</li><li>BROKERAGE_CASH</li><li>BROKERAGE_LINK_ACCOUNT</li><li>INDIVIDUAL</li><li>CMA</li></ul><b>investment (SN 2.0)</b><ul><li>BROKERAGE_MARGIN</li><li>BROKERAGE_CASH</li><li>BROKERAGE_LINK_ACCOUNT</li><li>INDIVIDUAL</li><li>CMA</li></ul><ul><li>GET /verification/verifiedAccounts</li></ul>
+        readOnly: true
+        type: string
+      currentBalance:
+        description: 'The balance in the account that is available at the beginning of the business day; it is equal to the ledger balance of the account.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      displayedName:
+        description: 'The name or identification of the account owner, as it appears at the FI site. <br><b>Note:</b> The account holder name can be full or partial based on how it is displayed in the account summary page of the FI site. In most cases, the FI site does not display the full account holder name in the account summary page.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: string
+      holder:
+        description: 'Holder details of the account.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/AccountHolder'
+      accountNumber:
+        description: 'The account number as it appears on the site. (The POST accounts service response return this field as number)<br><b>Additional Details</b>:<b> Bank / Investment</b>:<br> The account number for the bank account as it appears at the site.<br>In most cases, the site does not display the full account number in the account summary page and additional navigation is required to aggregate it.<br><b>Applicable containers</b>: bank, investment<br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<br><ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: string
+      classification:
+        description: 'The classification of the account such as personal, corporate, etc.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<li>GET /verification/verifiedAccounts</li></ul><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - OTHER
+        - PERSONAL
+        - CORPORATE
+        - SMALL_BUSINESS
+        - TRUST
+        - ADD_ON_CARD
+        - VIRTUAL_CARD
+      availableBalance:
+        description: 'The balance in the account that is available for spending. For checking accounts with overdraft, available balance may include overdraft amount, if end site adds overdraft balance to available balance.<br><b>Applicable containers</b>: bank, investment<br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<br><ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      fullAccountNumberList:
+        description: 'Full account number List of the account that contains paymentAccountNumber and unmaskedAccountNumber. <br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment <br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        $ref: '#/definitions/FullAccountNumberList'
+      accountId:
+        format: int64
+        description: 'The primary key of the provider account resource.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: integer
+      accountAgeClassification:
+        description: Attribute to return the classification of the account age by specifying whether the account is old/new/recent as relevant for a verification use case. If it could not be classified into any one of these values, the attribute would return the value as 'unclassified'
+        readOnly: true
+        type: string
+        enum:
+        - UNCLASSIFIED
+        - OLD
+        - NEW
+        - RECENT
+      balance:
+        description: 'The total account value. <br><b>Additional Details:</b><br><b>Bank:</b> available balance or current balance.<br><b>Investment:</b> The total balance of all the investment account, as it appears on the FI site.<b>Applicable containers</b>: bank, investment <br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<br><ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      providerId:
+        description: 'Identifier of the provider site. The primary key of provider resource. <br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: string
+      providerAccountId:
+        format: int64
+        description: 'The primary key of the provider account resource.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: integer
+      CONTAINER:
+        description: 'The type of service. E.g., Bank, Investment <br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</ul><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - bank
+        - investment
+      isSelected:
+        description: Indicates if an account is selected by the user in the FastLink 4 application
+        readOnly: true
+        type: boolean
+      cash:
+        description: 'The amount that is available for immediate withdrawal or the total amount available to purchase securities in a brokerage or investment account.<br><b>Note:</b> The cash balance field is only applicable to brokerage related accounts.<br><br><b>Aggregated </b><br><b>Applicable containers</b>: investment<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      bankTransferCode:
+        description: 'Bank and branch identification information.<br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/BankTransferCode'
+      providerName:
+        description: 'Service provider or institution name where the account originates. This belongs to the provider resource.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<ul><li>GET /verification/verifiedAccounts</li></ul>'
+        readOnly: true
+        type: string
+      failedReason:
+        description: The reason for the verification failure of the account.
+        readOnly: true
+        type: string
+        enum:
+        - REQUIRED_DATA_NOT_AVAILABLE
+        - MATCHING_FAILED
+  UpdateVerificationRequest:
+    type: object
+    title: UpdateVerificationRequest
+    properties:
+      verification:
+        $ref: '#/definitions/UpdateVerification'
+  VerificationRequest:
+    type: object
+    title: VerificationRequest
+    required:
+    - verification
+    properties:
+      verification:
+        $ref: '#/definitions/Verification'
+  VerificationStatus:
+    type: object
+    title: VerificationStatus
+    properties:
+      accountId:
+        format: int64
+        description: Unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        type: integer
+      reason:
+        description: The reason the account verification failed.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: string
+        enum:
+        - DATA_NOT_AVAILABLE
+        - ACCOUNT_HOLDER_MISMATCH
+        - FULL_ACCOUNT_NUMBER_AND_BANK_TRANSFER_CODE_NOT_AVAILABLE
+        - FULL_ACCOUNT_NUMBER_NOT_AVAILABLE
+        - BANK_TRANSFER_CODE_NOT_AVAILABLE
+        - EXPIRED
+        - DATA_MISMATCH
+        - INSTRUCTION_GENERATION_ERROR
+      verificationStatus:
+        description: The status of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+        readOnly: true
+        type: string
+        enum:
+        - INITIATED
+        - DEPOSITED
+        - SUCCESS
+        - FAILED
+      providerAccountId:
+        format: int64
+        description: Unique identifier for the provider account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        type: integer
+      singleAchTxn:
+        description: As part of account verification, true for we initiate a single credit microentry of $1 for each request and false if we have not initiated single credit microentry of $1 for each request.<br>This field is exposed only for FL4 Users.
+        readOnly: true
+        type: boolean
+      additionalMessage:
+        description: The additional information of the status of account verification.<br><br><b>Endpoints</b>:<ul><li>GET verification</li></ul><br><b>Applicable Values</b>
+        readOnly: true
+        type: string
+        enum:
+        - PENDING_PROCESSING
+        - PROCESSED
+        - DEPOSITED
+        - PENDING_VERIFICATION
+        - FAILED
+        - SUSPECTED_FRAUD
+        - RESTRICTED_RTN
+        - RESTRICTED_ACCOUNT
+        - PENDING_PROCESSING_EXPIRED
+        - RETURNED
+        - ACCOUNT_VERIFICATION_EXPIRED
+      verificationType:
+        description: The account verification type.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+        type: string
+        enum:
+        - MATCHING
+        - CHALLENGE_DEPOSIT
+      account:
+        $ref: '#/definitions/VerificationAccount'
+      remainingAttempts:
+        format: int64
+        readOnly: true
+        type: integer
+      verificationDate:
+        description: The date of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: string
+      verificationId:
+        format: int64
+        description: Unique identifier for the verification request.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: integer
+  VerificationResponse:
+    type: object
+    title: VerificationResponse
+    properties:
+      verification:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/Verification'
+  VerifiedAccountResponse:
+    type: object
+    title: VerifiedAccountResponse
+    properties:
+      requestId:
+        description: The unique identifier for the verification request that returns contextual data
+        readOnly: true
+        type: string
+      requestDate:
+        description: The date of the verification request
+        readOnly: true
+        type: string
+      state:
+        description: The overall status of the verification request
+        readOnly: true
+        type: string
+        enum:
+        - COMPLETED
+        - FAILED
+      verifiedAccount:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/VerifiedAccounts'
+      failedReason:
+        description: The reason for the failure of the verification request
+        readOnly: true
+        type: string
+        enum:
+        - ACCOUNT_LOCKED
+        - ADDL_AUTHENTICATION_REQUIRED
+        - CREDENTIALS_UPDATE_NEEDED
+        - INCORRECT_CREDENTIALS
+        - INVALID_ADDL_INFO_PROVIDED
+        - REQUEST_TIME_OUT
+        - SITE_BLOCKING_ERROR
+        - UNEXPECTED_SITE_ERROR
+        - SITE_NOT_SUPPORTED
+        - SITE_UNAVAILABLE
+        - TECH_ERROR
+        - USER_ACTION_NEEDED_AT_SITE
+        - SITE_SESSION_INVALIDATED
+        - NEW_AUTHENTICATION_REQUIRED
+        - CONSENT_REQUIRED
+        - CONSENT_EXPIRED
+        - CONSENT_REVOKED
+        - INCORRECT_OAUTH_TOKEN
+        - REQUIRED_DATA_NOT_AVAILABLE
+        - MATCHING_FAILED
+        - NO_ELIGIBLE_ACCOUNTS
+        - USER_INPUT_REQUIRED
+  VerificationHolderProfile:
+    type: object
+    title: VerificationHolderProfile
+    properties:
+      accountId:
+        format: int64
+        description: The primary key of the account resource and the unique identifier for the account
+        readOnly: true
+        type: integer
+      address:
+        description: The account holder's address available at the profile and account levels
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/AbstractAddress'
+      phoneNumber:
+        description: The account holder's phone number available at the profile and account levels
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/PhoneNumber'
+      providerAccountId:
+        format: int64
+        description: The primary key of the provider account resource
+        readOnly: true
+        type: integer
+      holder:
+        description: The holder entity is account-specific and captures the ownership status and the name details of the user
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/VerificationHolder'
+      email:
+        description: The account holder's email ID available at the profile and account levels
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/Email'
+  PhoneNumber:
+    type: object
+    title: PhoneNumber
+    properties:
+      type:
+        description: type of phone number
+        readOnly: true
+        type: string
+        enum:
+        - HOME
+        - WORK
+        - LANDLINE
+        - MOBILE
+      value:
+        description: Phone Number
+        readOnly: true
+        type: string
+  VerificationStatusResponse:
+    type: object
+    title: VerificationStatusResponse
+    properties:
+      verification:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/VerificationStatus'
+  ClassificationSummaryTransaction:
+    type: object
+    title: ClassificationSummaryTransaction
+    properties:
+      date:
+        description: The date the transaction happens in the account
+        readOnly: true
+        type: string
+      amount:
+        description: The amount of the transaction as it appears at the provider site
+        readOnly: true
+        $ref: '#/definitions/Money'
+      description:
+        description: The description of the transaction
+        readOnly: true
+        $ref: '#/definitions/Description'
+      merchant:
+        description: The name of the merchant corresponding to the transaction
+        readOnly: true
+        $ref: '#/definitions/ClassificationSummaryMerchant'
+      baseType:
+        description: Indicates if the transaction appears as a debit or a credit transaction in the account
+        readOnly: true
+        type: string
+        enum:
+        - CREDIT
+        - DEBIT
+  VerificationTransaction:
+    type: object
+    title: VerificationTransaction
+    required:
+    - amount
+    - baseType
+    properties:
+      amount:
+        $ref: '#/definitions/Money'
+      baseType:
+        type: string
+        enum:
+        - CREDIT
+        - DEBIT
+  Name:
+    type: object
+    title: Name
+    properties:
+      middle:
+        description: Middle name.
+        type: string
+      last:
+        description: Last name.
+        type: string
+      fullName:
+        description: Full name.
+        type: string
+      first:
+        description: First name.
+        type: string
+  Description:
+    type: object
+    title: Description
+    properties:
+      security:
+        description: 'The description will provide the actual name of the security.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      original:
+        description: 'Original transaction description as it appears at the FI site.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+        readOnly: true
+        type: string
+      simple:
+        description: 'The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of the transaction may not be evident. Yodlee attempts to simplify and make the transaction meaningful to the consumer, and this simplified transaction description is provided in the simple description field.Note: The simple description field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+        readOnly: true
+        type: string
+      consumer:
+        description: The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field.<br><br>
+        type: string
+  Email:
+    type: object
+    title: Email
+    properties:
+      type:
+        readOnly: true
+        type: string
+        enum:
+        - PRIMARY
+        - SECONDARY
+        - PERSONAL
+        - WORK
+        - OTHERS
+      value:
+        readOnly: true
+        type: string
+  ClassificationSummaryTransactionSummary:
+    type: object
+    title: ClassificationSummaryTransactionSummary
+    properties:
+      fromDate:
+        description: The date from which the transactions are considered for evaluating the attributes (Date of the oldest transaction for the accountId)
+        readOnly: true
+        type: string
+      cardPayments:
+        description: Indicates whether the account has any card-related payments based on an implicit logic
+        readOnly: true
+        type: boolean
+      isPrimaryAccount:
+        description: Indicates whether the account is a primary account based on an implicit logic
+        readOnly: true
+        type: boolean
+      loanPayments:
+        description: Indicates whether the account has any loan payments based on an implicit logic
+        readOnly: true
+        type: boolean
+      toDate:
+        description: The date until which the transactions are considered for evaluating the attributes (Date of the latest transaction for the accountId)
+        readOnly: true
+        type: string
+      billPayments:
+        description: Indicates whether the account has any bill payments based on an implicit logic
+        readOnly: true
+        type: boolean
+      mortgagePayments:
+        description: Indicates whether the account has any mortgage payments based on an implicit logic
+        readOnly: true
+        type: boolean
+      salaryCredits:
+        description: Indicates whether the account has salary credits based on an implicit logic
+        readOnly: true
+        type: boolean
+      isActiveAccount:
+        description: Indicates whether the account is an active account based on an implicit logic
+        readOnly: true
+        type: boolean
+      latestTransactions:
+        description: An array that lists the details about the latest 3 transactions that occurred in the user's account
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/ClassificationSummaryTransaction'
+      incomeCredits:
+        description: Indicates whether the account has any income credits based on an implicit logic
+        readOnly: true
+        type: boolean
+  UpdateVerification:
+    type: object
+    title: UpdateVerification
+    required:
+    - transaction
+    properties:
+      accountId:
+        format: int64
+        description: Unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        type: integer
+      reason:
+        description: The reason the account verification failed.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: string
+        enum:
+        - DATA_NOT_AVAILABLE
+        - ACCOUNT_HOLDER_MISMATCH
+        - FULL_ACCOUNT_NUMBER_AND_BANK_TRANSFER_CODE_NOT_AVAILABLE
+        - FULL_ACCOUNT_NUMBER_NOT_AVAILABLE
+        - BANK_TRANSFER_CODE_NOT_AVAILABLE
+        - EXPIRED
+        - DATA_MISMATCH
+        - INSTRUCTION_GENERATION_ERROR
+      verificationStatus:
+        description: The status of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+        readOnly: true
+        type: string
+        enum:
+        - INITIATED
+        - DEPOSITED
+        - SUCCESS
+        - FAILED
+      providerAccountId:
+        format: int64
+        description: Unique identifier for the provider account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        type: integer
+      additionalMessage:
+        description: The additional information of the status of account verification.<br><br><b>Endpoints</b>:<ul><li>GET verification</li></ul><br><b>Applicable Values</b>
+        readOnly: true
+        type: string
+        enum:
+        - PENDING_PROCESSING
+        - PROCESSED
+        - DEPOSITED
+        - PENDING_VERIFICATION
+        - FAILED
+        - SUSPECTED_FRAUD
+        - RESTRICTED_RTN
+        - RESTRICTED_ACCOUNT
+        - PENDING_PROCESSING_EXPIRED
+        - RETURNED
+        - ACCOUNT_VERIFICATION_EXPIRED
+      verificationType:
+        description: The account verification type.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+        type: string
+        enum:
+        - MATCHING
+        - CHALLENGE_DEPOSIT
+      account:
+        $ref: '#/definitions/VerificationAccount'
+      transaction:
+        type: array
+        items:
+          $ref: '#/definitions/VerificationTransaction'
+      transactionReferenceText:
+        description: A one time reference code of randomly generated 4 digits that is sent along with the single credit transaction and visible in transaction reference field.<br>This is applicable only when single ACH key is enabled.
+        type: boolean
+      verificationDate:
+        description: The date of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: string
+      verificationId:
+        format: int64
+        description: Unique identifier for the verification request.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: integer
+  AbstractAddress:
+    type: object
+    title: AbstractAddress
+    properties:
+      zip:
+        description: Zip.
+        type: string
+      country:
+        description: Country.
+        type: string
+      address3:
+        description: Address Line 3.
+        type: string
+      address2:
+        description: Address Line 2.
+        type: string
+      city:
+        description: City.
+        type: string
+      address1:
+        description: Address Line 1.
+        type: string
+      state:
+        description: State.
+        type: string
+  VerificationBankTransferCode:
+    type: object
+    title: VerificationBankTransferCode
+    properties:
+      id:
+        description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
+        type: string
+      type:
+        description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
+        type: string
+        enum:
+        - BSB
+        - IFSC
+        - ROUTING_NUMBER
+        - SORT_CODE
+  ClassificationSummaryAccountSummary:
+    type: object
+    title: ClassificationSummaryAccountSummary
+    properties:
+      accountId:
+        format: int64
+        description: 'The primary key of the account resource and the unique identifier for the account.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank'
+        readOnly: true
+        type: integer
+      lastUpdated:
+        description: The date-time the account information was last retrieved from the provider site and updated in the Yodlee system
+        readOnly: true
+        type: string
+      site:
+        description: The name of the provider site
+        readOnly: true
+        type: string
+      accountName:
+        description: The account name as it appears at the site
+        readOnly: true
+        type: string
+      accountType:
+        description: The type of account that is aggregated such as savings, checking, etc. The account type is derived based on the attributes of the account.
+        readOnly: true
+        type: string
+      accountOpenDate:
+        description: The date on which the user opened the account at the provider site
+        readOnly: true
+        type: string
+      transactionSummary:
+        description: The transaction summary entity encapsulates the transaction-level summary attributes and account specifics based on the nature of transactions
+        readOnly: true
+        $ref: '#/definitions/ClassificationSummaryTransactionSummary'
+      availableBalance:
+        description: 'The balance in the account that is available for spending. The value is aggregated from the provider site during the last refresh.<br><b>Note</b>: For checking accounts with overdraft, the available balance amount may include the overdraft amount if the provider site adds the overdraft balance to the available balance.'
+        readOnly: true
+        $ref: '#/definitions/Money'
+  AccountHolder:
+    type: object
+    title: AccountHolder
+    properties:
+      identifier:
+        description: 'Identifiers of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/Identifier'
+      gender:
+        description: 'Identifiers of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+        readOnly: true
+        type: string
+      ownership:
+        description: 'Indicates the ownership of the account.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - PRIMARY
+        - SECONDARY
+        - CUSTODIAN
+        - OTHERS
+        - POWER_OF_ATTORNEY
+        - TRUSTEE
+        - JOINT_OWNER
+        - BENEFICIARY
+        - AAS
+        - BUSINESS
+        - DBA
+        - TRUST
+      name:
+        description: 'Name of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+        readOnly: true
+        $ref: '#/definitions/Name'
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string
+  VerificationHolder:
+    type: object
+    title: VerificationHolder
+    properties:
+      ownership:
+        description: Indicates the ownership of the account
+        readOnly: true
+        type: string
+      name:
+        description: The name of the account holder
+        readOnly: true
+        $ref: '#/definitions/Name'
+  Identifier:
+    type: object
+    title: Identifier
+    properties:
+      type:
+        description: Type of Identifier
+        readOnly: true
+        type: string
+        enum:
+        - NIE
+        - DNI
+        - EIN
+        - BN
+        - AADHAR
+        - NIN
+        - NRIC
+      value:
+        description: Value of the identifier
+        readOnly: true
+        type: string
+  ClassificationSummaryMerchant:
+    type: object
+    title: ClassificationSummaryMerchant
+    properties:
+      name:
+        description: The name of the merchant
+        readOnly: true
+        type: string
+  VerificationAccount:
+    type: object
+    title: VerificationAccount
+    required:
+    - accountNumber
+    - accountType
+    - bankTransferCode
+    properties:
+      accountName:
+        type: string
+      accountType:
+        type: string
+        enum:
+        - SAVINGS
+        - CHECKING
+      accountNumber:
+        minLength: 3
+        type: string
+        maxLength: 17
+      userClassification:
+        type: string
+        enum:
+        - BUSINESS
+        - PERSONAL
+      bankTransferCode:
+        $ref: '#/definitions/VerificationBankTransferCode'
+  HolderProfileResponse:
+    type: object
+    title: HolderProfileResponse
+    properties:
+      holderProfile:
+        description: The holder profile entity encapsulates all the user's details, such as the corresponding accounts and the userâ€™s profile data under it
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/VerificationHolderProfile'
+  Verification:
+    type: object
+    title: Verification
+    properties:
+      accountId:
+        format: int64
+        description: Unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        type: integer
+      reason:
+        description: The reason the account verification failed.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: string
+        enum:
+        - DATA_NOT_AVAILABLE
+        - ACCOUNT_HOLDER_MISMATCH
+        - FULL_ACCOUNT_NUMBER_AND_BANK_TRANSFER_CODE_NOT_AVAILABLE
+        - FULL_ACCOUNT_NUMBER_NOT_AVAILABLE
+        - BANK_TRANSFER_CODE_NOT_AVAILABLE
+        - EXPIRED
+        - DATA_MISMATCH
+        - INSTRUCTION_GENERATION_ERROR
+      verificationStatus:
+        description: The status of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+        readOnly: true
+        type: string
+        enum:
+        - INITIATED
+        - DEPOSITED
+        - SUCCESS
+        - FAILED
+      providerAccountId:
+        format: int64
+        description: Unique identifier for the provider account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        type: integer
+      additionalMessage:
+        description: The additional information of the status of account verification.<br><br><b>Endpoints</b>:<ul><li>GET verification</li></ul><br><b>Applicable Values</b>
+        readOnly: true
+        type: string
+        enum:
+        - PENDING_PROCESSING
+        - PROCESSED
+        - DEPOSITED
+        - PENDING_VERIFICATION
+        - FAILED
+        - SUSPECTED_FRAUD
+        - RESTRICTED_RTN
+        - RESTRICTED_ACCOUNT
+        - PENDING_PROCESSING_EXPIRED
+        - RETURNED
+        - ACCOUNT_VERIFICATION_EXPIRED
+      verificationType:
+        description: The account verification type.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+        type: string
+        enum:
+        - MATCHING
+        - CHALLENGE_DEPOSIT
+      account:
+        $ref: '#/definitions/VerificationAccount'
+      verificationDate:
+        description: The date of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: string
+      verificationId:
+        format: int64
+        description: Unique identifier for the verification request.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+        readOnly: true
+        type: integer
+  BankTransferCode:
+    type: object
+    title: BankTransferCode
+    properties:
+      id:
+        description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
+        type: string
+      type:
+        description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
+        type: string
+        enum:
+        - BSB
+        - IFSC
+        - ROUTING_NUMBER
+        - SORT_CODE
+  FullAccountNumberList:
+    type: object
+    title: FullAccountNumberList
+    properties:
+      paymentAccountNumber:
+        description: Payment Account Number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
+        readOnly: true
+        type: string
+      tokenizedAccountNumber:
+        description: Tokenized account number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
+        readOnly: true
+        type: string
+      unmaskedAccountNumber:
+        description: Unmasked account number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
+        readOnly: true
+        type: string
+  ClassificationSummaryResponse:
+    type: object
+    title: ClassificationSummaryResponse
+    properties:
+      accountSummary:
+        description: The account summary entity encapsulates the account-level summary information, and the transaction entity provides a transaction-level summary for an account passed.
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/ClassificationSummaryAccountSummary'
+  Money:
+    type: object
+    title: Money
+    properties:
+      amount:
+        format: double
+        description: Value of amount.
+        type: number
+      convertedAmount:
+        format: double
+        description: Value of the converted amount.
+        type: number
+      currency:
+        description: Currency should be a valid three-letter ISO Code.
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK
+      convertedCurrency:
+        description: Currency should be a valid three-letter ISO Code.
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK

@@ -1,0 +1,171 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token Institutions API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Institutions
+  description: Institutions API
+paths:
+  /institutions:
+    get:
+      summary: Get institutions
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: "Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers. The get institutions service helps in identifying credential and related OB sites in a financial institution. The service searches for an institution regardless of the authentication types associated with the providers. Using the get institutions service, retrieve institutions enabled for the customer, search an institution by its name or routing number, and retrieve the popular institutions for a region. Searching for an institution using a routing number applies only to the USA and Canada regions.<br> The valid values for the priority parameter are: <br/> 1.\tall: Returns all the institutions enabled for the customer (the default value for the priority parameter).<br/> 2.\tsearch: Returns institutions matching the name provided by the user. The name parameter is mandatory if the priority parameter is set as search.<br/> 3.\tpopular: Returns institutions that are popular among the customer's users.<br/> Only the datasets, attributes, and containers that are enabled for the customer will be returned in the response.<br/>Input for the dataset$filter should adhere to the following expression:<dataset.name>[<attribute.name>.container[<container> OR <container>] OR <attribute.name>.container[<container>]] <br>OR <dataset.name>[<attribute.name> OR <attribute.name>]<br><b>dataset$filter value examples:</b><br>ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank OR investment OR creditCard]]<br>ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]<br>BASIC_AGG_DATA[ACCOUNT_DETAILS.container[bank OR investment] OR HOLDINGS.container[bank]] OR ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]<br>BASIC_AGG_DATA<br>BASIC_AGG_DATA OR ACCT_PROFILE<br>BASIC_AGG_DATA [ ACCOUNT_DETAILS OR HOLDINGS ]<br>BASIC_AGG_DATA [ ACCOUNT_DETAILS] OR DOCUMENT <br>BASIC_AGG_DATA [ BASIC_ACCOUNT_INFO OR ACCOUNT_DETAILS ] <br><br>The skip and top parameters are used for pagination. In the skip and top parameters, pass the number of records to be skipped and retrieved, respectively.<br>The response header provides the links to retrieve the next and previous set of transactions.<br><br><b>Note:</b> <br><br/> 1. If no value is set for the priority parameter, all the institutions enabled for the customer will be returned.<br/> 2. In a product flow involving user interaction, Yodlee recommends invoking this service with filters.<br/> Without filters, the service may perform slowly as it takes a few minutes to return data in the response.<br/> 3. The response includes comma separated provider IDs that are associated with the institution.<br/> 4. This service supports the localization feature and accepts locale as a header parameter.<br>"
+      operationId: getInstitutions
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/InstitutionResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for priority<br>Y800 : Invalid value for skip<br>Y804 : Permitted values of top between 1 - 500<br>Y821 : Dataset not supported<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: dataset$filter
+        description: Expression to filter the providers by dataset(s) or dataset attribute(s). The default value will be the dataset or dataset attributes configured as default for the customer.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: name
+        description: Name in minimum 1 character or routing number.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: priority
+        description: Search priority
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: providerId
+        format: int64
+        description: providerId
+        type: integer
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: skip
+        format: int32
+        description: skip (Min 0) - This is not applicable along with 'name' parameter.
+        type: integer
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: top
+        format: int32
+        description: top (Max 500) - This is not applicable along with 'name' parameter.
+        type: integer
+        required: false
+      tags:
+      - Institutions
+definitions:
+  Institution:
+    type: object
+    title: Institution
+    properties:
+      languageISOCode:
+        description: The language in which the provider details are provided. For example, a site supports two languages English and French. English being the primary language, the provider response will be provided in French depending on the user's locale. The language follows the two letter ISO code.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      favicon:
+        description: Favicon link of the provider.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      countryISOCode:
+        description: Country to which the provider belongs.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      isAddedByUser:
+        description: Indicates that the site has been added by the user at least once.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      PRIORITY:
+        description: Indicates the priority for which the service is invoked.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul><b>Applicable Values</b><br>
+        readOnly: true
+        type: string
+        enum:
+        - POPULAR
+        - SUGGESTED
+        - COBRAND
+        - SEARCH
+        - ALL
+      primaryLanguageISOCode:
+        description: The primary language of the site.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      baseUrl:
+        description: The base URL of the provider's site.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      loginUrl:
+        description: The login URL of the provider's site.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      providerId:
+        description: providerId<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: array
+        items:
+          format: int64
+          type: integer
+      name:
+        description: The name of a provider site.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      logo:
+        description: The logo link of the provider institution. The link will return the logo in the PNG format.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+      id:
+        format: int64
+        description: Unique identifier for the provider site.(e.g., financial institution sites, biller sites, lender sites, etc.).<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: integer
+      lastModified:
+        description: Determines when the provider information was updated by Yodlee. If the customer caches the data, the cache is recommended to be refreshed based on this field.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
+        readOnly: true
+        type: string
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string
+  InstitutionResponse:
+    type: object
+    title: InstitutionResponse
+    properties:
+      institution:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/Institution'

@@ -1,0 +1,228 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token Auth API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Auth
+  description: Auth API
+paths:
+  /auth/token:
+    post:
+      summary: Generate Access Token
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: <b>Generate Access Token using client credential authentication.</b><br>This service returns access tokens required to access Yodlee 1.1 APIs. These tokens are the simplest and easiest of several alternatives for authenticating with Yodlee servers.<br>The most commonly used services obtain data specific to an end user (your customer). For these services, you need a <b>user access token</b>. These are simply tokens created with the user name parameter (<b>loginName</b>) set to the id of your end user.  <i><br><br><b>Note:</b> You determine this id and you must ensure it's unique among all your customers.</i> <br><br>Each token issued has an associated user. The token passed in the http headers explicitly names the user referenced in that API call.<br><br>Some of the APIs do administrative work, and don't reference an end user. <br/>One example of administrative work is key management. Another example is registering a new user explicitly, with <b>POST /user/register</b> call or subscribe to webhook, with <b>POST /config/notifications/events/{eventName}</b>. <br/>To invoke these, you need an <b>admin access token</b>. Create this by passing in your admin user login name in place of a regular user name.<br><br>This service also allows for simplified registration of new users. Any time you pass in a user name not already in use, the system will automatically implicitly create a new user for you. <br>This user will naturally have very few associated details. You can later provide additional user information by calling the <b>PUT user/register service</b>.<br><br><b>Notes:</b><ul><li>The header <code>Authorization</code> does not apply to this service.</li><li>The content type has to be passed as application/x-www-form-urlencoded.<li>Upgrading to client credential authentication requires infrastructure reconfiguration. <li>Customers wishing to switch from another authentication scheme to client credential authentication, please contact Yodlee Client Services.</li><li>Default expiry time of user access token and admin access token is 30 minutes.</li></ul>
+      operationId: generateAccessToken
+      responses:
+        201:
+          schema:
+            $ref: '#/definitions/ClientCredentialTokenResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for loginName<br>Y806 : Invalid input<br>Y801 : Invalid length for loginName<br>Y303 : clientId or secret is missing<br>Y301 : Invalid clientId or secret<br>Y305 : Access token can be issued only for pre-registered users<br>Y004 : Inactive user<br>Y901 : Service not supported<br>'
+        401:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y016 : loginName header missing<br>Y015 : Unauthorized User<br>Y016 : Api-Version header missing<br>Y020 : Invalid token in authorization header<br>Y027 : Unsupported authentication type'
+        404:
+          description: Not Found
+      parameters:
+      - in: formData
+        name: clientId
+        description: clientId issued by Yodlee is used to generate the OAuth token for authentication.
+        type: string
+        required: false
+      - in: formData
+        name: secret
+        description: secret issued by Yodlee is used to generate the OAuth token for authentication.
+        type: string
+        required: false
+      tags:
+      - Auth
+      consumes:
+      - application/x-www-form-urlencoded
+    delete:
+      summary: Delete Token
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: This endpoint revokes the token passed in the Authorization header. This service is applicable for JWT-based (and all API key-based) authentication and also client credential (clientId and secret) based authentication. This service does not return a response body. The HTTP response code is 204 (success with no content). <br>Tokens generally have limited lifetime of up to 30 minutes. You will call this service when you finish working with one user, and you want to delete the valid token rather than simply letting it expire.<br><br><b>Note:</b> <li>Revoking an access token (either type, admin or a user token) can take up to 2 minutes, as the tokens are stored on a distributed system.<br/>
+      operationId: deleteToken
+      responses:
+        401:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y020 : Invalid token in authorization header<br>Y023 : Token has expired<br>Y016 : Api-Version header missing<br>Y015 : Unauthorized User<br>Y027 : Unsupported authentication type<br>Y007 : Authorization header missing<br>Y020 : Invalid token in authorization header'
+        204:
+          description: No Content
+        404:
+          description: Not Found
+      tags:
+      - Auth
+  /auth/apiKey/{key}:
+    delete:
+      summary: Delete API Key
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: 'This endpoint allows an existing API key to be deleted.<br>You can use one of the following authorization methods to access this API:<br><ol><li>cobsession</li><li>JWT token</li></ol> <b>Notes:</b> <li>This service is not available in developer sandbox environment and will be made availablefor testing in your dedicated environment. '
+      operationId: deleteApiKey
+      responses:
+        201:
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y807 : Resource not found<br>Y806 : Invalid input'
+        401:
+          description: Unauthorized
+        204:
+          description: No Content
+        404:
+          description: Not Found
+      parameters:
+      - in: path
+        name: key
+        description: key
+        type: string
+        required: true
+      tags:
+      - Auth
+  /auth/apiKey:
+    post:
+      summary: Generate API Key
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: 'This endpoint is used to generate an API key. The RSA public key you provide should be in 2048 bit PKCS#8 encoded format. <br>A public key is a mandatory input for generating the API key.<br/>The public key should be a unique key. The apiKeyId you get in the response is what you should use to generate the JWT token.<br> You can use one of the following authorization methods to access<br/>this API:<br><ol><li>cobsession</li><li>JWT token</li></ol> Alternatively, you can use base 64 encoded cobrandLogin and cobrandPassword in the Authorization header (Format: Authorization: Basic <encoded value of cobrandLogin: cobrandPassword>)<br><br><b>Note:</b><br><li>This service is not available in developer sandbox environment and will be made available for testing in your dedicated environment. The content type has to be passed as application/json for the body parameter.</li>'
+      operationId: generateApiKey
+      responses:
+        201:
+          schema:
+            $ref: '#/definitions/ApiKeyResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for RS512 publicKey<br>Y806 : Invalid input<br>Y824 : The maximum number of apiKey permitted is 5<br>Y811 : publicKey value already exists'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/ApiKeyRequest'
+        in: body
+        name: apiKeyRequest
+        description: apiKeyRequest
+        required: true
+      tags:
+      - Auth
+      consumes:
+      - application/json
+    get:
+      summary: Get API Keys
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: 'This endpoint provides the list of API keys that exist for a customer.<br>You can use one of the following authorization methods to access this API:<br><ol><li>cobsession</li><li>JWT token</li></ol><b>Notes:</b><li>This service is not available in developer sandbox environment and will be made available for testing in your dedicated environment. '
+      operationId: getApiKeys
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/ApiKeyResponse'
+          description: OK
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      tags:
+      - Auth
+definitions:
+  ClientCredentialToken:
+    type: object
+    title: ClientCredentialToken
+    properties:
+      expiresIn:
+        format: int32
+        description: Time in seconds after which the issued accessToken expires.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
+        readOnly: true
+        type: integer
+      issuedAt:
+        description: The date and time on which accessToken was created for the customer.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
+        readOnly: true
+        type: string
+      accessToken:
+        description: Access Token to access YSL 1.1 services.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
+        readOnly: true
+        type: string
+  ApiKeyOutput:
+    type: object
+    title: ApiKeyOutput
+    properties:
+      expiresIn:
+        format: int64
+        description: Time in seconds after which the JWT token created for users expires.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+        type: integer
+      createdDate:
+        description: The date on which the apiKey was created for the customer.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+        type: string
+      publicKey:
+        minLength: 1
+        description: Public key uploaded by the customer while generating ApiKey.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+        type: string
+        maxLength: 2147483647
+      key:
+        description: ApiKey or the issuer key used to generate the JWT token for authentication.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+        type: string
+  ApiKeyRequest:
+    type: object
+    title: ApiKeyRequest
+    properties:
+      publicKey:
+        minLength: 1
+        description: Public key uploaded by the customer while generating ApiKey.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+        type: string
+        maxLength: 2147483647
+  ApiKeyResponse:
+    type: object
+    title: ApiKeyResponse
+    properties:
+      apiKey:
+        description: ApiKey customer details.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+        type: array
+        items:
+          $ref: '#/definitions/ApiKeyOutput'
+  ClientCredentialTokenResponse:
+    type: object
+    title: ClientCredentialTokenResponse
+    properties:
+      token:
+        $ref: '#/definitions/ClientCredentialToken'
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string

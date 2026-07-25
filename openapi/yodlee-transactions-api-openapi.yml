@@ -1,0 +1,1889 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token Transactions API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Transactions
+  description: Transactions API
+paths:
+  /transactions:
+    get:
+      summary: Get Transactions
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: 'The Transaction service is used to get a list of transactions for a user.<br>By default, this service returns the last 30 days of transactions from today''s date when fromDate and toDate are not passed.<br>When fromDate and toDate are passed, the API will only return up to 2 years of transaction history. If the difference between fromDate and toDate is more than 2 years, API will return only last 2 years from the toDate.<br>The keyword parameter performs a contains search on the original, consumer, and simple description attributes, replace the special characters #, &, and + with percent-encoding values %23, %26, and %2B respectively. Eg: for -Debit# , pass the input as -Debit%23.<br>Values for categoryId parameter can be fetched from get transaction category list service.<br> The categoryId is used to filter transactions based on system-defined category as well as user-defined category.<br>User-defined categoryIds should be provided in the filter with the prefix ''''U''''. E.g. U10002<br>The skip and top parameters are used for pagination. In the skip and top parameters pass the number of records to be skipped and retrieved, respectively. The response header provides the links to retrieve the next and previous set of transactions.<br>Double quotes in the merchant name will be prefixed by backslashes (&#92;) in the response, e.g. Toys "R" Us. <br>sourceId is a unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts. Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts.<br><br><b>Note</b><ul><li><a href="https://developer.yodlee.com/resources/yodlee/transaction-data-enrichment/docs/overview">Transaction Data Enrichment</a> is made available for bank and card accounts. The address field in the response is available only when the Transaction Data Enrichment key is turned ON.</li><li>The pagination feature is available by default. If no values are passed in the skip and top parameters, the API will only return the first 500 transactions.</li><li>This service supports the localization feature and accepts locale as a header parameter.</li></ul>'
+      operationId: getTransactions
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/TransactionResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for baseType<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for category<br>Y800 : Invalid value for toDate<br>Y800 : Invalid value for container<br>Y809 : Invalid date range<br>Y804 : Permitted values of top between 1 - 500<br>Y805 : Multiple containers not supported<br>Y800 : Invalid value for transaction type<br>Y824 : The maximum number of accountIds permitted is 100<br>Y824 : The maximum number of categoryIds permitted is 100<br>Y824 : The maximum number of highLevelCategoryIds permitted is 100<br>Y848 : detailCategoryId cannot be provided as input, as the detailedCategory feature is not enabled<br>Y823 : detailCategoryId is not for applicable containers other than bank and card<br>Y824 : The maximum number of detailCategoryIds permitted is 100<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for convertToCurrency<br>Y820 : The currency value is not supported for convertToCurrency<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: Comma separated accountIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: baseType
+        description: DEBIT/CREDIT
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: categoryId
+        description: Comma separated categoryIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: categoryType
+        description: Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: container
+        description: bank/creditCard/investment/insurance/loan
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: convertToCurrency
+        description: On-demand currency conversion parameter
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: detailCategoryId
+        description: Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: fromDate
+        description: Transaction from date(YYYY-MM-DD)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: highLevelCategoryId
+        description: Comma separated highLevelCategoryIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: keyword
+        description: Transaction search text
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: skip
+        format: int32
+        description: skip (Min 0)
+        type: integer
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: toDate
+        description: Transaction end date (YYYY-MM-DD)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: top
+        format: int32
+        description: top (Max 500)
+        type: integer
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: transactionSourceId
+        description: A unique ID that the provider site has assigned to the transaction
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: type
+        description: Transaction Type(SELL,SWEEP, etc.) for bank/creditCard/investment
+        type: string
+        required: false
+      tags:
+      - Transactions
+    put:
+      summary: Update Transaction for Transaction Source ID
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: Update the category, consumer description, memo, isPhysical, merchantType, and detailCategory for a transaction by filtering it using the Transaction Source ID.<br>The HTTP response code is 204 (Success without content).<br>
+      operationId: updateTransaction
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y812 : Required field -transactionSourceId missing in the transaction <br>Y812 : Required field -container missing in the transactionParam parameter input<br>Y800 : Invalid value for transactionId<br>Y800 : Invalid value for merchantType<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for categoryId<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>Y800 : Invalid value for transactionSourceId<br>Y800 : Invalid value for transactionSourceId. Muiltiple transactionId found for given transactionSourceId<br>'
+        401:
+          description: Unauthorized
+        204:
+          description: Updated Successfully
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/TransactionRequest'
+        in: body
+        name: transactionRequest
+        description: transactionRequest
+        required: true
+      tags:
+      - Transactions
+      consumes:
+      - application/json
+  /transactions/categories/rules/{ruleId}:
+    post:
+      summary: Run Transaction Categorization Rule
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The run transaction categorization rule service is used to run a rule on transactions, to categorize the transactions.<br>The HTTP response code is 204 (Success with no content).<br>
+      operationId: runTransactionCategorizationRule
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for ruleId<br>Y400 : Categorization already in progress'
+        401:
+          description: Unauthorized
+        204:
+          description: Run Successfully
+        404:
+          description: Not Found
+      parameters:
+      - default: run
+        in: query
+        name: action
+        type: string
+        required: true
+        enum:
+        - run
+      - in: path
+        name: ruleId
+        format: int64
+        description: Unique id of the categorization rule
+        type: integer
+        required: true
+      tags:
+      - Transactions
+      consumes:
+      - application/json
+    delete:
+      summary: Delete Transaction Categorization Rule
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The delete transaction categorization rule service is used to delete the given user-defined transaction categorization rule for both system-defined category as well as user-defined category.<br>This will delete all the corresponding rule clauses associated with the rule.<br>The HTTP response code is 204 (Success without content).<br>
+      operationId: deleteTransactionCategorizationRule
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for ruleId'
+        401:
+          description: Unauthorized
+        204:
+          description: Deleted Successfully
+        404:
+          description: Not Found
+      parameters:
+      - in: path
+        name: ruleId
+        format: int64
+        description: ruleId
+        type: integer
+        required: true
+      tags:
+      - Transactions
+    put:
+      summary: Update Transaction Categorization Rule
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The update transaction categorization rule service is used to update a categorization rule for both system-defined category as well as user-defined category.<br>ruleParam JSON input should be as explained in the create transaction categorization rule service.<br>The HTTP response code is 204 (Success without content).<br>
+      operationId: updateTransactionCategorizationRule
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for ruleId<br>Y806 : Invalid input'
+        401:
+          description: Unauthorized
+        204:
+          description: Updated Successfully
+        404:
+          description: Not Found
+      parameters:
+      - in: path
+        name: ruleId
+        format: int64
+        description: ruleId
+        type: integer
+        required: true
+      - schema:
+          $ref: '#/definitions/TransactionCategorizationRuleRequest'
+        in: body
+        name: transactionCategoriesRuleRequest
+        description: transactionCategoriesRuleRequest
+        required: true
+      tags:
+      - Transactions
+      consumes:
+      - application/json
+  /transactions/count:
+    get:
+      summary: Get Transactions Count
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The count service provides the total number of transactions for a specific user depending on the input parameters passed.<br>If you are implementing pagination for transactions, call this endpoint before calling GET /transactions to know the number of transactions that are returned for the input parameters passed.<br>The functionality of the input parameters remains the same as that of the GET /transactions endpoint.<br>If the difference between fromDate and toDate is more than 2 years, API will return the count of last 2 years from the toDate.<br>
+      operationId: getTransactionsCount
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/TransactionCountResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for detailCategoryId<br>Y848 : detailCategoryId cannot be provided as input, as the detailedCategory feature is not enabled<br>Y823 : detailCategoryId is not applicable for containers other than bank and card<br>Y824 : The maximum number of detailCategoryIds permitted is 100<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: "Comma separated accountIds\t"
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: baseType
+        description: DEBIT/CREDIT
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: categoryId
+        description: Comma separated categoryIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: categoryType
+        description: Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: container
+        description: bank/creditCard/investment/insurance/loan
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: detailCategoryId
+        description: Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: fromDate
+        description: Transaction from date(YYYY-MM-DD)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: highLevelCategoryId
+        description: Comma separated highLevelCategoryIds
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: keyword
+        description: "Transaction search text\t"
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: toDate
+        description: Transaction end date (YYYY-MM-DD)
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: type
+        description: Transaction Type(SELL,SWEEP, etc.)
+        type: string
+        required: false
+      tags:
+      - Transactions
+  /transactions/categories/txnRules:
+    get:
+      summary: Get Transaction Categorization Rules
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get transaction categorization rule service is used to get all the categorization rules.<br>
+      operationId: getTransactionCategorizationRules
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/TransactionCategorizationRuleResponse'
+          description: OK
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      tags:
+      - Transactions
+  /transactions/categories/{categoryId}:
+    delete:
+      summary: Delete Category
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The delete transaction categories service is used to delete the given user-defined category.<br>The HTTP response code is 204 (Success without content).<br>
+      operationId: deleteTransactionCategory
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for categoryId'
+        401:
+          description: Unauthorized
+        204:
+          description: Deleted Successfully
+        404:
+          description: Not Found
+      parameters:
+      - in: path
+        name: categoryId
+        format: int64
+        description: categoryId
+        type: integer
+        required: true
+      tags:
+      - Transactions
+  /transactions/categories:
+    post:
+      summary: Create Category
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The create transaction categories service is used to create user-defined categories for a system-defined category.<br>The parentCategoryId is the system-defined category id.This can be retrieved using get transaction categories service.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 201 (Created successfully).<br>
+      operationId: createTransactionCategory
+      responses:
+        201:
+          description: Created Successfully
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for categoryParam<br>Y800 : Invalid value for source<br>Y801 : Invalid length for categoryName. Min 1 and max 50 is required<br>Y803 : parentCategoryId required<br>Y811 : categoryName value already exists'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/TransactionCategoryRequest'
+        in: body
+        name: transactionCategoryRequest
+        description: User Transaction Category in JSON format
+        required: true
+      tags:
+      - Transactions
+      consumes:
+      - application/json
+    get:
+      summary: Get Transaction Category List
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The categories service returns the list of available transaction categories.<br>High level category is returned in the response only if it is opted by the customer.<br>When invoked by passing the cobrand session or admin access token, this service returns the supported transaction categories at the cobrand level. <br>When invoked by passing the cobrand session and the user session or user access token, this service returns the transaction categories <br>along with user-defined categories.<br>Double quotes in the user-defined category name will be prefixed by backslashes (&#92;) in the response, <br>e.g. Toys "R" Us.<br/>Source and id are the primary attributes of the category entity.<br><br><b>Note:</b><li>This service supports the localization feature and accepts locale as a header parameter.</li>
+      operationId: getTransactionCategories
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/TransactionCategoryResponse'
+          description: OK
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      tags:
+      - Transactions
+    put:
+      summary: Update Category
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The update transaction categories service is used to update the transaction category name<br>for a high level category, a system-defined category and a user-defined category.<br>The renamed category can be set back to the original name by passing an empty string for categoryName.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 204 (Success without content).<br>
+      operationId: updateTransactionCategory
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for categoryParam<br>Y800 : Invalid value for source<br>Y801 : Invalid length for categoryName. Min 1 and max 50 is required<br>Y803 : id required<br>Y811 : categoryName value already exists'
+        401:
+          description: Unauthorized
+        204:
+          description: Updated Successfully
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/UpdateCategoryRequest'
+        in: body
+        name: updateCategoryRequest
+        description: updateCategoryRequest
+        required: true
+      tags:
+      - Transactions
+      consumes:
+      - application/json
+  /transactions/categories/rules:
+    post:
+      summary: Create or Run Transaction Categorization Rule
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: 'The Create or Run Transaction Categorization Rule endpoint is used to: <br>Create transaction categorization rules for both system and user-defined categories.<br>Run all the transaction categorization rules to categorize transactions by calling the endpoint with action=run as the query parameter. <br><br>The input body parameters to create transaction categorization rules follow:<br>     categoryId - This field is mandatory and numeric<br>     priority - This field is optional and numeric. Priority decides the order in which the rule gets applied on transactions.<br>     ruleClause - This field is mandatory and should contain at least one rule<br>     field - The value can be description or amount<br><br>       If the field value is description then,<br>         1. operation - value can be stringEquals or stringContains<br>         2. value - value should be min of 3 and max of 50 characters<br><br>       If the field value is amount then, <br>         1. operation - value can be numberEquals, numberLessThan, numberLessThanEquals, numberGreaterThan or numberGreaterThanEquals<br>         2. value - min value 0 and a max value of 99999999999.99 is allowed<br>The HTTP response code is 201 (Created Successfully).'
+      operationId: createOrRunTransactionCategorizationRules
+      responses:
+        201:
+          description: Created Successfully
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y806 : Invalid input<br>Y400 : Rule already exists. Rule should be unique in terms of combination of description and amount'
+        401:
+          description: Unauthorized
+        204:
+          description: No Content
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: action
+        description: To run rules, pass action=run. Only value run is supported
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: ruleParam
+        description: rules(JSON format) to categorize the transactions
+        type: string
+        required: false
+      tags:
+      - Transactions
+      consumes:
+      - application/json
+    get:
+      summary: Get Transaction Categorization Rules
+      deprecated: true
+      produces:
+      - application/json;charset=UTF-8
+      description: The get transaction categorization rule service is used to get all the categorization rules.<br>
+      operationId: getTransactionCategorizationRulesDeprecated
+      responses:
+        200:
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TransactionCategorizationRule'
+          description: OK
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      tags:
+      - Transactions
+  /transactions/{transactionId}:
+    get:
+      summary: Get Transactions using Transaction ID
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The Transaction service is used to get a list of transactions for a user using Transaction ID.<br>
+      operationId: getTransactionsByTransactionID
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/TransactionResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for baseType<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for category<br>Y800 : Invalid value for toDate<br>Y800 : Invalid value for container<br>Y809 : Invalid date range<br>Y804 : Permitted values of top between 1 - 500<br>Y805 : Multiple containers not supported<br>Y800 : Invalid value for transaction type<br>Y824 : The maximum number of accountIds permitted is 100<br>Y824 : The maximum number of categoryIds permitted is 100<br>Y824 : The maximum number of highLevelCategoryIds permitted is 100<br>Y848 : detailCategoryId cannot be provided as input, as the detailedCategory feature is not enabled<br>Y823 : detailCategoryId is not for applicable containers other than bank and card<br>Y824 : The maximum number of detailCategoryIds permitted is 100<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for convertToCurrency<br>Y820 : The currency value is not supported for convertToCurrency<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: container
+        description: bank/creditCard/investment/insurance/loan
+        type: string
+        required: true
+      - in: query
+        allowEmptyValue: false
+        name: convertToCurrency
+        description: On-demand currency conversion parameter
+        type: string
+        required: false
+      - in: path
+        name: transactionId
+        format: int64
+        description: An unique identifier for the transaction. The combination of the id and account container are unique in the system.
+        type: integer
+        required: true
+      tags:
+      - Transactions
+    put:
+      summary: Update Transaction
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The update transaction service is used to update the category,consumer description, memo, isPhysical, merchantType, detailCategory for a transaction.<br>The HTTP response code is 204 (Success without content).<br>
+      operationId: updateTransaction_1
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y812 : Required field -container missing in the transactionParam parameter input<br>Y800 : Invalid value for transactionId<br>Y800 : Invalid value for merchantType<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for categoryId<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>'
+        401:
+          description: Unauthorized
+        204:
+          description: Updated Successfully
+        404:
+          description: Not Found
+      parameters:
+      - in: path
+        name: transactionId
+        format: int64
+        description: transactionId
+        type: integer
+        required: true
+      - schema:
+          $ref: '#/definitions/TransactionRequest'
+        in: body
+        name: transactionRequest
+        description: transactionRequest
+        required: true
+      tags:
+      - Transactions
+      consumes:
+      - application/json
+definitions:
+  BusinessCategory:
+    type: object
+    title: BusinessCategory
+    properties:
+      categoryName:
+        description: 'The name of the category assigned to the transaction. This is the category field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      categoryId:
+        format: int64
+        description: 'The id of the category assigned to the transaction. This is the id field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: integer
+  TransactionCountResponse:
+    type: object
+    title: TransactionCountResponse
+    properties:
+      transaction:
+        readOnly: true
+        $ref: '#/definitions/TransactionCount'
+  UpdateTransaction:
+    type: object
+    title: UpdateTransaction
+    required:
+    - categoryId
+    - categorySource
+    - container
+    - transactionSourceId
+    properties:
+      categorySource:
+        type: string
+        enum:
+        - SYSTEM
+        - USER
+      container:
+        type: string
+        enum:
+        - bank
+        - creditCard
+        - investment
+        - insurance
+        - loan
+        - reward
+        - bill
+        - realEstate
+        - otherAssets
+        - otherLiabilities
+      isPhysical:
+        type: boolean
+      detailCategoryId:
+        format: int64
+        type: integer
+      memo:
+        type: string
+      transactionSourceId:
+        type: string
+      merchantType:
+        type: string
+        enum:
+        - BILLERS
+        - SUBSCRIPTION
+        - BNPL
+        - OTHERS
+      categoryId:
+        format: int64
+        type: integer
+  TransactionCategorizationRuleResponse:
+    type: object
+    title: TransactionCategorizationRuleResponse
+    properties:
+      txnRules:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/TransactionCategorizationRule'
+  TransactionCategorizationRuleRequest:
+    type: object
+    title: TransactionCategorizationRuleRequest
+    required:
+    - rule
+    properties:
+      rule:
+        $ref: '#/definitions/TransactionCategorizationRuleInfo'
+  DetailCategory:
+    type: object
+    title: DetailCategory
+    properties:
+      name:
+        description: 'The name of the detail category<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+      id:
+        format: int64
+        description: 'The unique identifier of the detail category.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+  LogoURLs:
+    type: object
+    title: LogoURLs
+    properties:
+      type:
+        description: 'The merchant type of the logo url (SVG/PNG)<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: string
+      url:
+        description: 'The logo url of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: string
+  Merchant:
+    type: object
+    title: Merchant
+    properties:
+      website:
+        description: 'The website of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: string
+      address:
+        description: 'The address of the merchant associated with the transaction is populated in the merchant address field.<br><b>Note</b>: The merchant address field is not available by default and customers will have to specifically request the merchant''s address (that includes city, state, and ZIP of the merchant). The merchant address field is available only for merchants in the United States.<br><br><b>Applicable containers</b>: bank,creditCard<br>'
+        readOnly: true
+        $ref: '#/definitions/AccountAddress'
+      logoURLs:
+        description: 'The logoURL of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/LogoURLs'
+      contact:
+        description: 'The merchant contact information like phone and email.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        $ref: '#/definitions/Contact'
+      categoryLabel:
+        description: 'The business categories of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: array
+        items:
+          type: string
+      coordinates:
+        description: 'The merchant geolocation coordinates like latitude and longitude.<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+        $ref: '#/definitions/Coordinates'
+      name:
+        description: 'The name of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      id:
+        description: 'Identifier of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      source:
+        description: 'The source through which merchant information is retrieved.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - YODLEE
+        - FACTUAL
+        - FOURSQUARE
+      logoURL:
+        description: 'The logoURL of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: string
+  AccountAddress:
+    type: object
+    title: AccountAddress
+    properties:
+      zip:
+        description: Zip.
+        type: string
+      country:
+        description: Country.
+        type: string
+      address3:
+        description: Address Line 3.
+        type: string
+      address2:
+        description: Address Line 2.
+        type: string
+      city:
+        description: City.
+        type: string
+      sourceType:
+        type: string
+      address1:
+        description: Address Line 1.
+        type: string
+      street:
+        type: string
+      state:
+        description: State.
+        type: string
+      type:
+        type: string
+        enum:
+        - HOME
+        - BUSINESS
+        - POBOX
+        - RETAIL
+        - OFFICE
+        - SMALL_BUSINESS
+        - COMMUNICATION
+        - PERMANENT
+        - STATEMENT_ADDRESS
+        - PAYMENT
+        - PAYOFF
+        - UNKNOWN
+  TransactionRequest:
+    type: object
+    title: TransactionRequest
+    required:
+    - transaction
+    properties:
+      transaction:
+        $ref: '#/definitions/UpdateTransaction'
+  TransactionCategorizationRuleInfo:
+    type: object
+    title: TransactionCategorizationRuleInfo
+    required:
+    - categoryId
+    - ruleClause
+    properties:
+      ruleClause:
+        type: array
+        items:
+          $ref: '#/definitions/FieldOperation'
+      source:
+        type: string
+        enum:
+        - SYSTEM
+        - USER
+      priority:
+        format: int32
+        type: integer
+      categoryId:
+        format: int32
+        type: integer
+  TransactionCategorizationRule:
+    type: object
+    title: TransactionCategorizationRule
+    properties:
+      ruleClauses:
+        description: 'Details of rules. <br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/RuleClause'
+      userDefinedRuleId:
+        format: int64
+        description: 'Unique identifier generated for every rule the user creates.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+      categoryLevelId:
+        format: int32
+        description: 'The level of the category for which the rule is created.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+        readOnly: true
+        type: integer
+      transactionCategorisationId:
+        format: int64
+        description: 'Category id that is assigned to the transaction when the transaction matches the rule clause. This is the id field of the transaction category resource.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+      memId:
+        format: int64
+        description: 'Unique identifier of the user.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+      rulePriority:
+        format: int32
+        description: 'The order in which the rules get executed on transactions.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+  Contact:
+    type: object
+    title: Contact
+    properties:
+      phone:
+        description: 'Phone number of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        type: string
+      email:
+        description: 'Email Id of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        type: string
+  TransactionTotal:
+    type: object
+    title: TransactionTotal
+    properties:
+      count:
+        format: int64
+        type: integer
+  Description:
+    type: object
+    title: Description
+    properties:
+      security:
+        description: 'The description will provide the actual name of the security.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      original:
+        description: 'Original transaction description as it appears at the FI site.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+        readOnly: true
+        type: string
+      simple:
+        description: 'The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of the transaction may not be evident. Yodlee attempts to simplify and make the transaction meaningful to the consumer, and this simplified transaction description is provided in the simple description field.Note: The simple description field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+        readOnly: true
+        type: string
+      consumer:
+        description: The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field.<br><br>
+        type: string
+  TransactionCount:
+    type: object
+    title: TransactionCount
+    properties:
+      TOTAL:
+        $ref: '#/definitions/TransactionTotal'
+  TransactionCategoryResponse:
+    type: object
+    title: TransactionCategoryResponse
+    properties:
+      transactionCategory:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/TransactionCategory'
+  TransactionCategoryRequest:
+    type: object
+    title: TransactionCategoryRequest
+    required:
+    - parentCategoryId
+    properties:
+      parentCategoryId:
+        format: int32
+        type: integer
+        exclusiveMinimum: false
+        minimum: 1.0
+      source:
+        readOnly: true
+        type: string
+      categoryName:
+        minLength: 1
+        type: string
+        maxLength: 50
+  Coordinates:
+    type: object
+    title: Coordinates
+    properties:
+      latitude:
+        format: double
+        description: 'Latitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+        type: number
+      longitude:
+        format: double
+        description: 'Longitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+        type: number
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string
+  RuleClause:
+    type: object
+    title: RuleClause
+    properties:
+      field:
+        description: 'Field for which the clause is created.<br><br><br><b>Valid Values</b>:amount,description<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+        enum:
+        - amount
+        - description
+      userDefinedRuleId:
+        format: int64
+        description: 'Unique identifier generated for every rule the user creates.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+      fieldValue:
+        description: 'The value would be the amount value in case of amount based rule clause or the string value in case of description based rule clause.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+      operation:
+        description: 'Operation for which the clause is created.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+        enum:
+        - numberEquals
+        - numberLessThan
+        - numberLessThanEquals
+        - numberGreaterThan
+        - numberGreaterThanEquals
+        - stringEquals
+        - stringContains
+      ruleClauseId:
+        format: int64
+        description: 'Unique identifier generated for the rule clause.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+  TransactionResponse:
+    type: object
+    title: TransactionResponse
+    properties:
+      transaction:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/TransactionWithDateTime'
+  FieldOperation:
+    type: object
+    title: FieldOperation
+    properties:
+      field:
+        description: 'Field for which the clause is created.<br><br><b>Applicable containers</b>: bank, creditCard, investment, insurance, loan<br><b>Applicable Values</b>:<ul><li>amount</li><li>description</li></ul><b>Applicable Values</b><br>'
+        type: string
+        enum:
+        - amount
+        - description
+      operation:
+        description: 'Operation for which the clause is created.<br><br><b>Applicable containers</b>: bank, creditCard, investment, insurance, loan<br><b>Applicable values (depends on the value of field)</b>:<ul><li>field is <b>description</b> -> operation can be<ol><li>stringEquals</li><li>stringContains</li></ol></li><li>field is <b>amount</b> -> operation can be<ol><li>numberEquals</li><li>numberLessThan</li><li>numberLessThanEquals</li><li>numberGreaterThan</li><li>numberGreaterThanEquals</li></ol></li></ul><b>Applicable Values</b><br>'
+        type: string
+        enum:
+        - numberEquals
+        - numberLessThan
+        - numberLessThanEquals
+        - numberGreaterThan
+        - numberGreaterThanEquals
+        - stringEquals
+        - stringContains
+      value:
+        description: 'The value would be the amount value in case of amount based rule clause or the string value in case of description based rule clause.<br><br><b>Applicable containers</b>: bank, creditCard, investment, insurance, loan<br><b>Applicable Values</b>:<ul><li>field is <b>description</b> -> value should be <b>min of 3 and max of 50 characters</b></li><li>field is <b>amount</b> -> value should be <b> min value of 0 and a max value of 99999999999.99</b></li></ul>'
+        type: object
+  TransactionCategory:
+    type: object
+    title: TransactionCategory
+    properties:
+      highLevelCategoryName:
+        description: 'The name of the high level category. A group of similar transaction categories are clubbed together to form a high-level category.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+      defaultHighLevelCategoryName:
+        description: 'A attribute which will always hold the first value(initial name) of Yodlee defined highLevelCategoryName attribute.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+      highLevelCategoryId:
+        format: int64
+        description: 'The unique identifier of the high level category.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+      businessCategory:
+        description: 'business category details for the SMB customers.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        $ref: '#/definitions/BusinessCategory'
+      detailCategory:
+        description: 'Entity that provides detail category attributes<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DetailCategory'
+      id:
+        format: int64
+        description: 'Unique identifier of the category.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: integer
+      source:
+        description: 'Source used to identify whether the transaction category is user defined category or system created category.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - SYSTEM
+        - USER
+      category:
+        description: 'The name of the category.<br><b>Note</b>: Transaction categorization is one of the core features offered by Yodlee and the categories are assigned to the transactions by the system. Transactions can be clubbed together by the category that is assigned to them.  <br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+      classification:
+        description: 'Category Classification.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - PERSONAL
+        - BUSINESS
+      type:
+        description: 'Transaction categories and high-level categories are further mapped to five transaction category types. Customers, based on their needs can either use the transaction categories, the high-level categories, or the transaction category types. <br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - TRANSFER
+        - DEFERRED_COMPENSATION
+        - UNCATEGORIZE
+        - INCOME
+        - EXPENSE
+        - LOAN
+      defaultCategoryName:
+        description: 'A attribute which will always hold the first value(initial name) of Yodlee defined category attribute.<br><br><b>Applicable containers</b>: creditCard, investment, insurance, loan<br>'
+        readOnly: true
+        type: string
+  TransactionWithDateTime:
+    type: object
+    title: TransactionWithDateTime
+    properties:
+      date:
+        description: 'The value provided will be either postDate or transactionDate. postDate takes higher priority than transactionDate, except for the investment container as only transactionDate is available. The availability of postDate or transactionDate depends on the provider site.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      sourceId:
+        description: A unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts.<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts.
+        readOnly: true
+        type: string
+      symbol:
+        description: 'The symbol of the security being traded.<br><b>Note</b>: The settle date field applies only to trade-related transactions. <br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      cusipNumber:
+        description: 'The CUSIP (Committee on Uniform Securities Identification Procedures) identifies the financial instruments in the United States and Canada.<br><b><br><b>Note</b></b>: The CUSIP number field applies only to trade related transactions.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      sourceApcaNumber:
+        description: '6 Digit APCA number for the initiating institution. The field is fixed-width and padded with leading zeros if applicable. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
+        readOnly: true
+        type: string
+      highLevelCategoryId:
+        format: int64
+        description: 'The high level category assigned to the transaction. The supported values are provided by the GET transactions/categories. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: integer
+      memo:
+        description: 'Additional notes provided by the user for a particular  transaction through application or API services. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      type:
+        description: 'The nature of the transaction, i.e., deposit, refund, payment, etc.<br><b>Note</b>: The transaction type field is available only for the United States, Canada, United Kingdom, New Zealand and India based provider sites. <br><br><b>Applicable containers</b>: bank,creditCard,investment<br>'
+        readOnly: true
+        type: string
+      intermediary:
+        description: 'The intermediary of the transaction.<br><br><b>Applicable containers</b>:  bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: array
+        items:
+          type: string
+      frequency:
+        description: 'Frequency is set to MONTHLY if the Merchant type is BILLERS or SUBSCRIPTION.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      lastUpdated:
+        readOnly: true
+        type: string
+      price:
+        description: 'The price of the security for the transaction.<br><b>Note</b>: The price field applies only to the trade related transactions. <br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      sourceMerchantCategoryCode:
+        description: 'The merchant category code for an outgoing payment to a merchant. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card,Loan container<br>'
+        readOnly: true
+        type: string
+      id:
+        format: int64
+        description: 'An unique identifier for the transaction. The combination of the id and account container are unique in the system. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: integer
+      checkNumber:
+        description: 'The checkNumber of the transaction.<br><br><b>Applicable containers</b>: bank<br>'
+        readOnly: true
+        type: string
+      transactionDateTime:
+        description: 'The timestamp the transaction happens in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      typeAtSource:
+        description: 'The type of transaction. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card,Loan container<br>'
+        readOnly: true
+        type: string
+      valoren:
+        description: 'It is an identification number that is assigned to financial instruments such as stocks and bonds trading in Switzerland.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      isManual:
+        description: 'Indicates if the transaction is aggregated from the FI site or the consumer has manually created the transaction using the application or an API. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: boolean
+      sourceBillerName:
+        description: 'Name of the BPAY biller for the transaction (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
+        readOnly: true
+        type: string
+      merchant:
+        description: 'The name of the merchant associated with the transaction.<br><b>Note</b>: The merchant name field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Merchant'
+      sedol:
+        description: 'SEDOL stands for Stock Exchange Daily Official List, a list of security identifiers used in the United Kingdom and Ireland for clearing purposes.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      categoryType:
+        description: 'The categoryType of the category assigned to the transaction. This is the type field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+        enum:
+        - TRANSFER
+        - DEFERRED_COMPENSATION
+        - UNCATEGORIZE
+        - INCOME
+        - EXPENSE
+        - LOAN
+      accountId:
+        format: int64
+        description: 'The account from which the transaction was made. This is basically the primary key of the account resource. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: integer
+      sourceType:
+        description: 'The source through which the transaction is added to the Yodlee system.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loann<br><b>Applicable Values:</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - AGGREGATED
+        - MANUAL
+      subType:
+        description: 'The transaction subtype field provides a detailed transaction type. For example, purchase is a transaction type and the transaction subtype field indicates if the purchase was made using a debit or credit card.<br><b>Note</b>: The transaction subtype field is available only in the United States, Canada, United Kingdom, New Zealand and India.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+        enum:
+        - OVERDRAFT_CHARGE
+        - ONLINE_PURCHASE
+        - TAX_PAYMENT
+        - PAYMENT_BY_CHECK
+        - ATM_CASH_WITHDRAWAL
+        - SERVICE_CHARGE
+        - RETURNED_CHECK_CHARGE
+        - STOP_PAYMENT_CHARGE
+        - CONVENIENCE_FEE
+        - AUTO_LOAN
+        - HOME_LOAN_MORTGAGE
+        - RECURRING_SUBSCRIPTION_PAYMENT
+        - INTEREST
+        - PAYMENT
+        - PURCHASE
+        - REFUND
+        - TRANSFER
+        - FINANCE_CHARGE
+        - OTHER_CHARGES_FEES
+        - ANNUAL_FEE
+        - DEPOSIT
+        - DIRECT_DEPOSIT_SALARY
+        - INVESTMENT_INCOME_CASH
+        - SSA
+        - REWARDS
+        - TAX_REFUND
+        - CREDIT_CARD_PAYMENT
+        - INSURANCE_PAYMENT
+        - UTILITIES_PAYMENT
+        - CHILD_SUPPORT
+        - LOAN
+        - PERSONAL_LOAN
+        - STUDENT_LOAN
+        - REIMBURSEMENT
+        - BALANCE_TRANSFER
+        - OVERDRAFT_PROTECTION
+        - CREDIT
+        - NSF_FEES
+      holdingDescription:
+        description: 'For transactions involving securities, this captures the securities description.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      status:
+        description: 'The status of the transaction: pending or posted.<br><b>Note</b>: Most FI sites only display posted transactions. If the FI site displays transaction status, same will be aggregated.  <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - POSTED
+        - PENDING
+        - SCHEDULED
+        - FAILED
+        - CLEARED
+      detailCategoryId:
+        format: int64
+        description: 'The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard<br>'
+        readOnly: true
+        type: integer
+      description:
+        description: 'Description details<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Description'
+      settleDate:
+        description: 'It is the date on which the transaction is finalized, that is, the date the ownership of the security is transferred to the buyer. The settlement date is usually few days after the transaction date.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+      postDateTime:
+        description: 'The timestamp on which the transaction is posted to the account.<br><br><b>Applicable containers</b>: bank,creditCard,insurance,loan<br>'
+        readOnly: true
+        type: string
+      baseType:
+        description: 'Indicates if the transaction appears as a debit or a credit transaction in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - CREDIT
+        - DEBIT
+      categorySource:
+        description: 'Indicates the source of the category, i.e., categories derived by the system or assigned/provided by the consumer. This is the source field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - SYSTEM
+        - USER
+      principal:
+        description: 'The portion of the principal in the transaction amount. The transaction amount can be the amount due, payment amount, minimum amount, repayment, etc.<br><br><b>Applicable containers</b>: loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      sourceBillerCode:
+        description: 'BPAY Biller Code for the transaction (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
+        readOnly: true
+        type: string
+      interest:
+        description: 'The portion of interest in the transaction amount. The transaction amount can be the amount due, payment amount, minimum amount, repayment, etc.<br><br><b>Applicable containers</b>: loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      commission:
+        description: 'A commission or brokerage associated with a transaction.<br><br><br><b>Additional Details</b>:The commission only applies to trade-related transactions.<b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      merchantType:
+        description: 'Indicates the merchantType of the transaction.e.g:-BILLERS,SUBSCRIPTION,BNPL,OTHERS <br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: string
+      amount:
+        description: 'The amount of the transaction as it appears at the FI site. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      isPhysical:
+        description: 'Indicates if the transaction is happened online or in-store. <br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+        readOnly: true
+        type: boolean
+      quantity:
+        format: double
+        description: 'The quantity associated with the transaction.<br><b>Note</b>: The quantity field applies only to trade-related transactions.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: number
+      isRecurring:
+        description: 'If the transaction is done on a merchant with merchant type as BILLERS/SUBSCRIPTION, then such transactions are marked isRecurring to True or else it is marked as False.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      transactionDate:
+        description: 'The date the transaction happens in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      createdDate:
+        readOnly: true
+        type: string
+      CONTAINER:
+        description: 'The account''s container.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+        readOnly: true
+        type: string
+        enum:
+        - bank
+        - creditCard
+        - investment
+        - insurance
+        - loan
+        - reward
+        - bill
+        - realEstate
+        - otherAssets
+        - otherLiabilities
+      businessCategory:
+        description: 'business category details for the SMB customers.<br><br><b>Applicable containers</b>: Bank container<br>'
+        readOnly: true
+        $ref: '#/definitions/BusinessCategory'
+      postDate:
+        description: 'The date on which the transaction is posted to the account.<br><br><b>Applicable containers</b>: bank,creditCard,insurance,loan<br>'
+        readOnly: true
+        type: string
+      parentCategoryId:
+        format: int64
+        description: 'The parentCategoryId of the category assigned to the transaction.<br><b>Note</b>: This field will be provided in the response if the transaction is assigned to a user-created category. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: integer
+      category:
+        description: 'The name of the category assigned to the transaction. This is the category field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: string
+      runningBalance:
+        description: 'The running balance in an account indicates the balance of the account after every transaction.<br><br><b>Applicable containers</b>: bank,creditCard,investment<br>'
+        readOnly: true
+        $ref: '#/definitions/Money'
+      categoryId:
+        format: int64
+        description: 'The id of the category assigned to the transaction. This is the id field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+        readOnly: true
+        type: integer
+      isin:
+        description: 'International Securities Identification Number (ISIN) standard is used worldwide to identify specific securities.<br><br><b>Applicable containers</b>: investment<br>'
+        readOnly: true
+        type: string
+  UpdateCategoryRequest:
+    type: object
+    title: UpdateCategoryRequest
+    required:
+    - id
+    - source
+    properties:
+      highLevelCategoryName:
+        type: string
+      id:
+        format: int64
+        type: integer
+        exclusiveMinimum: false
+        minimum: 1.0
+      source:
+        type: string
+        enum:
+        - SYSTEM
+        - USER
+      categoryName:
+        type: string
+  Money:
+    type: object
+    title: Money
+    properties:
+      amount:
+        format: double
+        description: Value of amount.
+        type: number
+      convertedAmount:
+        format: double
+        description: Value of the converted amount.
+        type: number
+      currency:
+        description: Currency should be a valid three-letter ISO Code.
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK
+      convertedCurrency:
+        description: Currency should be a valid three-letter ISO Code.
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK

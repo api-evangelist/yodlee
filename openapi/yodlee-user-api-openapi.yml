@@ -1,0 +1,1047 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token User API
+  version: 1.1.0
+basePath: /
+tags:
+- name: User
+  description: Users API
+paths:
+  /user/samlLogin:
+    post:
+      summary: Saml Login
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The SAML login service is used to authenticate system users with a SAML response.<br>A new user will be created with the input provided if that user isn't already in the system.<br>For existing users, the system will make updates based on changes or new information.<br>When authentication is successful, a user session token is returned.<br><br><b>Note:</b> <li>The content type has to be passed as application/x-www-form-urlencoded. <li>issuer, source and samlResponse should be passed as body parameters.</li>
+      operationId: samlLogin
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/UserResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y013 : Invalid value for samlResponse<br>Y013 : Invalid value for issuer'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        name: issuer
+        description: issuer
+        type: string
+        required: true
+      - in: query
+        name: samlResponse
+        description: samlResponse
+        type: string
+        required: true
+      - in: query
+        name: source
+        description: source
+        type: string
+        required: true
+      tags:
+      - User
+      consumes:
+      - application/json
+  /user/accessTokens:
+    get:
+      summary: Get Access Tokens
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The Get Access Tokens service is used to retrieve the access tokens for the application id(s) provided.<br>URL in the response can be used to launch the application for which token is requested.<br><br><b>Note:</b> <li>This endpoint is deprecated for customers using the API Key-based authentication and is applicable only to customers who use the SAML-based authentication.<br>
+      operationId: getAccessTokens
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/UserAccessTokensResponse'
+          description: OK
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        name: appIds
+        description: appIds
+        type: string
+        required: true
+      tags:
+      - User
+  /user:
+    get:
+      summary: Get User Details
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get user details service is used to get the user profile information and the application preferences set at the time of user registration.<br>
+      operationId: getUser
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/UserDetailResponse'
+          description: OK
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      tags:
+      - User
+    put:
+      summary: Update User Details
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The update user details service is used to update user details like name, address, currency preference, etc.<br>This service can also be used to change the business unit of the user for FL4 customers.<br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>The HTTP response code is 204 (Success without content). <br><br> <b>Login Name Change Feature:</b> loginName can be passed to update the user's login name. Once the loginName is updated, to access the user's data, a token with the changed loginName must be created. This feature is supported only Client Credentials authentication methods.<br><b>Note:</b> <li>We strongly recommend to immediately delete the old access token once the user's loginName is successfully changed to avoid misuse.</li> <li>After updating the login name, the already sent data extract events with the old login name will no more be functional. Replace the loginName with new loginName or try polling method to retrieve the data.</li><br>
+      operationId: updateUser
+      responses:
+        401:
+          description: Unauthorized
+        204:
+          description: No Content
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/UpdateUserRequest'
+        in: body
+        name: userRequest
+        description: userRequest
+        required: true
+      tags:
+      - User
+      consumes:
+      - application/json
+  /user/unregister:
+    delete:
+      summary: Delete User
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The delete user service is used to delete or unregister a user from Yodlee. <br>Once deleted, the information related to the users cannot be retrieved. <br>The HTTP response code is 204 (Success without content)<br>
+      operationId: unregister
+      responses:
+        401:
+          description: Unauthorized
+        204:
+          description: No Content
+        404:
+          description: Not Found
+      tags:
+      - User
+  /user/register:
+    post:
+      summary: Register User
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The register user service is used to register a user in Yodlee.<br>The loginName cannot include spaces and must be between 3 and 150 characters.<br>locale passed must be one of the supported locales for the customer. <br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>userParam is accepted as a body parameter. <br><br><b>Note:</b> <li>The content type has to be passed as application/json for the body parameter.</li> <li>We recommend you to not use special characters in loginName other than "@", "#", "_" & "-"</li>.
+      operationId: registerUser
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/UserResponse'
+          description: Login Successful
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for loginName<br>Y800 : Invalid value for email<br>Y801 : Invalid length for loginName<br>Y800 : Invalid value for phoneNumber<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/UserRequest'
+        in: body
+        name: userRequest
+        description: userRequest
+        required: true
+      tags:
+      - User
+      consumes:
+      - application/json
+  /user/logout:
+    post:
+      summary: User Logout
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: '<b>Deprecated</b>: This endpoint is deprecated for API Key-based authentication. The user logout service allows the user to log out of the application.<br>The service does not return a response body. The HTTP response code is 204 (Success with no content).<br>'
+      operationId: userLogout
+      responses:
+        401:
+          description: Unauthorized
+        204:
+          description: Logout successful
+        404:
+          description: Not Found
+      tags:
+      - User
+      consumes:
+      - application/json
+definitions:
+  UpdateUserRequest:
+    type: object
+    title: UpdateUserRequest
+    required:
+    - user
+    properties:
+      user:
+        $ref: '#/definitions/UpdateUserRegistration'
+  AccessTokens:
+    type: object
+    title: AccessTokens
+    properties:
+      appId:
+        description: The identifier of the application for which the access token is generated.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+        type: string
+      value:
+        description: Access token value used to invoke the widgets/apps.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+        type: string
+      url:
+        description: Base URL using which the application is accessed.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+        type: string
+  UserRequestPreferences:
+    type: object
+    title: UserRequestPreferences
+    properties:
+      dateFormat:
+        minLength: 1
+        description: The dateformat of the user.This attribute is just a place holder and has no impact on any other API services.
+        type: string
+        maxLength: 2147483647
+      timeZone:
+        minLength: 1
+        description: The timezone of the user. This attribute is just a place holder and has no impact on any other API services.
+        type: string
+        maxLength: 2147483647
+      currency:
+        description: The currency of the user. This currency will be respected while providing the response for derived API services.<br><b>Applicable Values</b><br>
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK
+      locale:
+        description: The locale of the user. This locale will be considered for localization features like providing the provider information in the supported locale or providing category names in the transaction related services.<br><b>Applicable Values</b><br>
+        type: string
+        enum:
+        - en_US
+        - en_AN
+        - en_GB
+        - en_AU
+        - en_BE
+        - zh_CN
+        - en_IN
+        - en_CA
+        - en_ES
+        - en_NZ
+        - en_IE
+        - en_IL
+        - en_FR
+        - en_AE
+        - en_FJ
+        - en_GU
+        - en_HK
+        - en_IT
+        - en_JP
+        - en_KH
+        - en_KP
+        - en_KR
+        - en_MY
+        - en_PG
+        - en_PH
+        - en_SB
+        - en_SG
+        - en_TH
+        - en_TO
+        - en_VN
+        - en_VU
+        - en_WS
+        - es_ES
+        - fr_CA
+        - fr_FR
+        - nl_AN
+        - en_CH
+        - en_ZA
+        - en_CN
+        - en_FI
+        - en_AT
+        - de_AT
+        - en_DE
+        - de_DE
+        - de_RU
+        - en_ID
+        - en_MX
+        - es_MX
+        - en_PT
+        - en_SE
+        - en_GLOBAL
+        - pt_BR
+        - en_DK
+        - en_BR
+        - en_BM
+        - en_CK
+        - en_CO
+        - en_JE
+        - en_BG
+        - en_BW
+        - en_MW
+        - en_KE
+        - en_SZ
+        - en_ZW
+        - en_NL
+        - nl_NL
+  UserDetail:
+    type: object
+    title: UserDetail
+    properties:
+      preferences:
+        description: Preferences of the user to be respected in the data provided through various API services.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        $ref: '#/definitions/UserResponsePreferences'
+      address:
+        description: The address of the user.<br><br><b>Endpoints</b>:<ul><li>GET user</li></ul>
+        readOnly: true
+        $ref: '#/definitions/UserAddress'
+      phoneNumber:
+        type: string
+      loginName:
+        description: The login name of the user used for authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        type: string
+      name:
+        description: First, middle and last names of the user.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        $ref: '#/definitions/Name'
+      id:
+        format: int64
+        description: The unique identifier of a consumer/user in Yodlee system for whom the API services would be accessed for.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        type: integer
+      roleType:
+        type: string
+        enum:
+        - INDIVIDUAL
+      email:
+        description: The email address of the user.<br><br><b>Endpoints</b>:<ul><li>GET user</li></ul>
+        readOnly: true
+        type: string
+      segmentName:
+        type: string
+  UpdateUserRegistration:
+    type: object
+    title: UpdateUserRegistration
+    properties:
+      configName:
+        description: The name of configuration created at the time onboarding or configuration creation.
+        type: string
+      preferences:
+        $ref: '#/definitions/UserRequestPreferences'
+      address:
+        $ref: '#/definitions/UserAddress'
+      phoneNumber:
+        type: string
+      loginName:
+        type: string
+      name:
+        $ref: '#/definitions/Name'
+      email:
+        type: string
+      segmentName:
+        type: string
+  UserRegistration:
+    type: object
+    title: UserRegistration
+    required:
+    - loginName
+    properties:
+      preferences:
+        $ref: '#/definitions/UserRequestPreferences'
+      address:
+        $ref: '#/definitions/UserAddress'
+      phoneNumber:
+        type: string
+      loginName:
+        minLength: 3
+        type: string
+        maxLength: 150
+      name:
+        $ref: '#/definitions/Name'
+      email:
+        type: string
+      segmentName:
+        type: string
+  UserAccessToken:
+    type: object
+    title: UserAccessToken
+    properties:
+      accessTokens:
+        type: array
+        items:
+          $ref: '#/definitions/AccessTokens'
+  User:
+    type: object
+    title: User
+    properties:
+      preferences:
+        description: Preferences of the user to be respected in the data provided through various API services.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        $ref: '#/definitions/UserResponsePreferences'
+      session:
+        description: Session token of the user using which other services are invoked in the system.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li></ul>
+        readOnly: true
+        $ref: '#/definitions/UserSession'
+      loginName:
+        description: The login name of the user used for authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        type: string
+      name:
+        description: First, middle and last names of the user.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        $ref: '#/definitions/Name'
+      id:
+        format: int64
+        description: The unique identifier of a consumer/user in Yodlee system for whom the API services would be accessed for.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+        readOnly: true
+        type: integer
+      roleType:
+        type: string
+        enum:
+        - INDIVIDUAL
+  UserResponsePreferences:
+    type: object
+    title: UserResponsePreferences
+    properties:
+      dateFormat:
+        minLength: 1
+        description: The dateformat of the user.This attribute is just a place holder and has no impact on any other API services.
+        type: string
+        maxLength: 2147483647
+      timeZone:
+        minLength: 1
+        description: The timezone of the user. This attribute is just a place holder and has no impact on any other API services.
+        type: string
+        maxLength: 2147483647
+      currency:
+        description: The currency of the user. This currency will be respected while providing the response for derived API services.<br><b>Applicable Values</b><br>
+        type: string
+        enum:
+        - USD
+        - AUD
+        - BRL
+        - CAD
+        - EUR
+        - GBP
+        - HKD
+        - IDR
+        - INR
+        - JPY
+        - NZD
+        - SGD
+        - ZAR
+        - CNY
+        - VND
+        - MYR
+        - CHF
+        - AED
+        - AFA
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AWG
+        - AZM
+        - BAM
+        - BBD
+        - BDT
+        - BGL
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CDF
+        - CLP
+        - COP
+        - CRC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EEK
+        - EGP
+        - ERN
+        - ETB
+        - FJD
+        - FKP
+        - GEL
+        - GGP
+        - GHC
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - ILS
+        - IMP
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGF
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MTL
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MZM
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - ROL
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SEK
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SPL
+        - SRG
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TMM
+        - TND
+        - TOP
+        - TRL
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEB
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - YUM
+        - ZMK
+        - ZWD
+        - ADP
+        - ATS
+        - BEF
+        - BUK
+        - CSD
+        - CSK
+        - DDM
+        - DEM
+        - ECS
+        - ESP
+        - FIM
+        - GRD
+        - GWP
+        - IEP
+        - ITL
+        - LUF
+        - MLF
+        - NLG
+        - PTE
+        - SUR
+        - TPE
+        - UAK
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XEU
+        - XFO
+        - XFU
+        - XGF
+        - XMK
+        - XRM
+        - XTS
+        - YDD
+        - YUD
+        - ZRN
+        - TJS
+        - RON
+        - BGN
+        - BTC
+        - XBT
+        - CNH
+        - RUB
+        - TRY
+        - GHS
+        - TMT
+        - ZMW
+        - VEF
+        - SSP
+        - ALK
+      locale:
+        description: The locale of the user. This locale will be considered for localization features like providing the provider information in the supported locale or providing category names in the transaction related services.<br><b>Applicable Values</b><br>
+        type: string
+        enum:
+        - en_US
+        - en_AN
+        - en_GB
+        - en_AU
+        - en_BE
+        - zh_CN
+        - en_IN
+        - en_CA
+        - en_ES
+        - en_NZ
+        - en_IE
+        - en_IL
+        - en_FR
+        - en_AE
+        - en_FJ
+        - en_GU
+        - en_HK
+        - en_IT
+        - en_JP
+        - en_KH
+        - en_KP
+        - en_KR
+        - en_MY
+        - en_PG
+        - en_PH
+        - en_SB
+        - en_SG
+        - en_TH
+        - en_TO
+        - en_VN
+        - en_VU
+        - en_WS
+        - es_ES
+        - fr_CA
+        - fr_FR
+        - nl_AN
+        - en_CH
+        - en_ZA
+        - en_CN
+        - en_FI
+        - en_AT
+        - de_AT
+        - en_DE
+        - de_DE
+        - de_RU
+        - en_ID
+        - en_MX
+        - es_MX
+        - en_PT
+        - en_SE
+        - en_GLOBAL
+        - pt_BR
+        - en_DK
+        - en_BR
+        - en_BM
+        - en_CK
+        - en_CO
+        - en_JE
+        - en_BG
+        - en_BW
+        - en_MW
+        - en_KE
+        - en_SZ
+        - en_ZW
+        - en_NL
+        - nl_NL
+  UserRequest:
+    type: object
+    title: UserRequest
+    required:
+    - user
+    properties:
+      user:
+        $ref: '#/definitions/UserRegistration'
+  UserDetailResponse:
+    type: object
+    title: UserDetailResponse
+    properties:
+      user:
+        readOnly: true
+        $ref: '#/definitions/UserDetail'
+  UserResponse:
+    type: object
+    title: UserResponse
+    properties:
+      user:
+        readOnly: true
+        $ref: '#/definitions/User'
+  Name:
+    type: object
+    title: Name
+    properties:
+      middle:
+        description: Middle name.
+        type: string
+      last:
+        description: Last name.
+        type: string
+      fullName:
+        description: Full name.
+        type: string
+      first:
+        description: First name.
+        type: string
+  UserSession:
+    type: object
+    title: UserSession
+    properties:
+      userSession:
+        description: Session provided for a valid user to access API services upon successful authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li></ul>
+        readOnly: true
+        type: string
+  UserAddress:
+    type: object
+    title: UserAddress
+    properties:
+      zip:
+        description: Zip.
+        type: string
+      country:
+        description: Country.
+        type: string
+      address3:
+        description: Address Line 3.
+        type: string
+      address2:
+        description: Address Line 2.
+        type: string
+      city:
+        description: City.
+        type: string
+      address1:
+        description: Address Line 1.
+        type: string
+      state:
+        description: State.
+        type: string
+  UserAccessTokensResponse:
+    type: object
+    title: UserAccessTokensResponse
+    properties:
+      user:
+        readOnly: true
+        $ref: '#/definitions/UserAccessToken'
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string

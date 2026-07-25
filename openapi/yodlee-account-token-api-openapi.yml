@@ -1,0 +1,130 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Account Token
+  description: 'Account verification customers looking to integrate with one of our payment partners can use the Account Token endpoints. These APIs allow creating a secure processor token for your user''s verified financial accounts. You can then share the processor token with our payment partners to enable them to securely request the user''s account details from Yodlee.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:</p><ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.<p></p>'
+paths:
+  /paymentProcessor/token:
+    post:
+      summary: Create Account Token
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The create account token service allows you to create a secure <code>processorToken</code> for a user's verified financial account. This <code>processorToken</code> can then be shared with one of our payment processor partners.
+      operationId: generatePaymentProcessorToken
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/PaymentProcessorTokenResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y007 : Authorization header missing<br>Y008 : Invalid token in authorization header<br>Y833 : Invalid values(s) for accountId<br>Y800 : Invalid value for processor<br>Y813 : accountId should be provided<br>Y813 : processor should be provided'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/PaymentProcessorTokenRequest'
+        in: body
+        name: tokenRequest
+        description: account information
+        required: true
+      tags:
+      - Account Token
+      consumes:
+      - application/json
+    delete:
+      summary: Delete Account Token
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The delete account token service allows you to revoke a previously generated <code>processorToken</code>. It is recommended to use this service when you want to disallow further access to the user's financial account, for instance when a user removes their account from your application.
+      operationId: revokePaymentProcessorToken
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y007 : Authorization header missing<br>Y008 : Invalid token in authorization header<br>Y016 : processorToken header missing'
+        401:
+          description: Unauthorized
+        204:
+          description: No Content
+        404:
+          description: Not Found
+      parameters:
+      - in: header
+        name: processorToken
+        description: The token that you want to delete.
+        type: string
+        required: true
+      tags:
+      - Account Token
+definitions:
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string
+  PaymentProcessorTokenRequest:
+    type: object
+    title: PaymentProcessorTokenRequest
+    required:
+    - accountId
+    - processor
+    properties:
+      accountId:
+        description: The unique identifier for the user's account.
+        type: array
+        items:
+          format: int64
+          type: integer
+      processor:
+        description: The payment processor with whom the customer is integrating.
+        type: string
+  AccountToken:
+    type: object
+    title: AccountToken
+    properties:
+      processorToken:
+        description: The unique token that the payment partner can use to make API request to the Yodlee system.
+        readOnly: true
+        type: string
+      accountId:
+        format: int64
+        description: The unique identifier for the user's account.
+        readOnly: true
+        type: integer
+  PaymentProcessorTokenResponse:
+    type: object
+    title: PaymentProcessorTokenResponse
+    properties:
+      token:
+        description: token
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/AccountToken'

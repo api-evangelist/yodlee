@@ -1,0 +1,168 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token User Documents API
+  version: 1.1.0
+basePath: /
+tags:
+- name: User Documents
+  description: User Documents API
+paths:
+  /documents/search:
+    post:
+      summary: Get User Documents
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The Get User Documents service will allow customers to search or retrieve metadata related to PDF documents uploaded by user through the FastLink 4 flow.
+      operationId: getuserdocuments
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/GetDocumentsResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for ids<br>Y800 : Invalid value for accountIds<br>Y800 : Invalid value for ids or accountIds<br>'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/GetDocumentsRequest'
+        in: body
+        name: getDocumentsRequest
+        description: getDocumentsRequest
+        required: false
+      tags:
+      - User Documents
+      consumes:
+      - application/json
+  /documents:
+    delete:
+      summary: Delete User Documents
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The Delete User Documents service allows the consumer to delete the PDF documents uploaded by user through FastLink 4 flow.<br>The deleted documents will not be returned in the Get User Documents API.<br>The HTTP response code is 204 (success without content).
+      operationId: deleteuserdocuments
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for documentId<br>Y904 : Internal exception<br>'
+        401:
+          description: Unauthorized
+        204:
+          description: OK
+        404:
+          description: Not Found
+      parameters:
+      - schema:
+          $ref: '#/definitions/DeleteDocumentsRequest'
+        in: body
+        name: deleteDocumentsRequest
+        description: deleteDocumentsRequest
+        required: true
+      tags:
+      - User Documents
+definitions:
+  DeleteDocumentsRequest:
+    type: object
+    title: DeleteDocumentsRequest
+    properties:
+      id:
+        description: List of document ids.
+        type: array
+        items:
+          format: int64
+          type: integer
+  SuccessAssociations:
+    type: object
+    title: SuccessAssociations
+    properties:
+      accountId:
+        format: int64
+        description: The account Ids associated with the document Id.
+        readOnly: true
+        type: integer
+  GetDocumentsRequest:
+    type: object
+    title: GetDocumentsRequest
+    properties:
+      accountId:
+        description: The unique identifier of an account. Retrieve documents for a given associated accountId.<br>Comma separated Account Ids.
+        type: array
+        items:
+          format: int64
+          type: integer
+      id:
+        description: List of document ids.
+        type: array
+        items:
+          format: int64
+          type: integer
+  GetDocumentsResponse:
+    type: object
+    title: GetDocumentsResponse
+    properties:
+      documents:
+        type: array
+        items:
+          $ref: '#/definitions/GetDocumentsList'
+  GetDocumentsList:
+    type: object
+    title: GetDocumentsList
+    properties:
+      associatedAccounts:
+        type: array
+        items:
+          $ref: '#/definitions/SuccessAssociations'
+      uploadId:
+        format: int64
+        type: integer
+      downloadURL:
+        description: The URL from where the document can be download.
+        readOnly: true
+        type: string
+      name:
+        description: The name of the file uploaded.
+        readOnly: true
+        type: string
+      id:
+        format: int64
+        description: The document's primary key and unique identifier.
+        readOnly: true
+        type: integer
+      urlExpiryTime:
+        description: The validity time of the document to be downloaded.
+        readOnly: true
+        type: string
+      status:
+        description: Indicates the status of the document download.
+        readOnly: true
+        type: string
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string

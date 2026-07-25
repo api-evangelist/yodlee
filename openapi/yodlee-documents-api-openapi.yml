@@ -1,0 +1,213 @@
+swagger: '2.0'
+info:
+  license:
+    name: Yodlee Developer License
+    url: https://developer.yodlee.com/terms/condition#_Services_1
+  contact:
+    email: developer@yodlee.com
+  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  termsOfService: https://developer.yodlee.com/terms/condition
+  title: Yodlee Core APIs Account Token Documents API
+  version: 1.1.0
+basePath: /
+tags:
+- name: Documents
+  description: Documents API
+paths:
+  /documents/{documentId}:
+    get:
+      summary: Download a Document
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get document details service allows consumers to download a document. The document is provided in base64.<br>This API is a premium service which requires subscription in advance to use.  Please contact Yodlee Client Services for more information. <br>
+      operationId: downloadDocument
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/DocumentDownloadResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for documentId'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: path
+        name: documentId
+        description: documentId
+        type: string
+        required: true
+      tags:
+      - Documents
+    delete:
+      summary: Delete Document
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The delete document service allows the consumer to delete a document. The deleted document will not be returned in the get documents API. The HTTP response code is 204 (success without content).<br>Documents can be deleted only if the document related dataset attributes are subscribed.<br>
+      operationId: deleteDocument
+      responses:
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for documentId<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>'
+        401:
+          description: Unauthorized
+        204:
+          description: OK
+        404:
+          description: Not Found
+      parameters:
+      - in: path
+        name: documentId
+        description: documentId
+        type: string
+        required: true
+      tags:
+      - Documents
+  /documents:
+    get:
+      summary: Get Documents
+      deprecated: false
+      produces:
+      - application/json;charset=UTF-8
+      description: The get documents service allows customers to search or retrieve metadata related to documents. <br>The API returns the document as per the input parameters passed. If no date range is provided then all downloaded documents will be retrieved. Details of deleted documents or documents associated to closed providerAccount will not be returned. <br>This API is a premium service which requires subscription in advance to use.  Please contact Yodlee Client Services for more information. <br>
+      operationId: getDocuments
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/DocumentResponse'
+          description: OK
+        400:
+          schema:
+            $ref: '#/definitions/YodleeError'
+          description: 'Y800 : Invalid value for accountId<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for toDate<br>Y800 : Invalid value for docType'
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+      parameters:
+      - in: query
+        allowEmptyValue: false
+        name: Keyword
+        description: The string used to search a document by its name.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: accountId
+        description: The unique identifier of an account. Retrieve documents for a given accountId.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: docType
+        description: 'Accepts only one of the following valid document types: STMT, TAX, and EBILL.'
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: fromDate
+        description: The date from which documents have to be retrieved.
+        type: string
+        required: false
+      - in: query
+        allowEmptyValue: false
+        name: toDate
+        description: The date to which documents have to be retrieved.
+        type: string
+        required: false
+      tags:
+      - Documents
+definitions:
+  Document:
+    type: object
+    title: Document
+    properties:
+      accountID:
+        format: int64
+        description: 'The unique identifier for the account. The account ID to which the document is linked.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: integer
+      lastUpdated:
+        description: 'Indicates the date and time the document was last updated.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+      formType:
+        description: 'Indicates the type of the tax form.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+      docType:
+        description: 'Indicates the type of the document.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+        enum:
+        - STMT
+        - TAX
+        - EBILL
+      name:
+        description: 'Indicates the name of the document.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+      id:
+        description: 'The document''s primary key and unique identifier.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+      source:
+        description: 'Indicates the source of the document download.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+      status:
+        description: 'Indicates the status of the document download.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+  DocumentResponse:
+    type: object
+    title: DocumentResponse
+    properties:
+      document:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/Document'
+  DocumentDownloadResponse:
+    type: object
+    title: DocumentDownloadResponse
+    properties:
+      document:
+        readOnly: true
+        type: array
+        items:
+          $ref: '#/definitions/DocumentDownload'
+  DocumentDownload:
+    type: object
+    title: DocumentDownload
+    properties:
+      docContent:
+        description: 'Contents of the document in Base64 format.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+      id:
+        description: 'The document''s primary key and unique identifier.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+        readOnly: true
+        type: string
+  YodleeError:
+    type: object
+    title: YodleeError
+    properties:
+      errorMessage:
+        description: The descriptive message that explains the error scenario.
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+        readOnly: true
+        type: string
+      referenceCode:
+        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+        readOnly: true
+        type: string
