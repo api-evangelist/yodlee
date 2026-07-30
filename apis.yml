@@ -6,7 +6,19 @@ description: Yodlee (Envestnet | Yodlee) is a financial data aggregation platfor
   Core APIs v1.1 enable secure account aggregation, transaction enrichment, risk analytics,
   consent management, and account verification for fintech applications.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/yodlee.png
 tags:
 - Financial Data
 - Data Aggregation
@@ -18,38 +30,12 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: yodlee:yodlee-core-api
-  name: Yodlee Core API
-  description: The Yodlee Core APIs v1.1 provide a flexible RESTful API for accessing
-    personal financial data. Key capabilities include account aggregation across banks
-    and brokerages, transaction history and enrichment, holdings and investment data,
-    consent and provider account management, documents, statements, data extracts,
-    risk analytics, and account verification. Supports 90% of top US, UK, Australia,
-    and India financial institutions.
-  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
-  baseURL: https://production.api.yodlee.com/ysl
-  tags:
-  - Financial Data
-  - Aggregation
-  - Transactions
-  - Accounts
-  - Banking
-  - Investments
-  properties:
-  - type: Documentation
-    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
-  - type: OpenAPI
-    url: https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml
-  - type: GettingStarted
-    url: https://developer.yodlee.com/docs/getting-started
-  - url: graphql/yodlee-graphql.md
-    type: GraphQL
 - aid: yodlee:yodlee-account-verification-api
   name: Yodlee Account Verification API
-  description: The Yodlee Account Verification API enables real-time verification
-    of bank account ownership and balance. Supports verification workflows via FastLink
-    4, holder profile retrieval, verified account status, and account classification
-    summaries.
+  description: >-
+    The Yodlee Account Verification API enables real-time verification of bank account ownership and balance.
+    Supports verification workflows via FastLink 4, holder profile retrieval, verified account status,
+    and account classification summaries.
   humanURL: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
   baseURL: https://production.api.yodlee.com/ysl
   tags:
@@ -62,10 +48,10 @@ apis:
     url: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
 - aid: yodlee:yodlee-fastlink
   name: Yodlee FastLink
-  description: FastLink 4 is Yodlee's white-label account aggregation widget that
-    enables users to securely link their financial accounts. Provides a customizable
-    embedded UI for account login, MFA, account selection, verification, and consent
-    management.
+  description: >-
+    FastLink 4 is Yodlee's white-label account aggregation widget that enables users to securely link
+    their financial accounts. Provides a customizable embedded UI for account login, MFA, account selection,
+    verification, and consent management.
   humanURL: https://developer.yodlee.com/
   tags:
   - Account Linking
@@ -74,6 +60,360 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.yodlee.com/
+- aid: yodlee:yodlee-account-token-api
+  name: Yodlee Account Token API
+  description: >-
+    Account verification customers looking to integrate with one of our payment partners can use the Account
+    Token endpoints. These APIs allow creating a secure processor token for your user's verified financial
+    accounts. You can then share the processor token with our payment partners to enable them to securely
+    request the user's account details from Yodlee.<br><br>You will have to set the header before making
+    the API call. The following headers apply to all the APIs:</p><ul><li>Authorization: This header holds
+    the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers,
+    they are mentioned explicitly in the respective API's description.<p></p>
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Account Token
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-account-token-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-accounts-api
+  name: Yodlee Accounts API
+  description: Accounts API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-auth-api
+  name: Yodlee Auth API
+  description: Auth API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-auth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-cobrand-api
+  name: Yodlee Cobrand API
+  description: Cobrand API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Cobrand
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-cobrand-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-configs-api
+  name: Yodlee Configs API
+  description: Configs API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Configs
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-configs-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-consents-api
+  name: Yodlee Consents API
+  description: Consents API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Consents
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-consents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-dataextracts-api
+  name: Yodlee DataExtracts API
+  description: DataExtracts API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - DataExtracts
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-dataextracts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-derived-api
+  name: Yodlee Derived API
+  description: Derived API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Derived
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-derived-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-documents-api
+  name: Yodlee Documents API
+  description: Documents API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-documents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-holdings-api
+  name: Yodlee Holdings API
+  description: Holdings API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Holdings
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-holdings-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-institutions-api
+  name: Yodlee Institutions API
+  description: Institutions API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Institutions
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-institutions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-payment-processor-api
+  name: Yodlee Payment Processor API
+  description: >-
+    Yodlee's payment processor partners can use the Payment Processor endpoints to access verified account
+    details using the <code>processorToken</code> created and shared by mutual customers. These APIs are
+    only for payment processor partners and not for developers using the Yodlee services to integrate
+    with payment partners. Refer <a href="/products/yodlee/account-token/docs#customers"> here </a> for
+    a guide on working with payment processor partners.<br>As a processor payment partner, you can retrieve
+    the following account information using the <code>processorToken</code>:<ul><li>Account details include
+    account status, account name, full account number, bank transfer code, balance, etc.</li><li>Account
+    holder details include name, email, phone number, address, etc.</li><li>Account balance details.</li></ul><br>You
+    will have to set the header before making the API call. The following headers apply to all the APIs:</p><ul><li>Authorization:
+    This header holds the access token</li> </ul><b>Note</b>: If there are any API-specific headers, they
+    are mentioned explicitly in the respective API's description.<p></p>
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Payment Processor
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-payment-processor-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-provideraccounts-api
+  name: Yodlee ProviderAccounts API
+  description: Provider Accounts API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - ProviderAccounts
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-provideraccounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-providers-api
+  name: Yodlee Providers API
+  description: Providers API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-providers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-risk-analytics-api
+  name: Yodlee Risk Analytics API
+  description: Risk Analytics API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Risk Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-risk-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-statements-api
+  name: Yodlee Statements API
+  description: Statements API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-statements-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-transactions-api
+  name: Yodlee Transactions API
+  description: Transactions API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-user-api
+  name: Yodlee User API
+  description: Users API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-user-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-user-documents-api
+  name: Yodlee User Documents API
+  description: User Documents API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - User Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-user-documents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-verification-api
+  name: Yodlee Verification API
+  description: Verification API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-verification-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-verify-account-api
+  name: Yodlee Verify Account API
+  description: Verify Account API
+  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Verify Account
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-verify-account-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/yodlee-agentic-access.yml
