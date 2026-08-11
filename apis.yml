@@ -415,6 +415,12 @@ apis:
   - type: GraphQL
     url: graphql/yodlee-graphql.md
 common:
+- type: Blog
+  url: https://www.yodlee.com/company/blog
+- type: PrivacyPolicy
+  url: https://www.yodlee.com/legal/privacy-notice
+- type: SignUp
+  url: https://developer.yodlee.com/user/register
 - type: AgenticAccess
   url: agentic-access/yodlee-agentic-access.yml
 - type: DomainSecurity
