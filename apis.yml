@@ -6,6 +6,18 @@ description: Yodlee (Envestnet | Yodlee) is a financial data aggregation platfor
   Core APIs v1.1 enable secure account aggregation, transaction enrichment, risk analytics,
   consent management, and account verification for fintech applications.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-11'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: unknown
@@ -419,7 +431,7 @@ common:
   url: https://www.yodlee.com/company/blog
 - type: PrivacyPolicy
   url: https://www.yodlee.com/legal/privacy-notice
-- type: SignUp
+- type: Signup
   url: https://developer.yodlee.com/user/register
 - type: AgenticAccess
   url: agentic-access/yodlee-agentic-access.yml
