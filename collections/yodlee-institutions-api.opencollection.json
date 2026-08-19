@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Institutions API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Institutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get institutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/institutions",
+            "params": [
+              {
+                "name": "dataset$filter",
+                "value": "",
+                "type": "query",
+                "description": "Expression to filter the providers by dataset(s) or dataset attribute(s). The default value will be the dataset or dataset attributes configured as default for the customer."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name in minimum 1 character or routing number."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Search priority"
+              },
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "query",
+                "description": "providerId"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0) - This is not applicable along with 'name' parameter."
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500) - This is not applicable along with 'name' parameter."
+              }
+            ]
+          },
+          "docs": "Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers. The get institutions service helps in identifying credential and related OB sites in a financial institution. The service searches for an institution regardless of the authentication types associated with the providers. Using the get institutions service, retrieve institutions enabled for the customer, search an institution by its name or routing number, and retrieve the popular institutions for a regi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

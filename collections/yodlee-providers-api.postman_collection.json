@@ -1,0 +1,889 @@
+{
+  "item": [
+    {
+      "id": "2ac49892-eb08-4cc6-90d0-757c79050f75",
+      "name": "Providers",
+      "description": {
+        "content": "Providers API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f581220a-aa69-47cc-a05b-8629b96990cb",
+          "name": "Get Providers",
+          "request": {
+            "name": "Get Providers",
+            "description": {
+              "content": "The get provider service is used to get all the providers that are enabled, search a provider service by name or routing number and get popular sites of a region. <br>Searching for a provider using a routing number is applicable only to the USA and Canada regions.<br>The valid values for priority are: <br>   1. cobrand: Returns providers enabled for the cobrand (Default priority)<br>   2. popular: Returns providers popular among users of the customer<br><br>Only the datasets, attributes, and containers that are enabled for the customer will be returned in the response.<br>Input for the dataset$filter should adhere to the following expression:<br><dataset.name>[<attribute.name>.container[<container> OR <container>] OR <attribute.name>.container[<container>]] <br>OR <dataset.name>[<attribute.name> OR <attribute.name>]<br><b>dataset$filter value examples:</b><br>ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank OR investment OR creditCard]]<br>ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]<br>BASIC_AGG_DATA[ACCOUNT_DETAILS.container[bank OR investment] OR HOLDINGS.container[bank]] OR ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]<br>BASIC_AGG_DATA<br>BASIC_AGG_DATA OR ACCT_PROFILE<br>BASIC_AGG_DATA [ ACCOUNT_DETAILS OR HOLDINGS ]<br>BASIC_AGG_DATA [ ACCOUNT_DETAILS] OR DOCUMENT <br>BASIC_AGG_DATA [ BASIC_ACCOUNT_INFO OR ACCOUNT_DETAILS ] <br><br>The fullAcountNumberFields is specified to filter the providers that have paymentAccountNumber or unmaskedAccountNumber support in the FULL_ACCT_NUMBER dataset attribute.<br><b>Examples for usage of fullAccountNumberFields </b><br>dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp; fullAccountNumberFields=paymentAccountNumber<br>dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp; fullAccountNumberFields=unmaskedAccountNumber<br>dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp; fullAccountNumberFields=unmaskedAccountNumber,paymentAccountNumber<br><br>The skip and top parameters are used for pagination. In the skip and top parameters, pass the number of records to be skipped and retrieved, respectively.<br>The response header provides the links to retrieve the next and previous set of transactions.<br><br><b>Note:</b> <ol><li>In a product flow involving user interaction, Yodlee recommends invoking this service with filters.<li>Without filters, the service may perform slowly as it takes a few minutes to return data in the response.<li>The AuthParameter appears in the response only in case of token-based aggregation sites.<li>The pagination feature only applies when the priority parameter is set as cobrand. If no values are provided in the skip and top parameters, the API will only return the first 500 records.<li>This service supports the localization feature and accepts locale as a header parameter.<li>The capability has been deprecated in query parameter and response.</li></ol>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "capability",
+                  "value": "<string>",
+                  "description": "CHALLENGE_DEPOSIT_VERIFICATION - capability search is deprecated"
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset$filter",
+                  "value": "<string>",
+                  "description": "Expression to filter the providers by dataset(s) or dataset attribute(s). The default value will be the dataset or dataset attributes configured as default for the customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "fullAccountNumberFields",
+                  "value": "<string>",
+                  "description": "Specify to filter the providers with values paymentAccountNumber,unmaskedAccountNumber."
+                },
+                {
+                  "disabled": false,
+                  "key": "institutionId",
+                  "value": "<long>",
+                  "description": "Institution Id for Single site selection"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name in minimum 1 character or routing number."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<string>",
+                  "description": "Search priority"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerId",
+                  "value": "<string>",
+                  "description": "Max 5 Comma seperated Provider Ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "skip (Min 0) - This is not applicable along with 'name' parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<integer>",
+                  "description": "top (Max 500) - This is not applicable along with 'name' parameter."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8fc36896-40f2-45f4-af3e-1e67aefd89b8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "institutionId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"provider\": [\n    {\n      \"languageISOCode\": \"string\",\n      \"forgetPasswordUrl\": \"string\",\n      \"PRIORITY\": \"SUGGESTED\",\n      \"associatedProviderIds\": [\n        3183,\n        3147\n      ],\n      \"loginHelp\": \"string\",\n      \"isTanSupported\": true,\n      \"capability\": [\n        {\n          \"container\": [\n            \"bank\",\n            \"realEstate\"\n          ],\n          \"name\": \"string\"\n        },\n        {\n          \"container\": [\n            \"bill\",\n            \"realEstate\"\n          ],\n          \"name\": \"string\"\n        }\n      ],\n      \"isConsentRequired\": false,\n      \"loginUrl\": \"string\",\n      \"isAutoRefreshEnabled\": true,\n      \"logo\": \"string\",\n      \"authTypetestni\": \"CREDENTIALS\",\n      \"betaContainers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": 7752,\n      \"authParameter\": [\n        \"authorizationCode\",\n        \"authorizationCode\"\n      ],\n      \"authType\": \"OAUTH\",\n      \"favicon\": \"string\",\n      \"accountType\": [\n        \"BROKERAGE_CASH\",\n        \"CURRENT\"\n      ],\n      \"countryISOCode\": \"string\",\n      \"isAddedByUser\": \"string\",\n      \"primaryLanguageISOCode\": \"string\",\n      \"help\": \"string\",\n      \"baseUrl\": \"string\",\n      \"name\": \"string\",\n      \"lastModified\": \"string\",\n      \"dataset\": [\n        {\n          \"name\": \"DOCUMENT\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"DOCUMENT\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"uptimeMetrics\": {\n        \"thresholdPercentage\": \"string\",\n        \"status\": \"string\"\n      },\n      \"status\": \"Unsupported\"\n    },\n    {\n      \"languageISOCode\": \"string\",\n      \"forgetPasswordUrl\": \"string\",\n      \"PRIORITY\": \"POPULAR\",\n      \"associatedProviderIds\": [\n        5229,\n        5993\n      ],\n      \"loginHelp\": \"string\",\n      \"isTanSupported\": true,\n      \"capability\": [\n        {\n          \"container\": [\n            \"otherAssets\",\n            \"otherAssets\"\n          ],\n          \"name\": \"string\"\n        },\n        {\n          \"container\": [\n            \"loan\",\n            \"reward\"\n          ],\n          \"name\": \"string\"\n        }\n      ],\n      \"isConsentRequired\": false,\n      \"loginUrl\": \"string\",\n      \"isAutoRefreshEnabled\": true,\n      \"logo\": \"string\",\n      \"authTypetestni\": \"MFA_CREDENTIALS\",\n      \"betaContainers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": 6818,\n      \"authParameter\": [\n        \"authResponse\",\n        \"state\"\n      ],\n      \"authType\": \"OAUTH\",\n      \"favicon\": \"string\",\n      \"accountType\": [\n        \"CURRENT\",\n        \"BROKERAGE_CASH\"\n      ],\n      \"countryISOCode\": \"string\",\n      \"isAddedByUser\": \"string\",\n      \"primaryLanguageISOCode\": \"string\",\n      \"help\": \"string\",\n      \"baseUrl\": \"string\",\n      \"name\": \"string\",\n      \"lastModified\": \"string\",\n      \"dataset\": [\n        {\n          \"name\": \"DOCUMENT\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"ACCT_PROFILE\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"uptimeMetrics\": {\n        \"thresholdPercentage\": \"string\",\n        \"status\": \"string\"\n      },\n      \"status\": \"Unsupported\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d547dacb-e667-4199-ad14-fee6135d3751",
+              "name": "Y800 : Invalid value for priority<br>Y800 : Invalid value for providerName<br>Y801 : Invalid length for a site search. The search string must have atleast 1 character<br>Y800 : Invalid value for skip<br>Y804 : Permitted values of top between 1 - 500<br>Y821 : Dataset not supported<br>Y820 : The additionalDataSet is not supported for Get provider API",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "institutionId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd2ecbab-84d1-43c7-b827-2b9b0920b366",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "institutionId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6efb2002-14dc-43c9-b303-88a324c8abfc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "institutionId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4383b2ac-c6cf-4b8c-84ab-8deb92254571",
+          "name": "Get Provider Details",
+          "request": {
+            "name": "Get Provider Details",
+            "description": {
+              "content": "The get provider detail service is used to get detailed information including the login form for a provider.<br>The response is a provider object that includes information such as name of the provider, <br>provider's base URL, a list of containers supported by the provider, the login form details of the provider, etc.<br>Only enabled datasets, attributes and containers gets returned in the response.<br><br><b>Note:</b><li>This service supports the localization feature and accepts locale as a header parameter.<li>The capability has been deprecated in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                ":providerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "providerId",
+                  "description": "(Required) providerId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "048ba11e-319d-438c-afc6-6b0634f7dd35",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerId",
+                      "description": "(Required) providerId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"provider\": [\n    {\n      \"languageISOCode\": \"string\",\n      \"PRIORITY\": \"SEARCH\",\n      \"associatedProviderIds\": [\n        8779,\n        5542\n      ],\n      \"isTanSupported\": true,\n      \"capability\": [\n        {\n          \"container\": [\n            \"reward\",\n            \"creditCard\"\n          ],\n          \"name\": \"string\"\n        },\n        {\n          \"container\": [\n            \"investment\",\n            \"creditCard\"\n          ],\n          \"name\": \"string\"\n        }\n      ],\n      \"isConsentRequired\": true,\n      \"loginUrl\": \"string\",\n      \"isAutoRefreshEnabled\": false,\n      \"logo\": \"string\",\n      \"authTypetestni\": \"OAUTH\",\n      \"betaContainers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": 3353,\n      \"authParameter\": [\n        \"authResponse\",\n        \"state\"\n      ],\n      \"authType\": \"CREDENTIALS\",\n      \"favicon\": \"string\",\n      \"accountType\": [\n        \"BROKERAGE_CASH\",\n        \"BROKERAGE_CASH\"\n      ],\n      \"countryISOCode\": \"string\",\n      \"isAddedByUser\": \"string\",\n      \"primaryLanguageISOCode\": \"string\",\n      \"help\": \"string\",\n      \"baseUrl\": \"string\",\n      \"loginForm\": [\n        {\n          \"mfaInfoTitle\": \"string\",\n          \"help\": \"string\",\n          \"forgetPasswordURL\": \"string\",\n          \"formType\": \"login\",\n          \"mfaInfoText\": \"string\",\n          \"loginHelp\": \"string\",\n          \"mfaTimeout\": 3179,\n          \"id\": 6831,\n          \"row\": [\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"mfaInfoTitle\": \"string\",\n          \"help\": \"string\",\n          \"forgetPasswordURL\": \"string\",\n          \"formType\": \"image\",\n          \"mfaInfoText\": \"string\",\n          \"loginHelp\": \"string\",\n          \"mfaTimeout\": 9651,\n          \"id\": 8480,\n          \"row\": [\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"name\": \"string\",\n      \"lastModified\": \"string\",\n      \"dataset\": [\n        {\n          \"name\": \"DOCUMENT\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"ACCT_PROFILE\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"uptimeMetrics\": {\n        \"thresholdPercentage\": \"string\",\n        \"status\": \"string\"\n      },\n      \"status\": \"Supported\"\n    },\n    {\n      \"languageISOCode\": \"string\",\n      \"PRIORITY\": \"ALL\",\n      \"associatedProviderIds\": [\n        3094,\n        9191\n      ],\n      \"isTanSupported\": false,\n      \"capability\": [\n        {\n          \"container\": [\n            \"loan\",\n            \"reward\"\n          ],\n          \"name\": \"string\"\n        },\n        {\n          \"container\": [\n            \"insurance\",\n            \"bank\"\n          ],\n          \"name\": \"string\"\n        }\n      ],\n      \"isConsentRequired\": false,\n      \"loginUrl\": \"string\",\n      \"isAutoRefreshEnabled\": true,\n      \"logo\": \"string\",\n      \"authTypetestni\": \"CREDENTIALS\",\n      \"betaContainers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": 7383,\n      \"authParameter\": [\n        \"authResponse\",\n        \"authResponse\"\n      ],\n      \"authType\": \"OAUTH\",\n      \"favicon\": \"string\",\n      \"accountType\": [\n        \"CURRENT\",\n        \"CURRENT\"\n      ],\n      \"countryISOCode\": \"string\",\n      \"isAddedByUser\": \"string\",\n      \"primaryLanguageISOCode\": \"string\",\n      \"help\": \"string\",\n      \"baseUrl\": \"string\",\n      \"loginForm\": [\n        {\n          \"mfaInfoTitle\": \"string\",\n          \"help\": \"string\",\n          \"forgetPasswordURL\": \"string\",\n          \"formType\": \"login\",\n          \"mfaInfoText\": \"string\",\n          \"loginHelp\": \"string\",\n          \"mfaTimeout\": 7068,\n          \"id\": 9208,\n          \"row\": [\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"mfaInfoTitle\": \"string\",\n          \"help\": \"string\",\n          \"forgetPasswordURL\": \"string\",\n          \"formType\": \"image\",\n          \"mfaInfoText\": \"string\",\n          \"loginHelp\": \"string\",\n          \"mfaTimeout\": 7861,\n          \"id\": 9474,\n          \"row\": [\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fieldRowChoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"form\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"name\": \"string\",\n      \"lastModified\": \"string\",\n      \"dataset\": [\n        {\n          \"name\": \"DOCUMENT\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"DOCUMENT\",\n          \"attribute\": [\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"container\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fromFinYear\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"containerAttributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toDate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"uptimeMetrics\": {\n        \"thresholdPercentage\": \"string\",\n        \"status\": \"string\"\n      },\n      \"status\": \"Supported\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30638f10-5da5-49e2-b592-6d9ea6543410",
+              "name": "Y800 : Invalid value for providerId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerId",
+                      "description": "(Required) providerId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ff81739-dfb8-4b8f-879c-5761f3e67cec",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerId",
+                      "description": "(Required) providerId"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9d154b8-b3b3-4d8f-94d1-7be3f99d3bb3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    ":providerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerId",
+                      "description": "(Required) providerId"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a0c1344-152a-4eba-b7c3-870f4f6733bf",
+          "name": "Get Providers Count",
+          "request": {
+            "name": "Get Providers Count",
+            "description": {
+              "content": "The count service provides the total number of providers that get returned in the GET /providers depending on the input parameters passed.<br>If you are implementing pagination for providers, call this endpoint before calling GET /providers to know the number of providers that are returned for the input parameters passed.<br>The functionality of the input parameters remains the same as that of the GET /providers endpoint<br><br><b>Note:</b> <li>The capability has been deprecated in the query parameter.</li>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "capability",
+                  "value": "<string>",
+                  "description": "CHALLENGE_DEPOSIT_VERIFICATION - capability search is deprecated"
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset$filter",
+                  "value": "<string>",
+                  "description": "Expression to filter the providers by dataset(s) or dataset attribute(s). The default value will be the dataset or dataset attributes configured as default for the customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "fullAccountNumberFields",
+                  "value": "<string>",
+                  "description": "Specify to filter the providers with values paymentAccountNumber,unmaskedAccountNumber."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name in minimum 1 character or routing number."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<string>",
+                  "description": "Search priority"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a9cf295-488c-4213-82c2-56e78d5ad03a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"provider\": {\n    \"TOTAL\": {\n      \"count\": 6301\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4f9234c-2039-4e69-9ed6-eb4ee6dda2b8",
+              "name": "Y800 : Invalid value for priority<br>Y800 : Invalid value for providerName<br>Y801 : Invalid length for a site search. The search string must have at least 1 character<br>Y800 : Invalid value for skip<br>Y804 : Permitted values of top between 1 - 500<br>Y821 : Dataset not supported<br>Y820 : The additionalDataSet is not supported for Get provider API",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b89c9078-fe34-40fc-96a8-5700e8d4e990",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ee04fd8-6a9e-41fa-a73e-0fead9fa873f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataset$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullAccountNumberFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5d567316-bb8d-4129-a871-31ffd38d37ed",
+    "name": "Yodlee Core APIs Account Token Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

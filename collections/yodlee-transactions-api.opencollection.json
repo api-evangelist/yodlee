@@ -1,0 +1,422 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Transactions API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds"
+              },
+              {
+                "name": "baseType",
+                "value": "",
+                "type": "query",
+                "description": "DEBIT/CREDIT"
+              },
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated categoryIds"
+              },
+              {
+                "name": "categoryType",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "detailCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "highLevelCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated highLevelCategoryIds"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Transaction search text"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500)"
+              },
+              {
+                "name": "transactionSourceId",
+                "value": "",
+                "type": "query",
+                "description": "A unique ID that the provider site has assigned to the transaction"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Type(SELL,SWEEP, etc.) for bank/creditCard/investment"
+              }
+            ]
+          },
+          "docs": "The Transaction service is used to get a list of transactions for a user.<br>By default, this service returns the last 30 days of transactions from today's date when fromDate and toDate are not passed.<br>When fromDate and toDate are passed, the API will only return up to 2 years of transaction history. If the difference between fromDate and toDate is more than 2 years, API will return only last 2 years from the toDate.<br>The keyword parameter performs a contains search on the original, consume"
+        },
+        {
+          "info": {
+            "name": "Update Transaction for Transaction Source ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions"
+          },
+          "docs": "Update the category, consumer description, memo, isPhysical, merchantType, and detailCategory for a transaction by filtering it using the Transaction Source ID.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Run Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transactions/categories/rules/:ruleId",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique id of the categorization rule"
+              }
+            ]
+          },
+          "docs": "The run transaction categorization rule service is used to run a rule on transactions, to categorize the transactions.<br>The HTTP response code is 204 (Success with no content).<br>"
+        },
+        {
+          "info": {
+            "name": "Update Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions/categories/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "ruleId"
+              }
+            ]
+          },
+          "docs": "The update transaction categorization rule service is used to update a categorization rule for both system-defined category as well as user-defined category.<br>ruleParam JSON input should be as explained in the create transaction categorization rule service.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Delete Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/transactions/categories/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "ruleId"
+              }
+            ]
+          },
+          "docs": "The delete transaction categorization rule service is used to delete the given user-defined transaction categorization rule for both system-defined category as well as user-defined category.<br>This will delete all the corresponding rule clauses associated with the rule.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Transactions Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/count",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds\t"
+              },
+              {
+                "name": "baseType",
+                "value": "",
+                "type": "query",
+                "description": "DEBIT/CREDIT"
+              },
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated categoryIds"
+              },
+              {
+                "name": "categoryType",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan"
+              },
+              {
+                "name": "detailCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "highLevelCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated highLevelCategoryIds"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Transaction search text\t"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Transaction end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Type(SELL,SWEEP, etc.)"
+              }
+            ]
+          },
+          "docs": "The count service provides the total number of transactions for a specific user depending on the input parameters passed.<br>If you are implementing pagination for transactions, call this endpoint before calling GET /transactions to know the number of transactions that are returned for the input parameters passed.<br>The functionality of the input parameters remains the same as that of the GET /transactions endpoint.<br>If the difference between fromDate and toDate is more than 2 years, API will"
+        },
+        {
+          "info": {
+            "name": "Get Transaction Categorization Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/categories/txnRules"
+          },
+          "docs": "The get transaction categorization rule service is used to get all the categorization rules.<br>"
+        },
+        {
+          "info": {
+            "name": "Delete Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/transactions/categories/:categoryId",
+            "params": [
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "path",
+                "description": "categoryId"
+              }
+            ]
+          },
+          "docs": "The delete transaction categories service is used to delete the given user-defined category.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Transaction Category List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/categories"
+          },
+          "docs": "The categories service returns the list of available transaction categories.<br>High level category is returned in the response only if it is opted by the customer.<br>When invoked by passing the cobrand session or admin access token, this service returns the supported transaction categories at the cobrand level. <br>When invoked by passing the cobrand session and the user session or user access token, this service returns the transaction categories <br>along with user-defined categories.<br>Dou"
+        },
+        {
+          "info": {
+            "name": "Create Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transactions/categories"
+          },
+          "docs": "The create transaction categories service is used to create user-defined categories for a system-defined category.<br>The parentCategoryId is the system-defined category id.This can be retrieved using get transaction categories service.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 201 (Created successfully).<br>"
+        },
+        {
+          "info": {
+            "name": "Update Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions/categories"
+          },
+          "docs": "The update transaction categories service is used to update the transaction category name<br>for a high level category, a system-defined category and a user-defined category.<br>The renamed category can be set back to the original name by passing an empty string for categoryName.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 204 (Success without content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Transaction Categorization Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/categories/rules"
+          },
+          "docs": "The get transaction categorization rule service is used to get all the categorization rules.<br>"
+        },
+        {
+          "info": {
+            "name": "Create or Run Transaction Categorization Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/transactions/categories/rules",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "To run rules, pass action=run. Only value run is supported"
+              },
+              {
+                "name": "ruleParam",
+                "value": "",
+                "type": "query",
+                "description": "rules(JSON format) to categorize the transactions"
+              }
+            ]
+          },
+          "docs": "The Create or Run Transaction Categorization Rule endpoint is used to: <br>Create transaction categorization rules for both system and user-defined categories.<br>Run all the transaction categorization rules to categorize transactions by calling the endpoint with action=run as the query parameter. <br><br>The input body parameters to create transaction categorization rules follow:<br>     categoryId - This field is mandatory and numeric<br>     priority - This field is optional and numeric. Prio"
+        },
+        {
+          "info": {
+            "name": "Get Transactions using Transaction ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/transactions/:transactionId",
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "An unique identifier for the transaction. The combination of the id and account container are unique in the system."
+              }
+            ]
+          },
+          "docs": "The Transaction service is used to get a list of transactions for a user using Transaction ID.<br>"
+        },
+        {
+          "info": {
+            "name": "Update Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/transactions/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "transactionId"
+              }
+            ]
+          },
+          "docs": "The update transaction service is used to update the category,consumer description, memo, isPhysical, merchantType, detailCategory for a transaction.<br>The HTTP response code is 204 (Success without content).<br>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token User API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Saml Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user/samlLogin",
+            "params": [
+              {
+                "name": "issuer",
+                "value": "",
+                "type": "query",
+                "description": "issuer"
+              },
+              {
+                "name": "samlResponse",
+                "value": "",
+                "type": "query",
+                "description": "samlResponse"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "source"
+              }
+            ]
+          },
+          "docs": "The SAML login service is used to authenticate system users with a SAML response.<br>A new user will be created with the input provided if that user isn't already in the system.<br>For existing users, the system will make updates based on changes or new information.<br>When authentication is successful, a user session token is returned.<br><br><b>Note:</b> <li>The content type has to be passed as application/x-www-form-urlencoded. <li>issuer, source and samlResponse should be passed as body para"
+        },
+        {
+          "info": {
+            "name": "Get Access Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user/accessTokens",
+            "params": [
+              {
+                "name": "appIds",
+                "value": "",
+                "type": "query",
+                "description": "appIds"
+              }
+            ]
+          },
+          "docs": "The Get Access Tokens service is used to retrieve the access tokens for the application id(s) provided.<br>URL in the response can be used to launch the application for which token is requested.<br><br><b>Note:</b> <li>This endpoint is deprecated for customers using the API Key-based authentication and is applicable only to customers who use the SAML-based authentication.<br>"
+        },
+        {
+          "info": {
+            "name": "Get User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user"
+          },
+          "docs": "The get user details service is used to get the user profile information and the application preferences set at the time of user registration.<br>"
+        },
+        {
+          "info": {
+            "name": "Update User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/user"
+          },
+          "docs": "The update user details service is used to update user details like name, address, currency preference, etc.<br>This service can also be used to change the business unit of the user for FL4 customers.<br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>The HTTP response code is 204 (Success without content). <br><br> <b>Login Name Change Feature:</b> loginName can be passed to update the "
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/user/unregister"
+          },
+          "docs": "The delete user service is used to delete or unregister a user from Yodlee. <br>Once deleted, the information related to the users cannot be retrieved. <br>The HTTP response code is 204 (Success without content)<br>"
+        },
+        {
+          "info": {
+            "name": "Register User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user/register"
+          },
+          "docs": "The register user service is used to register a user in Yodlee.<br>The loginName cannot include spaces and must be between 3 and 150 characters.<br>locale passed must be one of the supported locales for the customer. <br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>userParam is accepted as a body parameter. <br><br><b>Note:</b> <li>The content type has to be passed as application/json"
+        },
+        {
+          "info": {
+            "name": "User Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user/logout"
+          },
+          "docs": "<b>Deprecated</b>: This endpoint is deprecated for API Key-based authentication. The user logout service allows the user to log out of the application.<br>The service does not return a response body. The HTTP response code is 204 (Success with no content).<br>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

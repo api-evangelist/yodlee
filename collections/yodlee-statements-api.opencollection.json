@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Statements API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/statements",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "creditCard/loan/insurance"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date for statement retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "isLatest",
+                "value": "",
+                "type": "query",
+                "description": "isLatest (true/false)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "ACTIVE,TO_BE_CLOSED,CLOSED"
+              }
+            ]
+          },
+          "docs": "The statements service is used to get the list of statement related information. <br>By default, all the latest statements of active and to be closed accounts are retrieved for the user. <br>Certain sites do not have both a statement date and a due date. When a fromDate is passed as an input, all the statements that have the due date on or after the passed date are retrieved. <br>For sites that do not have the due date, statements that have the statement date on or after the passed date are retr"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

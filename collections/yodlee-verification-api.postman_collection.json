@@ -1,0 +1,1360 @@
+{
+  "item": [
+    {
+      "id": "b6aba870-c273-4fb4-9aa7-d5c64aac19ae",
+      "name": "Verification",
+      "description": {
+        "content": "Verification API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef1c33df-5462-4cd8-a08c-e4d5b0b039c1",
+          "name": "Get Verified Accounts",
+          "request": {
+            "name": "Get Verified Accounts",
+            "description": {
+              "content": "The Verified Accounts API v1.1 provides information about the bank and investment accounts that the user  has selected for verification, during the Account Verification flow on FastLink 4. By default, the API only returns information of the accounts that were selected and have been successfully verified. <br><br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verification",
+                "verifiedAccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "Comma separated accountIds."
+                },
+                {
+                  "disabled": false,
+                  "key": "isSelected",
+                  "value": "<string>",
+                  "description": "Comma separated isSelected. Allowed values are true, false. <br>"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountId",
+                  "value": "<string>",
+                  "description": "(Required) providerAccountId."
+                },
+                {
+                  "disabled": false,
+                  "key": "verificationStatus",
+                  "value": "<string>",
+                  "description": "Comma separated verificationStatus. Allowed values are SUCCESS, FAILED <br><b>Note:</b> If no value is passed, the implicit default value is SUCCESS."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "957e383c-8ba2-4680-850a-8a305455fa28",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "verifiedAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isSelected",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"requestDate\": \"string\",\n  \"state\": \"FAILED\",\n  \"verifiedAccount\": [\n    {\n      \"accountName\": \"string\",\n      \"verificationStatus\": \"FAILED\",\n      \"accountType\": \"string\",\n      \"currentBalance\": {\n        \"amount\": 4453.406052459752,\n        \"convertedAmount\": 941.5027761558259,\n        \"currency\": \"NZD\",\n        \"convertedCurrency\": \"ISK\"\n      },\n      \"displayedName\": \"string\",\n      \"holder\": [\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"BUSINESS\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"BENEFICIARY\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"accountNumber\": \"string\",\n      \"classification\": \"PERSONAL\",\n      \"availableBalance\": {\n        \"amount\": 6803.194856835339,\n        \"convertedAmount\": 7673.114712022969,\n        \"currency\": \"MGF\",\n        \"convertedCurrency\": \"TWD\"\n      },\n      \"fullAccountNumberList\": {\n        \"paymentAccountNumber\": \"string\",\n        \"tokenizedAccountNumber\": \"string\",\n        \"unmaskedAccountNumber\": \"string\"\n      },\n      \"accountId\": 1007,\n      \"accountAgeClassification\": \"RECENT\",\n      \"balance\": {\n        \"amount\": 1553.7509100070579,\n        \"convertedAmount\": 1460.2322370934262,\n        \"currency\": \"KYD\",\n        \"convertedCurrency\": \"ITL\"\n      },\n      \"providerId\": \"string\",\n      \"providerAccountId\": 1965,\n      \"CONTAINER\": \"investment\",\n      \"isSelected\": true,\n      \"cash\": {\n        \"amount\": 517.747773721896,\n        \"convertedAmount\": 1763.6474938150548,\n        \"currency\": \"TJS\",\n        \"convertedCurrency\": \"IDR\"\n      },\n      \"bankTransferCode\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"SORT_CODE\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"IFSC\"\n        }\n      ],\n      \"providerName\": \"string\",\n      \"failedReason\": \"MATCHING_FAILED\"\n    },\n    {\n      \"accountName\": \"string\",\n      \"verificationStatus\": \"SUCCESS\",\n      \"accountType\": \"string\",\n      \"currentBalance\": {\n        \"amount\": 686.6836975905577,\n        \"convertedAmount\": 90.05222167000059,\n        \"currency\": \"GGP\",\n        \"convertedCurrency\": \"DEM\"\n      },\n      \"displayedName\": \"string\",\n      \"holder\": [\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"TRUSTEE\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"BENEFICIARY\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"accountNumber\": \"string\",\n      \"classification\": \"ADD_ON_CARD\",\n      \"availableBalance\": {\n        \"amount\": 772.2400296975984,\n        \"convertedAmount\": 828.1559748259403,\n        \"currency\": \"AUD\",\n        \"convertedCurrency\": \"AWG\"\n      },\n      \"fullAccountNumberList\": {\n        \"paymentAccountNumber\": \"string\",\n        \"tokenizedAccountNumber\": \"string\",\n        \"unmaskedAccountNumber\": \"string\"\n      },\n      \"accountId\": 6099,\n      \"accountAgeClassification\": \"NEW\",\n      \"balance\": {\n        \"amount\": 1906.8335986788754,\n        \"convertedAmount\": 433.5239360310517,\n        \"currency\": \"BYR\",\n        \"convertedCurrency\": \"XCD\"\n      },\n      \"providerId\": \"string\",\n      \"providerAccountId\": 2001,\n      \"CONTAINER\": \"investment\",\n      \"isSelected\": true,\n      \"cash\": {\n        \"amount\": 9958.971019640365,\n        \"convertedAmount\": 9374.175251633671,\n        \"currency\": \"COP\",\n        \"convertedCurrency\": \"EGP\"\n      },\n      \"bankTransferCode\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"SORT_CODE\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        }\n      ],\n      \"providerName\": \"string\",\n      \"failedReason\": \"MATCHING_FAILED\"\n    }\n  ],\n  \"failedReason\": \"REQUEST_TIME_OUT\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a509d3f-5e73-4df4-8e39-c76b5e6fd45f",
+              "name": "Y813 : providerAccountId should be provided<br>Y800 : Invalid value for providerAccountId<br>Y800 : Invalid value for verificationStatus<br>Y800 : Invalid value for isSelected<br>Y800 : Invalid value for accountId<br>Y807 : Resource not found<br>Y871 : The verification process for the request is still in progress. This API can only be invoked after the verification process is completed<br>Y824 : The maximum number of accountIds permitted is 10",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "verifiedAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isSelected",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9838af9-f70f-47dc-b295-b21639853a4a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "verifiedAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isSelected",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "492b870f-f7dc-4d06-9749-db79ac79192b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "verifiedAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isSelected",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a93d10b-994b-41c5-945c-76dfa03f22ea",
+          "name": "Get Holder Profile",
+          "request": {
+            "name": "Get Holder Profile",
+            "description": {
+              "content": "The Holder Profile API service allows retrieving the user's profile details (i.e., PII data such as name, email, phone number, and address) that are available at the provider account and each account level. The API accepts the providerAccountId and retrieves the profile information available under it and all the details available under each of the associated accounts.  <br><br>This service can only be invoked by Yodlee API v1.1, FastLink 3, and FastLink 4 customers. <br><br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verification",
+                "holderProfile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "accountId"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountId",
+                  "value": "<string>",
+                  "description": "(Required) providerAccountId."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb707121-f262-4885-b633-fed4b1597250",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "holderProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"holderProfile\": [\n    {\n      \"accountId\": 4357,\n      \"address\": [\n        {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"address1\": \"string\",\n          \"state\": \"string\"\n        },\n        {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"address1\": \"string\",\n          \"state\": \"string\"\n        }\n      ],\n      \"phoneNumber\": [\n        {\n          \"type\": \"MOBILE\",\n          \"value\": \"string\"\n        },\n        {\n          \"type\": \"WORK\",\n          \"value\": \"string\"\n        }\n      ],\n      \"providerAccountId\": 3326,\n      \"holder\": [\n        {\n          \"ownership\": \"string\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"ownership\": \"string\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"email\": [\n        {\n          \"type\": \"SECONDARY\",\n          \"value\": \"string\"\n        },\n        {\n          \"type\": \"PERSONAL\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"accountId\": 8766,\n      \"address\": [\n        {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"address1\": \"string\",\n          \"state\": \"string\"\n        },\n        {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"address1\": \"string\",\n          \"state\": \"string\"\n        }\n      ],\n      \"phoneNumber\": [\n        {\n          \"type\": \"MOBILE\",\n          \"value\": \"string\"\n        },\n        {\n          \"type\": \"WORK\",\n          \"value\": \"string\"\n        }\n      ],\n      \"providerAccountId\": 3381,\n      \"holder\": [\n        {\n          \"ownership\": \"string\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"ownership\": \"string\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"email\": [\n        {\n          \"type\": \"OTHERS\",\n          \"value\": \"string\"\n        },\n        {\n          \"type\": \"SECONDARY\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93330ed7-aab7-4097-a17e-1791e4aff6b1",
+              "name": "Y901 : Service not supported<br>Y800 : Invalid value for providerAccountId<br>Y800 : Invalid value for accountId. Only ACTIVE accountIds are supported<br>Y800 : Invalid value for accountId. All accountIds should belong to the same providerAccountId<br>Y803 : providerAccountId required<br>Y805 : Multiple providerAccountId not supported<br>Y820 : The accountId is not supported for containers other than bank and investment<br>can only be invoked after the verification process is completed<br>Y824 : The maximum number of accountIds permitted is 10<br>Y878 : Profile data is not yet requested for this account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "holderProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9501858-f358-4b11-94ec-27f7e14c06c5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "holderProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3ac30fd-f69b-4129-bb56-38a0e9ee66f2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "holderProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4015fb1-efd3-49f6-bb4d-d1e2ff700ace",
+          "name": "Get Classification Summary",
+          "request": {
+            "name": "Get Classification Summary",
+            "description": {
+              "content": "The get classification summary API service returns attributes that provide account-level and transaction-level summary for a user's account.<br><br>As a prerequisite, the Account Verification customers should have Transactions enabled to fetch a response. The API can be invoked only for an account verified by the user following the get verified accounts API call. If the prerequisite is not satisfied, an appropriate error will be returned on invoking the API.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verification",
+                "classification",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "(Required) accountId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0c03889-61f1-4445-8646-e7b1f01c36ed",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "classification",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"accountSummary\": [\n    {\n      \"accountId\": 2334,\n      \"lastUpdated\": \"string\",\n      \"site\": \"string\",\n      \"accountName\": \"string\",\n      \"accountType\": \"string\",\n      \"accountOpenDate\": \"string\",\n      \"transactionSummary\": {\n        \"fromDate\": \"string\",\n        \"cardPayments\": true,\n        \"isPrimaryAccount\": false,\n        \"loanPayments\": true,\n        \"toDate\": \"string\",\n        \"billPayments\": false,\n        \"mortgagePayments\": false,\n        \"salaryCredits\": false,\n        \"isActiveAccount\": false,\n        \"latestTransactions\": [\n          {\n            \"date\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"baseType\": \"CREDIT\"\n          },\n          {\n            \"date\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"baseType\": \"CREDIT\"\n          }\n        ],\n        \"incomeCredits\": false\n      },\n      \"availableBalance\": {\n        \"amount\": 78.77191519376714,\n        \"convertedAmount\": 5320.810835785287,\n        \"currency\": \"ZMK\",\n        \"convertedCurrency\": \"DEM\"\n      }\n    },\n    {\n      \"accountId\": 6660,\n      \"lastUpdated\": \"string\",\n      \"site\": \"string\",\n      \"accountName\": \"string\",\n      \"accountType\": \"string\",\n      \"accountOpenDate\": \"string\",\n      \"transactionSummary\": {\n        \"fromDate\": \"string\",\n        \"cardPayments\": false,\n        \"isPrimaryAccount\": false,\n        \"loanPayments\": true,\n        \"toDate\": \"string\",\n        \"billPayments\": true,\n        \"mortgagePayments\": false,\n        \"salaryCredits\": false,\n        \"isActiveAccount\": false,\n        \"latestTransactions\": [\n          {\n            \"date\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"baseType\": \"CREDIT\"\n          },\n          {\n            \"date\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"baseType\": \"CREDIT\"\n          }\n        ],\n        \"incomeCredits\": false\n      },\n      \"availableBalance\": {\n        \"amount\": 2816.244553809363,\n        \"convertedAmount\": 9822.577834667023,\n        \"currency\": \"UAH\",\n        \"convertedCurrency\": \"PYG\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "babe6a05-6922-484c-ad1b-7aaaf8db0d73",
+              "name": "Y847 : resource cannot be requested, as feature not enabled<br>Y812 : Required field/value - accountId missing in the request<br>Y800 : Invalid value for accountId. Only ACTIVE and verified bank account ID belonging to the user is allowed.<br>Y805 : Multiple accountId not supported<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "classification",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "601f0274-6807-4bde-aa7f-db50b9e3afc2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "classification",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b555c993-7b82-46db-9a1e-f0e2b6ddc6a0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification",
+                    "classification",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "422d7fa6-a415-4503-b339-f5c270ff384d",
+          "name": "Initiaite Challenge Deposit",
+          "request": {
+            "name": "Initiaite Challenge Deposit",
+            "description": {
+              "content": "The post verification service is used to initiate the matching service (MS) and the challenge deposit account verification (CDV) process to verify account ownership.<br>The MS and CDV process can verify ownership of only bank accounts (i.e., checking and savings).<br>The MS verification can be initiated only for an already aggregated account or a providerAccount.<br>The prerequisite for the MS verification process is to request the ACCT_PROFILE dataset with the HOLDER_NAME attribute.<br>In the MS verification process, a string-match of the account holder name with the registered user name is performed instantaneously. You can contact the Yodlee CustomerCare to configure the full name or only the last name match.<br>Once the CDV process is initiated Yodlee will post the microtransaction (i.e., credit and debit) in the user's account. The CDV process takes 2 to 3 days to complete as it requires the user to provide the microtransaction details.<br>The CDV process is currently supported only in the United States.<br>The verificationId in the response can be used to track the verification request.<br><br><b>Notes:</b><li>This endpoint cannot be used to test the CDV functionality in the developer sandbox or test environment. You will need a money transmitter license to implement the CDV functionality and also require the Yodlee Professional Services team's assistance to set up a dedicated environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verification\": {\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f225068-1572-410f-b1a8-35cf0d401b4e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"verification\": [\n    {\n      \"accountId\": \"<long>\",\n      \"reason\": \"EXPIRED\",\n      \"verificationStatus\": \"INITIATED\",\n      \"providerAccountId\": \"<long>\",\n      \"additionalMessage\": \"FAILED\",\n      \"verificationType\": \"<string>\",\n      \"account\": {\n        \"accountNumber\": \"<string>\",\n        \"accountType\": \"<string>\",\n        \"bankTransferCode\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"accountName\": \"<string>\",\n        \"userClassification\": \"<string>\"\n      },\n      \"verificationDate\": \"string\",\n      \"verificationId\": 9550\n    },\n    {\n      \"accountId\": \"<long>\",\n      \"reason\": \"DATA_NOT_AVAILABLE\",\n      \"verificationStatus\": \"FAILED\",\n      \"providerAccountId\": \"<long>\",\n      \"additionalMessage\": \"PROCESSED\",\n      \"verificationType\": \"<string>\",\n      \"account\": {\n        \"accountNumber\": \"<string>\",\n        \"accountType\": \"<string>\",\n        \"bankTransferCode\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"accountName\": \"<string>\",\n        \"userClassification\": \"<string>\"\n      },\n      \"verificationDate\": \"string\",\n      \"verificationId\": 3324\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18d61bb6-b541-4bc8-861c-087387a94ed1",
+              "name": "Y901 : Service not supported<br>Y812 : Required field/value - verification.verificationType missing in the verificationParam<br>Y812 : Required field/value - accountNumber missing in the verificationParam<br>Y812 : Required field/value - accountType missing in the verificationParam<br>Y812 : Required field/value - bankTransferCode missing in the verificationParam<br>Y812 : Required field/value - bankTransferCode.id missing in the verificationParam<br>Y812 : Required field/value - bankTransferCode.type missing in the verificationParam<br>Y800 : Invalid value for verification.verificationType<br>Y800 : Invalid value for verificationParam<br>Y800 : Invalid value for bankTransferCode.type<br>Y800 : Invalid value for bankTransferCode.id<br>Y800 : Invalid value for accountType<br>Y800 : Invalid value for accountId<br>Y813 : Account details should be provided<br>Y801 : Invalid length for accountNumber<br>Y835 : Account(s) not eligible for Challenge Deposit verification<br>Y806 : Invalid Input<br>Y840 : Verification has been initiated already<br>Y837 : Account has been verified already<br>Y800 : Invalid value for userClassification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c810d685-3b37-4534-9087-9c35bb0cc215",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "34af32fa-c42b-44ed-a8cf-f782222ea828",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09e5951d-bd82-4628-b719-09cff0f2e016",
+          "name": "Get Verification Status",
+          "request": {
+            "name": "Get Verification Status",
+            "description": {
+              "content": "The get verification status service is used to retrieve the verification status of all accounts for which the MS or CDV process has been initiated.<br>For the MS process, the account details object returns the aggregated information of the verified accounts. For the CDV process, the account details object returns the user provided account information.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "Comma separated accountId"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountId",
+                  "value": "<string>",
+                  "description": "Comma separated providerAccountId"
+                },
+                {
+                  "disabled": false,
+                  "key": "verificationType",
+                  "value": "<string>",
+                  "description": "verificationType"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efcbceac-535f-4e26-835f-de1c4da37a04",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"verification\": [\n    {\n      \"accountId\": 7474,\n      \"reason\": \"DATA_NOT_AVAILABLE\",\n      \"verificationStatus\": \"INITIATED\",\n      \"providerAccountId\": 6048,\n      \"singleAchTxn\": true,\n      \"additionalMessage\": \"PENDING_PROCESSING\",\n      \"verificationType\": \"MATCHING\",\n      \"account\": {\n        \"accountNumber\": \"<string>\",\n        \"accountType\": \"<string>\",\n        \"bankTransferCode\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"accountName\": \"<string>\",\n        \"userClassification\": \"<string>\"\n      },\n      \"remainingAttempts\": 113,\n      \"verificationDate\": \"string\",\n      \"verificationId\": 5406\n    },\n    {\n      \"accountId\": 8448,\n      \"reason\": \"ACCOUNT_HOLDER_MISMATCH\",\n      \"verificationStatus\": \"FAILED\",\n      \"providerAccountId\": 9559,\n      \"singleAchTxn\": false,\n      \"additionalMessage\": \"RETURNED\",\n      \"verificationType\": \"MATCHING\",\n      \"account\": {\n        \"accountNumber\": \"<string>\",\n        \"accountType\": \"<string>\",\n        \"bankTransferCode\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"accountName\": \"<string>\",\n        \"userClassification\": \"<string>\"\n      },\n      \"remainingAttempts\": 9323,\n      \"verificationDate\": \"string\",\n      \"verificationId\": 8456\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2627980c-6292-4430-a6d5-5aa4a46d7644",
+              "name": "Y901 : Service not supported<br>Y813 : Either of accountId or providerAccountId should be provided<br>Y800 : Invalid value for accountId<br>Y800 : Invalid value for verification.verificationType<br>Y800 : Invalid value for providerAccountId<br>Y835 : Account(s) not eligible for Matching verification<br>Y836 : No verification initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6a1ca0f-005f-4c6b-b735-19b14fd3c581",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb56e9a6-c636-4606-91f5-1fc5d9eaaa39",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verificationType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2454a73e-9b65-40fb-a8ab-bec4dcbe4635",
+          "name": "Verify Challenge Deposit",
+          "request": {
+            "name": "Verify Challenge Deposit",
+            "description": {
+              "content": "The put verification service is used to complete the challenge deposit verification (CDV) process.<br>This service is used only by the customer of CDV flow.<br>In the CDV process, the user-provided microtransaction details (i.e., credit and debit) is matched against the microtransactions posted by Yodlee. For a successful verification of the account's ownership both the microtransaction details should match.<br>The CDV process is currently supported only in the United States.<br><br><b>Notes:</b><ul><li>This endpoint cannot be used to test the CDV functionality in the developer sandbox or test environment. You will need a money transmitter license to implement the CDV functionality and also require the Yodlee Professional Services team's assistance to set up a dedicated environment.</li></ul>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verification\": {\n    \"transaction\": [\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      },\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      }\n    ],\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    },\n    \"transactionReferenceText\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d63e0769-e2d6-4c3c-aeb9-4f29a9c9bbc7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"transaction\": [\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      },\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      }\n    ],\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    },\n    \"transactionReferenceText\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"verification\": [\n    {\n      \"accountId\": \"<long>\",\n      \"reason\": \"DATA_MISMATCH\",\n      \"verificationStatus\": \"FAILED\",\n      \"providerAccountId\": \"<long>\",\n      \"additionalMessage\": \"PROCESSED\",\n      \"verificationType\": \"<string>\",\n      \"account\": {\n        \"accountNumber\": \"<string>\",\n        \"accountType\": \"<string>\",\n        \"bankTransferCode\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"accountName\": \"<string>\",\n        \"userClassification\": \"<string>\"\n      },\n      \"verificationDate\": \"string\",\n      \"verificationId\": 1960\n    },\n    {\n      \"accountId\": \"<long>\",\n      \"reason\": \"EXPIRED\",\n      \"verificationStatus\": \"SUCCESS\",\n      \"providerAccountId\": \"<long>\",\n      \"additionalMessage\": \"PENDING_VERIFICATION\",\n      \"verificationType\": \"<string>\",\n      \"account\": {\n        \"accountNumber\": \"<string>\",\n        \"accountType\": \"<string>\",\n        \"bankTransferCode\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"accountName\": \"<string>\",\n        \"userClassification\": \"<string>\"\n      },\n      \"verificationDate\": \"string\",\n      \"verificationId\": 2565\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a8598e3-cfba-4d46-94af-156facceced0",
+              "name": "Y901 : Service not supported<br>Y812 : Required field/value - verification.verificationType missing in the verificationParam<br>Y812 : Required field/value - amount.amount missing in the verificationParam<br>Y812 : Required field/value - baseType missing in the verificationParam<br>Y812 : Required field/value - currency missing in the verificationParam<br>Y812 : Required field/value - providerAccountId missing in the verificationParam<br>Y812 : Required field/value - accountId missing in the verificationParam<br>Y800 : Invalid value for verificationParam<br>Y800 : Invalid value for verification.verificationType<br>Y800 : Invalid value for baseType<br>Y800 : Invalid value for providerAccountId<br>Y800 : Invalid value for accountId<br>Y813 : Transaction should be provided<br>Y801 : Invalid length for accountNumber<br>Y801 : Invalid length for amount<br>Y835 : Account(s) not eligible for Challenge Deposit verification<br>Y806 : Invalid Input<br>Y840 : Verification has been initiated already<br>Y837 : Account has been verified already<br>Y838 : The currency code provided does not match with the currency of the transaction executed on the target account<br>Y846 : The number of financial transactions made on the target account does not match with the number of transactions entered by the user.<br>Y842 : Number of retries exceeded the maximum Challenge Deposit verification limit<br>Y844 : Financial Instructions were not executed successfully on the target account<br>Y845 : Verification time expired. Please try initiating challenge deposit again<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>Y813 : Either transactionReferenceText or transaction should be provided<br>Y800 : Invalid value for transactionReferenceText<br>Y801 : Invalid length for transactionReferenceText<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"transaction\": [\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      },\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      }\n    ],\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    },\n    \"transactionReferenceText\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d5c6c0e-32f6-4e17-b382-1349929dc5b7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"transaction\": [\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      },\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      }\n    ],\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    },\n    \"transactionReferenceText\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dee361a5-2571-40a0-9a4f-57848fe50c94",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification\": {\n    \"transaction\": [\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      },\n      {\n        \"amount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"baseType\": \"<string>\"\n      }\n    ],\n    \"accountId\": \"<long>\",\n    \"providerAccountId\": \"<long>\",\n    \"verificationType\": \"<string>\",\n    \"account\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"bankTransferCode\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"accountName\": \"<string>\",\n      \"userClassification\": \"<string>\"\n    },\n    \"transactionReferenceText\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "428e9bdc-3887-4337-988a-baacb4873172",
+    "name": "Yodlee Core APIs Account Token Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

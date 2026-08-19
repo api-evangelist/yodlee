@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Account Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/paymentProcessor/token"
+          },
+          "docs": "The create account token service allows you to create a secure <code>processorToken</code> for a user's verified financial account. This <code>processorToken</code> can then be shared with one of our payment processor partners."
+        },
+        {
+          "info": {
+            "name": "Delete Account Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/paymentProcessor/token",
+            "headers": [
+              {
+                "name": "processorToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The delete account token service allows you to revoke a previously generated <code>processorToken</code>. It is recommended to use this service when you want to disallow further access to the user's financial account, for instance when a user removes their account from your application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2398 @@
+{
+  "item": [
+    {
+      "id": "af2fa51e-a1a9-4cca-aefd-87cd28bee850",
+      "name": "Accounts",
+      "description": {
+        "content": "Accounts API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "32209af5-d039-447f-b0e7-00916780e9c8",
+          "name": "Associated Accounts",
+          "request": {
+            "name": "Associated Accounts",
+            "description": {
+              "content": "Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers.<br>This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may merge their subsidiaries and provide data as a single OB provider.<br>Before the OB solution, this data was aggregated with different provider IDs.<br>This service accepts the providerAccountId and returns all accounts of the associated providerAccounts that belong to the subsidiary of the financial institution.<br>This data should be displayed to the user to let them select the accounts that they wish to provide consent to share account data.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "associatedAccounts",
+                ":providerAccountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "providerAccountId",
+                  "description": "(Required) providerAccountId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0188e59d-3759-4030-aa5f-904868b4a9bb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "associatedAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"account\": [\n    {\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": 1967.1770683096922,\n        \"convertedAmount\": 9295.28291078867,\n        \"currency\": \"BYR\",\n        \"convertedCurrency\": \"BYR\"\n      },\n      \"accountName\": \"string\",\n      \"providerId\": \"string\",\n      \"accountType\": \"string\",\n      \"currentBalance\": {\n        \"amount\": 793.2386852104179,\n        \"convertedAmount\": 8698.98308318709,\n        \"currency\": \"UYU\",\n        \"convertedCurrency\": \"ETB\"\n      },\n      \"providerAccountId\": 858,\n      \"CONTAINER\": \"loan\",\n      \"id\": 2854,\n      \"accountNumber\": \"string\",\n      \"providerName\": \"string\",\n      \"availableBalance\": {\n        \"amount\": 2668.263351208534,\n        \"convertedAmount\": 9918.46949862069,\n        \"currency\": \"CHF\",\n        \"convertedCurrency\": \"ITL\"\n      }\n    },\n    {\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": 9458.920624054084,\n        \"convertedAmount\": 4758.247038835205,\n        \"currency\": \"BMD\",\n        \"convertedCurrency\": \"DZD\"\n      },\n      \"accountName\": \"string\",\n      \"providerId\": \"string\",\n      \"accountType\": \"string\",\n      \"currentBalance\": {\n        \"amount\": 2065.917112099347,\n        \"convertedAmount\": 4057.9020918427977,\n        \"currency\": \"LYD\",\n        \"convertedCurrency\": \"GMD\"\n      },\n      \"providerAccountId\": 9860,\n      \"CONTAINER\": \"insurance\",\n      \"id\": 8072,\n      \"accountNumber\": \"string\",\n      \"providerName\": \"string\",\n      \"availableBalance\": {\n        \"amount\": 3494.2350269753806,\n        \"convertedAmount\": 2416.812039556885,\n        \"currency\": \"PHP\",\n        \"convertedCurrency\": \"SDD\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81b653fb-4724-4d16-9df3-8da56049ac1c",
+              "name": "Y800 : Invalid value for providerAccountId<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "associatedAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19ef3410-5ca0-4653-afc8-dc7ef2bbe06b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "associatedAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa61b10f-028a-459a-9b02-af1741d3bd34",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "associatedAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1eaa81e-2d52-4c15-9b44-0da511af925f",
+          "name": "Add Manual Account",
+          "request": {
+            "name": "Add Manual Account",
+            "description": {
+              "content": "The add account service is used to add manual accounts.<br>The response of add account service includes the account name , account number and Yodlee generated account id.<br>All manual accounts added will be included as part of networth calculation by default.<br>Add manual account support is available for bank, card, investment, insurance and loan container only.<br><br><b>Note:</b><ul> <li>A real estate account addition is only supported for SYSTEM and MANUAL valuation type.</li></ul>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account\": {\n    \"accountName\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"nickname\": \"<string>\",\n    \"valuationType\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "724ae4eb-0e3b-47ad-a9ff-0c00f9c12a0b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"accountName\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"nickname\": \"<string>\",\n    \"valuationType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"account\": [\n    {\n      \"accountName\": \"string\",\n      \"id\": 3659,\n      \"accountNumber\": \"string\"\n    },\n    {\n      \"accountName\": \"string\",\n      \"id\": 329,\n      \"accountNumber\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95f6fe52-ccf4-4403-ac9d-e68bebe385e5",
+              "name": "Y800 : Invalid value for accountParam<br>Y811 : Real Estate Property value already exists<br>Y862 : The provided address is invalid, or the valuation is not available<br>Y869 : Multiple matches found. Provide the complete address or call the POST /accounts/evaluateAddress API to retrieve the list of matched addresses<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"accountName\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"nickname\": \"<string>\",\n    \"valuationType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e350d704-ff96-4046-8797-1501f95735df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"accountName\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"nickname\": \"<string>\",\n    \"valuationType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "70a0831f-8075-438b-a08b-0702c3c2199a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"accountName\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"nickname\": \"<string>\",\n    \"valuationType\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2463510f-a839-4e24-9f2d-5dc96e9ef793",
+          "name": "Get Accounts",
+          "request": {
+            "name": "Get Accounts",
+            "description": {
+              "content": "The get accounts service provides information about accounts added by the user.<br>By default, this service returns information for active and to be closed accounts.<br>If requestId is provided, the accounts that are updated in the context of the requestId will be provided in the response.<br>Pagination is made available to the advisors to retrieve account data of all users assigned to them. The skip and top parameters are used for pagination. In the skip and top parameters pass the number of records to be skipped and retrieved, respectively. <br><br><b>Note:</b><br><ul><li>fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.</li><li>fullAccountNumberList, PII (Personal Identifiable Information) and holder details are not available by default, as it is a premium feature that needs security approval. This will not be available for testing in Sandbox environment.</li></ul>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "Comma separated accountIds."
+                },
+                {
+                  "disabled": false,
+                  "key": "container",
+                  "value": "<string>",
+                  "description": "bank/creditCard/investment/insurance/loan/reward/realEstate/otherAssets/otherLiabilities"
+                },
+                {
+                  "disabled": false,
+                  "key": "convertToCurrency",
+                  "value": "<string>",
+                  "description": "On-demand currency conversion parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b><br><li>fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.</li><br><li>profile is deprecated, and to retrieve the profile information, call the GET /verification/holderProfile API instead.</li>"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountId",
+                  "value": "<string>",
+                  "description": "Comma separated providerAccountIds."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<string>",
+                  "description": "The unique identifier that returns contextual data"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "ACTIVE,INACTIVE,TO_BE_CLOSED,CLOSED"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6cf2110-d548-466d-ac8f-e27d7e38c082",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"account\": [\n    {\n      \"availableCash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"includeInNetWorth\": true,\n      \"moneyMarketBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"enrollmentDate\": \"string\",\n      \"estimatedDate\": \"string\",\n      \"memo\": \"string\",\n      \"guarantor\": \"string\",\n      \"interestPaidLastYear\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nsccMemberClearingCode\": \"string\",\n      \"homeInsuranceType\": \"HOME_OWNER\",\n      \"id\": 7733,\n      \"cash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCreditLine\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerName\": \"string\",\n      \"valuationType\": \"MANUAL\",\n      \"marginBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"apr\": 8451.423194139763,\n      \"availableCredit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceProductName\": \"string\",\n      \"currentBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"isManual\": true,\n      \"profile\": {\n        \"identifier\": [\n          {\n            \"type\": \"DNI\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"DNI\",\n            \"value\": \"string\"\n          }\n        ],\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"phoneNumber\": [\n          {\n            \"type\": \"WORK\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"WORK\",\n            \"value\": \"string\"\n          }\n        ],\n        \"email\": [\n          {\n            \"type\": \"WORK\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"OTHERS\",\n            \"value\": \"string\"\n          }\n        ]\n      },\n      \"escrowBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nextLevel\": \"string\",\n      \"classification\": \"ADD_ON_CARD\",\n      \"loanPayoffAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"interestRateType\": \"OTHER\",\n      \"loanPayByDate\": \"string\",\n      \"faceAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyFromDate\": \"string\",\n      \"sourceLoanOffsetEnabled\": true,\n      \"dtccMemberClearingCode\": \"string\",\n      \"premiumPaymentTerm\": \"string\",\n      \"policyTerm\": \"string\",\n      \"repaymentPlanType\": \"INCOME_SENSITIVE\",\n      \"aggregatedAccountType\": \"string\",\n      \"availableBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountStatus\": \"INACTIVE\",\n      \"lifeInsuranceType\": \"VARIABLE_LIFE_INSURANCE\",\n      \"fullAccountNumber\": \"string\",\n      \"premium\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"aggregationSource\": \"USER\",\n      \"overDraftLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nickname\": \"string\",\n      \"term\": \"string\",\n      \"interestRate\": 3121.480713342909,\n      \"deathBenefit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"address\": {\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address3\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"street\": \"<string>\",\n        \"state\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"sourceLoanRepaymentType\": \"string\",\n      \"cashValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"holder\": [\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"PRIMARY\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"SECONDARY\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"401kLoan\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"homeValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountNumber\": \"string\",\n      \"createdDate\": \"string\",\n      \"interestPaidYTD\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"businessInformation\": {\n        \"legalName\": \"string\",\n        \"businessName\": \"string\",\n        \"abn\": \"string\",\n        \"acn\": \"string\"\n      },\n      \"maxRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerAccountId\": 6763,\n      \"collateral\": \"string\",\n      \"dataset\": [\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"ALLOW_UPDATE\",\n          \"additionalStatus\": \"INCORRECT_CREDENTIALS\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"DOCUMENT\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        },\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"ALLOW_UPDATE_WITH_CREDENTIALS\",\n          \"additionalStatus\": \"UNEXPECTED_SITE_ERROR\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"BASIC_AGG_DATA\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        }\n      ],\n      \"runningBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceId\": \"string\",\n      \"dueDate\": \"string\",\n      \"frequency\": \"FIRST_DAY_MONTHLY\",\n      \"sourceAccountOwnership\": \"string\",\n      \"maturityAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"associatedProviderAccountId\": [\n        6757,\n        2223\n      ],\n      \"isAsset\": true,\n      \"principalBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCashLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"maturityDate\": \"string\",\n      \"minimumAmountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annualPercentageYield\": 7049.646279757513,\n      \"accountType\": \"string\",\n      \"originationDate\": \"string\",\n      \"totalVestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"rewardBalance\": [\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"BALANCE_TO_LEVEL\",\n          \"balance\": 6986.787616842906,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        },\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"EXPIRING_BALANCE\",\n          \"balance\": 1747.3911384582964,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        }\n      ],\n      \"sourceAccountStatus\": \"IN_REPAYMENT\",\n      \"linkedAccountIds\": [\n        1764,\n        2237\n      ],\n      \"derivedApr\": 2035.9307066848487,\n      \"policyEffectiveDate\": \"string\",\n      \"totalUnvestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annuityBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountCategory\": \"string\",\n      \"accountName\": \"string\",\n      \"totalCreditLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyStatus\": \"ACTIVE\",\n      \"shortBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lender\": \"string\",\n      \"lastEmployeeContributionAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerId\": \"string\",\n      \"lastPaymentDate\": \"string\",\n      \"primaryRewardUnit\": \"string\",\n      \"lastPaymentAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"remainingBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"userClassification\": \"BUSINESS\",\n      \"bankTransferCode\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"IFSC\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"ROUTING_NUMBER\"\n        }\n      ],\n      \"expirationDate\": \"string\",\n      \"coverage\": [\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"HMO\",\n          \"endDate\": \"string\",\n          \"type\": \"VISION\",\n          \"startDate\": \"string\"\n        },\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"PPO\",\n          \"endDate\": \"string\",\n          \"type\": \"OTHER\",\n          \"startDate\": \"string\"\n        }\n      ],\n      \"cashApr\": 6538.986152704582,\n      \"autoRefresh\": {\n        \"additionalStatus\": \"USER_ACTION_REQUIRED\",\n        \"asOfDate\": \"string\",\n        \"status\": \"DISABLED\"\n      },\n      \"oauthMigrationStatus\": \"MIGRATED\",\n      \"displayedName\": \"string\",\n      \"fullAccountNumberList\": {\n        \"paymentAccountNumber\": \"string\",\n        \"tokenizedAccountNumber\": \"string\",\n        \"unmaskedAccountNumber\": \"string\"\n      },\n      \"amountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"currentLevel\": \"string\",\n      \"originalLoanAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyToDate\": \"string\",\n      \"loanPayoffDetails\": {\n        \"payByDate\": \"string\",\n        \"payoffAmount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"outstandingBalance\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        }\n      },\n      \"paymentProfile\": {\n        \"identifier\": {\n          \"type\": \"PLATFORM_CODE\",\n          \"value\": \"string\"\n        },\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"paymentBankTransferCode\": {\n          \"id\": \"string\",\n          \"type\": \"ROUTING_NUMBER\"\n        }\n      },\n      \"CONTAINER\": \"creditCard\",\n      \"isOwnedAtSource\": true,\n      \"lastEmployeeContributionDate\": \"string\",\n      \"lastPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"recurringPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"minRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      }\n    },\n    {\n      \"availableCash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"includeInNetWorth\": false,\n      \"moneyMarketBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"enrollmentDate\": \"string\",\n      \"estimatedDate\": \"string\",\n      \"memo\": \"string\",\n      \"guarantor\": \"string\",\n      \"interestPaidLastYear\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nsccMemberClearingCode\": \"string\",\n      \"homeInsuranceType\": \"RENTAL\",\n      \"id\": 5093,\n      \"cash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCreditLine\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerName\": \"string\",\n      \"valuationType\": \"SYSTEM\",\n      \"marginBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"apr\": 8785.100486417768,\n      \"availableCredit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceProductName\": \"string\",\n      \"currentBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"isManual\": true,\n      \"profile\": {\n        \"identifier\": [\n          {\n            \"type\": \"NIE\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"DNI\",\n            \"value\": \"string\"\n          }\n        ],\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"phoneNumber\": [\n          {\n            \"type\": \"MOBILE\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"LANDLINE\",\n            \"value\": \"string\"\n          }\n        ],\n        \"email\": [\n          {\n            \"type\": \"OTHERS\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"PRIMARY\",\n            \"value\": \"string\"\n          }\n        ]\n      },\n      \"escrowBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nextLevel\": \"string\",\n      \"classification\": \"VIRTUAL_CARD\",\n      \"loanPayoffAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"interestRateType\": \"UNKNOWN\",\n      \"loanPayByDate\": \"string\",\n      \"faceAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyFromDate\": \"string\",\n      \"sourceLoanOffsetEnabled\": false,\n      \"dtccMemberClearingCode\": \"string\",\n      \"premiumPaymentTerm\": \"string\",\n      \"policyTerm\": \"string\",\n      \"repaymentPlanType\": \"INCOME_SENSITIVE\",\n      \"aggregatedAccountType\": \"string\",\n      \"availableBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountStatus\": \"TO_BE_CLOSED\",\n      \"lifeInsuranceType\": \"OTHER\",\n      \"fullAccountNumber\": \"string\",\n      \"premium\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"aggregationSource\": \"SYSTEM\",\n      \"overDraftLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nickname\": \"string\",\n      \"term\": \"string\",\n      \"interestRate\": 5036.636509962446,\n      \"deathBenefit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"address\": {\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address3\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"street\": \"<string>\",\n        \"state\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"sourceLoanRepaymentType\": \"string\",\n      \"cashValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"holder\": [\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"AAS\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"TRUST\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"401kLoan\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"homeValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountNumber\": \"string\",\n      \"createdDate\": \"string\",\n      \"interestPaidYTD\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"businessInformation\": {\n        \"legalName\": \"string\",\n        \"businessName\": \"string\",\n        \"abn\": \"string\",\n        \"acn\": \"string\"\n      },\n      \"maxRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerAccountId\": 3564,\n      \"collateral\": \"string\",\n      \"dataset\": [\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"ALLOW_UPDATE\",\n          \"additionalStatus\": \"SITE_NOT_SUPPORTED\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"ADVANCE_AGG_DATA\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        },\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"DISALLOW_UPDATE\",\n          \"additionalStatus\": \"NEW_AUTHENTICATION_REQUIRED\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"BASIC_AGG_DATA\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        }\n      ],\n      \"runningBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceId\": \"string\",\n      \"dueDate\": \"string\",\n      \"frequency\": \"ANNUALLY\",\n      \"sourceAccountOwnership\": \"string\",\n      \"maturityAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"associatedProviderAccountId\": [\n        8607,\n        1101\n      ],\n      \"isAsset\": false,\n      \"principalBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCashLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"maturityDate\": \"string\",\n      \"minimumAmountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annualPercentageYield\": 7668.9315079804555,\n      \"accountType\": \"string\",\n      \"originationDate\": \"string\",\n      \"totalVestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"rewardBalance\": [\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"EXPIRING_BALANCE\",\n          \"balance\": 5476.066067554034,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        },\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"TOTAL_BALANCE\",\n          \"balance\": 1778.3347541546013,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        }\n      ],\n      \"sourceAccountStatus\": \"DEFAULTED\",\n      \"linkedAccountIds\": [\n        6512,\n        9706\n      ],\n      \"derivedApr\": 4386.0700117519345,\n      \"policyEffectiveDate\": \"string\",\n      \"totalUnvestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annuityBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountCategory\": \"string\",\n      \"accountName\": \"string\",\n      \"totalCreditLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyStatus\": \"OTHER\",\n      \"shortBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lender\": \"string\",\n      \"lastEmployeeContributionAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerId\": \"string\",\n      \"lastPaymentDate\": \"string\",\n      \"primaryRewardUnit\": \"string\",\n      \"lastPaymentAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"remainingBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"userClassification\": \"PERSONAL\",\n      \"bankTransferCode\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        }\n      ],\n      \"expirationDate\": \"string\",\n      \"coverage\": [\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"UNKNOWN\",\n          \"endDate\": \"string\",\n          \"type\": \"DEATH_TOTAL_PERMANENT_DISABILITY\",\n          \"startDate\": \"string\"\n        },\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"HMO\",\n          \"endDate\": \"string\",\n          \"type\": \"DENTAL\",\n          \"startDate\": \"string\"\n        }\n      ],\n      \"cashApr\": 5666.614106316593,\n      \"autoRefresh\": {\n        \"additionalStatus\": \"SCHEDULED\",\n        \"asOfDate\": \"string\",\n        \"status\": \"DISABLED\"\n      },\n      \"oauthMigrationStatus\": \"IN_PROGRESS\",\n      \"displayedName\": \"string\",\n      \"fullAccountNumberList\": {\n        \"paymentAccountNumber\": \"string\",\n        \"tokenizedAccountNumber\": \"string\",\n        \"unmaskedAccountNumber\": \"string\"\n      },\n      \"amountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"currentLevel\": \"string\",\n      \"originalLoanAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyToDate\": \"string\",\n      \"loanPayoffDetails\": {\n        \"payByDate\": \"string\",\n        \"payoffAmount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"outstandingBalance\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        }\n      },\n      \"paymentProfile\": {\n        \"identifier\": {\n          \"type\": \"PLATFORM_CODE\",\n          \"value\": \"string\"\n        },\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"paymentBankTransferCode\": {\n          \"id\": \"string\",\n          \"type\": \"SORT_CODE\"\n        }\n      },\n      \"CONTAINER\": \"bill\",\n      \"isOwnedAtSource\": false,\n      \"lastEmployeeContributionDate\": \"string\",\n      \"lastPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"recurringPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"minRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0418bab-d842-48a3-ba56-ed12bcda70a8",
+              "name": "Y800 : Invalid value for status<br>Y800 : Invalid value for container<br>Y800 : Invalid value for providerAccountId<br>Y824 : The maximum number of accountIds permitted is 100",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c02d339-484c-47ad-91b5-1c91055837a3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a42f54d-25e3-4705-ab5b-c170a5493494",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aad0e8b5-d991-419a-bbc8-1fa94f617dbd",
+          "name": "Migrate Accounts",
+          "request": {
+            "name": "Migrate Accounts",
+            "description": {
+              "content": "This service is associated with the open banking (OB) flow.<br>Before invoking this service, display all the associated accounts to the user by calling the GET /associatedAccounts API.<br>The migrate accounts API treats the user's consent acceptance to initiate account migration. Invoking this service indicates that the user has given the consent to access the associated account information from the financial institution.<br>If an existing provider supports bank, card, and loan accounts, and chose only to provide bank and card through OB APIs, a new providerAccountId for OB will be created.<br>The bank and card account information will be moved to the new providerAccountId. The loan account will be retained in the existing provider account.<br>This service returns the OB providerId and the OB providerAccountId. Note that, as part of this process, there is a possibility of one or more providerAccounts getting merged.<br>The update or delete actions will not be allowed for the providerAccounts involved in the migration process until the user completes the authorization on the OB provider.<br>The oauthMigrationEligibilityStatus attribute in the GET /accounts API response indicates the accounts included in the migration process.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "migrateAccounts",
+                ":providerAccountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "providerAccountId",
+                  "description": "(Required) providerAccountId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbaa8224-8753-42a0-b91f-e36af9023924",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "migrateAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"providerId\": 891,\n  \"providerAccountId\": 9805\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62d2a2ff-82dc-45bd-98aa-0097df8e2d94",
+              "name": "Y800 : Invalid value for providerAccountId<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "migrateAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58bd7438-6ffa-4422-b5ad-6707cb49d04b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "migrateAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab011823-5f63-4546-8987-2572f94bd07e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "migrateAccounts",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "015e8f5a-bb5c-4b12-848c-8838e610dd45",
+          "name": "Evaluate Address",
+          "request": {
+            "name": "Evaluate Address",
+            "description": {
+              "content": "Use this service to validate the address before adding the real estate account.<br>If the address is valid, the service will return the complete address information.<br>The response will contain multiple addresses if the user-provided input matches with multiple entries in the vendor database.<br>In the case of multiple matches, the user can select the appropriate address from the list and then invoke the add account service with the complete address.<br><br><b>Note:</b> <ul><li>Yodlee recommends to use this service before adding the real estate account to avoid failures.</li></ul>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "evaluateAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"street\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address3\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"sourceType\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"state\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4af1277-4401-42a1-aa5e-b2d4ad57c034",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "evaluateAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"street\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address3\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"sourceType\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"state\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"address\": [\n    {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"isValidAddress\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49dcff89-a767-4827-8487-a2f73cf9a494",
+              "name": "Y806 : Invalid input<br>Y800 : Invalid value for zip<br>Y812 : Required field/value - address missing in the request<br>Y812 : Required field/value - street missing in the request<br>Y812 : Required field/value - state & city / zip missing in the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "evaluateAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"street\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address3\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"sourceType\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"state\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2db4d4c-67b9-4503-afe8-931b38c57977",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "evaluateAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"street\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address3\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"sourceType\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"state\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "388bc51b-6910-409a-8b3b-711eaef17810",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "evaluateAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"street\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address3\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"sourceType\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"state\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5a731b5-6572-4bd5-988b-fd5567fb2c49",
+          "name": "Get Account Details",
+          "request": {
+            "name": "Get Account Details",
+            "description": {
+              "content": "The get account details service provides detailed information of an account.<br><br><b>Note:</b><li> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.</li>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "convertToCurrency",
+                  "value": "<string>",
+                  "description": "On-demand currency conversion parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b>fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "accountId",
+                  "description": "(Required) accountId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9a7572d-e89f-429b-8c69-7f418cc5faba",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"account\": [\n    {\n      \"availableCash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"includeInNetWorth\": false,\n      \"moneyMarketBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"enrollmentDate\": \"string\",\n      \"estimatedDate\": \"string\",\n      \"memo\": \"string\",\n      \"guarantor\": \"string\",\n      \"interestPaidLastYear\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nsccMemberClearingCode\": \"string\",\n      \"homeInsuranceType\": \"RENTER\",\n      \"id\": 7771,\n      \"cash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCreditLine\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerName\": \"string\",\n      \"valuationType\": \"SYSTEM\",\n      \"marginBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"apr\": 1777.906441093633,\n      \"availableCredit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceProductName\": \"string\",\n      \"currentBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"isManual\": true,\n      \"profile\": {\n        \"identifier\": [\n          {\n            \"type\": \"NRIC\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"NIN\",\n            \"value\": \"string\"\n          }\n        ],\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"phoneNumber\": [\n          {\n            \"type\": \"WORK\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"HOME\",\n            \"value\": \"string\"\n          }\n        ],\n        \"email\": [\n          {\n            \"type\": \"SECONDARY\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"OTHERS\",\n            \"value\": \"string\"\n          }\n        ]\n      },\n      \"escrowBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nextLevel\": \"string\",\n      \"classification\": \"VIRTUAL_CARD\",\n      \"loanPayoffAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"interestRateType\": \"VARIABLE\",\n      \"loanPayByDate\": \"string\",\n      \"faceAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyFromDate\": \"string\",\n      \"sourceLoanOffsetEnabled\": true,\n      \"dtccMemberClearingCode\": \"string\",\n      \"premiumPaymentTerm\": \"string\",\n      \"policyTerm\": \"string\",\n      \"repaymentPlanType\": \"PAY_AS_YOU_EARN\",\n      \"aggregatedAccountType\": \"string\",\n      \"availableBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountStatus\": \"TO_BE_CLOSED\",\n      \"lifeInsuranceType\": \"WHOLE_LIFE_INSURANCE\",\n      \"fullAccountNumber\": \"string\",\n      \"premium\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"aggregationSource\": \"SYSTEM\",\n      \"overDraftLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nickname\": \"string\",\n      \"term\": \"string\",\n      \"interestRate\": 2472.8725980223144,\n      \"deathBenefit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"address\": {\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address3\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"street\": \"<string>\",\n        \"state\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"sourceLoanRepaymentType\": \"string\",\n      \"cashValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"holder\": [\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"TRUSTEE\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"BUSINESS\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"401kLoan\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"homeValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountNumber\": \"string\",\n      \"createdDate\": \"string\",\n      \"interestPaidYTD\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"businessInformation\": {\n        \"legalName\": \"string\",\n        \"businessName\": \"string\",\n        \"abn\": \"string\",\n        \"acn\": \"string\"\n      },\n      \"maxRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerAccountId\": 3007,\n      \"collateral\": \"string\",\n      \"dataset\": [\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"DISALLOW_UPDATE\",\n          \"additionalStatus\": \"PROPERTY_VALUE_NOT_AVAILABLE\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"ACCT_PROFILE\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        },\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"ALLOW_UPDATE_WITH_CREDENTIALS\",\n          \"additionalStatus\": \"CONSENT_REVOKED\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"DOCUMENT\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        }\n      ],\n      \"runningBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceId\": \"string\",\n      \"dueDate\": \"string\",\n      \"frequency\": \"QUARTERLY\",\n      \"sourceAccountOwnership\": \"string\",\n      \"maturityAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"associatedProviderAccountId\": [\n        3212,\n        7774\n      ],\n      \"isAsset\": true,\n      \"principalBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCashLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"maturityDate\": \"string\",\n      \"minimumAmountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annualPercentageYield\": 1242.400121507361,\n      \"accountType\": \"string\",\n      \"originationDate\": \"string\",\n      \"totalVestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"rewardBalance\": [\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"EXPIRING_BALANCE\",\n          \"balance\": 6966.502231284698,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        },\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"EXPIRING_BALANCE\",\n          \"balance\": 4758.661298814079,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        }\n      ],\n      \"sourceAccountStatus\": \"DELINQUENCY\",\n      \"linkedAccountIds\": [\n        1115,\n        5741\n      ],\n      \"derivedApr\": 3457.090839785587,\n      \"policyEffectiveDate\": \"string\",\n      \"totalUnvestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annuityBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountCategory\": \"string\",\n      \"accountName\": \"string\",\n      \"totalCreditLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyStatus\": \"IN_ACTIVE\",\n      \"shortBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lender\": \"string\",\n      \"lastEmployeeContributionAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerId\": \"string\",\n      \"lastPaymentDate\": \"string\",\n      \"primaryRewardUnit\": \"string\",\n      \"lastPaymentAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"remainingBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"userClassification\": \"BUSINESS\",\n      \"bankTransferCode\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        }\n      ],\n      \"expirationDate\": \"string\",\n      \"coverage\": [\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"PPO\",\n          \"endDate\": \"string\",\n          \"type\": \"INCOME_PROTECTION\",\n          \"startDate\": \"string\"\n        },\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"HMO\",\n          \"endDate\": \"string\",\n          \"type\": \"DEATH_COVER\",\n          \"startDate\": \"string\"\n        }\n      ],\n      \"cashApr\": 8386.955472138645,\n      \"autoRefresh\": {\n        \"additionalStatus\": \"SCHEDULED\",\n        \"asOfDate\": \"string\",\n        \"status\": \"ENABLED\"\n      },\n      \"oauthMigrationStatus\": \"MIGRATED\",\n      \"displayedName\": \"string\",\n      \"fullAccountNumberList\": {\n        \"paymentAccountNumber\": \"string\",\n        \"tokenizedAccountNumber\": \"string\",\n        \"unmaskedAccountNumber\": \"string\"\n      },\n      \"amountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"currentLevel\": \"string\",\n      \"originalLoanAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyToDate\": \"string\",\n      \"loanPayoffDetails\": {\n        \"payByDate\": \"string\",\n        \"payoffAmount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"outstandingBalance\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        }\n      },\n      \"paymentProfile\": {\n        \"identifier\": {\n          \"type\": \"REFERENCE_NUMBER\",\n          \"value\": \"string\"\n        },\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"paymentBankTransferCode\": {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        }\n      },\n      \"CONTAINER\": \"insurance\",\n      \"isOwnedAtSource\": false,\n      \"lastEmployeeContributionDate\": \"string\",\n      \"lastPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"recurringPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"minRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      }\n    },\n    {\n      \"availableCash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"includeInNetWorth\": false,\n      \"moneyMarketBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"enrollmentDate\": \"string\",\n      \"estimatedDate\": \"string\",\n      \"memo\": \"string\",\n      \"guarantor\": \"string\",\n      \"interestPaidLastYear\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nsccMemberClearingCode\": \"string\",\n      \"homeInsuranceType\": \"OTHER\",\n      \"id\": 4374,\n      \"cash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCreditLine\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerName\": \"string\",\n      \"valuationType\": \"SYSTEM\",\n      \"marginBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"apr\": 3577.7662807530473,\n      \"availableCredit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceProductName\": \"string\",\n      \"currentBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"isManual\": true,\n      \"profile\": {\n        \"identifier\": [\n          {\n            \"type\": \"NIE\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"NIN\",\n            \"value\": \"string\"\n          }\n        ],\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"phoneNumber\": [\n          {\n            \"type\": \"LANDLINE\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"WORK\",\n            \"value\": \"string\"\n          }\n        ],\n        \"email\": [\n          {\n            \"type\": \"PERSONAL\",\n            \"value\": \"string\"\n          },\n          {\n            \"type\": \"PRIMARY\",\n            \"value\": \"string\"\n          }\n        ]\n      },\n      \"escrowBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nextLevel\": \"string\",\n      \"classification\": \"CORPORATE\",\n      \"loanPayoffAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"interestRateType\": \"FIXED\",\n      \"loanPayByDate\": \"string\",\n      \"faceAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyFromDate\": \"string\",\n      \"sourceLoanOffsetEnabled\": false,\n      \"dtccMemberClearingCode\": \"string\",\n      \"premiumPaymentTerm\": \"string\",\n      \"policyTerm\": \"string\",\n      \"repaymentPlanType\": \"STANDARD\",\n      \"aggregatedAccountType\": \"string\",\n      \"availableBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountStatus\": \"INACTIVE\",\n      \"lifeInsuranceType\": \"TERM_LIFE_INSURANCE\",\n      \"fullAccountNumber\": \"string\",\n      \"premium\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"aggregationSource\": \"USER\",\n      \"overDraftLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"nickname\": \"string\",\n      \"term\": \"string\",\n      \"interestRate\": 5034.740137695399,\n      \"deathBenefit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"address\": {\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address3\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"street\": \"<string>\",\n        \"state\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"sourceLoanRepaymentType\": \"string\",\n      \"cashValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"holder\": [\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"PRIMARY\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        },\n        {\n          \"identifier\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"gender\": \"string\",\n          \"ownership\": \"BENEFICIARY\",\n          \"name\": {\n            \"middle\": \"string\",\n            \"last\": \"string\",\n            \"fullName\": \"string\",\n            \"first\": \"string\"\n          }\n        }\n      ],\n      \"401kLoan\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"homeValue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountNumber\": \"string\",\n      \"createdDate\": \"string\",\n      \"interestPaidYTD\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"businessInformation\": {\n        \"legalName\": \"string\",\n        \"businessName\": \"string\",\n        \"abn\": \"string\",\n        \"acn\": \"string\"\n      },\n      \"maxRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerAccountId\": 1723,\n      \"collateral\": \"string\",\n      \"dataset\": [\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"DISALLOW_UPDATE\",\n          \"additionalStatus\": \"UNEXPECTED_SITE_ERROR\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"ACCT_PROFILE\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        },\n        {\n          \"lastUpdated\": \"string\",\n          \"updateEligibility\": \"ALLOW_UPDATE_WITH_CREDENTIALS\",\n          \"additionalStatus\": \"AVAILABLE_DATA_RETRIEVED\",\n          \"nextUpdateScheduled\": \"string\",\n          \"name\": \"ACCT_PROFILE\",\n          \"lastUpdateAttempt\": \"string\",\n          \"additionalStatusErrorCode\": \"string\"\n        }\n      ],\n      \"runningBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"sourceId\": \"string\",\n      \"dueDate\": \"string\",\n      \"frequency\": \"DAILY\",\n      \"sourceAccountOwnership\": \"string\",\n      \"maturityAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"associatedProviderAccountId\": [\n        4417,\n        9367\n      ],\n      \"isAsset\": false,\n      \"principalBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"totalCashLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"maturityDate\": \"string\",\n      \"minimumAmountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annualPercentageYield\": 8704.54259355657,\n      \"accountType\": \"string\",\n      \"originationDate\": \"string\",\n      \"totalVestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"rewardBalance\": [\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"BALANCE\",\n          \"balance\": 6964.153215274618,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        },\n        {\n          \"expiryDate\": \"string\",\n          \"balanceToReward\": \"string\",\n          \"balanceType\": \"BALANCE\",\n          \"balance\": 5978.495102608749,\n          \"description\": \"string\",\n          \"balanceToLevel\": \"string\",\n          \"units\": \"string\"\n        }\n      ],\n      \"sourceAccountStatus\": \"DELINQUENCY\",\n      \"linkedAccountIds\": [\n        2236,\n        6657\n      ],\n      \"derivedApr\": 1728.0161787849913,\n      \"policyEffectiveDate\": \"string\",\n      \"totalUnvestedBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"annuityBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountCategory\": \"string\",\n      \"accountName\": \"string\",\n      \"totalCreditLimit\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyStatus\": \"OTHER\",\n      \"shortBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"lender\": \"string\",\n      \"lastEmployeeContributionAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerId\": \"string\",\n      \"lastPaymentDate\": \"string\",\n      \"primaryRewardUnit\": \"string\",\n      \"lastPaymentAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"remainingBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"userClassification\": \"BUSINESS\",\n      \"bankTransferCode\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"IFSC\"\n        }\n      ],\n      \"expirationDate\": \"string\",\n      \"coverage\": [\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"HMO\",\n          \"endDate\": \"string\",\n          \"type\": \"HEALTH\",\n          \"startDate\": \"string\"\n        },\n        {\n          \"amount\": [\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"cover\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limitType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"met\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"planType\": \"HMO\",\n          \"endDate\": \"string\",\n          \"type\": \"DENTAL\",\n          \"startDate\": \"string\"\n        }\n      ],\n      \"cashApr\": 1847.129554123944,\n      \"autoRefresh\": {\n        \"additionalStatus\": \"UNSUBSCRIBED\",\n        \"asOfDate\": \"string\",\n        \"status\": \"ENABLED\"\n      },\n      \"oauthMigrationStatus\": \"IN_PROGRESS\",\n      \"displayedName\": \"string\",\n      \"fullAccountNumberList\": {\n        \"paymentAccountNumber\": \"string\",\n        \"tokenizedAccountNumber\": \"string\",\n        \"unmaskedAccountNumber\": \"string\"\n      },\n      \"amountDue\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"currentLevel\": \"string\",\n      \"originalLoanAmount\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"policyToDate\": \"string\",\n      \"loanPayoffDetails\": {\n        \"payByDate\": \"string\",\n        \"payoffAmount\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        },\n        \"outstandingBalance\": {\n          \"amount\": \"<double>\",\n          \"convertedAmount\": \"<double>\",\n          \"currency\": \"<string>\",\n          \"convertedCurrency\": \"<string>\"\n        }\n      },\n      \"paymentProfile\": {\n        \"identifier\": {\n          \"type\": \"REFERENCE_NUMBER\",\n          \"value\": \"string\"\n        },\n        \"address\": [\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"zip\": \"<string>\",\n            \"country\": \"<string>\",\n            \"address3\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"sourceType\": \"<string>\",\n            \"address1\": \"<string>\",\n            \"street\": \"<string>\",\n            \"state\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"paymentBankTransferCode\": {\n          \"id\": \"string\",\n          \"type\": \"BSB\"\n        }\n      },\n      \"CONTAINER\": \"otherLiabilities\",\n      \"isOwnedAtSource\": false,\n      \"lastEmployeeContributionDate\": \"string\",\n      \"lastPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"recurringPayment\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"minRedraw\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80b94e72-2b2c-4f7a-a0b3-3f223fa89250",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b51c6f7c-6e46-4ad6-b37c-3e4a5e1bc4ab",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8489847-f846-4258-92eb-2f622801c682",
+          "name": "Delete Account",
+          "request": {
+            "name": "Delete Account",
+            "description": {
+              "content": "The delete account service allows an account to be deleted.<br>This service does not return a response. The HTTP response code is 204 (Success with no content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "accountId",
+                  "description": "(Required) accountId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d86d0a8e-af8e-4bad-8a47-35f83eab0e2f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d3669838-8cd7-40d1-9227-4291b484103f",
+              "name": "Y800 : Invalid value for accountId<br>Y806 : Invalid input<br>Y807 : Resource not found<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21dba786-336f-4ef8-b6f3-a6dd5a3453de",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe121c5b-b85a-4442-be40-3c04509847bb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bea1ee40-9257-44b6-b253-9d83043caa1a",
+          "name": "Update Account",
+          "request": {
+            "name": "Update Account",
+            "description": {
+              "content": "The update account service is used to update manual and aggregated accounts.<br>The HTTP response code is 204 (Success without content).<br>Update manual account support is available for bank, card, investment, insurance, loan, otherAssets, otherLiabilities and realEstate containers only.<br><br><b>Note:</b><li> A real estate account update is only supported for SYSTEM and MANUAL valuation type.</li> <li> A real estate account can be linked to a loan account by passing accountId of a loan account in linkedAccountIds .</li> <li> Attribute <b>isEbillEnrolled</b> is deprecated as it is applicable for bill accounts only.</li>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "accountId",
+                  "description": "(Required) accountId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account\": {\n    \"container\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"accountName\": \"<string>\",\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"accountStatus\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"linkedAccountIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"isEbillEnrolled\": \"<string>\",\n    \"nickname\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8ae3c83-00cc-4834-b2fe-5c847b89305a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"container\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"accountName\": \"<string>\",\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"accountStatus\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"linkedAccountIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"isEbillEnrolled\": \"<string>\",\n    \"nickname\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8767f7a-a1f2-44cb-a79f-653d9aaa10e1",
+              "name": "Y800 : Invalid value for accountId<br>Y800 : Invalid value for updateParam<br>Y862 : The provided address is invalid, or the valuation is not available<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>Y869 : Multiple matches found. Provide the complete address or call the POST /accounts/evaluateAddress API to retrieve the list of matched addresses<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"container\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"accountName\": \"<string>\",\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"accountStatus\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"linkedAccountIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"isEbillEnrolled\": \"<string>\",\n    \"nickname\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afb8e0ad-76ee-4a91-acec-9dd21bd57bad",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"container\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"accountName\": \"<string>\",\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"accountStatus\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"linkedAccountIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"isEbillEnrolled\": \"<string>\",\n    \"nickname\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61796f86-cdea-45b9-8d0e-674a8fbe0c94",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "accountId",
+                      "description": "(Required) accountId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": {\n    \"container\": \"<string>\",\n    \"includeInNetWorth\": \"<string>\",\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"street\": \"<string>\",\n      \"state\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"accountName\": \"<string>\",\n    \"dueDate\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"homeValue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"accountNumber\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"accountStatus\": \"<string>\",\n    \"amountDue\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"linkedAccountIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"balance\": {\n      \"amount\": \"<double>\",\n      \"convertedAmount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"convertedCurrency\": \"<string>\"\n    },\n    \"isEbillEnrolled\": \"<string>\",\n    \"nickname\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8320c2a2-4eff-4bc9-8108-1df820498e04",
+          "name": "Get Historical Balances",
+          "request": {
+            "name": "Get Historical Balances",
+            "description": {
+              "content": "The historical balances service is used to retrieve the historical balances for an account or a user.<br>Historical balances are daily (D), weekly (W), and monthly (M). <br>The interval input should be passed as D, W, and M to retrieve the desired historical balances. The default interval is daily (D). <br>When no account id is provided, historical balances of the accounts that are active, to be closed, and closed are provided in the response. <br>If the fromDate and toDate are not passed, the last 90 days of data will be provided. <br>The fromDate and toDate should be passed in the YYYY-MM-DD format. <br>The date field in the response denotes the date for which the balance is requested.<br>includeCF needs to be sent as true if the customer wants to return carried forward balances for a date when the data is not available. <br>asofDate field in the response denotes the date as of which the balance was updated for that account.<br>When there is no balance available for a requested date and if includeCF is sent as true, the previous date for which the balance is available is provided in the response. <br>When there is no previous balance available, no data will be sent. <br>By default, pagination is available for the historicalBalances entity in this API. The skip and top parameters are used for pagination. In the skip and top parameters, pass the number of records to be skipped and retrieved, respectively. The response header provides the links to retrieve the next and previous set of historical balances.<br> The API will only retrieve a maximum 500 records by default when values for skip and top parameters are not provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "historicalBalances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "accountId"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<string>",
+                  "description": "from date for balance retrieval (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCF",
+                  "value": "<boolean>",
+                  "description": "Consider carry forward logic for missing balances"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "D-daily, W-weekly or M-monthly"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "skip (Min 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<string>",
+                  "description": "toDate for balance retrieval (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<integer>",
+                  "description": "top (Max 500)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98f44aec-a624-429f-a65c-6ff3e2a69a9e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "historicalBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeCF",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"account\": [\n    {\n      \"historicalBalances\": [\n        {\n          \"date\": \"string\",\n          \"isAsset\": false,\n          \"balance\": {\n            \"amount\": \"<double>\",\n            \"convertedAmount\": \"<double>\",\n            \"currency\": \"<string>\",\n            \"convertedCurrency\": \"<string>\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"CF\"\n        },\n        {\n          \"date\": \"string\",\n          \"isAsset\": false,\n          \"balance\": {\n            \"amount\": \"<double>\",\n            \"convertedAmount\": \"<double>\",\n            \"currency\": \"<string>\",\n            \"convertedCurrency\": \"<string>\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"CF\"\n        }\n      ],\n      \"id\": 7231\n    },\n    {\n      \"historicalBalances\": [\n        {\n          \"date\": \"string\",\n          \"isAsset\": false,\n          \"balance\": {\n            \"amount\": \"<double>\",\n            \"convertedAmount\": \"<double>\",\n            \"currency\": \"<string>\",\n            \"convertedCurrency\": \"<string>\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"C\"\n        },\n        {\n          \"date\": \"string\",\n          \"isAsset\": false,\n          \"balance\": {\n            \"amount\": \"<double>\",\n            \"convertedAmount\": \"<double>\",\n            \"currency\": \"<string>\",\n            \"convertedCurrency\": \"<string>\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"S\"\n        }\n      ],\n      \"id\": 2610\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d7e613a-ffe8-401f-a521-8b579d229ea0",
+              "name": "Y800 : Invalid value for accountId<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for toDate<br>Y809 : Invalid date range<br>Y800 : Invalid value for interval<br>Y802 : Future date not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "historicalBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeCF",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "155b3429-7bca-4929-ba29-0788c10bf902",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "historicalBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeCF",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57a8c2fc-5bc6-4d4a-a5af-127eb9f7de43",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "historicalBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeCF",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "130a5840-054e-4849-935c-5e2b1fa64067",
+          "name": "Get Latest Balances",
+          "request": {
+            "name": "Get Latest Balances",
+            "description": {
+              "content": "The latest balances service provides the latest account balance by initiating a new balance refresh request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "latestBalances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "(Required) Comma separated accountIds."
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountId",
+                  "value": "<string>",
+                  "description": "(Required) providerAccountId."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c8f16b6-fc75-4364-bc3e-13a58b73c671",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "latestBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"accountBalance\": [\n    {\n      \"accountName\": \"string\",\n      \"totalBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountType\": \"string\",\n      \"currentBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"refreshStatus\": \"FAILED\",\n      \"accountNumber\": \"string\",\n      \"availableBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountId\": 2027,\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerId\": \"string\",\n      \"providerAccountId\": 2606,\n      \"CONTAINER\": \"investment\",\n      \"cash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerName\": \"string\",\n      \"failedReason\": \"CREDENTIALS_UPDATE_NEEDED\"\n    },\n    {\n      \"accountName\": \"string\",\n      \"totalBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountType\": \"string\",\n      \"currentBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"refreshStatus\": \"SUCCESS\",\n      \"accountNumber\": \"string\",\n      \"availableBalance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"accountId\": 6418,\n      \"lastUpdated\": \"string\",\n      \"balance\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerId\": \"string\",\n      \"providerAccountId\": 2066,\n      \"CONTAINER\": \"investment\",\n      \"cash\": {\n        \"amount\": \"<double>\",\n        \"convertedAmount\": \"<double>\",\n        \"currency\": \"<string>\",\n        \"convertedCurrency\": \"<string>\"\n      },\n      \"providerName\": \"string\",\n      \"failedReason\": \"INVALID_ADDL_INFO_PROVIDED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a4ec1c4-949a-4daf-81a8-4e515790f95b",
+              "name": "Y800 : Invalid value for providerAccountId<br>Y800 : Invalid value for accountId <br>Y800 : Invalid value for accountId. Only ACTIVE accountId are supported <br>Y901 : Service not supported<br>Y803 : providerAccountId required <br>Y805 : Multiple providerAccountId not supported <br>Y803 : accountId required <br>Y820 : The accountId is not supported for container other than bank, investment<br>Y824 : The maximum number of accountIds permitted is 10<br>Y800 : Invalid value for accountId. All accountIds should belong to the same providerAccountId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "latestBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ca6a919-e49e-4f5b-ba62-ae6060684503",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "latestBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8eae3f31-b50f-418d-8101-cd3d6b6d658e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "latestBalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "61b82fcf-8e17-4fa8-a2fb-1c207853f0ee",
+    "name": "Yodlee Core APIs Account Token Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

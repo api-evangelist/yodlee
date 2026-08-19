@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Holdings API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Holdings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Asset Classification List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings/assetClassificationList"
+          },
+          "docs": "The get asset classifications list service is used to get the supported asset classifications. <br>The response includes different classification types like assetClass, country, sector, style, etc. and the values corresponding to each type.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Security Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings/securities",
+            "params": [
+              {
+                "name": "holdingId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated holdingId"
+              }
+            ]
+          },
+          "docs": "The get security details service is used to get all the security information for the holdings<br>"
+        },
+        {
+          "info": {
+            "name": "Get Holdings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountId"
+              },
+              {
+                "name": "assetClassification.classificationType",
+                "value": "",
+                "type": "query",
+                "description": "e.g. Country, Sector, etc."
+              },
+              {
+                "name": "classificationValue",
+                "value": "",
+                "type": "query",
+                "description": "e.g. US"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "assetClassification"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "The get holdings service is used to get the list of holdings of a user.<br>Supported holding types can be employeeStockOption, moneyMarketFund, bond, etc. and is obtained using get holding type list service. <br>Asset classifications for the holdings need to be requested through the \"include\" parameter.<br>Asset classification information for holdings are not available by default, as it is a premium feature.<br>"
+        },
+        {
+          "info": {
+            "name": "Add Holding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/holdings"
+          },
+          "docs": "The add manual holding service is used to add manual holdings. The response of add manual holding service includes the Yodlee generated holding id.<br><br>Add manual holding can only be added to a manual account of investment type container only."
+        },
+        {
+          "info": {
+            "name": "Get Holding Type List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holdings/holdingTypeList"
+          },
+          "docs": "The get holding types list service is used to get the supported holding types.<br>The response includes different holding types such as future, moneyMarketFund, stock, etc. and it returns the supported holding types <br>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

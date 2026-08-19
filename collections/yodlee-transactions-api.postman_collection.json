@@ -1,0 +1,3576 @@
+{
+  "item": [
+    {
+      "id": "7ebc3d6d-9d77-4033-b66b-97b5f1bf5a84",
+      "name": "Transactions",
+      "description": {
+        "content": "Transactions API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d53a153-e1af-4fe6-8329-a6bf8255b2f1",
+          "name": "Get Transactions",
+          "request": {
+            "name": "Get Transactions",
+            "description": {
+              "content": "The Transaction service is used to get a list of transactions for a user.<br>By default, this service returns the last 30 days of transactions from today's date when fromDate and toDate are not passed.<br>When fromDate and toDate are passed, the API will only return up to 2 years of transaction history. If the difference between fromDate and toDate is more than 2 years, API will return only last 2 years from the toDate.<br>The keyword parameter performs a contains search on the original, consumer, and simple description attributes, replace the special characters #, &, and + with percent-encoding values %23, %26, and %2B respectively. Eg: for -Debit# , pass the input as -Debit%23.<br>Values for categoryId parameter can be fetched from get transaction category list service.<br> The categoryId is used to filter transactions based on system-defined category as well as user-defined category.<br>User-defined categoryIds should be provided in the filter with the prefix ''U''. E.g. U10002<br>The skip and top parameters are used for pagination. In the skip and top parameters pass the number of records to be skipped and retrieved, respectively. The response header provides the links to retrieve the next and previous set of transactions.<br>Double quotes in the merchant name will be prefixed by backslashes (&#92;) in the response, e.g. Toys \"R\" Us. <br>sourceId is a unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts. Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts.<br><br><b>Note</b><ul><li><a href=\"https://developer.yodlee.com/resources/yodlee/transaction-data-enrichment/docs/overview\">Transaction Data Enrichment</a> is made available for bank and card accounts. The address field in the response is available only when the Transaction Data Enrichment key is turned ON.</li><li>The pagination feature is available by default. If no values are passed in the skip and top parameters, the API will only return the first 500 transactions.</li><li>This service supports the localization feature and accepts locale as a header parameter.</li></ul>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "Comma separated accountIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "baseType",
+                  "value": "<string>",
+                  "description": "DEBIT/CREDIT"
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "description": "Comma separated categoryIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryType",
+                  "value": "<string>",
+                  "description": "Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)"
+                },
+                {
+                  "disabled": false,
+                  "key": "container",
+                  "value": "<string>",
+                  "description": "bank/creditCard/investment/insurance/loan"
+                },
+                {
+                  "disabled": false,
+                  "key": "convertToCurrency",
+                  "value": "<string>",
+                  "description": "On-demand currency conversion parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "detailCategoryId",
+                  "value": "<string>",
+                  "description": "Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories."
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<string>",
+                  "description": "Transaction from date(YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "highLevelCategoryId",
+                  "value": "<string>",
+                  "description": "Comma separated highLevelCategoryIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>",
+                  "description": "Transaction search text"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "skip (Min 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<string>",
+                  "description": "Transaction end date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<integer>",
+                  "description": "top (Max 500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionSourceId",
+                  "value": "<string>",
+                  "description": "A unique ID that the provider site has assigned to the transaction"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Transaction Type(SELL,SWEEP, etc.) for bank/creditCard/investment"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "365a40c1-7af5-460c-b51b-663426df9595",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionSourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"transaction\": [\n    {\n      \"date\": \"string\",\n      \"sourceId\": \"string\",\n      \"symbol\": \"string\",\n      \"cusipNumber\": \"string\",\n      \"sourceApcaNumber\": \"string\",\n      \"highLevelCategoryId\": 9835,\n      \"memo\": \"string\",\n      \"type\": \"string\",\n      \"intermediary\": [\n        \"string\",\n        \"string\"\n      ],\n      \"frequency\": \"string\",\n      \"lastUpdated\": \"string\",\n      \"price\": {\n        \"amount\": 1591.4741669126786,\n        \"convertedAmount\": 2618.9002808047235,\n        \"currency\": \"BRL\",\n        \"convertedCurrency\": \"NLG\"\n      },\n      \"sourceMerchantCategoryCode\": \"string\",\n      \"id\": 8032,\n      \"checkNumber\": \"string\",\n      \"transactionDateTime\": \"string\",\n      \"typeAtSource\": \"string\",\n      \"valoren\": \"string\",\n      \"isManual\": true,\n      \"sourceBillerName\": \"string\",\n      \"merchant\": {\n        \"website\": \"string\",\n        \"address\": {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"sourceType\": \"string\",\n          \"address1\": \"string\",\n          \"street\": \"string\",\n          \"state\": \"string\",\n          \"type\": \"SMALL_BUSINESS\"\n        },\n        \"logoURLs\": [\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          }\n        ],\n        \"contact\": {\n          \"phone\": \"string\",\n          \"email\": \"string\"\n        },\n        \"categoryLabel\": [\n          \"string\",\n          \"string\"\n        ],\n        \"coordinates\": {\n          \"latitude\": 1710.4441668067516,\n          \"longitude\": 5631.633196941272\n        },\n        \"name\": \"string\",\n        \"id\": \"string\",\n        \"source\": \"YODLEE\",\n        \"logoURL\": \"string\"\n      },\n      \"sedol\": \"string\",\n      \"categoryType\": \"LOAN\",\n      \"accountId\": 7085,\n      \"sourceType\": \"MANUAL\",\n      \"subType\": \"CREDIT\",\n      \"holdingDescription\": \"string\",\n      \"status\": \"CLEARED\",\n      \"detailCategoryId\": 4713,\n      \"description\": {\n        \"security\": \"string\",\n        \"original\": \"string\",\n        \"simple\": \"string\",\n        \"consumer\": \"string\"\n      },\n      \"settleDate\": \"string\",\n      \"postDateTime\": \"string\",\n      \"baseType\": \"CREDIT\",\n      \"categorySource\": \"USER\",\n      \"principal\": {\n        \"amount\": 5251.822662351756,\n        \"convertedAmount\": 260.5416382676229,\n        \"currency\": \"SBD\",\n        \"convertedCurrency\": \"PGK\"\n      },\n      \"sourceBillerCode\": \"string\",\n      \"interest\": {\n        \"amount\": 5703.616515252074,\n        \"convertedAmount\": 3280.173510658352,\n        \"currency\": \"SRG\",\n        \"convertedCurrency\": \"AFA\"\n      },\n      \"commission\": {\n        \"amount\": 1831.6346567876362,\n        \"convertedAmount\": 8354.583499327036,\n        \"currency\": \"HUF\",\n        \"convertedCurrency\": \"BTC\"\n      },\n      \"merchantType\": \"string\",\n      \"amount\": {\n        \"amount\": 885.3020887541841,\n        \"convertedAmount\": 4980.7326430399335,\n        \"currency\": \"SOS\",\n        \"convertedCurrency\": \"QAR\"\n      },\n      \"isPhysical\": false,\n      \"quantity\": 5077.031215979794,\n      \"isRecurring\": \"string\",\n      \"transactionDate\": \"string\",\n      \"createdDate\": \"string\",\n      \"CONTAINER\": \"realEstate\",\n      \"businessCategory\": {\n        \"categoryName\": \"string\",\n        \"categoryId\": 982\n      },\n      \"postDate\": \"string\",\n      \"parentCategoryId\": 4417,\n      \"category\": \"string\",\n      \"runningBalance\": {\n        \"amount\": 4737.38476629212,\n        \"convertedAmount\": 449.6241326140016,\n        \"currency\": \"IRR\",\n        \"convertedCurrency\": \"XFU\"\n      },\n      \"categoryId\": 6445,\n      \"isin\": \"string\"\n    },\n    {\n      \"date\": \"string\",\n      \"sourceId\": \"string\",\n      \"symbol\": \"string\",\n      \"cusipNumber\": \"string\",\n      \"sourceApcaNumber\": \"string\",\n      \"highLevelCategoryId\": 6102,\n      \"memo\": \"string\",\n      \"type\": \"string\",\n      \"intermediary\": [\n        \"string\",\n        \"string\"\n      ],\n      \"frequency\": \"string\",\n      \"lastUpdated\": \"string\",\n      \"price\": {\n        \"amount\": 8823.972134157575,\n        \"convertedAmount\": 7821.8761926498755,\n        \"currency\": \"LSL\",\n        \"convertedCurrency\": \"RWF\"\n      },\n      \"sourceMerchantCategoryCode\": \"string\",\n      \"id\": 6518,\n      \"checkNumber\": \"string\",\n      \"transactionDateTime\": \"string\",\n      \"typeAtSource\": \"string\",\n      \"valoren\": \"string\",\n      \"isManual\": false,\n      \"sourceBillerName\": \"string\",\n      \"merchant\": {\n        \"website\": \"string\",\n        \"address\": {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"sourceType\": \"string\",\n          \"address1\": \"string\",\n          \"street\": \"string\",\n          \"state\": \"string\",\n          \"type\": \"BUSINESS\"\n        },\n        \"logoURLs\": [\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          }\n        ],\n        \"contact\": {\n          \"phone\": \"string\",\n          \"email\": \"string\"\n        },\n        \"categoryLabel\": [\n          \"string\",\n          \"string\"\n        ],\n        \"coordinates\": {\n          \"latitude\": 1312.1321975229594,\n          \"longitude\": 2659.9104710589627\n        },\n        \"name\": \"string\",\n        \"id\": \"string\",\n        \"source\": \"YODLEE\",\n        \"logoURL\": \"string\"\n      },\n      \"sedol\": \"string\",\n      \"categoryType\": \"DEFERRED_COMPENSATION\",\n      \"accountId\": 1994,\n      \"sourceType\": \"MANUAL\",\n      \"subType\": \"PERSONAL_LOAN\",\n      \"holdingDescription\": \"string\",\n      \"status\": \"POSTED\",\n      \"detailCategoryId\": 4984,\n      \"description\": {\n        \"security\": \"string\",\n        \"original\": \"string\",\n        \"simple\": \"string\",\n        \"consumer\": \"string\"\n      },\n      \"settleDate\": \"string\",\n      \"postDateTime\": \"string\",\n      \"baseType\": \"DEBIT\",\n      \"categorySource\": \"USER\",\n      \"principal\": {\n        \"amount\": 5129.209753654489,\n        \"convertedAmount\": 7254.574086417376,\n        \"currency\": \"SDD\",\n        \"convertedCurrency\": \"BIF\"\n      },\n      \"sourceBillerCode\": \"string\",\n      \"interest\": {\n        \"amount\": 9130.513959093609,\n        \"convertedAmount\": 2415.466438762911,\n        \"currency\": \"BBD\",\n        \"convertedCurrency\": \"TRY\"\n      },\n      \"commission\": {\n        \"amount\": 1115.3881736830485,\n        \"convertedAmount\": 1305.4045445307838,\n        \"currency\": \"SPL\",\n        \"convertedCurrency\": \"ETB\"\n      },\n      \"merchantType\": \"string\",\n      \"amount\": {\n        \"amount\": 40.6185506338963,\n        \"convertedAmount\": 5719.105935502917,\n        \"currency\": \"STD\",\n        \"convertedCurrency\": \"AZM\"\n      },\n      \"isPhysical\": false,\n      \"quantity\": 885.8067279215076,\n      \"isRecurring\": \"string\",\n      \"transactionDate\": \"string\",\n      \"createdDate\": \"string\",\n      \"CONTAINER\": \"reward\",\n      \"businessCategory\": {\n        \"categoryName\": \"string\",\n        \"categoryId\": 2972\n      },\n      \"postDate\": \"string\",\n      \"parentCategoryId\": 4320,\n      \"category\": \"string\",\n      \"runningBalance\": {\n        \"amount\": 7084.0599885689535,\n        \"convertedAmount\": 4813.4551264568545,\n        \"currency\": \"GIP\",\n        \"convertedCurrency\": \"YER\"\n      },\n      \"categoryId\": 6811,\n      \"isin\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58ae4a92-e209-412d-8919-771eb10900b8",
+              "name": "Y800 : Invalid value for baseType<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for category<br>Y800 : Invalid value for toDate<br>Y800 : Invalid value for container<br>Y809 : Invalid date range<br>Y804 : Permitted values of top between 1 - 500<br>Y805 : Multiple containers not supported<br>Y800 : Invalid value for transaction type<br>Y824 : The maximum number of accountIds permitted is 100<br>Y824 : The maximum number of categoryIds permitted is 100<br>Y824 : The maximum number of highLevelCategoryIds permitted is 100<br>Y848 : detailCategoryId cannot be provided as input, as the detailedCategory feature is not enabled<br>Y823 : detailCategoryId is not for applicable containers other than bank and card<br>Y824 : The maximum number of detailCategoryIds permitted is 100<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for convertToCurrency<br>Y820 : The currency value is not supported for convertToCurrency<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionSourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ee86aaa-2c46-461e-bc67-a686073f4d96",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionSourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e2072af-43e7-4a45-b6f1-e23b2773590b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionSourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e74969b-6c38-4551-b1a9-2b9b15e77e3b",
+          "name": "Update Transaction for Transaction Source ID",
+          "request": {
+            "name": "Update Transaction for Transaction Source ID",
+            "description": {
+              "content": "Update the category, consumer description, memo, isPhysical, merchantType, and detailCategory for a transaction by filtering it using the Transaction Source ID.<br>The HTTP response code is 204 (Success without content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction\": {\n    \"categoryId\": \"<long>\",\n    \"categorySource\": \"<string>\",\n    \"container\": \"<string>\",\n    \"transactionSourceId\": \"<string>\",\n    \"isPhysical\": \"<boolean>\",\n    \"detailCategoryId\": \"<long>\",\n    \"memo\": \"<string>\",\n    \"merchantType\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cfe8d04b-5f55-4719-b0a3-bc823c5fb7b7",
+              "name": "Updated Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "884761b6-3dc1-471b-8dd0-bb4ed39b5b97",
+              "name": "Y812 : Required field -transactionSourceId missing in the transaction <br>Y812 : Required field -container missing in the transactionParam parameter input<br>Y800 : Invalid value for transactionId<br>Y800 : Invalid value for merchantType<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for categoryId<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>Y800 : Invalid value for transactionSourceId<br>Y800 : Invalid value for transactionSourceId. Muiltiple transactionId found for given transactionSourceId<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a2cafcb-f65b-46f9-85b4-ace59ae399e0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2bf84a4-bde6-4d76-9744-4e43995ddcbc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30b56446-ad1d-4f85-8374-26f5461f2bb2",
+          "name": "Run Transaction Categorization Rule",
+          "request": {
+            "name": "Run Transaction Categorization Rule",
+            "description": {
+              "content": "The run transaction categorization rule service is used to run a rule on transactions, to categorize the transactions.<br>The HTTP response code is 204 (Success with no content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories",
+                "rules",
+                ":ruleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "run",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "ruleId",
+                  "description": "(Required) Unique id of the categorization rule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1b7327a-2b68-4154-9457-3a7ba6b2fc9e",
+              "name": "Run Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "run"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique id of the categorization rule"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ee9b402-6ba5-4303-babe-c35edc1af758",
+              "name": "Y800 : Invalid value for ruleId<br>Y400 : Categorization already in progress",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "run"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique id of the categorization rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58196812-3cd6-46b1-837b-c984521840f2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "run"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique id of the categorization rule"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd26b9ad-55d4-4e90-a929-ce967d20ef50",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "run"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique id of the categorization rule"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fab65fc4-cb3b-44c6-a2bc-ffabbdb09c86",
+          "name": "Delete Transaction Categorization Rule",
+          "request": {
+            "name": "Delete Transaction Categorization Rule",
+            "description": {
+              "content": "The delete transaction categorization rule service is used to delete the given user-defined transaction categorization rule for both system-defined category as well as user-defined category.<br>This will delete all the corresponding rule clauses associated with the rule.<br>The HTTP response code is 204 (Success without content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories",
+                "rules",
+                ":ruleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "ruleId",
+                  "description": "(Required) ruleId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c15b4625-a7c1-4eb0-ad4e-d3450537e24c",
+              "name": "Deleted Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da171f0e-19ce-481a-bf1a-9752573f8272",
+              "name": "Y800 : Invalid value for ruleId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dd11c55-4f74-408c-9ef1-060666f3ef6a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0647652-e280-49e5-937e-1bdba73d4d98",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb592fdc-1c3f-4f84-8185-b4224db84084",
+          "name": "Update Transaction Categorization Rule",
+          "request": {
+            "name": "Update Transaction Categorization Rule",
+            "description": {
+              "content": "The update transaction categorization rule service is used to update a categorization rule for both system-defined category as well as user-defined category.<br>ruleParam JSON input should be as explained in the create transaction categorization rule service.<br>The HTTP response code is 204 (Success without content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories",
+                "rules",
+                ":ruleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "ruleId",
+                  "description": "(Required) ruleId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rule\": {\n    \"categoryId\": \"<integer>\",\n    \"ruleClause\": [\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    ],\n    \"source\": \"<string>\",\n    \"priority\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7b00dee-172b-4da3-9d67-3ad43c107456",
+              "name": "Updated Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rule\": {\n    \"categoryId\": \"<integer>\",\n    \"ruleClause\": [\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    ],\n    \"source\": \"<string>\",\n    \"priority\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3266f644-2c78-4fac-8257-84d74cc25b8a",
+              "name": "Y800 : Invalid value for ruleId<br>Y806 : Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rule\": {\n    \"categoryId\": \"<integer>\",\n    \"ruleClause\": [\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    ],\n    \"source\": \"<string>\",\n    \"priority\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdea8b36-5f90-48ec-be91-8aa8832ded7e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rule\": {\n    \"categoryId\": \"<integer>\",\n    \"ruleClause\": [\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    ],\n    \"source\": \"<string>\",\n    \"priority\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c1279f7-1955-4b00-a295-88e149affde0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "ruleId",
+                      "description": "(Required) ruleId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rule\": {\n    \"categoryId\": \"<integer>\",\n    \"ruleClause\": [\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"operation\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    ],\n    \"source\": \"<string>\",\n    \"priority\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f425eb8e-1a3f-4ce3-8f8c-4afb50a548ef",
+          "name": "Get Transactions Count",
+          "request": {
+            "name": "Get Transactions Count",
+            "description": {
+              "content": "The count service provides the total number of transactions for a specific user depending on the input parameters passed.<br>If you are implementing pagination for transactions, call this endpoint before calling GET /transactions to know the number of transactions that are returned for the input parameters passed.<br>The functionality of the input parameters remains the same as that of the GET /transactions endpoint.<br>If the difference between fromDate and toDate is more than 2 years, API will return the count of last 2 years from the toDate.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "Comma separated accountIds\t"
+                },
+                {
+                  "disabled": false,
+                  "key": "baseType",
+                  "value": "<string>",
+                  "description": "DEBIT/CREDIT"
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "description": "Comma separated categoryIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryType",
+                  "value": "<string>",
+                  "description": "Transaction Category Type(LOAN, UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)"
+                },
+                {
+                  "disabled": false,
+                  "key": "container",
+                  "value": "<string>",
+                  "description": "bank/creditCard/investment/insurance/loan"
+                },
+                {
+                  "disabled": false,
+                  "key": "detailCategoryId",
+                  "value": "<string>",
+                  "description": "Comma separated detailCategoryIds. The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories."
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<string>",
+                  "description": "Transaction from date(YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "highLevelCategoryId",
+                  "value": "<string>",
+                  "description": "Comma separated highLevelCategoryIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>",
+                  "description": "Transaction search text\t"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<string>",
+                  "description": "Transaction end date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Transaction Type(SELL,SWEEP, etc.)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9ea8aaf-c425-4511-817e-17e842eaa1c9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"transaction\": {\n    \"TOTAL\": {\n      \"count\": 3760\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05a471ea-5035-4a8f-a61e-8c145f7706ad",
+              "name": "Y800 : Invalid value for detailCategoryId<br>Y848 : detailCategoryId cannot be provided as input, as the detailedCategory feature is not enabled<br>Y823 : detailCategoryId is not applicable for containers other than bank and card<br>Y824 : The maximum number of detailCategoryIds permitted is 100<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce0d42f0-c2a2-4b7c-9b4b-faa32469e6ae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b4e19da-83f1-4f37-b81a-c1e59b7c578e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "detailCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "highLevelCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a979f15-ab79-4c2a-92da-b2a0af43a5a6",
+          "name": "Get Transaction Categorization Rules",
+          "request": {
+            "name": "Get Transaction Categorization Rules",
+            "description": {
+              "content": "The get transaction categorization rule service is used to get all the categorization rules.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories",
+                "txnRules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "630e7913-c558-4a49-8ec2-3bf447eb0c91",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "txnRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"txnRules\": [\n    {\n      \"ruleClauses\": [\n        {\n          \"field\": \"amount\",\n          \"userDefinedRuleId\": 2379,\n          \"fieldValue\": \"string\",\n          \"operation\": \"numberLessThan\",\n          \"ruleClauseId\": 9176\n        },\n        {\n          \"field\": \"amount\",\n          \"userDefinedRuleId\": 3161,\n          \"fieldValue\": \"string\",\n          \"operation\": \"numberLessThanEquals\",\n          \"ruleClauseId\": 609\n        }\n      ],\n      \"userDefinedRuleId\": 7295,\n      \"categoryLevelId\": 1041,\n      \"transactionCategorisationId\": 8485,\n      \"memId\": 9017,\n      \"rulePriority\": 8682\n    },\n    {\n      \"ruleClauses\": [\n        {\n          \"field\": \"description\",\n          \"userDefinedRuleId\": 3634,\n          \"fieldValue\": \"string\",\n          \"operation\": \"numberLessThanEquals\",\n          \"ruleClauseId\": 5826\n        },\n        {\n          \"field\": \"amount\",\n          \"userDefinedRuleId\": 1479,\n          \"fieldValue\": \"string\",\n          \"operation\": \"numberGreaterThanEquals\",\n          \"ruleClauseId\": 2110\n        }\n      ],\n      \"userDefinedRuleId\": 749,\n      \"categoryLevelId\": 8944,\n      \"transactionCategorisationId\": 5442,\n      \"memId\": 5793,\n      \"rulePriority\": 1900\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b911b2fd-f451-496b-95e3-cc50355eec4a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "txnRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3b513522-3b59-485b-a41f-969c25588bd1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "txnRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "473ba63d-d814-4eef-83cb-5335b8c390d0",
+          "name": "Delete Category",
+          "request": {
+            "name": "Delete Category",
+            "description": {
+              "content": "The delete transaction categories service is used to delete the given user-defined category.<br>The HTTP response code is 204 (Success without content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories",
+                ":categoryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "categoryId",
+                  "description": "(Required) categoryId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ad3acd6-f241-4b45-abee-eff89403087c",
+              "name": "Deleted Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    ":categoryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "categoryId",
+                      "description": "(Required) categoryId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa982c3f-7bdc-4679-b58f-df6398f096e8",
+              "name": "Y800 : Invalid value for categoryId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    ":categoryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "categoryId",
+                      "description": "(Required) categoryId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5f10c23-8ce5-4f42-b328-ac88fca8a5c2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    ":categoryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "categoryId",
+                      "description": "(Required) categoryId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42132175-aa5b-4c78-bbdf-12859326021b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    ":categoryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "categoryId",
+                      "description": "(Required) categoryId"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebed580f-623c-45f3-bf48-3b96ac8a550f",
+          "name": "Create Category",
+          "request": {
+            "name": "Create Category",
+            "description": {
+              "content": "The create transaction categories service is used to create user-defined categories for a system-defined category.<br>The parentCategoryId is the system-defined category id.This can be retrieved using get transaction categories service.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 201 (Created successfully).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parentCategoryId\": \"<integer>\",\n  \"categoryName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6bb1dd57-24d4-4853-b1d8-8ef96b0a73f5",
+              "name": "Created Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parentCategoryId\": \"<integer>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1321f256-f179-472f-bd3e-6ad220689d6f",
+              "name": "Y800 : Invalid value for categoryParam<br>Y800 : Invalid value for source<br>Y801 : Invalid length for categoryName. Min 1 and max 50 is required<br>Y803 : parentCategoryId required<br>Y811 : categoryName value already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parentCategoryId\": \"<integer>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acff0bb5-94c6-4e59-b2f1-34adf458b88a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parentCategoryId\": \"<integer>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9081a23-e991-4702-9aee-e3b191b9ce3c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parentCategoryId\": \"<integer>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c831e995-eacb-4e61-955a-fc48cf209888",
+          "name": "Get Transaction Category List",
+          "request": {
+            "name": "Get Transaction Category List",
+            "description": {
+              "content": "The categories service returns the list of available transaction categories.<br>High level category is returned in the response only if it is opted by the customer.<br>When invoked by passing the cobrand session or admin access token, this service returns the supported transaction categories at the cobrand level. <br>When invoked by passing the cobrand session and the user session or user access token, this service returns the transaction categories <br>along with user-defined categories.<br>Double quotes in the user-defined category name will be prefixed by backslashes (&#92;) in the response, <br>e.g. Toys \"R\" Us.<br/>Source and id are the primary attributes of the category entity.<br><br><b>Note:</b><li>This service supports the localization feature and accepts locale as a header parameter.</li>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0679330d-7722-488a-b591-1752ea3f49af",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"transactionCategory\": [\n    {\n      \"highLevelCategoryName\": \"string\",\n      \"defaultHighLevelCategoryName\": \"string\",\n      \"highLevelCategoryId\": 4875,\n      \"businessCategory\": {\n        \"categoryName\": \"string\",\n        \"categoryId\": 6849\n      },\n      \"detailCategory\": [\n        {\n          \"name\": \"string\",\n          \"id\": 2326\n        },\n        {\n          \"name\": \"string\",\n          \"id\": 7175\n        }\n      ],\n      \"id\": 4385,\n      \"source\": \"SYSTEM\",\n      \"category\": \"string\",\n      \"classification\": \"PERSONAL\",\n      \"type\": \"UNCATEGORIZE\",\n      \"defaultCategoryName\": \"string\"\n    },\n    {\n      \"highLevelCategoryName\": \"string\",\n      \"defaultHighLevelCategoryName\": \"string\",\n      \"highLevelCategoryId\": 9949,\n      \"businessCategory\": {\n        \"categoryName\": \"string\",\n        \"categoryId\": 1314\n      },\n      \"detailCategory\": [\n        {\n          \"name\": \"string\",\n          \"id\": 4104\n        },\n        {\n          \"name\": \"string\",\n          \"id\": 503\n        }\n      ],\n      \"id\": 6131,\n      \"source\": \"SYSTEM\",\n      \"category\": \"string\",\n      \"classification\": \"BUSINESS\",\n      \"type\": \"UNCATEGORIZE\",\n      \"defaultCategoryName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e4c80f2-5641-457c-80d4-e6c9c1646323",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5a0bc42-72ec-4fa4-8ebb-2e02885fad3b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc76a01d-ec76-4b37-a49e-3868a2343110",
+          "name": "Update Category",
+          "request": {
+            "name": "Update Category",
+            "description": {
+              "content": "The update transaction categories service is used to update the transaction category name<br>for a high level category, a system-defined category and a user-defined category.<br>The renamed category can be set back to the original name by passing an empty string for categoryName.<br>The categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.<br>The HTTP response code is 204 (Success without content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<long>\",\n  \"source\": \"<string>\",\n  \"highLevelCategoryName\": \"<string>\",\n  \"categoryName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7fccd402-0226-417e-9e34-0d461e87df13",
+              "name": "Updated Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"source\": \"<string>\",\n  \"highLevelCategoryName\": \"<string>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "62b97f10-6d9c-41eb-932e-ccbe10f6edd5",
+              "name": "Y800 : Invalid value for categoryParam<br>Y800 : Invalid value for source<br>Y801 : Invalid length for categoryName. Min 1 and max 50 is required<br>Y803 : id required<br>Y811 : categoryName value already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"source\": \"<string>\",\n  \"highLevelCategoryName\": \"<string>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6fc9e70-ca6c-4dd8-8363-caaf5d44b591",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"source\": \"<string>\",\n  \"highLevelCategoryName\": \"<string>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "067a969f-58ee-4509-8673-4fcabae16d3a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"source\": \"<string>\",\n  \"highLevelCategoryName\": \"<string>\",\n  \"categoryName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb345471-242a-46b6-997f-1c7fa21f0ffe",
+          "name": "Create or Run Transaction Categorization Rule",
+          "request": {
+            "name": "Create or Run Transaction Categorization Rule",
+            "description": {
+              "content": "The Create or Run Transaction Categorization Rule endpoint is used to: <br>Create transaction categorization rules for both system and user-defined categories.<br>Run all the transaction categorization rules to categorize transactions by calling the endpoint with action=run as the query parameter. <br><br>The input body parameters to create transaction categorization rules follow:<br>     categoryId - This field is mandatory and numeric<br>     priority - This field is optional and numeric. Priority decides the order in which the rule gets applied on transactions.<br>     ruleClause - This field is mandatory and should contain at least one rule<br>     field - The value can be description or amount<br><br>       If the field value is description then,<br>         1. operation - value can be stringEquals or stringContains<br>         2. value - value should be min of 3 and max of 50 characters<br><br>       If the field value is amount then, <br>         1. operation - value can be numberEquals, numberLessThan, numberLessThanEquals, numberGreaterThan or numberGreaterThanEquals<br>         2. value - min value 0 and a max value of 99999999999.99 is allowed<br>The HTTP response code is 201 (Created Successfully).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "To run rules, pass action=run. Only value run is supported"
+                },
+                {
+                  "disabled": false,
+                  "key": "ruleParam",
+                  "value": "<string>",
+                  "description": "rules(JSON format) to categorize the transactions"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c76f3bf-8c93-4050-92e7-c4b14337d2d9",
+              "name": "Created Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ruleParam",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c79cd568-303d-487e-9eaf-62bf8c09824c",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ruleParam",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3fee9ba2-70e8-4ec0-80b3-a3d7cd185976",
+              "name": "Y806 : Invalid input<br>Y400 : Rule already exists. Rule should be unique in terms of combination of description and amount",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ruleParam",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00334531-246d-48a7-88ba-db322244481d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ruleParam",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d860abe-bca6-4379-b2fb-f8324d69218c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ruleParam",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae126af5-72a9-4f7d-ae9f-ba51211f5397",
+          "name": "Get Transaction Categorization Rules",
+          "request": {
+            "name": "Get Transaction Categorization Rules",
+            "description": {
+              "content": "The get transaction categorization rule service is used to get all the categorization rules.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "categories",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef017968-9f21-4807-aaef-000bc5854677",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "[\n  {\n    \"ruleClauses\": [\n      {\n        \"field\": \"description\",\n        \"userDefinedRuleId\": 9148,\n        \"fieldValue\": \"string\",\n        \"operation\": \"numberGreaterThan\",\n        \"ruleClauseId\": 9906\n      },\n      {\n        \"field\": \"amount\",\n        \"userDefinedRuleId\": 5966,\n        \"fieldValue\": \"string\",\n        \"operation\": \"numberLessThanEquals\",\n        \"ruleClauseId\": 5564\n      }\n    ],\n    \"userDefinedRuleId\": 110,\n    \"categoryLevelId\": 9085,\n    \"transactionCategorisationId\": 8157,\n    \"memId\": 8190,\n    \"rulePriority\": 168\n  },\n  {\n    \"ruleClauses\": [\n      {\n        \"field\": \"description\",\n        \"userDefinedRuleId\": 1558,\n        \"fieldValue\": \"string\",\n        \"operation\": \"numberGreaterThanEquals\",\n        \"ruleClauseId\": 2605\n      },\n      {\n        \"field\": \"description\",\n        \"userDefinedRuleId\": 8238,\n        \"fieldValue\": \"string\",\n        \"operation\": \"numberLessThan\",\n        \"ruleClauseId\": 9120\n      }\n    ],\n    \"userDefinedRuleId\": 466,\n    \"categoryLevelId\": 2651,\n    \"transactionCategorisationId\": 2472,\n    \"memId\": 4462,\n    \"rulePriority\": 40\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20155146-f951-49cb-ba0b-dd8005e13440",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09c1b1f0-7a43-4ac8-bde3-54f041eed88e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "categories",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b721e396-da4c-44b7-bb71-9edc8889f073",
+          "name": "Get Transactions using Transaction ID",
+          "request": {
+            "name": "Get Transactions using Transaction ID",
+            "description": {
+              "content": "The Transaction service is used to get a list of transactions for a user using Transaction ID.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "container",
+                  "value": "<string>",
+                  "description": "(Required) bank/creditCard/investment/insurance/loan"
+                },
+                {
+                  "disabled": false,
+                  "key": "convertToCurrency",
+                  "value": "<string>",
+                  "description": "On-demand currency conversion parameter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "transactionId",
+                  "description": "(Required) An unique identifier for the transaction. The combination of the id and account container are unique in the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "883d1eac-4caa-4f6f-bd35-d0774bb07efd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) An unique identifier for the transaction. The combination of the id and account container are unique in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"transaction\": [\n    {\n      \"date\": \"string\",\n      \"sourceId\": \"string\",\n      \"symbol\": \"string\",\n      \"cusipNumber\": \"string\",\n      \"sourceApcaNumber\": \"string\",\n      \"highLevelCategoryId\": 2822,\n      \"memo\": \"string\",\n      \"type\": \"string\",\n      \"intermediary\": [\n        \"string\",\n        \"string\"\n      ],\n      \"frequency\": \"string\",\n      \"lastUpdated\": \"string\",\n      \"price\": {\n        \"amount\": 2067.315041342197,\n        \"convertedAmount\": 5603.180991035094,\n        \"currency\": \"XEU\",\n        \"convertedCurrency\": \"XTS\"\n      },\n      \"sourceMerchantCategoryCode\": \"string\",\n      \"id\": 2932,\n      \"checkNumber\": \"string\",\n      \"transactionDateTime\": \"string\",\n      \"typeAtSource\": \"string\",\n      \"valoren\": \"string\",\n      \"isManual\": false,\n      \"sourceBillerName\": \"string\",\n      \"merchant\": {\n        \"website\": \"string\",\n        \"address\": {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"sourceType\": \"string\",\n          \"address1\": \"string\",\n          \"street\": \"string\",\n          \"state\": \"string\",\n          \"type\": \"STATEMENT_ADDRESS\"\n        },\n        \"logoURLs\": [\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          }\n        ],\n        \"contact\": {\n          \"phone\": \"string\",\n          \"email\": \"string\"\n        },\n        \"categoryLabel\": [\n          \"string\",\n          \"string\"\n        ],\n        \"coordinates\": {\n          \"latitude\": 5794.468176123147,\n          \"longitude\": 1711.3865314713084\n        },\n        \"name\": \"string\",\n        \"id\": \"string\",\n        \"source\": \"FOURSQUARE\",\n        \"logoURL\": \"string\"\n      },\n      \"sedol\": \"string\",\n      \"categoryType\": \"LOAN\",\n      \"accountId\": 7225,\n      \"sourceType\": \"AGGREGATED\",\n      \"subType\": \"LOAN\",\n      \"holdingDescription\": \"string\",\n      \"status\": \"FAILED\",\n      \"detailCategoryId\": 9185,\n      \"description\": {\n        \"security\": \"string\",\n        \"original\": \"string\",\n        \"simple\": \"string\",\n        \"consumer\": \"string\"\n      },\n      \"settleDate\": \"string\",\n      \"postDateTime\": \"string\",\n      \"baseType\": \"DEBIT\",\n      \"categorySource\": \"SYSTEM\",\n      \"principal\": {\n        \"amount\": 9415.417751002826,\n        \"convertedAmount\": 8063.005963936421,\n        \"currency\": \"GIP\",\n        \"convertedCurrency\": \"AOA\"\n      },\n      \"sourceBillerCode\": \"string\",\n      \"interest\": {\n        \"amount\": 1148.752173679215,\n        \"convertedAmount\": 5207.663074850813,\n        \"currency\": \"NAD\",\n        \"convertedCurrency\": \"ARS\"\n      },\n      \"commission\": {\n        \"amount\": 9339.514699431284,\n        \"convertedAmount\": 9721.483277059722,\n        \"currency\": \"CLP\",\n        \"convertedCurrency\": \"XTS\"\n      },\n      \"merchantType\": \"string\",\n      \"amount\": {\n        \"amount\": 3590.4081758997563,\n        \"convertedAmount\": 9946.747267046245,\n        \"currency\": \"SIT\",\n        \"convertedCurrency\": \"KPW\"\n      },\n      \"isPhysical\": true,\n      \"quantity\": 805.6227691247042,\n      \"isRecurring\": \"string\",\n      \"transactionDate\": \"string\",\n      \"createdDate\": \"string\",\n      \"CONTAINER\": \"bank\",\n      \"businessCategory\": {\n        \"categoryName\": \"string\",\n        \"categoryId\": 1051\n      },\n      \"postDate\": \"string\",\n      \"parentCategoryId\": 2427,\n      \"category\": \"string\",\n      \"runningBalance\": {\n        \"amount\": 7800.139743633438,\n        \"convertedAmount\": 7913.163434700599,\n        \"currency\": \"SYP\",\n        \"convertedCurrency\": \"GRD\"\n      },\n      \"categoryId\": 2447,\n      \"isin\": \"string\"\n    },\n    {\n      \"date\": \"string\",\n      \"sourceId\": \"string\",\n      \"symbol\": \"string\",\n      \"cusipNumber\": \"string\",\n      \"sourceApcaNumber\": \"string\",\n      \"highLevelCategoryId\": 9422,\n      \"memo\": \"string\",\n      \"type\": \"string\",\n      \"intermediary\": [\n        \"string\",\n        \"string\"\n      ],\n      \"frequency\": \"string\",\n      \"lastUpdated\": \"string\",\n      \"price\": {\n        \"amount\": 1256.6676190624949,\n        \"convertedAmount\": 4618.905333037252,\n        \"currency\": \"SEK\",\n        \"convertedCurrency\": \"GHS\"\n      },\n      \"sourceMerchantCategoryCode\": \"string\",\n      \"id\": 4475,\n      \"checkNumber\": \"string\",\n      \"transactionDateTime\": \"string\",\n      \"typeAtSource\": \"string\",\n      \"valoren\": \"string\",\n      \"isManual\": true,\n      \"sourceBillerName\": \"string\",\n      \"merchant\": {\n        \"website\": \"string\",\n        \"address\": {\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"address3\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"sourceType\": \"string\",\n          \"address1\": \"string\",\n          \"street\": \"string\",\n          \"state\": \"string\",\n          \"type\": \"COMMUNICATION\"\n        },\n        \"logoURLs\": [\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"url\": \"string\"\n          }\n        ],\n        \"contact\": {\n          \"phone\": \"string\",\n          \"email\": \"string\"\n        },\n        \"categoryLabel\": [\n          \"string\",\n          \"string\"\n        ],\n        \"coordinates\": {\n          \"latitude\": 8185.340751256681,\n          \"longitude\": 8520.841686426844\n        },\n        \"name\": \"string\",\n        \"id\": \"string\",\n        \"source\": \"FOURSQUARE\",\n        \"logoURL\": \"string\"\n      },\n      \"sedol\": \"string\",\n      \"categoryType\": \"TRANSFER\",\n      \"accountId\": 4778,\n      \"sourceType\": \"AGGREGATED\",\n      \"subType\": \"TRANSFER\",\n      \"holdingDescription\": \"string\",\n      \"status\": \"CLEARED\",\n      \"detailCategoryId\": 2935,\n      \"description\": {\n        \"security\": \"string\",\n        \"original\": \"string\",\n        \"simple\": \"string\",\n        \"consumer\": \"string\"\n      },\n      \"settleDate\": \"string\",\n      \"postDateTime\": \"string\",\n      \"baseType\": \"CREDIT\",\n      \"categorySource\": \"USER\",\n      \"principal\": {\n        \"amount\": 3595.3235329422373,\n        \"convertedAmount\": 1814.840506577966,\n        \"currency\": \"XBC\",\n        \"convertedCurrency\": \"XAU\"\n      },\n      \"sourceBillerCode\": \"string\",\n      \"interest\": {\n        \"amount\": 1077.3531539427706,\n        \"convertedAmount\": 5006.28023984972,\n        \"currency\": \"NPR\",\n        \"convertedCurrency\": \"FIM\"\n      },\n      \"commission\": {\n        \"amount\": 4691.263933677267,\n        \"convertedAmount\": 3615.433370527834,\n        \"currency\": \"FJD\",\n        \"convertedCurrency\": \"BWP\"\n      },\n      \"merchantType\": \"string\",\n      \"amount\": {\n        \"amount\": 2828.24996212631,\n        \"convertedAmount\": 7752.570717530442,\n        \"currency\": \"XAU\",\n        \"convertedCurrency\": \"XAU\"\n      },\n      \"isPhysical\": false,\n      \"quantity\": 3908.790587043148,\n      \"isRecurring\": \"string\",\n      \"transactionDate\": \"string\",\n      \"createdDate\": \"string\",\n      \"CONTAINER\": \"investment\",\n      \"businessCategory\": {\n        \"categoryName\": \"string\",\n        \"categoryId\": 8256\n      },\n      \"postDate\": \"string\",\n      \"parentCategoryId\": 8579,\n      \"category\": \"string\",\n      \"runningBalance\": {\n        \"amount\": 452.7869011336594,\n        \"convertedAmount\": 6547.446187007247,\n        \"currency\": \"MGF\",\n        \"convertedCurrency\": \"XPD\"\n      },\n      \"categoryId\": 563,\n      \"isin\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e132b532-d3e3-48e0-9ae5-0a695f5d13b5",
+              "name": "Y800 : Invalid value for baseType<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for category<br>Y800 : Invalid value for toDate<br>Y800 : Invalid value for container<br>Y809 : Invalid date range<br>Y804 : Permitted values of top between 1 - 500<br>Y805 : Multiple containers not supported<br>Y800 : Invalid value for transaction type<br>Y824 : The maximum number of accountIds permitted is 100<br>Y824 : The maximum number of categoryIds permitted is 100<br>Y824 : The maximum number of highLevelCategoryIds permitted is 100<br>Y848 : detailCategoryId cannot be provided as input, as the detailedCategory feature is not enabled<br>Y823 : detailCategoryId is not for applicable containers other than bank and card<br>Y824 : The maximum number of detailCategoryIds permitted is 100<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for convertToCurrency<br>Y820 : The currency value is not supported for convertToCurrency<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) An unique identifier for the transaction. The combination of the id and account container are unique in the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77d81668-c559-474f-ab44-079b9ed05658",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) An unique identifier for the transaction. The combination of the id and account container are unique in the system."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da5e9e2f-50be-4006-a0c2-097cf5534eca",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "convertToCurrency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) An unique identifier for the transaction. The combination of the id and account container are unique in the system."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e61e105a-70e4-48db-8123-8c012e902d3c",
+          "name": "Update Transaction",
+          "request": {
+            "name": "Update Transaction",
+            "description": {
+              "content": "The update transaction service is used to update the category,consumer description, memo, isPhysical, merchantType, detailCategory for a transaction.<br>The HTTP response code is 204 (Success without content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "transactionId",
+                  "description": "(Required) transactionId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction\": {\n    \"categoryId\": \"<long>\",\n    \"categorySource\": \"<string>\",\n    \"container\": \"<string>\",\n    \"transactionSourceId\": \"<string>\",\n    \"isPhysical\": \"<boolean>\",\n    \"detailCategoryId\": \"<long>\",\n    \"memo\": \"<string>\",\n    \"merchantType\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb792455-7a8a-4635-8913-d9c73b6968bc",
+              "name": "Updated Successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) transactionId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5dbae1a-784c-4241-8daa-7539d680ea6b",
+              "name": "Y812 : Required field -container missing in the transactionParam parameter input<br>Y800 : Invalid value for transactionId<br>Y800 : Invalid value for merchantType<br>Y800 : Invalid value for detailCategoryId<br>Y800 : Invalid value for categoryId<br>Y868 : No action is allowed, as the data is being migrated to the Open Banking provider<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) transactionId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bf78312-a8c6-4e99-b022-a44b2db28be2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) transactionId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "035aab8b-658f-4eff-b7a4-8d238abf72a8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionId",
+                      "description": "(Required) transactionId"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b64b6bae-a266-4b42-861c-46eb83251c8b",
+    "name": "Yodlee Core APIs Account Token Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

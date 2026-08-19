@@ -1,0 +1,1867 @@
+{
+  "item": [
+    {
+      "id": "6cfe6f2d-7e83-468b-be5b-8dbe4543eb72",
+      "name": "Consents",
+      "description": {
+        "content": "Consents API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cdfa47fc-198f-4741-9165-974124007f8d",
+          "name": "Get Consent History Count",
+          "request": {
+            "name": "Get Consent History Count",
+            "description": {
+              "content": "The count service provides the total number of history records for a specific consent. <br/>If you are implementing pagination for consent history, call this endpoint before calling GET /consents/history to know the number of records for the given consent that are returned for the input parameters passed.<br/>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "history",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consentId",
+                  "value": "<string>",
+                  "description": "(Required) Consent Id generated through POST Consent."
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<string>",
+                  "description": "Consent History from date(YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<string>",
+                  "description": "Consent History end date (YYYY-MM-DD)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77fa1410-2a32-44e1-ba23-fbefe6ac9e4f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consentHistory\": {\n    \"TOTAL\": {\n      \"count\": 9958\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f51057aa-3e2e-448c-b0c2-e06fdeecce9a",
+              "name": "Y800 : Invalid value for consentId <br/>Y803 : consentId is required <br/>Y800 : Invalid value for fromDate<br/>Y800 : Invalid value for toDate<br/>Y809 : Invalid date range<br/>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e438cd9c-9831-4d06-a3dd-d6e97c3b54f3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6db0eb8-676f-433b-b04b-2d31a57e0733",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13c1f691-7aac-468e-9a81-b87cfe87019f",
+          "name": "Get Consent History ",
+          "request": {
+            "name": "Get Consent History ",
+            "description": {
+              "content": "The get consent history service is used to retrieve all the history related to the consent. <br/>All history event details for few fields like userDataPurge, deidentificationPreference and consentCollectionPeriod may not be available for older AU Open Banking consents and other Open Banking regions.<br/>For any consent, history will be captured and available from consent authorization (consent status Active) event onwards.<br/><b>Note:</b><br/>  i. Duration (fromDate and toDate) is optional. In the absence of duration, one year history is retrieved from today's date.<br/>ii. The pagination feature is available by default. If no values are passed in the skip and top parameters, the API will only return the first 500 records.<br/>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consentId",
+                  "value": "<string>",
+                  "description": "(Required) Consent Id generated through POST Consent."
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<string>",
+                  "description": "Consent History from date(YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "skip (Min 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<string>",
+                  "description": "Consent History end date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<integer>",
+                  "description": "top (Max 500)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "723cd7ae-d0f5-49e8-a583-256c09a0fbf9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consentHistory\": [\n    {\n      \"consentStatus\": \"EXPIRED\",\n      \"eventDateTime\": \"string\",\n      \"startDateTime\": \"string\",\n      \"expirationDateTime\": \"string\",\n      \"userDataPurge\": 8558,\n      \"deidentificationPreference\": true,\n      \"renewedDateTime\": \"string\",\n      \"revokedDateTime\": \"string\",\n      \"consentCollectionPeriod\": 1933\n    },\n    {\n      \"consentStatus\": \"REVOKED\",\n      \"eventDateTime\": \"string\",\n      \"startDateTime\": \"string\",\n      \"expirationDateTime\": \"string\",\n      \"userDataPurge\": 8664,\n      \"deidentificationPreference\": true,\n      \"renewedDateTime\": \"string\",\n      \"revokedDateTime\": \"string\",\n      \"consentCollectionPeriod\": 8871\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f16a6f18-207a-4789-880d-6596bd27ede7",
+              "name": "Y800 : Invalid value for consentId <br/>Y803 : consentId is required <br/>Y804 : Permitted values of top between 1 - 500<br/>Y800 : Invalid value for skip<br/>Y800 : Invalid value for fromDate<br/>Y800 : Invalid value for toDate<br/>Y809 : Invalid date range<br/>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9658b6f-5749-4462-9f68-1fdbe2b0206e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f1618099-635f-4d69-abea-6adb507d3379",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fa79c13-242a-4cc2-8f3a-30e616df38d0",
+          "name": "Get Authorization Details",
+          "request": {
+            "name": "Get Authorization Details",
+            "description": {
+              "content": "The get authorization URL for consent service provides the authorization URL for the renew consent flow, within the consent dashboard.<b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                ":consentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "consentId",
+                  "description": "(Required) Consent Id generated through POST Consent."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d56813ba-29dc-4a8a-9a1c-38f340159e40",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consent\": [\n    {\n      \"consentId\": 138,\n      \"authorizationUrl\": \"string\",\n      \"providerId\": 2497\n    },\n    {\n      \"consentId\": 5985,\n      \"authorizationUrl\": \"string\",\n      \"providerId\": 281\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4738ceb-5b0c-4579-86b5-b9c842923d09",
+              "name": "Y800 : Invalid value for consentId <br/>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54a7496c-30bd-4521-9d91-e40f9625c694",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2cbd21be-f776-44f4-888c-c60d1c0e230f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "810d1492-98ec-4231-8ad9-94ecbe07dc6f",
+          "name": "Put Consent",
+          "request": {
+            "name": "Put Consent",
+            "description": {
+              "content": "The update consent service is used to capture the user acceptance of the consent presented to him or her. <br/>This service returns the authorization-redirect URL that should be used to display to the user, the bank's authentication interface.<b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                ":consentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "consentId",
+                  "description": "(Required) Consent Id generated through POST Consent."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"scopeId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1cfe9698-8d58-4586-81b6-32e48d7fd119",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"scopeId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consent\": [\n    {\n      \"consentId\": 5618,\n      \"authorizationUrl\": \"string\",\n      \"providerId\": 6012\n    },\n    {\n      \"consentId\": 2037,\n      \"authorizationUrl\": \"string\",\n      \"providerId\": 6007\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94bad882-1293-4804-8493-01b24d90ceef",
+              "name": "Y800 : Invalid value for consentId <br/>Y800 : Invalid value for consentParam <br/>Y802 : The consent duration days is outside of the range selected during onboarding, hence consentDurationDays not allowed<br>Y803 : consent duration days preference required consentParam <br/>Y812 : Required field/value - scopeId missing in the consentParam <br/>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"scopeId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "896d3585-cba4-45c7-a438-d78fe944a338",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"scopeId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a9cbc51-7b82-461d-a8ad-92d0168946e4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id generated through POST Consent."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"scopeId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0f7a23b-5124-4609-9a58-fb350c395197",
+          "name": "Get Consents Preferences",
+          "request": {
+            "name": "Get Consents Preferences",
+            "description": {
+              "content": "This API service provides user's preferences for the consent",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                "preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consentId",
+                  "value": "<string>",
+                  "description": "(Required) consentId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a9a7365-61a5-4208-9706-47a10fe0c724",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consentId\": 5850,\n  \"customDisplayData\": {\n    \"clientTrustedAdvisorTxt\": {\n      \"description\": \"string\"\n    },\n    \"consentConfirmation\": {\n      \"description\": \"string\",\n      \"header\": \"string\"\n    },\n    \"deletePreference\": {\n      \"description\": \"string\",\n      \"alternateDescription\": \"string\",\n      \"labelDescription\": \"string\"\n    },\n    \"thirdParty\": {\n      \"description\": \"string\",\n      \"header\": \"string\"\n    },\n    \"userDataTreatment\": {\n      \"cdrPolicy\": {\n        \"description\": \"string\",\n        \"url\": \"string\"\n      },\n      \"dataHandling\": {\n        \"dataList\": [\n          \"string\",\n          \"string\"\n        ],\n        \"headerDescription\": \"string\"\n      },\n      \"description\": \"string\"\n    }\n  },\n  \"preferences\": {\n    \"id\": 3820,\n    \"title\": \"string\",\n    \"type\": \"string\",\n    \"value\": \"string\",\n    \"label\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "326d497c-7b68-407c-9bf1-2d3c5d21b063",
+              "name": "Y800 : Invalid value for consentId <br/>Y812 :Required field/value - consentId missing in the request <br/>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44422f44-23eb-466a-a482-2035c50abfe8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3fadf360-9dca-4bf6-bd1c-6fe4c88e6f89",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc293815-203d-4171-9eae-2d4590b97d97",
+          "name": "Renew Consent",
+          "request": {
+            "name": "Renew Consent",
+            "description": {
+              "content": "The consent renewal service is used to renew the consent by validating the consent state. This API supports both UK and AU Open Banking. </br><b>Renewing an UK Open Banking consent:</b><br><li>Before the grace period of 90 days: The consent will be renewed using the third-party provider (TPP) renewal process that Yodlee does, and no consent reauthorisation is required.The API response will contain the complete renewed consent object.</li><li>After the grace period of 90 days: The API will provide an authorisation URL to redirect the user to the financial institution site to complete the consent reauthorization process.<br><b>Renewing an AU Open Banking consent:</b><br><li>Invoke this API, and in the API response, an authorisation URL will be provided to redirect the user to the financial institution site to complete the consent reauthorisation process.</li><br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents",
+                ":consentId",
+                "renewal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "consentId",
+                  "description": "(Required) Consent Id to be renewed."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"renewal\": {\n    \"defaultRenewalDuration\": \"<string>\",\n    \"isReauthorizationRequired\": \"<boolean>\"\n  },\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"verificationDateTime\": \"<string>\"\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c60e0fd-9fc8-4958-b4e7-ee367387f163",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId",
+                    "renewal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id to be renewed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"renewal\": {\n    \"defaultRenewalDuration\": \"<string>\",\n    \"isReauthorizationRequired\": \"<boolean>\"\n  },\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"verificationDateTime\": \"<string>\"\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consentId\": 432,\n  \"authorizationUrl\": \"string\",\n  \"providerId\": 2797\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffa069a4-c553-409f-a708-17ff0e0b6e1f",
+              "name": "Y800 : Invalid value for consentId <br/>Y800 : Invalid value for consentParam <br/>Y802 : The consent duration days is outside of the range selected during onboarding, hence consentDurationDays not allowed<br/>Y803 : consent duration days preference required consentParam <br/>Y812 : Required field/value - scopeId missing in the consentParam <br/>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId",
+                    "renewal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id to be renewed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"renewal\": {\n    \"defaultRenewalDuration\": \"<string>\",\n    \"isReauthorizationRequired\": \"<boolean>\"\n  },\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"verificationDateTime\": \"<string>\"\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4527e95-97f2-4434-a86f-d0a4023a2e75",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId",
+                    "renewal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id to be renewed."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"renewal\": {\n    \"defaultRenewalDuration\": \"<string>\",\n    \"isReauthorizationRequired\": \"<boolean>\"\n  },\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"verificationDateTime\": \"<string>\"\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "133ff732-7dc3-4ea0-8156-886422ce34ef",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents",
+                    ":consentId",
+                    "renewal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "consentId",
+                      "description": "(Required) Consent Id to be renewed."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferences\": {\n    \"id\": \"<long>\",\n    \"value\": \"<string>\"\n  },\n  \"cdrInsightsDisclosure\": {\n    \"purpose\": \"<string>\",\n    \"nonAPName\": \"<string>\",\n    \"cdrInsights\": [\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    ]\n  },\n  \"renewal\": {\n    \"defaultRenewalDuration\": \"<string>\",\n    \"isReauthorizationRequired\": \"<boolean>\"\n  },\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"verificationDateTime\": \"<string>\"\n  },\n  \"clientTrustedAdvisor\": [\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b531535-ee10-42ed-b79e-0dc2fa947459",
+          "name": "Post Consent",
+          "request": {
+            "name": "Post Consent",
+            "description": {
+              "content": "The generate consent service is used to generate all the consent information and permissions associated to a provider. <br/>The scope provided in the response is based on the providerId and the datasets provided in the input. <br/>If no dataset value is provided, the datasets that are configured for the customer will be considered. <br/>The configured dataset can be overridden by providing the dataset as an input. <br/>If no applicationName is provided in the input, the default applicationName will be considered. <b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerId\": \"<long>\",\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\"\n  },\n  \"dataset\": [\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"applicationName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a2fd09f-d44f-4a9b-9a43-356b44631a8d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<long>\",\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\"\n  },\n  \"dataset\": [\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"applicationName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consent\": [\n    {\n      \"applicationDisplayName\": \"string\",\n      \"clientADR\": \"string\",\n      \"consentId\": 9345,\n      \"consentStatus\": \"CONSENT_ACCEPTED\",\n      \"expirationDate\": \"string\",\n      \"expirationDateTime\": \"string\",\n      \"links\": [\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        },\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        }\n      ],\n      \"preferences\": [\n        {\n          \"id\": 3148,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        },\n        {\n          \"id\": 5948,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        }\n      ],\n      \"providerId\": 7800,\n      \"revokeDate\": \"string\",\n      \"revokeDateTime\": \"string\",\n      \"scope\": [\n        {\n          \"scopeId\": \"ACCOUNT_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"scopeId\": \"TRANSACTION_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"startDate\": \"string\",\n      \"startDateTime\": \"string\",\n      \"title\": \"string\",\n      \"titleBody\": \"string\",\n      \"dataAccessFrequency\": \"ONE_TIME\",\n      \"otspADRName\": \"string\",\n      \"otspADR\": \"string\",\n      \"renewal\": {\n        \"defaultRenewalDuration\": 4104,\n        \"isReauthorizationRequired\": false\n      },\n      \"clientTrustedAdvisor\": [\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        }\n      ],\n      \"providerConsentId\": \"string\",\n      \"customDisplayData\": {\n        \"clientTrustedAdvisorTxt\": {\n          \"description\": \"string\"\n        },\n        \"consentConfirmation\": {\n          \"description\": \"string\",\n          \"header\": \"string\"\n        },\n        \"deletePreference\": {\n          \"description\": \"string\",\n          \"alternateDescription\": \"string\",\n          \"labelDescription\": \"string\"\n        },\n        \"thirdParty\": {\n          \"description\": \"string\",\n          \"header\": \"string\"\n        },\n        \"userDataTreatment\": {\n          \"cdrPolicy\": {\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dataHandling\": {\n            \"dataList\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"headerDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"description\": \"string\"\n        }\n      },\n      \"thirdPartyADR\": [\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        }\n      ]\n    },\n    {\n      \"applicationDisplayName\": \"string\",\n      \"clientADR\": \"string\",\n      \"consentId\": 5633,\n      \"consentStatus\": \"ACTIVE\",\n      \"expirationDate\": \"string\",\n      \"expirationDateTime\": \"string\",\n      \"links\": [\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        },\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        }\n      ],\n      \"preferences\": [\n        {\n          \"id\": 5453,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        },\n        {\n          \"id\": 5077,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        }\n      ],\n      \"providerId\": 5391,\n      \"revokeDate\": \"string\",\n      \"revokeDateTime\": \"string\",\n      \"scope\": [\n        {\n          \"scopeId\": \"CONTACT_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"scopeId\": \"ACCOUNT_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"startDate\": \"string\",\n      \"startDateTime\": \"string\",\n      \"title\": \"string\",\n      \"titleBody\": \"string\",\n      \"dataAccessFrequency\": \"ONE_TIME\",\n      \"otspADRName\": \"string\",\n      \"otspADR\": \"string\",\n      \"renewal\": {\n        \"defaultRenewalDuration\": 3051,\n        \"isReauthorizationRequired\": false\n      },\n      \"clientTrustedAdvisor\": [\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        }\n      ],\n      \"providerConsentId\": \"string\",\n      \"customDisplayData\": {\n        \"clientTrustedAdvisorTxt\": {\n          \"description\": \"string\"\n        },\n        \"consentConfirmation\": {\n          \"description\": \"string\",\n          \"header\": \"string\"\n        },\n        \"deletePreference\": {\n          \"description\": \"string\",\n          \"alternateDescription\": \"string\",\n          \"labelDescription\": \"string\"\n        },\n        \"thirdParty\": {\n          \"description\": \"string\",\n          \"header\": \"string\"\n        },\n        \"userDataTreatment\": {\n          \"cdrPolicy\": {\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dataHandling\": {\n            \"dataList\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"headerDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"description\": \"string\"\n        }\n      },\n      \"thirdPartyADR\": [\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74dccd97-4577-4402-bd5f-52c505059f7c",
+              "name": "Y800 : Invalid value for providerId <br/>Y807 : Resource not found <br/>Y800 : Invalid value for consentParam <br/>Y901 : Service not supported <br/>Y800 : Invalid value for applicationName <br/>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<long>\",\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\"\n  },\n  \"dataset\": [\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"applicationName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e5abcde-cbab-4a76-a1e3-4d4f119485b4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<long>\",\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\"\n  },\n  \"dataset\": [\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"applicationName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87cfb249-b2fa-4c90-9e30-53ccdb0e162d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<long>\",\n  \"businessUserDetail\": {\n    \"abn\": \"<string>\"\n  },\n  \"dataset\": [\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"attribute\": [\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"container\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"containerAttributes\": {\n            \"BANK\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LOAN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CREDITCARD\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INVESTMENT\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"INSURANCE\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"applicationName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c83f8bd-3db8-494a-831d-6da1071ef124",
+          "name": "Get Consents",
+          "request": {
+            "name": "Get Consents",
+            "description": {
+              "content": "The get consent service is used to retrieve all the consents submitted to Yodlee. <br>The service can be used to build a manage consent interface or a consent dashboard to implement the renew and revoke consent flows.<br><b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consentIds",
+                  "value": "<string>",
+                  "description": "Consent Id generated through POST Consent."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "The flag responsible to include renew details like sharing duration and reauthorization required"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountIds",
+                  "value": "<string>",
+                  "description": "Unique identifier for the provider account resource. This is created during account addition."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ba4b737-b540-48cf-a8e2-23ba493314ab",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"consent\": [\n    {\n      \"applicationDisplayName\": \"string\",\n      \"clientADR\": \"string\",\n      \"consentId\": 3115,\n      \"consentStatus\": \"CONSENT_AUTHORIZED\",\n      \"expirationDate\": \"string\",\n      \"expirationDateTime\": \"string\",\n      \"links\": [\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        },\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        }\n      ],\n      \"preferences\": [\n        {\n          \"id\": 331,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        },\n        {\n          \"id\": 428,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        }\n      ],\n      \"providerId\": 4319,\n      \"revokeDate\": \"string\",\n      \"revokeDateTime\": \"string\",\n      \"scope\": [\n        {\n          \"scopeId\": \"ACCOUNT_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"scopeId\": \"TRANSACTION_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"startDate\": \"string\",\n      \"startDateTime\": \"string\",\n      \"title\": \"string\",\n      \"titleBody\": \"string\",\n      \"dataAccessFrequency\": \"RECURRING\",\n      \"otspADR\": \"string\",\n      \"businessUserDetail\": {\n        \"abn\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"verificationDateTime\": \"<string>\"\n      },\n      \"clientTrustedAdvisor\": [\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        }\n      ],\n      \"providerConsentId\": \"string\",\n      \"cdrInsightsDisclosure\": {\n        \"purpose\": \"<string>\",\n        \"nonAPName\": \"<string>\",\n        \"cdrInsights\": [\n          {\n            \"description\": \"<string>\",\n            \"detail\": \"<string>\"\n          },\n          {\n            \"description\": \"<string>\",\n            \"detail\": \"<string>\"\n          }\n        ]\n      },\n      \"userDataTreatment\": {\n        \"cdrPolicy\": {\n          \"description\": \"string\",\n          \"url\": \"string\"\n        },\n        \"dataHandling\": {\n          \"dataList\": [\n            \"string\",\n            \"string\"\n          ],\n          \"headerDescription\": \"string\"\n        },\n        \"description\": \"string\"\n      },\n      \"otspADRName\": \"string\",\n      \"renewal\": {\n        \"defaultRenewalDuration\": 5905,\n        \"isReauthorizationRequired\": true\n      },\n      \"thirdPartyADR\": [\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"renewedDateTime\": \"string\",\n      \"providerAccountId\": 7935\n    },\n    {\n      \"applicationDisplayName\": \"string\",\n      \"clientADR\": \"string\",\n      \"consentId\": 9012,\n      \"consentStatus\": \"ACTIVE\",\n      \"expirationDate\": \"string\",\n      \"expirationDateTime\": \"string\",\n      \"links\": [\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        },\n        {\n          \"href\": \"string\",\n          \"methodType\": \"string\",\n          \"rel\": \"string\"\n        }\n      ],\n      \"preferences\": [\n        {\n          \"id\": 5052,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        },\n        {\n          \"id\": 8784,\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"label\": \"string\"\n        }\n      ],\n      \"providerId\": 6063,\n      \"revokeDate\": \"string\",\n      \"revokeDateTime\": \"string\",\n      \"scope\": [\n        {\n          \"scopeId\": \"CONTACT_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"scopeId\": \"TRANSACTION_DETAILS\",\n          \"title\": \"string\",\n          \"titleBody\": [\n            \"string\",\n            \"string\"\n          ],\n          \"datasetAttributes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"startDate\": \"string\",\n      \"startDateTime\": \"string\",\n      \"title\": \"string\",\n      \"titleBody\": \"string\",\n      \"dataAccessFrequency\": \"RECURRING\",\n      \"otspADR\": \"string\",\n      \"businessUserDetail\": {\n        \"abn\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"verificationDateTime\": \"<string>\"\n      },\n      \"clientTrustedAdvisor\": [\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        }\n      ],\n      \"providerConsentId\": \"string\",\n      \"cdrInsightsDisclosure\": {\n        \"purpose\": \"<string>\",\n        \"nonAPName\": \"<string>\",\n        \"cdrInsights\": [\n          {\n            \"description\": \"<string>\",\n            \"detail\": \"<string>\"\n          },\n          {\n            \"description\": \"<string>\",\n            \"detail\": \"<string>\"\n          }\n        ]\n      },\n      \"userDataTreatment\": {\n        \"cdrPolicy\": {\n          \"description\": \"string\",\n          \"url\": \"string\"\n        },\n        \"dataHandling\": {\n          \"dataList\": [\n            \"string\",\n            \"string\"\n          ],\n          \"headerDescription\": \"string\"\n        },\n        \"description\": \"string\"\n      },\n      \"otspADRName\": \"string\",\n      \"renewal\": {\n        \"defaultRenewalDuration\": 7528,\n        \"isReauthorizationRequired\": true\n      },\n      \"thirdPartyADR\": [\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"renewedDateTime\": \"string\",\n      \"providerAccountId\": 7015\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98df1cf4-3233-414a-a6d7-5b11134338e0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd939740-ccf4-4b6c-803b-4471377a2ed4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5c790060-a446-486f-8cb1-78d1049b254c",
+    "name": "Yodlee Core APIs Account Token Consents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

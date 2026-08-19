@@ -1,0 +1,282 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Accounts API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Associated Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/associatedAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers.<br>This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may merge their subsidiaries and provide data as a single OB provider.<br>Before the OB solution, this data was aggregated with different provider IDs.<br>This service accepts the providerAccountId and returns all accounts of the associated providerAccounts that belong to the subsidiary of the"
+        },
+        {
+          "info": {
+            "name": "Get Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds."
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "bank/creditCard/investment/insurance/loan/reward/realEstate/otherAssets/otherLiabilities"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b><br><li>fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.</li><br><li>profile is deprecated, and to retrieve the profile information, call the GET /verification/holderProfile API instead.</li>"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated providerAccountIds."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier that returns contextual data"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "ACTIVE,INACTIVE,TO_BE_CLOSED,CLOSED"
+              }
+            ]
+          },
+          "docs": "The get accounts service provides information about accounts added by the user.<br>By default, this service returns information for active and to be closed accounts.<br>If requestId is provided, the accounts that are updated in the context of the requestId will be provided in the response.<br>Pagination is made available to the advisors to retrieve account data of all users assigned to them. The skip and top parameters are used for pagination. In the skip and top parameters pass the number of re"
+        },
+        {
+          "info": {
+            "name": "Add Manual Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounts"
+          },
+          "docs": "The add account service is used to add manual accounts.<br>The response of add account service includes the account name , account number and Yodlee generated account id.<br>All manual accounts added will be included as part of networth calculation by default.<br>Add manual account support is available for bank, card, investment, insurance and loan container only.<br><br><b>Note:</b><ul> <li>A real estate account addition is only supported for SYSTEM and MANUAL valuation type.</li></ul>"
+        },
+        {
+          "info": {
+            "name": "Migrate Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/accounts/migrateAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "This service is associated with the open banking (OB) flow.<br>Before invoking this service, display all the associated accounts to the user by calling the GET /associatedAccounts API.<br>The migrate accounts API treats the user's consent acceptance to initiate account migration. Invoking this service indicates that the user has given the consent to access the associated account information from the financial institution.<br>If an existing provider supports bank, card, and loan accounts, and cho"
+        },
+        {
+          "info": {
+            "name": "Evaluate Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounts/evaluateAddress"
+          },
+          "docs": "Use this service to validate the address before adding the real estate account.<br>If the address is valid, the service will return the complete address information.<br>The response will contain multiple addresses if the user-provided input matches with multiple entries in the vendor database.<br>In the case of multiple matches, the user can select the appropriate address from the list and then invoke the add account service with the complete address.<br><br><b>Note:</b> <ul><li>Yodlee recommend"
+        },
+        {
+          "info": {
+            "name": "Get Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "accountId"
+              },
+              {
+                "name": "convertToCurrency",
+                "value": "",
+                "type": "query",
+                "description": "On-demand currency conversion parameter"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "profile, holder, fullAccountNumber, fullAccountNumberList, paymentProfile, autoRefresh<br><b>Note:</b>fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response."
+              }
+            ]
+          },
+          "docs": "The get account details service provides detailed information of an account.<br><br><b>Note:</b><li> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.</li>"
+        },
+        {
+          "info": {
+            "name": "Update Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "accountId"
+              }
+            ]
+          },
+          "docs": "The update account service is used to update manual and aggregated accounts.<br>The HTTP response code is 204 (Success without content).<br>Update manual account support is available for bank, card, investment, insurance, loan, otherAssets, otherLiabilities and realEstate containers only.<br><br><b>Note:</b><li> A real estate account update is only supported for SYSTEM and MANUAL valuation type.</li> <li> A real estate account can be linked to a loan account by passing accountId of a loan accoun"
+        },
+        {
+          "info": {
+            "name": "Delete Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "accountId"
+              }
+            ]
+          },
+          "docs": "The delete account service allows an account to be deleted.<br>This service does not return a response. The HTTP response code is 204 (Success with no content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Historical Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/historicalBalances",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date for balance retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "includeCF",
+                "value": "",
+                "type": "query",
+                "description": "Consider carry forward logic for missing balances"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "D-daily, W-weekly or M-monthly"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "toDate for balance retrieval (YYYY-MM-DD)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500)"
+              }
+            ]
+          },
+          "docs": "The historical balances service is used to retrieve the historical balances for an account or a user.<br>Historical balances are daily (D), weekly (W), and monthly (M). <br>The interval input should be passed as D, W, and M to retrieve the desired historical balances. The default interval is daily (D). <br>When no account id is provided, historical balances of the accounts that are active, to be closed, and closed are provided in the response. <br>If the fromDate and toDate are not passed, the l"
+        },
+        {
+          "info": {
+            "name": "Get Latest Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/latestBalances",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated accountIds."
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "providerAccountId."
+              }
+            ]
+          },
+          "docs": "The latest balances service provides the latest account balance by initiating a new balance refresh request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

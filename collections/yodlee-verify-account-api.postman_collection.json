@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "2735915d-295b-46d6-9d86-5db2993c0d94",
+      "name": "Verify Account",
+      "description": {
+        "content": "Verify Account API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae0b39ac-5886-4da6-a45c-dd82813c8bad",
+          "name": "Verify Accounts Using Transactions",
+          "request": {
+            "name": "Verify Accounts Using Transactions",
+            "description": {
+              "content": "The verify account service is used to verify the account's ownership by  matching the transaction details with the accounts aggregated for the user.<br><ul><li>If a match is identified, the service returns details of all the accounts along with the matched transaction's details.<li>If no transaction match is found, an empty response will be returned.<li>A maximum of 5 transactionCriteria can be passed in a request.<li>The baseType, date, and amount parameters should mandatorily be passed.<li>The optional dateVariance parameter cannot be more than 7 days. For example, +7, -4, or +/-2.<li>Pass the container or accountId parameters for better performance.<li>This service supports the localization feature and accepts locale as a header parameter.</li></ul>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verifyAccount",
+                ":providerAccountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "providerAccountId",
+                  "description": "(Required) providerAccountId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionCriteria\": [\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    },\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    }\n  ],\n  \"container\": \"<string>\",\n  \"accountId\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3328dce-98f6-4d2a-b034-b119c61e2ca8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifyAccount",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionCriteria\": [\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    },\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    }\n  ],\n  \"container\": \"<string>\",\n  \"accountId\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"verifyAccount\": {\n    \"transactionCriteria\": [\n      {\n        \"amount\": \"<double>\",\n        \"date\": \"<string>\",\n        \"verifiedTransaction\": [\n          {\n            \"date\": \"string\",\n            \"sourceId\": \"string\",\n            \"symbol\": \"string\",\n            \"cusipNumber\": \"string\",\n            \"sourceApcaNumber\": \"string\",\n            \"highLevelCategoryId\": 4070,\n            \"memo\": \"string\",\n            \"type\": \"string\",\n            \"intermediary\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"frequency\": \"string\",\n            \"lastUpdated\": \"string\",\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceMerchantCategoryCode\": \"string\",\n            \"id\": 312,\n            \"checkNumber\": \"string\",\n            \"typeAtSource\": \"string\",\n            \"valoren\": \"string\",\n            \"isManual\": false,\n            \"sourceBillerName\": \"string\",\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sedol\": \"string\",\n            \"categoryType\": \"LOAN\",\n            \"accountId\": 2659,\n            \"sourceType\": \"AGGREGATED\",\n            \"subType\": \"PURCHASE\",\n            \"holdingDescription\": \"string\",\n            \"status\": \"POSTED\",\n            \"detailCategoryId\": 5491,\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settleDate\": \"string\",\n            \"baseType\": \"CREDIT\",\n            \"categorySource\": \"USER\",\n            \"principal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceBillerCode\": \"string\",\n            \"interest\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commission\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchantType\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isPhysical\": true,\n            \"quantity\": 6926.846557790705,\n            \"isRecurring\": \"string\",\n            \"transactionDate\": \"string\",\n            \"createdDate\": \"string\",\n            \"CONTAINER\": \"creditCard\",\n            \"businessCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postDate\": \"string\",\n            \"parentCategoryId\": 3073,\n            \"category\": \"string\",\n            \"runningBalance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categoryId\": 4410,\n            \"isin\": \"string\"\n          },\n          {\n            \"date\": \"string\",\n            \"sourceId\": \"string\",\n            \"symbol\": \"string\",\n            \"cusipNumber\": \"string\",\n            \"sourceApcaNumber\": \"string\",\n            \"highLevelCategoryId\": 291,\n            \"memo\": \"string\",\n            \"type\": \"string\",\n            \"intermediary\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"frequency\": \"string\",\n            \"lastUpdated\": \"string\",\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceMerchantCategoryCode\": \"string\",\n            \"id\": 2872,\n            \"checkNumber\": \"string\",\n            \"typeAtSource\": \"string\",\n            \"valoren\": \"string\",\n            \"isManual\": false,\n            \"sourceBillerName\": \"string\",\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sedol\": \"string\",\n            \"categoryType\": \"DEFERRED_COMPENSATION\",\n            \"accountId\": 5802,\n            \"sourceType\": \"MANUAL\",\n            \"subType\": \"REFUND\",\n            \"holdingDescription\": \"string\",\n            \"status\": \"FAILED\",\n            \"detailCategoryId\": 8630,\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settleDate\": \"string\",\n            \"baseType\": \"CREDIT\",\n            \"categorySource\": \"SYSTEM\",\n            \"principal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceBillerCode\": \"string\",\n            \"interest\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commission\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchantType\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isPhysical\": true,\n            \"quantity\": 2084.004395358483,\n            \"isRecurring\": \"string\",\n            \"transactionDate\": \"string\",\n            \"createdDate\": \"string\",\n            \"CONTAINER\": \"creditCard\",\n            \"businessCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postDate\": \"string\",\n            \"parentCategoryId\": 6549,\n            \"category\": \"string\",\n            \"runningBalance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categoryId\": 6701,\n            \"isin\": \"string\"\n          }\n        ],\n        \"matched\": \"NONE\",\n        \"keyword\": \"<string>\",\n        \"dateVariance\": \"<string>\",\n        \"baseType\": \"<string>\"\n      },\n      {\n        \"amount\": \"<double>\",\n        \"date\": \"<string>\",\n        \"verifiedTransaction\": [\n          {\n            \"date\": \"string\",\n            \"sourceId\": \"string\",\n            \"symbol\": \"string\",\n            \"cusipNumber\": \"string\",\n            \"sourceApcaNumber\": \"string\",\n            \"highLevelCategoryId\": 8014,\n            \"memo\": \"string\",\n            \"type\": \"string\",\n            \"intermediary\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"frequency\": \"string\",\n            \"lastUpdated\": \"string\",\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceMerchantCategoryCode\": \"string\",\n            \"id\": 9673,\n            \"checkNumber\": \"string\",\n            \"typeAtSource\": \"string\",\n            \"valoren\": \"string\",\n            \"isManual\": true,\n            \"sourceBillerName\": \"string\",\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sedol\": \"string\",\n            \"categoryType\": \"UNCATEGORIZE\",\n            \"accountId\": 7599,\n            \"sourceType\": \"AGGREGATED\",\n            \"subType\": \"TRANSFER\",\n            \"holdingDescription\": \"string\",\n            \"status\": \"FAILED\",\n            \"detailCategoryId\": 964,\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settleDate\": \"string\",\n            \"baseType\": \"DEBIT\",\n            \"categorySource\": \"SYSTEM\",\n            \"principal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceBillerCode\": \"string\",\n            \"interest\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commission\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchantType\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isPhysical\": false,\n            \"quantity\": 443.7025312168297,\n            \"isRecurring\": \"string\",\n            \"transactionDate\": \"string\",\n            \"createdDate\": \"string\",\n            \"CONTAINER\": \"bank\",\n            \"businessCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postDate\": \"string\",\n            \"parentCategoryId\": 4874,\n            \"category\": \"string\",\n            \"runningBalance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categoryId\": 4595,\n            \"isin\": \"string\"\n          },\n          {\n            \"date\": \"string\",\n            \"sourceId\": \"string\",\n            \"symbol\": \"string\",\n            \"cusipNumber\": \"string\",\n            \"sourceApcaNumber\": \"string\",\n            \"highLevelCategoryId\": 5780,\n            \"memo\": \"string\",\n            \"type\": \"string\",\n            \"intermediary\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"frequency\": \"string\",\n            \"lastUpdated\": \"string\",\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceMerchantCategoryCode\": \"string\",\n            \"id\": 876,\n            \"checkNumber\": \"string\",\n            \"typeAtSource\": \"string\",\n            \"valoren\": \"string\",\n            \"isManual\": true,\n            \"sourceBillerName\": \"string\",\n            \"merchant\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sedol\": \"string\",\n            \"categoryType\": \"LOAN\",\n            \"accountId\": 8353,\n            \"sourceType\": \"AGGREGATED\",\n            \"subType\": \"PERSONAL_LOAN\",\n            \"holdingDescription\": \"string\",\n            \"status\": \"FAILED\",\n            \"detailCategoryId\": 6615,\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settleDate\": \"string\",\n            \"baseType\": \"DEBIT\",\n            \"categorySource\": \"SYSTEM\",\n            \"principal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sourceBillerCode\": \"string\",\n            \"interest\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commission\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchantType\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isPhysical\": false,\n            \"quantity\": 6559.546615660825,\n            \"isRecurring\": \"string\",\n            \"transactionDate\": \"string\",\n            \"createdDate\": \"string\",\n            \"CONTAINER\": \"creditCard\",\n            \"businessCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postDate\": \"string\",\n            \"parentCategoryId\": 3621,\n            \"category\": \"string\",\n            \"runningBalance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categoryId\": 262,\n            \"isin\": \"string\"\n          }\n        ],\n        \"matched\": \"COMPLETE\",\n        \"keyword\": \"<string>\",\n        \"dateVariance\": \"<string>\",\n        \"baseType\": \"<string>\"\n      }\n    ],\n    \"account\": [\n      {\n        \"fullAccountNumber\": \"string\",\n        \"accountType\": \"string\",\n        \"providerAccountId\": 8805,\n        \"holder\": [\n          {\n            \"identifier\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"gender\": \"string\",\n            \"ownership\": \"AAS\",\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"identifier\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"gender\": \"string\",\n            \"ownership\": \"SECONDARY\",\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"id\": 7375,\n        \"accountNumber\": \"string\",\n        \"bankTransferCode\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"ROUTING_NUMBER\"\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"BSB\"\n          }\n        ],\n        \"providerName\": \"string\"\n      },\n      {\n        \"fullAccountNumber\": \"string\",\n        \"accountType\": \"string\",\n        \"providerAccountId\": 6729,\n        \"holder\": [\n          {\n            \"identifier\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"gender\": \"string\",\n            \"ownership\": \"DBA\",\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"identifier\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"gender\": \"string\",\n            \"ownership\": \"BUSINESS\",\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"id\": 386,\n        \"accountNumber\": \"string\",\n        \"bankTransferCode\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"SORT_CODE\"\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"BSB\"\n          }\n        ],\n        \"providerName\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "875bc67f-4422-4857-a656-f09e41b80fa3",
+              "name": "Y800 : Invalid value for container<br>Y800 : Invalid value for accountId<br>Y800 : Invalid value for amount<br>Y800 : Invalid value for dateVariance<br>Y801 : Invalid length for keyword<br>Y804 : Permitted values of dateVariance between 1 - 7<br>Y806 : Invalid input<br>Y807 : Resource not found<br>Y809 : Invalid date range<br>Y812 : Required field/value - transactionCriteria missing in the input<br>Y812 : Required field/value - amount missing in the transactionCriteria<br>Y812 : Required field/value - amount date in the transactionCriteria<br>Y812 : Required field/value - baseType missing in the transactionCriteria<br>Y823 : Transaction not applicable for container <br>Y824 : The maximum number of transactionCriteria permitted is 5<br>Y857 : Transactions are not refreshed in the past 24 hours<br>Y858 : Only active accounts can be verified<br>Y901 : Service not supported<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifyAccount",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionCriteria\": [\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    },\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    }\n  ],\n  \"container\": \"<string>\",\n  \"accountId\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "284da912-d015-4c05-82f7-ce1cc64bd36c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifyAccount",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionCriteria\": [\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    },\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    }\n  ],\n  \"container\": \"<string>\",\n  \"accountId\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2dd14c70-7b42-4db2-a4a3-bb5540214c75",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifyAccount",
+                    ":providerAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "providerAccountId",
+                      "description": "(Required) providerAccountId"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionCriteria\": [\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    },\n    {\n      \"amount\": \"<double>\",\n      \"date\": \"<string>\",\n      \"keyword\": \"<string>\",\n      \"dateVariance\": \"<string>\",\n      \"baseType\": \"<string>\"\n    }\n  ],\n  \"container\": \"<string>\",\n  \"accountId\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6bbb4f30-c5bd-4bd3-92b9-10a53bd5f22d",
+    "name": "Yodlee Core APIs Account Token Verify Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

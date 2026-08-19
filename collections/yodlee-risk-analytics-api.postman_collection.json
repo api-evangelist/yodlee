@@ -1,0 +1,222 @@
+{
+  "item": [
+    {
+      "id": "2448b183-3d40-4659-b2e3-1de6d433fd28",
+      "name": "Risk Analytics",
+      "description": {
+        "content": "Risk Analytics API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "221a0c8a-0df9-4ff7-bc7e-2736289c6190",
+          "name": "Risk Analytics",
+          "request": {
+            "name": "Risk Analytics",
+            "description": {
+              "content": "The Account Verification service checks for any fraud pattern but does not derive any risk information with respect to the verified account. The risk analytics feature introduced enables customers to gain deeper insights into potential risks associated with their consumers, helping them to identify, assess, and effectively manage those risks. <br>Risk analytics will be generated only for accounts verified using FastLink 4 Instant Account Verification service and not the Micro Entries service. Once account verification is complete, risk analytics for the selected account(s) will be initiated and made available in near real time. <br>Contact the Yodlee Client Services team to enable this feature, however, the plan to automate this feature is in the roadmap. <br>Once the risk information is generated for the verified accounts, the webhook RISK_ANALYTICS will be notified to the customers. The customers can invoke GET /riskAnalytics?accountId={accountId} to get the risk analytics for the selected account(s). <br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "riskAnalytics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "(Required) accountId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85de850c-65ed-4a79-8ed9-2be0a7579378",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "riskAnalytics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"debitCount\": 6429,\n  \"accountName\": \"string\",\n  \"completenessScore\": 6780.4840100148285,\n  \"accountType\": \"string\",\n  \"currentBalance\": 6458.513974701129,\n  \"displayedName\": \"string\",\n  \"transactionsPresent\": \"string\",\n  \"creditCount\": 5190,\n  \"debitAmount\": 3977.939041285323,\n  \"accountNumber\": \"string\",\n  \"avgNetMonthlyCashflow\": 1305.6308238565384,\n  \"majorCharges\": [\n    {\n      \"ageOfRecentOccurence\": 7636,\n      \"ageOfFirstOccurence\": 3341,\n      \"amount\": 6664.943931069609,\n      \"featureName\": \"string\",\n      \"countDistinctMonths\": 6730,\n      \"countTxn\": 61\n    },\n    {\n      \"ageOfRecentOccurence\": 7628,\n      \"ageOfFirstOccurence\": 3134,\n      \"amount\": 9098.507309945195,\n      \"featureName\": \"string\",\n      \"countDistinctMonths\": 8965,\n      \"countTxn\": 2838\n    }\n  ],\n  \"transactionBeginDate\": \"string\",\n  \"noOfNegativeCashflowMonths\": 1786,\n  \"accountClassification\": \"string\",\n  \"availableBalance\": 2335.6349260002175,\n  \"accountId\": 751,\n  \"transactionEndDate\": \"string\",\n  \"transactionDays\": 4540,\n  \"transfers\": [\n    {\n      \"ageOfRecentOccurence\": 6062,\n      \"ageOfFirstOccurence\": 4214,\n      \"amount\": 297.2994907072557,\n      \"featureName\": \"string\",\n      \"countDistinctMonths\": 8547,\n      \"countTxn\": 4110\n    },\n    {\n      \"ageOfRecentOccurence\": 1266,\n      \"ageOfFirstOccurence\": 4908,\n      \"amount\": 6228.837313850872,\n      \"featureName\": \"string\",\n      \"countDistinctMonths\": 2580,\n      \"countTxn\": 1082\n    }\n  ],\n  \"providerAccountId\": 9923,\n  \"creditAmount\": 6100.745387502041,\n  \"transactionsCount\": 3883\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9050c76e-0f92-4e16-886d-855c05e4b36a",
+              "name": "Y800 : Invalid value for accountId<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "riskAnalytics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96bd0145-385e-4f6b-aaab-e5692b77dc36",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "riskAnalytics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e1ac7dc-404f-47d2-93f3-245aba94572b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "riskAnalytics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cc34751b-cc3c-4cb0-b489-f33f3dfc33cf",
+    "name": "Yodlee Core APIs Account Token Risk Analytics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

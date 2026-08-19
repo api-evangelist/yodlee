@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token ProviderAccounts API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProviderAccounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/providerAccounts/:providerAccountId/preferences",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to update preferences like data extracts and auto refreshes without triggering refresh for the providerAccount.<br>Setting isDataExtractsEnabled to false will not trigger data extracts notification and dataExtracts/events will not reflect any data change that is happening for the providerAccount.<br>Modified data will not be provided in the dataExtracts/userData endpoint.<br>Setting isAutoRefreshEnabled to false will not trigger auto refreshes for the provider account.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Provider Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "include credentials,questions"
+              },
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for the request that returns contextual data"
+              }
+            ]
+          },
+          "docs": "The get provider account details service is used to learn the status of adding accounts and updating accounts.<br>This service has to be called continuously to know the progress level of the triggered process. This service also provides the MFA information requested by the provider site.<br>When <i>include = credentials</i>, questions is passed as input, the service returns the credentials (non-password values) and questions stored in the Yodlee system for that provider account. <br><br><b>Note:"
+        },
+        {
+          "info": {
+            "name": "Delete Provider Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/providerAccounts/:providerAccountId",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "providerAccountId"
+              }
+            ]
+          },
+          "docs": "The delete provider account service is used to delete a provider account from the Yodlee system. This service also deletes the accounts that are created in the Yodlee system for that provider account. <br>This service does not return a response. The HTTP response code is 204 (Success with no content).<br>"
+        },
+        {
+          "info": {
+            "name": "Get Provider Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerAccounts",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "include"
+              },
+              {
+                "name": "providerIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated providerIds."
+              }
+            ]
+          },
+          "docs": "The get provider accounts service is used to return all the provider accounts added by the user. <br>This includes the failed and successfully added provider accounts.<br>"
+        },
+        {
+          "info": {
+            "name": "Add Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/providerAccounts",
+            "params": [
+              {
+                "name": "providerId",
+                "value": "",
+                "type": "query",
+                "description": "providerId"
+              }
+            ]
+          },
+          "docs": "The add account service is used to link the user's account with the provider site in the Yodlee system. Providers that require multifactor authentication or open banking are also supported by this service. The response includes the Yodlee generated ID (providerAccountId) of the account along with the refresh information.<br><br>Open Banking Implementation Notes: <br>To link the user's account of the Open Banking provider site in the Yodlee system, pass the field entity that contains:<br>1. id - "
+        },
+        {
+          "info": {
+            "name": "Update Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/providerAccounts",
+            "params": [
+              {
+                "name": "providerAccountIds",
+                "value": "",
+                "type": "query",
+                "description": "comma separated providerAccountIds"
+              }
+            ]
+          },
+          "docs": "<b>Credential-based Implementation Notes:</b> <br>The update account API is used to:  &bull; Retrieve the latest information for accounts that belong to one providerAccount from the provider site. You must allow at least 15 min between requests. <br> &bull; Update account credentials when the user has changed the authentication information at the provider site. <br> &bull; Post MFA information for the MFA-enabled provider accounts during add and update accounts. <br> &bull; Retrieve the latest i"
+        },
+        {
+          "info": {
+            "name": "Refresh Provider Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/providerAccounts/refresh"
+          },
+          "docs": "This api service will allow you to refresh the Non-MFA provider accounts against a configName, i.e refresh will respect the configurations of the configName while refreshing the account.<br>Note: this service will only work with FastLink 4 users.<br>"
+        },
+        {
+          "info": {
+            "name": "Get User Profile Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerAccounts/profile",
+            "params": [
+              {
+                "name": "providerAccountId",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated providerAccountIds."
+              }
+            ]
+          },
+          "docs": "<b>Refer GET /verification/holderProfile</b><br>The get provider accounts profile service is used to return the user profile details that are associated to the provider account. <br>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

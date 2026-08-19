@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Risk Analytics API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Risk Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Risk Analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/riskAnalytics",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "accountId"
+              }
+            ]
+          },
+          "docs": "The Account Verification service checks for any fraud pattern but does not derive any risk information with respect to the verified account. The risk analytics feature introduced enables customers to gain deeper insights into potential risks associated with their consumers, helping them to identify, assess, and effectively manage those risks. <br>Risk analytics will be generated only for accounts verified using FastLink 4 Instant Account Verification service and not the Micro Entries service. On"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

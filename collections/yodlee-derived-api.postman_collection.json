@@ -1,0 +1,991 @@
+{
+  "item": [
+    {
+      "id": "95b8604b-fd61-4b32-86a5-c8a9e2c6f1ef",
+      "name": "Derived",
+      "description": {
+        "content": "Derived API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0db20832-d6bf-4a08-ae17-8722c998c421",
+          "name": "Get Networth Summary",
+          "request": {
+            "name": "Get Networth Summary",
+            "description": {
+              "content": "The get networth service is used to get the networth for the user.<br>If the include parameter value is passed as details then networth with historical balances is returned. <br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derived",
+                "networth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountIds",
+                  "value": "<string>",
+                  "description": "comma separated accountIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "container",
+                  "value": "<string>",
+                  "description": "bank/creditCard/investment/insurance/loan/realEstate/otherAssets/otherLiabilities"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<string>",
+                  "description": "from date for balance retrieval (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "details"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "D-daily, W-weekly or M-monthly"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "skip (Min 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<string>",
+                  "description": "toDate for balance retrieval (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<integer>",
+                  "description": "top (Max 500)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efaa5ff9-3627-4daa-b80e-0d48a7b7fbe9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "networth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"networth\": [\n    {\n      \"date\": \"string\",\n      \"liability\": {\n        \"amount\": 8617.411977739788,\n        \"convertedAmount\": 3598.2986216067634,\n        \"currency\": \"XBC\",\n        \"convertedCurrency\": \"YER\"\n      },\n      \"historicalBalances\": [\n        {\n          \"date\": \"string\",\n          \"accountId\": 7682,\n          \"isAsset\": true,\n          \"balance\": {\n            \"amount\": 9780.686362889059,\n            \"convertedAmount\": 8283.697617207552,\n            \"currency\": \"AMD\",\n            \"convertedCurrency\": \"LRD\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"CF\"\n        },\n        {\n          \"date\": \"string\",\n          \"accountId\": 1163,\n          \"isAsset\": true,\n          \"balance\": {\n            \"amount\": 8145.596586142958,\n            \"convertedAmount\": 1071.8741378224106,\n            \"currency\": \"MXN\",\n            \"convertedCurrency\": \"THB\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"CF\"\n        }\n      ],\n      \"networth\": {\n        \"amount\": 673.0468596709161,\n        \"convertedAmount\": 635.4698394154301,\n        \"currency\": \"HUF\",\n        \"convertedCurrency\": \"LUF\"\n      },\n      \"asset\": {\n        \"amount\": 763.0574370106813,\n        \"convertedAmount\": 8745.256087867247,\n        \"currency\": \"EEK\",\n        \"convertedCurrency\": \"DEM\"\n      }\n    },\n    {\n      \"date\": \"string\",\n      \"liability\": {\n        \"amount\": 2579.210887480734,\n        \"convertedAmount\": 6867.636680653713,\n        \"currency\": \"XMK\",\n        \"convertedCurrency\": \"SLL\"\n      },\n      \"historicalBalances\": [\n        {\n          \"date\": \"string\",\n          \"accountId\": 4480,\n          \"isAsset\": true,\n          \"balance\": {\n            \"amount\": 7809.029709606911,\n            \"convertedAmount\": 8751.728780604713,\n            \"currency\": \"BSD\",\n            \"convertedCurrency\": \"GWP\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"CF\"\n        },\n        {\n          \"date\": \"string\",\n          \"accountId\": 3298,\n          \"isAsset\": false,\n          \"balance\": {\n            \"amount\": 5836.893382550612,\n            \"convertedAmount\": 7520.210130540287,\n            \"currency\": \"ZRN\",\n            \"convertedCurrency\": \"CHF\"\n          },\n          \"asOfDate\": \"string\",\n          \"dataSourceType\": \"S\"\n        }\n      ],\n      \"networth\": {\n        \"amount\": 9207.216627355212,\n        \"convertedAmount\": 5117.128378223215,\n        \"currency\": \"BYR\",\n        \"convertedCurrency\": \"TRY\"\n      },\n      \"asset\": {\n        \"amount\": 643.0856793178141,\n        \"convertedAmount\": 4503.573696996052,\n        \"currency\": \"PAB\",\n        \"convertedCurrency\": \"MVR\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f3693d4-bfac-43a7-8371-955432a62abd",
+              "name": "Y800 : Invalid value for accountIds<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for toDate<br>Y809 : Invalid date range<br>Y800 : Invalid value for interval<br>Y802 : Future date not allowed<br>Y814 : Exchange rate not available for currency<br>Y800 : Invalid value for container",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "networth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca9f151c-25d8-4282-8e00-89f34cab8699",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "networth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d848d9ca-2a07-40ce-a296-07108eef3009",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "networth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78e9b522-fad6-4db2-a855-efa5767b4720",
+          "name": "Get Transaction Summary",
+          "request": {
+            "name": "Get Transaction Summary",
+            "description": {
+              "content": "The transaction summary service provides the summary values of transactions for the given date range by category type, high-level categories, or system-defined categories.<br><br>Yodlee has the transaction data stored for a day, month, year and week per category as per the availability of user's data. If the include parameter value is passed as details, then summary details will be returned depending on the interval passed-monthly is the default.<br><br><b>Notes:</b><ol> <li> Details can be requested for only one system-defined category<li>Passing categoryType is mandatory except when the groupBy value is CATEGORY_TYPE<li>Dates will not be respected for monthly, yearly, and weekly details<li>When monthly details are requested, only the fromDate and toDate month will be respected<li>When yearly details are requested, only the fromDate and toDate year will be respected<li>For weekly data points, details will be provided for every Sunday date available within the fromDate and toDate<li>This service supports the localization feature and accepts locale as a header parameter</li></ol>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derived",
+                "transactionSummary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "comma separated account Ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "description": "comma separated categoryIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryType",
+                  "value": "<string>",
+                  "description": "LOAN, INCOME, EXPENSE, TRANSFER, UNCATEGORIZE or DEFERRED_COMPENSATION"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<string>",
+                  "description": "YYYY-MM-DD format"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupBy",
+                  "value": "<string>",
+                  "description": "(Required) CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "details"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeUserCategory",
+                  "value": "<boolean>",
+                  "description": "TRUE/FALSE"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "D-daily, W-weekly, M-mothly or Y-yearly"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<string>",
+                  "description": "YYYY-MM-DD format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d01c7d0-5854-4819-8d38-97128a6aafe9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "transactionSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUserCategory",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"transactions\": \"string\"\n  },\n  \"transactionSummary\": [\n    {\n      \"categoryType\": \"EXPENSE\",\n      \"categorySummary\": [\n        {\n          \"creditTotal\": {\n            \"amount\": 8237.811655809868,\n            \"convertedAmount\": 4589.754220887885,\n            \"currency\": \"BGN\",\n            \"convertedCurrency\": \"BYR\"\n          },\n          \"details\": [\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"links\": {\n            \"transactions\": \"string\"\n          },\n          \"categoryName\": \"string\",\n          \"categoryId\": 8771,\n          \"debitTotal\": {\n            \"amount\": 5745.11571553708,\n            \"convertedAmount\": 518.6837409977829,\n            \"currency\": \"PKR\",\n            \"convertedCurrency\": \"CSK\"\n          }\n        },\n        {\n          \"creditTotal\": {\n            \"amount\": 4273.239223848782,\n            \"convertedAmount\": 7805.577730941682,\n            \"currency\": \"LSL\",\n            \"convertedCurrency\": \"KZT\"\n          },\n          \"details\": [\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"links\": {\n            \"transactions\": \"string\"\n          },\n          \"categoryName\": \"string\",\n          \"categoryId\": 9414,\n          \"debitTotal\": {\n            \"amount\": 3404.2240422417212,\n            \"convertedAmount\": 7104.488604628406,\n            \"currency\": \"XOF\",\n            \"convertedCurrency\": \"GTQ\"\n          }\n        }\n      ],\n      \"creditTotal\": {\n        \"amount\": 2463.727687758116,\n        \"convertedAmount\": 2285.8516122271044,\n        \"currency\": \"TRL\",\n        \"convertedCurrency\": \"CVE\"\n      },\n      \"links\": {\n        \"transactions\": \"string\"\n      },\n      \"debitTotal\": {\n        \"amount\": 5994.516823408725,\n        \"convertedAmount\": 4944.0430436795805,\n        \"currency\": \"KPW\",\n        \"convertedCurrency\": \"XPD\"\n      }\n    },\n    {\n      \"categoryType\": \"INCOME\",\n      \"categorySummary\": [\n        {\n          \"creditTotal\": {\n            \"amount\": 2321.936961921609,\n            \"convertedAmount\": 5382.08440883838,\n            \"currency\": \"INR\",\n            \"convertedCurrency\": \"SKK\"\n          },\n          \"details\": [\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"links\": {\n            \"transactions\": \"string\"\n          },\n          \"categoryName\": \"string\",\n          \"categoryId\": 6449,\n          \"debitTotal\": {\n            \"amount\": 2385.587839538288,\n            \"convertedAmount\": 4809.709754098004,\n            \"currency\": \"BMD\",\n            \"convertedCurrency\": \"XBD\"\n          }\n        },\n        {\n          \"creditTotal\": {\n            \"amount\": 1491.7592090229282,\n            \"convertedAmount\": 7094.733150462248,\n            \"currency\": \"ZAR\",\n            \"convertedCurrency\": \"TMM\"\n          },\n          \"details\": [\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creditTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"debitTotal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"links\": {\n            \"transactions\": \"string\"\n          },\n          \"categoryName\": \"string\",\n          \"categoryId\": 5723,\n          \"debitTotal\": {\n            \"amount\": 8953.267477341104,\n            \"convertedAmount\": 6115.978527583684,\n            \"currency\": \"BYR\",\n            \"convertedCurrency\": \"MTL\"\n          }\n        }\n      ],\n      \"creditTotal\": {\n        \"amount\": 6022.335533905601,\n        \"convertedAmount\": 9159.846953634988,\n        \"currency\": \"MVR\",\n        \"convertedCurrency\": \"MZM\"\n      },\n      \"links\": {\n        \"transactions\": \"string\"\n      },\n      \"debitTotal\": {\n        \"amount\": 8954.586409623116,\n        \"convertedAmount\": 3655.351424901476,\n        \"currency\": \"CRC\",\n        \"convertedCurrency\": \"LYD\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "931cee3d-6d73-4ee9-969a-190994fb12d1",
+              "name": "Y010 : Invalid session<br>Y800 : Invalid value for accountId<br>Y800 : Invalid value for groupBy<br>Y803 : groupBy required<br>Y803 : categoryType required<br>Y800 : Invalid value for categoryId<br>Y800 : Invalid value for fromDate<br>Y800 : Invalid value for toDate<br>Y800 : Invalid value for fromDate or toDate<br>Y814 : Exchange rate not available for currency<br>Y815 : Cannot apply filter on categoryId if groupBy value is CATEGORY_TYPE<br>Y816 : User-defined category details can only be requested for one system categoryId with groupBy='CATEGORY'<br>Y824 : The maximum number of accountIds permitted is 100<br>Y824 : The maximum number of categoryIds permitted is 100<br>Y824 : The maximum number of categoryTypes permitted is 100",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "transactionSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUserCategory",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5d9a2c3-0f64-4501-a916-2ee716e47341",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "transactionSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUserCategory",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac39cfd7-f3df-4366-9b82-8eb146607e99",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "transactionSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUserCategory",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "044f7a6b-2be2-46e2-b88a-ed80deeda397",
+          "name": "Get Holding Summary",
+          "request": {
+            "name": "Get Holding Summary",
+            "description": {
+              "content": "The get holding summary service is used to get the summary of asset classifications for the user.<br>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>If the include parameter value is passed as details then a summary with holdings and account information is returned.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derived",
+                "holdingSummary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountIds",
+                  "value": "<string>",
+                  "description": "Comma separated accountIds"
+                },
+                {
+                  "disabled": false,
+                  "key": "classificationType",
+                  "value": "<string>",
+                  "description": "e.g. Country, Sector, etc."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "details"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e43d6c84-9457-4e33-a7f7-29810fe6c694",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "holdingSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "classificationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"holdingSummary\": [\n    {\n      \"holding\": [\n        {\n          \"symbol\": \"string\",\n          \"exercisedQuantity\": 5723.248466421424,\n          \"cusipNumber\": \"string\",\n          \"assetClassification\": {\n            \"allocation\": 4141.077296936405,\n            \"classificationType\": \"string\",\n            \"classificationValue\": \"string\"\n          },\n          \"vestedQuantity\": 6228.643253960819,\n          \"description\": \"string\",\n          \"unvestedValue\": {\n            \"amount\": 4607.907902215127,\n            \"convertedAmount\": 2190.2282814759633,\n            \"currency\": \"IRR\",\n            \"convertedCurrency\": \"BAM\"\n          },\n          \"securityStyle\": \"string\",\n          \"vestedValue\": {\n            \"amount\": 7039.941127326556,\n            \"convertedAmount\": 5345.542391070565,\n            \"currency\": \"AFA\",\n            \"convertedCurrency\": \"PLN\"\n          },\n          \"optionType\": \"call\",\n          \"lastUpdated\": \"string\",\n          \"matchStatus\": \"string\",\n          \"holdingType\": \"commodity\",\n          \"maturityDate\": \"string\",\n          \"price\": {\n            \"amount\": 593.2636400185587,\n            \"convertedAmount\": 118.5563960811331,\n            \"currency\": \"SCR\",\n            \"convertedCurrency\": \"SRG\"\n          },\n          \"term\": \"string\",\n          \"contractQuantity\": 2405.454391934011,\n          \"id\": 372,\n          \"isShort\": false,\n          \"value\": {\n            \"amount\": 9730.965058948197,\n            \"convertedAmount\": 3718.888952639404,\n            \"currency\": \"JMD\",\n            \"convertedCurrency\": \"KGS\"\n          },\n          \"expirationDate\": \"string\",\n          \"interestRate\": 5515.756192914253,\n          \"quantity\": 4524.325122208073,\n          \"accruedInterest\": {\n            \"amount\": 1995.2266809745556,\n            \"convertedAmount\": 5307.462325291832,\n            \"currency\": \"HKD\",\n            \"convertedCurrency\": \"ECS\"\n          },\n          \"grantDate\": \"string\",\n          \"sedol\": \"string\",\n          \"vestedSharesExercisable\": 7666.115946300403,\n          \"spread\": {\n            \"amount\": 3720.5975337842033,\n            \"convertedAmount\": 307.36422878704593,\n            \"currency\": \"UYU\",\n            \"convertedCurrency\": \"IQD\"\n          },\n          \"accountId\": 8036,\n          \"enrichedDescription\": \"string\",\n          \"couponRate\": 9932.418798526269,\n          \"createdDate\": \"string\",\n          \"accruedIncome\": {\n            \"amount\": 9486.197113827933,\n            \"convertedAmount\": 7476.408786191154,\n            \"currency\": \"PAB\",\n            \"convertedCurrency\": \"HNL\"\n          },\n          \"securityType\": \"string\",\n          \"providerAccountId\": 8933,\n          \"unvestedQuantity\": 5638.922690327863,\n          \"costBasis\": {\n            \"amount\": 2766.414878838105,\n            \"convertedAmount\": 7210.109917796851,\n            \"currency\": \"ZMK\",\n            \"convertedCurrency\": \"YER\"\n          },\n          \"vestingDate\": \"string\",\n          \"isin\": \"string\",\n          \"strikePrice\": {\n            \"amount\": 4569.45402866263,\n            \"convertedAmount\": 2370.0300035605915,\n            \"currency\": \"GBP\",\n            \"convertedCurrency\": \"CZK\"\n          }\n        },\n        {\n          \"symbol\": \"string\",\n          \"exercisedQuantity\": 4279.832148200266,\n          \"cusipNumber\": \"string\",\n          \"assetClassification\": {\n            \"allocation\": 1555.532366402097,\n            \"classificationType\": \"string\",\n            \"classificationValue\": \"string\"\n          },\n          \"vestedQuantity\": 2675.880945318149,\n          \"description\": \"string\",\n          \"unvestedValue\": {\n            \"amount\": 4445.75157030729,\n            \"convertedAmount\": 9464.503734947726,\n            \"currency\": \"PEN\",\n            \"convertedCurrency\": \"THB\"\n          },\n          \"securityStyle\": \"string\",\n          \"vestedValue\": {\n            \"amount\": 2487.044097128621,\n            \"convertedAmount\": 7217.337385305768,\n            \"currency\": \"CZK\",\n            \"convertedCurrency\": \"TND\"\n          },\n          \"optionType\": \"call\",\n          \"lastUpdated\": \"string\",\n          \"matchStatus\": \"string\",\n          \"holdingType\": \"preferredStock\",\n          \"maturityDate\": \"string\",\n          \"price\": {\n            \"amount\": 8098.3615611692585,\n            \"convertedAmount\": 8962.082298723684,\n            \"currency\": \"CNH\",\n            \"convertedCurrency\": \"ARS\"\n          },\n          \"term\": \"string\",\n          \"contractQuantity\": 3107.6742590475046,\n          \"id\": 9055,\n          \"isShort\": true,\n          \"value\": {\n            \"amount\": 7596.073192454913,\n            \"convertedAmount\": 857.1884577443445,\n            \"currency\": \"TRL\",\n            \"convertedCurrency\": \"UAH\"\n          },\n          \"expirationDate\": \"string\",\n          \"interestRate\": 996.9205417014115,\n          \"quantity\": 335.7517421240763,\n          \"accruedInterest\": {\n            \"amount\": 7946.332462201737,\n            \"convertedAmount\": 8864.140914839998,\n            \"currency\": \"MRO\",\n            \"convertedCurrency\": \"DDM\"\n          },\n          \"grantDate\": \"string\",\n          \"sedol\": \"string\",\n          \"vestedSharesExercisable\": 6368.504197547393,\n          \"spread\": {\n            \"amount\": 3153.791688630927,\n            \"convertedAmount\": 3801.1547926756693,\n            \"currency\": \"HKD\",\n            \"convertedCurrency\": \"YER\"\n          },\n          \"accountId\": 8564,\n          \"enrichedDescription\": \"string\",\n          \"couponRate\": 4860.185690439719,\n          \"createdDate\": \"string\",\n          \"accruedIncome\": {\n            \"amount\": 2594.497541222743,\n            \"convertedAmount\": 7947.710176140455,\n            \"currency\": \"PLN\",\n            \"convertedCurrency\": \"CRC\"\n          },\n          \"securityType\": \"string\",\n          \"providerAccountId\": 1615,\n          \"unvestedQuantity\": 3652.3751094256627,\n          \"costBasis\": {\n            \"amount\": 9664.396145143342,\n            \"convertedAmount\": 165.4414995884246,\n            \"currency\": \"XBB\",\n            \"convertedCurrency\": \"GEL\"\n          },\n          \"vestingDate\": \"string\",\n          \"isin\": \"string\",\n          \"strikePrice\": {\n            \"amount\": 950.8783286313127,\n            \"convertedAmount\": 1536.0796465736105,\n            \"currency\": \"IEP\",\n            \"convertedCurrency\": \"JPY\"\n          }\n        }\n      ],\n      \"classificationType\": \"string\",\n      \"classificationValue\": \"string\",\n      \"value\": {\n        \"amount\": 5544.825651947429,\n        \"convertedAmount\": 9669.097535040137,\n        \"currency\": \"IQD\",\n        \"convertedCurrency\": \"INR\"\n      },\n      \"account\": [\n        {\n          \"id\": 1326,\n          \"value\": {\n            \"amount\": 112.23329269035132,\n            \"convertedAmount\": 1601.4097827798846,\n            \"currency\": \"XPF\",\n            \"convertedCurrency\": \"NIO\"\n          }\n        },\n        {\n          \"id\": 685,\n          \"value\": {\n            \"amount\": 4993.835014268736,\n            \"convertedAmount\": 194.6943283476643,\n            \"currency\": \"DEM\",\n            \"convertedCurrency\": \"KWD\"\n          }\n        }\n      ]\n    },\n    {\n      \"holding\": [\n        {\n          \"symbol\": \"string\",\n          \"exercisedQuantity\": 4699.362721477551,\n          \"cusipNumber\": \"string\",\n          \"assetClassification\": {\n            \"allocation\": 3341.9152179951807,\n            \"classificationType\": \"string\",\n            \"classificationValue\": \"string\"\n          },\n          \"vestedQuantity\": 4217.923151236317,\n          \"description\": \"string\",\n          \"unvestedValue\": {\n            \"amount\": 4876.421059060782,\n            \"convertedAmount\": 6080.598261546647,\n            \"currency\": \"ISK\",\n            \"convertedCurrency\": \"MUR\"\n          },\n          \"securityStyle\": \"string\",\n          \"vestedValue\": {\n            \"amount\": 5616.092812362725,\n            \"convertedAmount\": 6921.454508223157,\n            \"currency\": \"BTN\",\n            \"convertedCurrency\": \"CRC\"\n          },\n          \"optionType\": \"unknown\",\n          \"lastUpdated\": \"string\",\n          \"matchStatus\": \"string\",\n          \"holdingType\": \"future\",\n          \"maturityDate\": \"string\",\n          \"price\": {\n            \"amount\": 1316.0477354506806,\n            \"convertedAmount\": 1825.7879259419897,\n            \"currency\": \"LTL\",\n            \"convertedCurrency\": \"UYU\"\n          },\n          \"term\": \"string\",\n          \"contractQuantity\": 984.8233721711986,\n          \"id\": 7386,\n          \"isShort\": false,\n          \"value\": {\n            \"amount\": 5323.032106645172,\n            \"convertedAmount\": 464.7815220328544,\n            \"currency\": \"JOD\",\n            \"convertedCurrency\": \"JMD\"\n          },\n          \"expirationDate\": \"string\",\n          \"interestRate\": 3515.5051110732993,\n          \"quantity\": 899.6978585397985,\n          \"accruedInterest\": {\n            \"amount\": 7832.486256897706,\n            \"convertedAmount\": 5719.923735697252,\n            \"currency\": \"VUV\",\n            \"convertedCurrency\": \"TTD\"\n          },\n          \"grantDate\": \"string\",\n          \"sedol\": \"string\",\n          \"vestedSharesExercisable\": 1639.2189915825927,\n          \"spread\": {\n            \"amount\": 7267.199625242022,\n            \"convertedAmount\": 4373.95484324427,\n            \"currency\": \"TMT\",\n            \"convertedCurrency\": \"NIO\"\n          },\n          \"accountId\": 8856,\n          \"enrichedDescription\": \"string\",\n          \"couponRate\": 3700.927604426184,\n          \"createdDate\": \"string\",\n          \"accruedIncome\": {\n            \"amount\": 2291.9741623499535,\n            \"convertedAmount\": 7063.291886768751,\n            \"currency\": \"TRY\",\n            \"convertedCurrency\": \"DZD\"\n          },\n          \"securityType\": \"string\",\n          \"providerAccountId\": 1858,\n          \"unvestedQuantity\": 365.7932894225524,\n          \"costBasis\": {\n            \"amount\": 7614.800838162494,\n            \"convertedAmount\": 68.78751773039427,\n            \"currency\": \"PLN\",\n            \"convertedCurrency\": \"UZS\"\n          },\n          \"vestingDate\": \"string\",\n          \"isin\": \"string\",\n          \"strikePrice\": {\n            \"amount\": 2183.3535756717783,\n            \"convertedAmount\": 2519.498785914465,\n            \"currency\": \"TPE\",\n            \"convertedCurrency\": \"MGF\"\n          }\n        },\n        {\n          \"symbol\": \"string\",\n          \"exercisedQuantity\": 2041.5740232810297,\n          \"cusipNumber\": \"string\",\n          \"assetClassification\": {\n            \"allocation\": 6807.720205435792,\n            \"classificationType\": \"string\",\n            \"classificationValue\": \"string\"\n          },\n          \"vestedQuantity\": 4010.042939312416,\n          \"description\": \"string\",\n          \"unvestedValue\": {\n            \"amount\": 1693.5826608184857,\n            \"convertedAmount\": 9559.733135775323,\n            \"currency\": \"PTE\",\n            \"convertedCurrency\": \"IQD\"\n          },\n          \"securityStyle\": \"string\",\n          \"vestedValue\": {\n            \"amount\": 9515.091009798814,\n            \"convertedAmount\": 5166.34298683277,\n            \"currency\": \"UGX\",\n            \"convertedCurrency\": \"SEK\"\n          },\n          \"optionType\": \"put\",\n          \"lastUpdated\": \"string\",\n          \"matchStatus\": \"string\",\n          \"holdingType\": \"remic\",\n          \"maturityDate\": \"string\",\n          \"price\": {\n            \"amount\": 1625.7445821142057,\n            \"convertedAmount\": 2199.467665411765,\n            \"currency\": \"MRO\",\n            \"convertedCurrency\": \"ERN\"\n          },\n          \"term\": \"string\",\n          \"contractQuantity\": 8902.005653482916,\n          \"id\": 7888,\n          \"isShort\": true,\n          \"value\": {\n            \"amount\": 1545.5991570892913,\n            \"convertedAmount\": 8365.392901807922,\n            \"currency\": \"NAD\",\n            \"convertedCurrency\": \"SCR\"\n          },\n          \"expirationDate\": \"string\",\n          \"interestRate\": 2688.197228940057,\n          \"quantity\": 5838.563951541813,\n          \"accruedInterest\": {\n            \"amount\": 1359.5855950836478,\n            \"convertedAmount\": 8356.989986912911,\n            \"currency\": \"BIF\",\n            \"convertedCurrency\": \"MNT\"\n          },\n          \"grantDate\": \"string\",\n          \"sedol\": \"string\",\n          \"vestedSharesExercisable\": 3869.5282433565294,\n          \"spread\": {\n            \"amount\": 740.5765951054033,\n            \"convertedAmount\": 6301.147830816076,\n            \"currency\": \"SBD\",\n            \"convertedCurrency\": \"HTG\"\n          },\n          \"accountId\": 2127,\n          \"enrichedDescription\": \"string\",\n          \"couponRate\": 8269.58113246563,\n          \"createdDate\": \"string\",\n          \"accruedIncome\": {\n            \"amount\": 5750.202727499532,\n            \"convertedAmount\": 6662.57993828915,\n            \"currency\": \"BHD\",\n            \"convertedCurrency\": \"BBD\"\n          },\n          \"securityType\": \"string\",\n          \"providerAccountId\": 5111,\n          \"unvestedQuantity\": 2559.5868708026615,\n          \"costBasis\": {\n            \"amount\": 3835.141057672158,\n            \"convertedAmount\": 6987.539577940091,\n            \"currency\": \"SYP\",\n            \"convertedCurrency\": \"PKR\"\n          },\n          \"vestingDate\": \"string\",\n          \"isin\": \"string\",\n          \"strikePrice\": {\n            \"amount\": 7616.263784134601,\n            \"convertedAmount\": 6146.840978820625,\n            \"currency\": \"DKK\",\n            \"convertedCurrency\": \"ETB\"\n          }\n        }\n      ],\n      \"classificationType\": \"string\",\n      \"classificationValue\": \"string\",\n      \"value\": {\n        \"amount\": 8228.532626514072,\n        \"convertedAmount\": 9090.826781222653,\n        \"currency\": \"ZWD\",\n        \"convertedCurrency\": \"SVC\"\n      },\n      \"account\": [\n        {\n          \"id\": 4164,\n          \"value\": {\n            \"amount\": 6377.526547818706,\n            \"convertedAmount\": 1562.1954783136828,\n            \"currency\": \"NOK\",\n            \"convertedCurrency\": \"PYG\"\n          }\n        },\n        {\n          \"id\": 5908,\n          \"value\": {\n            \"amount\": 9218.977920889238,\n            \"convertedAmount\": 7043.3620444972785,\n            \"currency\": \"BHD\",\n            \"convertedCurrency\": \"SHP\"\n          }\n        }\n      ]\n    }\n  ],\n  \"link\": {\n    \"holdings\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abab2668-70ed-4806-8eb8-795afde08f0e",
+              "name": "Y800 : Invalid value for classificationType<br>Y814 : Exchange rate not available for currency<br>Y824 : The maximum number of accountIds permitted is 100<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "holdingSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "classificationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06bca761-cc6f-42e3-a8ab-d9624cce9d96",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "holdingSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "classificationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32de4732-426e-4289-9054-35d26b718f36",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derived",
+                    "holdingSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "classificationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9ef73dcb-18f6-4128-8717-5324e3e8c9fa",
+    "name": "Yodlee Core APIs Account Token Derived API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

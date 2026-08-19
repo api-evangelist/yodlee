@@ -1,0 +1,210 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Consents API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Consents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Consent History Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/history/count",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "query",
+                "description": "Consent Id generated through POST Consent."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History end date (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "The count service provides the total number of history records for a specific consent. <br/>If you are implementing pagination for consent history, call this endpoint before calling GET /consents/history to know the number of records for the given consent that are returned for the input parameters passed.<br/>"
+        },
+        {
+          "info": {
+            "name": "Get Consent History ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/history",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "query",
+                "description": "Consent Id generated through POST Consent."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History from date(YYYY-MM-DD)"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "skip (Min 0)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Consent History end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "top (Max 500)"
+              }
+            ]
+          },
+          "docs": "The get consent history service is used to retrieve all the history related to the consent. <br/>All history event details for few fields like userDataPurge, deidentificationPreference and consentCollectionPeriod may not be available for older AU Open Banking consents and other Open Banking regions.<br/>For any consent, history will be captured and available from consent authorization (consent status Active) event onwards.<br/><b>Note:</b><br/>  i. Duration (fromDate and toDate) is optional. In "
+        },
+        {
+          "info": {
+            "name": "Get Authorization Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/:consentId",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "path",
+                "description": "Consent Id generated through POST Consent."
+              }
+            ]
+          },
+          "docs": "The get authorization URL for consent service provides the authorization URL for the renew consent flow, within the consent dashboard.<b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>"
+        },
+        {
+          "info": {
+            "name": "Put Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/consents/:consentId",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "path",
+                "description": "Consent Id generated through POST Consent."
+              }
+            ]
+          },
+          "docs": "The update consent service is used to capture the user acceptance of the consent presented to him or her. <br/>This service returns the authorization-redirect URL that should be used to display to the user, the bank's authentication interface.<b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>"
+        },
+        {
+          "info": {
+            "name": "Get Consents Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents/preferences",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "query",
+                "description": "consentId"
+              }
+            ]
+          },
+          "docs": "This API service provides user's preferences for the consent"
+        },
+        {
+          "info": {
+            "name": "Renew Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/consents/:consentId/renewal",
+            "params": [
+              {
+                "name": "consentId",
+                "value": "",
+                "type": "path",
+                "description": "Consent Id to be renewed."
+              }
+            ]
+          },
+          "docs": "The consent renewal service is used to renew the consent by validating the consent state. This API supports both UK and AU Open Banking. </br><b>Renewing an UK Open Banking consent:</b><br><li>Before the grace period of 90 days: The consent will be renewed using the third-party provider (TPP) renewal process that Yodlee does, and no consent reauthorisation is required.The API response will contain the complete renewed consent object.</li><li>After the grace period of 90 days: The API will provid"
+        },
+        {
+          "info": {
+            "name": "Get Consents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/consents",
+            "params": [
+              {
+                "name": "consentIds",
+                "value": "",
+                "type": "query",
+                "description": "Consent Id generated through POST Consent."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "The flag responsible to include renew details like sharing duration and reauthorization required"
+              },
+              {
+                "name": "providerAccountIds",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the provider account resource. This is created during account addition."
+              }
+            ]
+          },
+          "docs": "The get consent service is used to retrieve all the consents submitted to Yodlee. <br>The service can be used to build a manage consent interface or a consent dashboard to implement the renew and revoke consent flows.<br><b>Note:</b>This service supports the localization feature and accepts locale as a header parameter.<br>"
+        },
+        {
+          "info": {
+            "name": "Post Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/consents"
+          },
+          "docs": "The generate consent service is used to generate all the consent information and permissions associated to a provider. <br/>The scope provided in the response is based on the providerId and the datasets provided in the input. <br/>If no dataset value is provided, the datasets that are configured for the customer will be considered. <br/>The configured dataset can be overridden by providing the dataset as an input. <br/>If no applicationName is provided in the input, the default applicationName w"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

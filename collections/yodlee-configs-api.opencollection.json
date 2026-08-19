@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token Configs API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subscribed Notification Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/configs/notifications/events",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The get events service provides the list of events for which consumers subscribed to receive notifications. <br>"
+        },
+        {
+          "info": {
+            "name": "Get Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/configs/publicKey"
+          },
+          "docs": "The get public key service provides the public key that should be used to encrypt user credentials while invoking POST /providerAccounts and PUT /providerAccounts endpoints.<br>This service will only work if the PKI (public key infrastructure) feature is enabled for the customer.<br><br><b>Note:</b><li> The key in the response is a string in PEM format.</li><li>This endpoint is not available in the Sandbox environment and it is useful only if the PKI feature is enabled.</li>"
+        },
+        {
+          "info": {
+            "name": "Subscribe For Notification Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/configs/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The subscribe events service is used to subscribe to an event for receiving notifications.<br>The callback URL, where the notification will be posted should be provided to this service.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br>Customers can subscribe to REFRESH,DATA_UPDATES,AUTO_REFRESH_UPDATES,LATEST_BALANCE_UPDATES and CREDIT_MATRIX_REPORT_UPDATES event.<br><br><b>Notes:</b><li>This service is not available in dev"
+        },
+        {
+          "info": {
+            "name": "Update Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/configs/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The update events service is used to update the callback URL.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br><br><b>Note:</b> <li>The content type has to be passed as application/json for the body parameter. <br>"
+        },
+        {
+          "info": {
+            "name": "Delete Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/configs/notifications/events/:eventName",
+            "params": [
+              {
+                "name": "eventName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the webhook subscription event"
+              }
+            ]
+          },
+          "docs": "The delete events service is used to unsubscribe from an events service.<br>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

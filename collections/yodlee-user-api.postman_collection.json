@@ -1,0 +1,1161 @@
+{
+  "item": [
+    {
+      "id": "e91977be-35ef-459c-b2f9-8f7be95df319",
+      "name": "User",
+      "description": {
+        "content": "Users API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7998a443-49de-4af3-922b-31a3e3ead8f9",
+          "name": "Saml Login",
+          "request": {
+            "name": "Saml Login",
+            "description": {
+              "content": "The SAML login service is used to authenticate system users with a SAML response.<br>A new user will be created with the input provided if that user isn't already in the system.<br>For existing users, the system will make updates based on changes or new information.<br>When authentication is successful, a user session token is returned.<br><br><b>Note:</b> <li>The content type has to be passed as application/x-www-form-urlencoded. <li>issuer, source and samlResponse should be passed as body parameters.</li>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user",
+                "samlLogin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "issuer",
+                  "value": "<string>",
+                  "description": "(Required) issuer"
+                },
+                {
+                  "disabled": false,
+                  "key": "samlResponse",
+                  "value": "<string>",
+                  "description": "(Required) samlResponse"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "(Required) source"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c293a47-1dc7-49da-8f2b-99c17cbc2135",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "samlLogin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "issuer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "samlResponse",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"preferences\": {\n      \"dateFormat\": \"string\",\n      \"timeZone\": \"string\",\n      \"currency\": \"LUF\",\n      \"locale\": \"zh_CN\"\n    },\n    \"session\": {\n      \"userSession\": \"string\"\n    },\n    \"loginName\": \"string\",\n    \"name\": {\n      \"middle\": \"string\",\n      \"last\": \"string\",\n      \"fullName\": \"string\",\n      \"first\": \"string\"\n    },\n    \"id\": 1452,\n    \"roleType\": \"INDIVIDUAL\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7bef8b7-0e16-409c-85ad-ed71661ac0e0",
+              "name": "Y013 : Invalid value for samlResponse<br>Y013 : Invalid value for issuer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "samlLogin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "issuer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "samlResponse",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "613fbb4a-8c56-4a02-96b4-4d8d4006596c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "samlLogin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "issuer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "samlResponse",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75b10e15-9d79-404b-8e83-1ad931eb13ec",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "samlLogin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "issuer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "samlResponse",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e054f89c-9125-4cb3-8989-49814ad1bab3",
+          "name": "Get Access Tokens",
+          "request": {
+            "name": "Get Access Tokens",
+            "description": {
+              "content": "The Get Access Tokens service is used to retrieve the access tokens for the application id(s) provided.<br>URL in the response can be used to launch the application for which token is requested.<br><br><b>Note:</b> <li>This endpoint is deprecated for customers using the API Key-based authentication and is applicable only to customers who use the SAML-based authentication.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user",
+                "accessTokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "appIds",
+                  "value": "<string>",
+                  "description": "(Required) appIds"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb595fa5-0c12-4e03-8f52-19a339b0a0c8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "accessTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"accessTokens\": [\n      {\n        \"appId\": \"string\",\n        \"value\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"appId\": \"string\",\n        \"value\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0caa2005-b4bb-4297-badb-9fb16b41e452",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "accessTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4aede3f-1aff-4a44-ac26-8ccffa2d3b29",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "accessTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3065115-26bc-49cf-9b70-99375d7edb72",
+          "name": "Get User Details",
+          "request": {
+            "name": "Get User Details",
+            "description": {
+              "content": "The get user details service is used to get the user profile information and the application preferences set at the time of user registration.<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "173a27c0-26b1-46d7-81b3-1920aaec62a9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"preferences\": {\n      \"dateFormat\": \"string\",\n      \"timeZone\": \"string\",\n      \"currency\": \"EUR\",\n      \"locale\": \"en_GLOBAL\"\n    },\n    \"address\": {\n      \"zip\": \"string\",\n      \"country\": \"string\",\n      \"address3\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"address1\": \"string\",\n      \"state\": \"string\"\n    },\n    \"phoneNumber\": \"string\",\n    \"loginName\": \"string\",\n    \"name\": {\n      \"middle\": \"string\",\n      \"last\": \"string\",\n      \"fullName\": \"string\",\n      \"first\": \"string\"\n    },\n    \"id\": 995,\n    \"roleType\": \"INDIVIDUAL\",\n    \"email\": \"string\",\n    \"segmentName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f2f386e-64ed-42f5-9441-30261c6b39bc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2242297d-1fa4-4b86-bae6-82c5e850fd21",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cdc3f4e-690e-40a3-a398-cb14fadaac88",
+          "name": "Update User Details",
+          "request": {
+            "name": "Update User Details",
+            "description": {
+              "content": "The update user details service is used to update user details like name, address, currency preference, etc.<br>This service can also be used to change the business unit of the user for FL4 customers.<br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>The HTTP response code is 204 (Success without content). <br><br> <b>Login Name Change Feature:</b> loginName can be passed to update the user's login name. Once the loginName is updated, to access the user's data, a token with the changed loginName must be created. This feature is supported only Client Credentials authentication methods.<br><b>Note:</b> <li>We strongly recommend to immediately delete the old access token once the user's loginName is successfully changed to avoid misuse.</li> <li>After updating the login name, the already sent data extract events with the old login name will no more be functional. Replace the loginName with new loginName or try polling method to retrieve the data.</li><br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"configName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"loginName\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48be0cc3-0f90-4694-9315-f93c9c91fec9",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"configName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"loginName\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c914c8c-44eb-44c8-a996-b4463594f03f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"configName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"loginName\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "034ce491-3a4e-4848-a099-99f42ecc27c7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"configName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"loginName\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab20d019-d022-40f7-bf34-2b5644c832a3",
+          "name": "Delete User",
+          "request": {
+            "name": "Delete User",
+            "description": {
+              "content": "The delete user service is used to delete or unregister a user from Yodlee. <br>Once deleted, the information related to the users cannot be retrieved. <br>The HTTP response code is 204 (Success without content)<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user",
+                "unregister"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "146d2433-2ce9-4d20-aa4d-2da33827666f",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "unregister"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6cfb53db-4e40-4f67-abe4-627e48ec559b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "unregister"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc9a4eff-769f-4671-a9c3-b693e8820572",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "unregister"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5c08706-ad42-4ac4-bedf-5d2c5d25d912",
+          "name": "Register User",
+          "request": {
+            "name": "Register User",
+            "description": {
+              "content": "The register user service is used to register a user in Yodlee.<br>The loginName cannot include spaces and must be between 3 and 150 characters.<br>locale passed must be one of the supported locales for the customer. <br>Currency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.<br>userParam is accepted as a body parameter. <br><br><b>Note:</b> <li>The content type has to be passed as application/json for the body parameter.</li> <li>We recommend you to not use special characters in loginName other than \"@\", \"#\", \"_\" & \"-\"</li>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user",
+                "register"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"loginName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c64df89-b5f5-4853-a514-554eb714c8fe",
+              "name": "Login Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"loginName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"preferences\": {\n      \"dateFormat\": \"string\",\n      \"timeZone\": \"string\",\n      \"currency\": \"TJR\",\n      \"locale\": \"en_AE\"\n    },\n    \"session\": {\n      \"userSession\": \"string\"\n    },\n    \"loginName\": \"string\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"id\": 3628,\n    \"roleType\": \"INDIVIDUAL\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86c1cc32-57ec-4268-aed1-d6575f100814",
+              "name": "Y800 : Invalid value for loginName<br>Y800 : Invalid value for email<br>Y801 : Invalid length for loginName<br>Y800 : Invalid value for phoneNumber<br>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"loginName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorCode\": \"string\",\n  \"referenceCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4a67716-803e-43f1-818f-2abb5599cba3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"loginName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edee951b-6846-4d56-92cc-45c5feac40b0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"loginName\": \"<string>\",\n    \"preferences\": {\n      \"dateFormat\": \"<string>\",\n      \"timeZone\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"locale\": \"<string>\"\n    },\n    \"address\": {\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address3\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"phoneNumber\": \"<string>\",\n    \"name\": {\n      \"middle\": \"<string>\",\n      \"last\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"first\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"segmentName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f06c81e8-6912-499a-bc5b-f31e699a5ed5",
+          "name": "User Logout",
+          "request": {
+            "name": "User Logout",
+            "description": {
+              "content": "<b>Deprecated</b>: This endpoint is deprecated for API Key-based authentication. The user logout service allows the user to log out of the application.<br>The service does not return a response body. The HTTP response code is 204 (Success with no content).<br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93b09157-1e22-41d8-9005-6ef2d4eb4864",
+              "name": "Logout successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f1b3103-56ba-4cb6-965c-63f3e80dae44",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa674699-eaeb-490f-a585-27926dd8e5b6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a4d06b8f-c6eb-4a86-bf18-a2eab658f8f9",
+    "name": "Yodlee Core APIs Account Token User API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API's description.\n\nContact Support:\n Email: developer@yodlee.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yodlee Core APIs Account Token User Documents API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/documents/search"
+          },
+          "docs": "The Get User Documents service will allow customers to search or retrieve metadata related to PDF documents uploaded by user through the FastLink 4 flow."
+        },
+        {
+          "info": {
+            "name": "Delete User Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/documents"
+          },
+          "docs": "The Delete User Documents service allows the consumer to delete the PDF documents uploaded by user through FastLink 4 flow.<br>The deleted documents will not be returned in the Get User Documents API.<br>The HTTP response code is 204 (success without content)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
