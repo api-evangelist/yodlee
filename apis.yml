@@ -101,6 +101,8 @@ apis:
   humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   baseURL: https://production.api.yodlee.com/ysl
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -117,6 +119,8 @@ apis:
   humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   baseURL: https://production.api.yodlee.com/ysl
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -245,6 +249,8 @@ apis:
   humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   baseURL: https://production.api.yodlee.com/ysl
   tags:
+  - institutions
+  tags_raw:
   - Institutions
   properties:
   - type: OpenAPI
@@ -352,6 +358,8 @@ apis:
   humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   baseURL: https://production.api.yodlee.com/ysl
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
