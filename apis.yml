@@ -249,7 +249,7 @@ apis:
   humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   baseURL: https://production.api.yodlee.com/ysl
   tags:
-  - institutions
+  - Institutions
   tags_raw:
   - Institutions
   properties:
