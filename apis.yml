@@ -288,22 +288,6 @@ apis:
     url: https://developer.yodlee.com/docs/getting-started
   - type: GraphQL
     url: graphql/yodlee-graphql.md
-- aid: yodlee:yodlee-provideraccounts-api
-  name: Yodlee ProviderAccounts API
-  description: Provider Accounts API
-  humanURL: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
-  baseURL: https://production.api.yodlee.com/ysl
-  tags:
-  - ProviderAccounts
-  properties:
-  - type: OpenAPI
-    url: openapi/yodlee-provideraccounts-api-openapi.yml
-  - type: Documentation
-    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
-  - type: GettingStarted
-    url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-providers-api
   name: Yodlee Providers API
   description: Providers API
@@ -428,6 +412,22 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/yodlee-verify-account-api-openapi.yml
+  - type: Documentation
+    url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
+  - type: GettingStarted
+    url: https://developer.yodlee.com/docs/getting-started
+  - type: GraphQL
+    url: graphql/yodlee-graphql.md
+- aid: yodlee:yodlee-provider-accounts-api
+  name: Yodlee Provider Accounts API
+  description: Provider Accounts API
+  humanURL: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
+  baseURL: https://production.api.yodlee.com/ysl
+  tags:
+  - Provider Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/yodlee-provider-accounts-api-openapi.yml
   - type: Documentation
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
