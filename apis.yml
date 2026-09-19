@@ -67,6 +67,10 @@ apis:
   humanURL: https://developer.yodlee.com/
   tags:
   - Account Linking
+  - Widgets
+  - Embedded Finance
+  tags_raw:
+  - Account Linking
   - Widget
   - Embedded Finance
   properties:
@@ -424,6 +428,8 @@ apis:
   humanURL: https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference
   baseURL: https://production.api.yodlee.com/ysl
   tags:
+  - ProviderAccounts
+  tags_raw:
   - Provider Accounts
   properties:
   - type: OpenAPI
