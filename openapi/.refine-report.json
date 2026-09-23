@@ -1,27 +1,7 @@
 {
   "provider": "yodlee",
   "sources": [
-    "yodlee-account-token-api-openapi.yml",
-    "yodlee-accounts-api-openapi.yml",
-    "yodlee-auth-api-openapi.yml",
-    "yodlee-cobrand-api-openapi.yml",
-    "yodlee-configs-api-openapi.yml",
-    "yodlee-consents-api-openapi.yml",
-    "yodlee-dataextracts-api-openapi.yml",
-    "yodlee-derived-api-openapi.yml",
-    "yodlee-documents-api-openapi.yml",
-    "yodlee-holdings-api-openapi.yml",
-    "yodlee-institutions-api-openapi.yml",
-    "yodlee-payment-processor-api-openapi.yml",
-    "yodlee-provideraccounts-api-openapi.yml",
-    "yodlee-providers-api-openapi.yml",
-    "yodlee-risk-analytics-api-openapi.yml",
-    "yodlee-statements-api-openapi.yml",
-    "yodlee-transactions-api-openapi.yml",
-    "yodlee-user-api-openapi.yml",
-    "yodlee-user-documents-api-openapi.yml",
-    "yodlee-verification-api-openapi.yml",
-    "yodlee-verify-account-api-openapi.yml"
+    "_original/yodlee-core-openapi.yml"
   ],
   "outputs": [
     "yodlee-account-token-api-openapi.yml",
@@ -46,9 +26,38 @@
     "yodlee-verification-api-openapi.yml",
     "yodlee-verify-account-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "yodlee-core-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: yodlee-provider-accounts-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 23 total)"
+  ],
+  "skipped": [
+    "yodlee-account-token-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-cobrand-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-configs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-consents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-dataextracts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-derived-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-holdings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-institutions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-payment-processor-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-provider-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-providers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-risk-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-statements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-user-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-verification-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "yodlee-verify-account-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

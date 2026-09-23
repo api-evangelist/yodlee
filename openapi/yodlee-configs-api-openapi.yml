@@ -1,15 +1,16 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   license:
     name: Yodlee Developer License
     url: https://developer.yodlee.com/terms/condition#_Services_1
   contact:
     email: developer@yodlee.com
-  description: 'This file describes the Yodlee Platform APIs using the swagger notation. You can use this swagger file to generate client side SDKs to the Yodlee Platform APIs for many different programming languages. Yodlee API v1.1 - Overview</a>.<br><br>You will have to set the header before making the API call. The following headers apply to all the APIs:<ul><li>Authorization: This header holds the access token</li> <li> Api-Version: 1.1</li></ul><b>Note</b>: If there are any API-specific headers, they are mentioned explicitly in the respective API''s description.'
+  description: This file describes the Yodlee Platform APIs using the swagger notation.
   termsOfService: https://developer.yodlee.com/terms/condition
-  title: Yodlee Core APIs Account Token Configs API
+  title: Yodlee Core Configs API
   version: 1.1.0
-basePath: /
+servers:
+- url: /
 tags:
 - name: Configs
   description: Configs API
@@ -18,15 +19,15 @@ paths:
     get:
       summary: Get Subscribed Notification Events
       deprecated: false
-      produces:
-      - application/json;charset=UTF-8
-      description: The get events service provides the list of events for which consumers subscribed to receive notifications. <br>
+      description: The get events service provides the list of events for which consumers subscribed to receive notifications.
       operationId: getSubscribedNotificationEvents
       responses:
         200:
-          schema:
-            $ref: '#/definitions/ConfigsNotificationResponse'
           description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ConfigsNotificationResponse'
         401:
           description: Unauthorized
         404:
@@ -36,29 +37,40 @@ paths:
         allowEmptyValue: false
         name: eventName
         description: Name of the webhook subscription event
-        type: string
         required: false
-        enum:
-        - REFRESH
-        - DATA_UPDATES
-        - AUTO_REFRESH_UPDATES
-        - LATEST_BALANCE_UPDATES
-        - CREDIT_MATRIX_REPORT_UPDATES
+        schema:
+          type: string
+          enum:
+          - REFRESH
+          - DATA_UPDATES
+          - AUTO_REFRESH_UPDATES
+          - LATEST_BALANCE_UPDATES
+          - CREDIT_MATRIX_REPORT_UPDATES
       tags:
       - Configs
   /configs/publicKey:
     get:
       summary: Get Public Key
       deprecated: false
-      produces:
-      - application/json;charset=UTF-8
-      description: The get public key service provides the public key that should be used to encrypt user credentials while invoking POST /providerAccounts and PUT /providerAccounts endpoints.<br>This service will only work if the PKI (public key infrastructure) feature is enabled for the customer.<br><br><b>Note:</b><li> The key in the response is a string in PEM format.</li><li>This endpoint is not available in the Sandbox environment and it is useful only if the PKI feature is enabled.</li>
+      description: 'The get public key service provides the public key that should be used to encrypt user credentials while invoking POST /providerAccounts and PUT /providerAccounts endpoints.
+
+        This service will only work if the PKI (public key infrastructure) feature is enabled for the customer.
+
+
+        Note:
+
+        The key in the response is a string in PEM format.
+
+
+        This endpoint is not available in the Sandbox environment and it is useful only if the PKI feature is enabled.'
       operationId: getPublicEncryptionKey
       responses:
         200:
-          schema:
-            $ref: '#/definitions/ConfigsPublicKeyResponse'
           description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ConfigsPublicKeyResponse'
         401:
           description: Unauthorized
         404:
@@ -69,17 +81,30 @@ paths:
     post:
       summary: Subscribe For Notification Event
       deprecated: false
-      produces:
-      - application/json;charset=UTF-8
-      description: The subscribe events service is used to subscribe to an event for receiving notifications.<br>The callback URL, where the notification will be posted should be provided to this service.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br>Customers can subscribe to REFRESH,DATA_UPDATES,AUTO_REFRESH_UPDATES,LATEST_BALANCE_UPDATES and CREDIT_MATRIX_REPORT_UPDATES event.<br><br><b>Notes:</b><li>This service is not available in developer sandbox/test environment and will be made available for testing in your dedicated environment, once the contract is signed.<li>The content type has to be passed as application/json for the body parameter.</li>
+      description: 'The subscribe events service is used to subscribe to an event for receiving notifications.
+
+        The callback URL, where the notification will be posted should be provided to this service.
+
+        If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.
+
+        Customers can subscribe to REFRESH,DATA_UPDATES,AUTO_REFRESH_UPDATES,LATEST_BALANCE_UPDATES and CREDIT_MATRIX_REPORT_UPDATES event.
+
+
+        Notes:
+
+        This service is not available in developer sandbox/test environment and will be made available for testing in your dedicated environment, once the contract is signed.
+
+        The content type has to be passed as application/json for the body parameter.'
       operationId: createSubscriptionNotificationEvent
       responses:
         201:
           description: OK
         400:
-          schema:
-            $ref: '#/definitions/YodleeError'
           description: 'Y803 : eventName required<br>Y803 : callbackUrl required<br>Y800 : Invalid value for callbackUrl<br>Y901 : Service not supported<br>'
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/YodleeError'
         401:
           description: Unauthorized
         404:
@@ -88,36 +113,36 @@ paths:
       - in: path
         name: eventName
         description: Name of the webhook subscription event
-        type: string
         required: true
-        enum:
-        - REFRESH
-        - DATA_UPDATES
-        - AUTO_REFRESH_UPDATES
-        - LATEST_BALANCE_UPDATES
-        - CREDIT_MATRIX_REPORT_UPDATES
-      - schema:
-          $ref: '#/definitions/CreateConfigsNotificationEventRequest'
-        in: body
-        name: eventRequest
-        description: eventRequest
-        required: true
+        schema:
+          type: string
+          enum:
+          - REFRESH
+          - DATA_UPDATES
+          - AUTO_REFRESH_UPDATES
+          - LATEST_BALANCE_UPDATES
+          - CREDIT_MATRIX_REPORT_UPDATES
       tags:
       - Configs
-      consumes:
-      - application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConfigsNotificationEventRequest'
+        description: eventRequest
+        required: true
     delete:
       summary: Delete Notification Subscription
       deprecated: false
-      produces:
-      - application/json;charset=UTF-8
-      description: The delete events service is used to unsubscribe from an events service.<br>
+      description: The delete events service is used to unsubscribe from an events service.
       operationId: deleteSubscribedNotificationEvent
       responses:
         400:
-          schema:
-            $ref: '#/definitions/YodleeError'
           description: 'Y803 : eventName required'
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/YodleeError'
         401:
           description: Unauthorized
         204:
@@ -128,28 +153,36 @@ paths:
       - in: path
         name: eventName
         description: Name of the webhook subscription event
-        type: string
         required: true
-        enum:
-        - REFRESH
-        - DATA_UPDATES
-        - AUTO_REFRESH_UPDATES
-        - LATEST_BALANCE_UPDATES
-        - CREDIT_MATRIX_REPORT_UPDATES
+        schema:
+          type: string
+          enum:
+          - REFRESH
+          - DATA_UPDATES
+          - AUTO_REFRESH_UPDATES
+          - LATEST_BALANCE_UPDATES
+          - CREDIT_MATRIX_REPORT_UPDATES
       tags:
       - Configs
     put:
       summary: Update Notification Subscription
       deprecated: false
-      produces:
-      - application/json;charset=UTF-8
-      description: The update events service is used to update the callback URL.<br>If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.<br><br><b>Note:</b> <li>The content type has to be passed as application/json for the body parameter. <br>
+      description: 'The update events service is used to update the callback URL.
+
+        If the callback URL is invalid or inaccessible, the subscription will be unsuccessful, and an error will be thrown.
+
+
+        Note:
+
+        The content type has to be passed as application/json for the body parameter.'
       operationId: updateSubscribedNotificationEvent
       responses:
         400:
-          schema:
-            $ref: '#/definitions/YodleeError'
           description: 'Y803 : eventName required<br>Y803 : callbackUrl required<br>Y800 : Invalid value for callbackUrl'
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/YodleeError'
         401:
           description: Unauthorized
         204:
@@ -160,117 +193,118 @@ paths:
       - in: path
         name: eventName
         description: Name of the webhook subscription event
-        type: string
         required: true
-        enum:
-        - REFRESH
-        - DATA_UPDATES
-        - AUTO_REFRESH_UPDATES
-        - LATEST_BALANCE_UPDATES
-        - CREDIT_MATRIX_REPORT_UPDATES
-      - schema:
-          $ref: '#/definitions/UpdateConfigsNotificationEventRequest'
-        in: body
-        name: eventRequest
-        description: eventRequest
-        required: true
+        schema:
+          type: string
+          enum:
+          - REFRESH
+          - DATA_UPDATES
+          - AUTO_REFRESH_UPDATES
+          - LATEST_BALANCE_UPDATES
+          - CREDIT_MATRIX_REPORT_UPDATES
       tags:
       - Configs
-      consumes:
-      - application/json
-definitions:
-  YodleeError:
-    type: object
-    title: YodleeError
-    properties:
-      errorMessage:
-        description: The descriptive message that explains the error scenario.
-        readOnly: true
-        type: string
-      errorCode:
-        description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-        readOnly: true
-        type: string
-      referenceCode:
-        description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-        readOnly: true
-        type: string
-  ConfigsNotificationResponse:
-    type: object
-    title: ConfigsNotificationResponse
-    properties:
-      event:
-        readOnly: true
-        type: array
-        items:
-          $ref: '#/definitions/ConfigsNotificationEvent'
-  ConfigsPublicKeyResponse:
-    type: object
-    title: ConfigsPublicKeyResponse
-    properties:
-      publicKey:
-        $ref: '#/definitions/ConfigsPublicKey'
-  ConfigsPublicKey:
-    type: object
-    title: ConfigsPublicKey
-    properties:
-      alias:
-        description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
-        readOnly: true
-        type: string
-      key:
-        description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
-        readOnly: true
-        type: string
-  ConfigsNotificationEvent:
-    type: object
-    title: ConfigsNotificationEvent
-    properties:
-      name:
-        description: Name of the event for which the customers must subscribe to receive notifications.<br><b>Valid Value:</b> Notification Events Name<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul><b>Applicable Values</b><br>
-        type: string
-        enum:
-        - REFRESH
-        - DATA_UPDATES
-        - AUTO_REFRESH_UPDATES
-        - LATEST_BALANCE_UPDATES
-        - CREDIT_MATRIX_REPORT_UPDATES
-      callbackUrl:
-        minLength: 1
-        description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
-        type: string
-        maxLength: 2147483647
-  UpdateConfigsNotificationEventRequest:
-    type: object
-    title: UpdateConfigsNotificationEventRequest
-    required:
-    - event
-    properties:
-      event:
-        $ref: '#/definitions/UpdateConfigsNotificationEvent'
-  CreateConfigsNotificationEventRequest:
-    type: object
-    title: CreateConfigsNotificationEventRequest
-    required:
-    - event
-    properties:
-      event:
-        $ref: '#/definitions/CreateConfigsNotificationEvent'
-  CreateConfigsNotificationEvent:
-    type: object
-    title: CreateConfigsNotificationEvent
-    properties:
-      callbackUrl:
-        minLength: 1
-        description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
-        type: string
-        maxLength: 2147483647
-  UpdateConfigsNotificationEvent:
-    type: object
-    title: UpdateConfigsNotificationEvent
-    properties:
-      callbackUrl:
-        minLength: 1
-        description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
-        type: string
-        maxLength: 2147483647
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConfigsNotificationEventRequest'
+        description: eventRequest
+        required: true
+components:
+  schemas:
+    CreateConfigsNotificationEvent:
+      type: object
+      title: CreateConfigsNotificationEvent
+      properties:
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647
+    ConfigsNotificationEvent:
+      type: object
+      title: ConfigsNotificationEvent
+      properties:
+        name:
+          description: Name of the event for which the customers must subscribe to receive notifications.<br><b>Valid Value:</b> Notification Events Name<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul><b>Applicable Values</b><br>
+          type: string
+          enum:
+          - REFRESH
+          - DATA_UPDATES
+          - AUTO_REFRESH_UPDATES
+          - LATEST_BALANCE_UPDATES
+          - CREDIT_MATRIX_REPORT_UPDATES
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647
+    UpdateConfigsNotificationEventRequest:
+      type: object
+      title: UpdateConfigsNotificationEventRequest
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
+    ConfigsPublicKeyResponse:
+      type: object
+      title: ConfigsPublicKeyResponse
+      properties:
+        publicKey:
+          $ref: '#/components/schemas/ConfigsPublicKey'
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    ConfigsPublicKey:
+      type: object
+      title: ConfigsPublicKey
+      properties:
+        alias:
+          description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
+          readOnly: true
+          type: string
+        key:
+          description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
+          readOnly: true
+          type: string
+    CreateConfigsNotificationEventRequest:
+      type: object
+      title: CreateConfigsNotificationEventRequest
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/CreateConfigsNotificationEvent'
+    UpdateConfigsNotificationEvent:
+      type: object
+      title: UpdateConfigsNotificationEvent
+      properties:
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647
+    ConfigsNotificationResponse:
+      type: object
+      title: ConfigsNotificationResponse
+      properties:
+        event:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigsNotificationEvent'
