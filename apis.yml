@@ -97,8 +97,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-accounts-api
   name: Yodlee Accounts API
   description: Accounts API
@@ -115,8 +113,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-auth-api
   name: Yodlee Auth API
   description: Auth API
@@ -133,8 +129,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-cobrand-api
   name: Yodlee Cobrand API
   description: Cobrand API
@@ -149,8 +143,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-configs-api
   name: Yodlee Configs API
   description: Configs API
@@ -165,8 +157,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-consents-api
   name: Yodlee Consents API
   description: Consents API
@@ -181,8 +171,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-dataextracts-api
   name: Yodlee DataExtracts API
   description: DataExtracts API
@@ -197,8 +185,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-derived-api
   name: Yodlee Derived API
   description: Derived API
@@ -213,8 +199,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-documents-api
   name: Yodlee Documents API
   description: Documents API
@@ -229,8 +213,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-holdings-api
   name: Yodlee Holdings API
   description: Holdings API
@@ -245,8 +227,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-institutions-api
   name: Yodlee Institutions API
   description: Institutions API
@@ -263,8 +243,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-payment-processor-api
   name: Yodlee Payment Processor API
   description: >-
@@ -290,8 +268,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-providers-api
   name: Yodlee Providers API
   description: Providers API
@@ -306,8 +282,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-risk-analytics-api
   name: Yodlee Risk Analytics API
   description: Risk Analytics API
@@ -322,8 +296,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-statements-api
   name: Yodlee Statements API
   description: Statements API
@@ -338,8 +310,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-transactions-api
   name: Yodlee Transactions API
   description: Transactions API
@@ -356,8 +326,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-user-api
   name: Yodlee User API
   description: Users API
@@ -372,8 +340,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-user-documents-api
   name: Yodlee User Documents API
   description: User Documents API
@@ -388,8 +354,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-verification-api
   name: Yodlee Verification API
   description: Verification API
@@ -404,8 +368,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-verify-account-api
   name: Yodlee Verify Account API
   description: Verify Account API
@@ -420,8 +382,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 - aid: yodlee:yodlee-provider-accounts-api
   name: Yodlee Provider Accounts API
   description: Provider Accounts API
@@ -438,8 +398,6 @@ apis:
     url: https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview
   - type: GettingStarted
     url: https://developer.yodlee.com/docs/getting-started
-  - type: GraphQL
-    url: graphql/yodlee-graphql.md
 common:
 - type: Blog
   url: https://www.yodlee.com/company/blog
