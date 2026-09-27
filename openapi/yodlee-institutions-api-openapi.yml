@@ -139,22 +139,15 @@ paths:
       - Institutions
 components:
   schemas:
-    YodleeError:
+    InstitutionResponse:
       type: object
-      title: YodleeError
+      title: InstitutionResponse
       properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
+        institution:
           readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
+          type: array
+          items:
+            $ref: '#/components/schemas/Institution'
     Institution:
       type: object
       title: Institution
@@ -221,12 +214,19 @@ components:
           description: Determines when the provider information was updated by Yodlee. If the customer caches the data, the cache is recommended to be refreshed based on this field.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
           readOnly: true
           type: string
-    InstitutionResponse:
+    YodleeError:
       type: object
-      title: InstitutionResponse
+      title: YodleeError
       properties:
-        institution:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
           readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Institution'
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string

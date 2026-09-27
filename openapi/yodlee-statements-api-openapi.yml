@@ -550,6 +550,31 @@ components:
           - VEF
           - SSP
           - ALK
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    StatementResponse:
+      type: object
+      title: StatementResponse
+      properties:
+        statement:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Statement'
     Statement:
       type: object
       title: Statement
@@ -634,28 +659,3 @@ components:
           description: 'New charges on the statement (i.e., charges since last statement to end of the billing period). Applicable to line of credit loan type.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
           readOnly: true
           $ref: '#/components/schemas/Money'
-    StatementResponse:
-      type: object
-      title: StatementResponse
-      properties:
-        statement:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Statement'
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string

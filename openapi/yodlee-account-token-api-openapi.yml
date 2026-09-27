@@ -92,6 +92,22 @@ components:
         processor:
           description: The payment processor with whom the customer is integrating.
           type: string
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
     PaymentProcessorTokenResponse:
       type: object
       title: PaymentProcessorTokenResponse
@@ -115,19 +131,3 @@ components:
           description: The unique identifier for the user's account.
           readOnly: true
           type: integer
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string

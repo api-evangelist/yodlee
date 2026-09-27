@@ -71,127 +71,21 @@ paths:
         required: true
 components:
   schemas:
-    YodleeError:
+    BankTransferCode:
       type: object
-      title: YodleeError
+      title: BankTransferCode
       properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
-    AccountAddress:
-      type: object
-      title: AccountAddress
-      properties:
-        zip:
-          description: Zip.
-          type: string
-        country:
-          description: Country.
-          type: string
-        address3:
-          description: Address Line 3.
-          type: string
-        address2:
-          description: Address Line 2.
-          type: string
-        city:
-          description: City.
-          type: string
-        sourceType:
-          type: string
-        address1:
-          description: Address Line 1.
-          type: string
-        street:
-          type: string
-        state:
-          description: State.
+        id:
+          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
           type: string
         type:
+          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
           type: string
           enum:
-          - HOME
-          - BUSINESS
-          - POBOX
-          - RETAIL
-          - OFFICE
-          - SMALL_BUSINESS
-          - COMMUNICATION
-          - PERMANENT
-          - STATEMENT_ADDRESS
-          - PAYMENT
-          - PAYOFF
-          - UNKNOWN
-    VerifyAccountRequest:
-      type: object
-      title: VerifyAccountRequest
-      required:
-      - transactionCriteria
-      properties:
-        container:
-          type: string
-          enum:
-          - bank
-          - creditCard
-          - investment
-          - insurance
-          - loan
-          - reward
-          - bill
-          - realEstate
-          - otherAssets
-          - otherLiabilities
-        accountId:
-          format: int64
-          type: integer
-        transactionCriteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/VerifyTransactionCriteria'
-    BusinessCategory:
-      type: object
-      title: BusinessCategory
-      properties:
-        categoryName:
-          description: 'The name of the category assigned to the transaction. This is the category field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        categoryId:
-          format: int64
-          description: 'The id of the category assigned to the transaction. This is the id field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: integer
-    Contact:
-      type: object
-      title: Contact
-      properties:
-        phone:
-          description: 'Phone number of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          type: string
-        email:
-          description: 'Email Id of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          type: string
-    LogoURLs:
-      type: object
-      title: LogoURLs
-      properties:
-        type:
-          description: 'The merchant type of the logo url (SVG/PNG)<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: string
-        url:
-          description: 'The logo url of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: string
+          - BSB
+          - IFSC
+          - ROUTING_NUMBER
+          - SORT_CODE
     VerifiedAccount:
       type: object
       title: VerifiedAccount
@@ -226,6 +120,52 @@ components:
             $ref: '#/components/schemas/BankTransferCode'
         providerName:
           description: '<b>Applicable containers</b>: reward, bank, creditCard, investment, loan, insurance, realEstate, otherLiabilities<br>'
+          readOnly: true
+          type: string
+    VerifyTransactionCriteria:
+      type: object
+      title: VerifyTransactionCriteria
+      required:
+      - amount
+      - date
+      properties:
+        date:
+          type: string
+        amount:
+          format: double
+          type: number
+        verifiedTransaction:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        matched:
+          description: Indicates if the criteria is matched or not. <br><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - COMPLETE
+          - NONE
+        keyword:
+          type: string
+        dateVariance:
+          type: string
+        baseType:
+          description: 'Indicates if the transaction appears as a debit or a credit transaction in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+          type: string
+          enum:
+          - CREDIT
+          - DEBIT
+    LogoURLs:
+      type: object
+      title: LogoURLs
+      properties:
+        type:
+          description: 'The merchant type of the logo url (SVG/PNG)<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: string
+        url:
+          description: 'The logo url of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
           readOnly: true
           type: string
     Money:
@@ -692,56 +632,26 @@ components:
           - VEF
           - SSP
           - ALK
-    BankTransferCode:
+    Identifier:
       type: object
-      title: BankTransferCode
+      title: Identifier
       properties:
-        id:
-          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
-          type: string
         type:
-          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
-          type: string
-          enum:
-          - BSB
-          - IFSC
-          - ROUTING_NUMBER
-          - SORT_CODE
-    AccountHolder:
-      type: object
-      title: AccountHolder
-      properties:
-        identifier:
-          description: 'Identifiers of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-        gender:
-          description: 'Identifiers of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: string
-        ownership:
-          description: 'Indicates the ownership of the account.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values</b><br>'
+          description: Type of Identifier
           readOnly: true
           type: string
           enum:
-          - PRIMARY
-          - SECONDARY
-          - CUSTODIAN
-          - OTHERS
-          - POWER_OF_ATTORNEY
-          - TRUSTEE
-          - JOINT_OWNER
-          - BENEFICIARY
-          - AAS
-          - BUSINESS
-          - DBA
-          - TRUST
-        name:
-          description: 'Name of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          - NIE
+          - DNI
+          - EIN
+          - BN
+          - AADHAR
+          - NIN
+          - NRIC
+        value:
+          description: Value of the identifier
           readOnly: true
-          $ref: '#/components/schemas/Name'
+          type: string
     Merchant:
       type: object
       title: Merchant
@@ -792,6 +702,79 @@ components:
           description: 'The logoURL of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
           readOnly: true
           type: string
+    AccountHolder:
+      type: object
+      title: AccountHolder
+      properties:
+        identifier:
+          description: 'Identifiers of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+        gender:
+          description: 'Identifiers of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: string
+        ownership:
+          description: 'Indicates the ownership of the account.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - PRIMARY
+          - SECONDARY
+          - CUSTODIAN
+          - OTHERS
+          - POWER_OF_ATTORNEY
+          - TRUSTEE
+          - JOINT_OWNER
+          - BENEFICIARY
+          - AAS
+          - BUSINESS
+          - DBA
+          - TRUST
+        name:
+          description: 'Name of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          $ref: '#/components/schemas/Name'
+    VerifyAccountRequest:
+      type: object
+      title: VerifyAccountRequest
+      required:
+      - transactionCriteria
+      properties:
+        container:
+          type: string
+          enum:
+          - bank
+          - creditCard
+          - investment
+          - insurance
+          - loan
+          - reward
+          - bill
+          - realEstate
+          - otherAssets
+          - otherLiabilities
+        accountId:
+          format: int64
+          type: integer
+        transactionCriteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/VerifyTransactionCriteria'
+    Coordinates:
+      type: object
+      title: Coordinates
+      properties:
+        latitude:
+          format: double
+          description: 'Latitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+          type: number
+        longitude:
+          format: double
+          description: 'Longitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+          type: number
     VerifyAccount:
       type: object
       title: VerifyAccount
@@ -804,32 +787,95 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VerifiedAccount'
-    Identifier:
+    BusinessCategory:
       type: object
-      title: Identifier
+      title: BusinessCategory
       properties:
-        type:
-          description: Type of Identifier
+        categoryName:
+          description: 'The name of the category assigned to the transaction. This is the category field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
           readOnly: true
+          type: string
+        categoryId:
+          format: int64
+          description: 'The id of the category assigned to the transaction. This is the id field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: integer
+    AccountAddress:
+      type: object
+      title: AccountAddress
+      properties:
+        zip:
+          description: Zip.
+          type: string
+        country:
+          description: Country.
+          type: string
+        address3:
+          description: Address Line 3.
+          type: string
+        address2:
+          description: Address Line 2.
+          type: string
+        city:
+          description: City.
+          type: string
+        sourceType:
+          type: string
+        address1:
+          description: Address Line 1.
+          type: string
+        street:
+          type: string
+        state:
+          description: State.
+          type: string
+        type:
           type: string
           enum:
-          - NIE
-          - DNI
-          - EIN
-          - BN
-          - AADHAR
-          - NIN
-          - NRIC
-        value:
-          description: Value of the identifier
-          readOnly: true
-          type: string
+          - HOME
+          - BUSINESS
+          - POBOX
+          - RETAIL
+          - OFFICE
+          - SMALL_BUSINESS
+          - COMMUNICATION
+          - PERMANENT
+          - STATEMENT_ADDRESS
+          - PAYMENT
+          - PAYOFF
+          - UNKNOWN
     VerifyAccountResponse:
       type: object
       title: VerifyAccountResponse
       properties:
         verifyAccount:
           $ref: '#/components/schemas/VerifyAccount'
+    Contact:
+      type: object
+      title: Contact
+      properties:
+        phone:
+          description: 'Phone number of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          type: string
+        email:
+          description: 'Email Id of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          type: string
+    Name:
+      type: object
+      title: Name
+      properties:
+        middle:
+          description: Middle name.
+          type: string
+        last:
+          description: Last name.
+          type: string
+        fullName:
+          description: Full name.
+          type: string
+        first:
+          description: First name.
+          type: string
     Description:
       type: object
       title: Description
@@ -849,68 +895,6 @@ components:
         consumer:
           description: The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field.<br><br>
           type: string
-    VerifyTransactionCriteria:
-      type: object
-      title: VerifyTransactionCriteria
-      required:
-      - amount
-      - date
-      properties:
-        date:
-          type: string
-        amount:
-          format: double
-          type: number
-        verifiedTransaction:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        matched:
-          description: Indicates if the criteria is matched or not. <br><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - COMPLETE
-          - NONE
-        keyword:
-          type: string
-        dateVariance:
-          type: string
-        baseType:
-          description: 'Indicates if the transaction appears as a debit or a credit transaction in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
-          type: string
-          enum:
-          - CREDIT
-          - DEBIT
-    Name:
-      type: object
-      title: Name
-      properties:
-        middle:
-          description: Middle name.
-          type: string
-        last:
-          description: Last name.
-          type: string
-        fullName:
-          description: Full name.
-          type: string
-        first:
-          description: First name.
-          type: string
-    Coordinates:
-      type: object
-      title: Coordinates
-      properties:
-        latitude:
-          format: double
-          description: 'Latitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
-          type: number
-        longitude:
-          format: double
-          description: 'Longitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
-          type: number
     Transaction:
       type: object
       title: Transaction
@@ -1196,5 +1180,21 @@ components:
           type: integer
         isin:
           description: 'International Securities Identification Number (ISIN) standard is used worldwide to identify specific securities.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string

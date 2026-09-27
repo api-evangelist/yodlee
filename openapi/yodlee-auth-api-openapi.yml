@@ -250,22 +250,15 @@ paths:
       - Auth
 components:
   schemas:
-    YodleeError:
+    ApiKeyRequest:
       type: object
-      title: YodleeError
+      title: ApiKeyRequest
       properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
+        publicKey:
+          minLength: 1
+          description: Public key uploaded by the customer while generating ApiKey.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
           type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
+          maxLength: 2147483647
     ApiKeyOutput:
       type: object
       title: ApiKeyOutput
@@ -285,6 +278,21 @@ components:
         key:
           description: ApiKey or the issuer key used to generate the JWT token for authentication.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
           type: string
+    ApiKeyResponse:
+      type: object
+      title: ApiKeyResponse
+      properties:
+        apiKey:
+          description: ApiKey customer details.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKeyOutput'
+    ClientCredentialTokenResponse:
+      type: object
+      title: ClientCredentialTokenResponse
+      properties:
+        token:
+          $ref: '#/components/schemas/ClientCredentialToken'
     ClientCredentialToken:
       type: object
       title: ClientCredentialToken
@@ -302,27 +310,19 @@ components:
           description: Access Token to access YSL 1.1 services.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
           readOnly: true
           type: string
-    ApiKeyRequest:
+    YodleeError:
       type: object
-      title: ApiKeyRequest
+      title: YodleeError
       properties:
-        publicKey:
-          minLength: 1
-          description: Public key uploaded by the customer while generating ApiKey.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
           type: string
-          maxLength: 2147483647
-    ApiKeyResponse:
-      type: object
-      title: ApiKeyResponse
-      properties:
-        apiKey:
-          description: ApiKey customer details.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiKeyOutput'
-    ClientCredentialTokenResponse:
-      type: object
-      title: ClientCredentialTokenResponse
-      properties:
-        token:
-          $ref: '#/components/schemas/ClientCredentialToken'
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string

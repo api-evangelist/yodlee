@@ -291,145 +291,86 @@ paths:
         required: true
 components:
   schemas:
-    VerifiedAccountResponse:
+    ClassificationSummaryTransactionSummary:
       type: object
-      title: VerifiedAccountResponse
+      title: ClassificationSummaryTransactionSummary
       properties:
-        requestId:
-          description: The unique identifier for the verification request that returns contextual data
+        fromDate:
+          description: The date from which the transactions are considered for evaluating the attributes (Date of the oldest transaction for the accountId)
           readOnly: true
           type: string
-        requestDate:
-          description: The date of the verification request
+        cardPayments:
+          description: Indicates whether the account has any card-related payments based on an implicit logic
+          readOnly: true
+          type: boolean
+        isPrimaryAccount:
+          description: Indicates whether the account is a primary account based on an implicit logic
+          readOnly: true
+          type: boolean
+        loanPayments:
+          description: Indicates whether the account has any loan payments based on an implicit logic
+          readOnly: true
+          type: boolean
+        toDate:
+          description: The date until which the transactions are considered for evaluating the attributes (Date of the latest transaction for the accountId)
           readOnly: true
           type: string
-        state:
-          description: The overall status of the verification request
+        billPayments:
+          description: Indicates whether the account has any bill payments based on an implicit logic
           readOnly: true
-          type: string
-          enum:
-          - COMPLETED
-          - FAILED
-        verifiedAccount:
+          type: boolean
+        mortgagePayments:
+          description: Indicates whether the account has any mortgage payments based on an implicit logic
+          readOnly: true
+          type: boolean
+        salaryCredits:
+          description: Indicates whether the account has salary credits based on an implicit logic
+          readOnly: true
+          type: boolean
+        isActiveAccount:
+          description: Indicates whether the account is an active account based on an implicit logic
+          readOnly: true
+          type: boolean
+        latestTransactions:
+          description: An array that lists the details about the latest 3 transactions that occurred in the user's account
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/VerifiedAccounts'
-        failedReason:
-          description: The reason for the failure of the verification request
+            $ref: '#/components/schemas/ClassificationSummaryTransaction'
+        incomeCredits:
+          description: Indicates whether the account has any income credits based on an implicit logic
           readOnly: true
-          type: string
-          enum:
-          - ACCOUNT_LOCKED
-          - ADDL_AUTHENTICATION_REQUIRED
-          - CREDENTIALS_UPDATE_NEEDED
-          - INCORRECT_CREDENTIALS
-          - INVALID_ADDL_INFO_PROVIDED
-          - REQUEST_TIME_OUT
-          - SITE_BLOCKING_ERROR
-          - UNEXPECTED_SITE_ERROR
-          - SITE_NOT_SUPPORTED
-          - SITE_UNAVAILABLE
-          - TECH_ERROR
-          - USER_ACTION_NEEDED_AT_SITE
-          - SITE_SESSION_INVALIDATED
-          - NEW_AUTHENTICATION_REQUIRED
-          - CONSENT_REQUIRED
-          - CONSENT_EXPIRED
-          - CONSENT_REVOKED
-          - INCORRECT_OAUTH_TOKEN
-          - REQUIRED_DATA_NOT_AVAILABLE
-          - MATCHING_FAILED
-          - NO_ELIGIBLE_ACCOUNTS
-          - USER_INPUT_REQUIRED
-    YodleeError:
+          type: boolean
+    VerificationBankTransferCode:
       type: object
-      title: YodleeError
+      title: VerificationBankTransferCode
       properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
+        id:
+          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
           type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
-    FullAccountNumberList:
-      type: object
-      title: FullAccountNumberList
-      properties:
-        paymentAccountNumber:
-          description: Payment Account Number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
-          readOnly: true
-          type: string
-        tokenizedAccountNumber:
-          description: Tokenized account number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
-          readOnly: true
-          type: string
-        unmaskedAccountNumber:
-          description: Unmasked account number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
-          readOnly: true
-          type: string
-    VerificationResponse:
-      type: object
-      title: VerificationResponse
-      properties:
-        verification:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Verification'
-    VerificationTransaction:
-      type: object
-      title: VerificationTransaction
-      required:
-      - amount
-      - baseType
-      properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-        baseType:
-          type: string
-          enum:
-          - CREDIT
-          - DEBIT
-    PhoneNumber:
-      type: object
-      title: PhoneNumber
-      properties:
         type:
-          description: type of phone number
-          readOnly: true
+          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
           type: string
           enum:
-          - HOME
-          - WORK
-          - LANDLINE
-          - MOBILE
-        value:
-          description: Phone Number
-          readOnly: true
-          type: string
-    Email:
+          - BSB
+          - IFSC
+          - ROUTING_NUMBER
+          - SORT_CODE
+    BankTransferCode:
       type: object
-      title: Email
+      title: BankTransferCode
       properties:
+        id:
+          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
+          type: string
         type:
-          readOnly: true
+          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
           type: string
           enum:
-          - PRIMARY
-          - SECONDARY
-          - PERSONAL
-          - WORK
-          - OTHERS
-        value:
-          readOnly: true
-          type: string
+          - BSB
+          - IFSC
+          - ROUTING_NUMBER
+          - SORT_CODE
     AbstractAddress:
       type: object
       title: AbstractAddress
@@ -455,111 +396,6 @@ components:
         state:
           description: State.
           type: string
-    Verification:
-      type: object
-      title: Verification
-      properties:
-        accountId:
-          format: int64
-          description: Unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
-          type: integer
-        reason:
-          description: The reason the account verification failed.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
-          readOnly: true
-          type: string
-          enum:
-          - DATA_NOT_AVAILABLE
-          - ACCOUNT_HOLDER_MISMATCH
-          - FULL_ACCOUNT_NUMBER_AND_BANK_TRANSFER_CODE_NOT_AVAILABLE
-          - FULL_ACCOUNT_NUMBER_NOT_AVAILABLE
-          - BANK_TRANSFER_CODE_NOT_AVAILABLE
-          - EXPIRED
-          - DATA_MISMATCH
-          - INSTRUCTION_GENERATION_ERROR
-        verificationStatus:
-          description: The status of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
-          readOnly: true
-          type: string
-          enum:
-          - INITIATED
-          - DEPOSITED
-          - SUCCESS
-          - FAILED
-        providerAccountId:
-          format: int64
-          description: Unique identifier for the provider account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
-          type: integer
-        additionalMessage:
-          description: The additional information of the status of account verification.<br><br><b>Endpoints</b>:<ul><li>GET verification</li></ul><br><b>Applicable Values</b>
-          readOnly: true
-          type: string
-          enum:
-          - PENDING_PROCESSING
-          - PROCESSED
-          - DEPOSITED
-          - PENDING_VERIFICATION
-          - FAILED
-          - SUSPECTED_FRAUD
-          - RESTRICTED_RTN
-          - RESTRICTED_ACCOUNT
-          - PENDING_PROCESSING_EXPIRED
-          - RETURNED
-          - ACCOUNT_VERIFICATION_EXPIRED
-        verificationType:
-          description: The account verification type.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
-          type: string
-          enum:
-          - MATCHING
-          - CHALLENGE_DEPOSIT
-        account:
-          $ref: '#/components/schemas/VerificationAccount'
-        verificationDate:
-          description: The date of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
-          readOnly: true
-          type: string
-        verificationId:
-          format: int64
-          description: Unique identifier for the verification request.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
-          readOnly: true
-          type: integer
-    VerificationHolderProfile:
-      type: object
-      title: VerificationHolderProfile
-      properties:
-        accountId:
-          format: int64
-          description: The primary key of the account resource and the unique identifier for the account
-          readOnly: true
-          type: integer
-        address:
-          description: The account holder's address available at the profile and account levels
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/AbstractAddress'
-        phoneNumber:
-          description: The account holder's phone number available at the profile and account levels
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PhoneNumber'
-        providerAccountId:
-          format: int64
-          description: The primary key of the provider account resource
-          readOnly: true
-          type: integer
-        holder:
-          description: The holder entity is account-specific and captures the ownership status and the name details of the user
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/VerificationHolder'
-        email:
-          description: The account holder's email ID available at the profile and account levels
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Email'
     UpdateVerification:
       type: object
       title: UpdateVerification
@@ -636,119 +472,6 @@ components:
           description: Unique identifier for the verification request.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
           readOnly: true
           type: integer
-    ClassificationSummaryAccountSummary:
-      type: object
-      title: ClassificationSummaryAccountSummary
-      properties:
-        accountId:
-          format: int64
-          description: 'The primary key of the account resource and the unique identifier for the account.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank'
-          readOnly: true
-          type: integer
-        lastUpdated:
-          description: The date-time the account information was last retrieved from the provider site and updated in the Yodlee system
-          readOnly: true
-          type: string
-        site:
-          description: The name of the provider site
-          readOnly: true
-          type: string
-        accountName:
-          description: The account name as it appears at the site
-          readOnly: true
-          type: string
-        accountType:
-          description: The type of account that is aggregated such as savings, checking, etc. The account type is derived based on the attributes of the account.
-          readOnly: true
-          type: string
-        accountOpenDate:
-          description: The date on which the user opened the account at the provider site
-          readOnly: true
-          type: string
-        transactionSummary:
-          description: The transaction summary entity encapsulates the transaction-level summary attributes and account specifics based on the nature of transactions
-          readOnly: true
-          $ref: '#/components/schemas/ClassificationSummaryTransactionSummary'
-        availableBalance:
-          description: 'The balance in the account that is available for spending. The value is aggregated from the provider site during the last refresh.<br><b>Note</b>: For checking accounts with overdraft, the available balance amount may include the overdraft amount if the provider site adds the overdraft balance to the available balance.'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-    HolderProfileResponse:
-      type: object
-      title: HolderProfileResponse
-      properties:
-        holderProfile:
-          description: The holder profile entity encapsulates all the user's details, such as the corresponding accounts and the userâ€™s profile data under it
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/VerificationHolderProfile'
-    ClassificationSummaryMerchant:
-      type: object
-      title: ClassificationSummaryMerchant
-      properties:
-        name:
-          description: The name of the merchant
-          readOnly: true
-          type: string
-    ClassificationSummaryTransactionSummary:
-      type: object
-      title: ClassificationSummaryTransactionSummary
-      properties:
-        fromDate:
-          description: The date from which the transactions are considered for evaluating the attributes (Date of the oldest transaction for the accountId)
-          readOnly: true
-          type: string
-        cardPayments:
-          description: Indicates whether the account has any card-related payments based on an implicit logic
-          readOnly: true
-          type: boolean
-        isPrimaryAccount:
-          description: Indicates whether the account is a primary account based on an implicit logic
-          readOnly: true
-          type: boolean
-        loanPayments:
-          description: Indicates whether the account has any loan payments based on an implicit logic
-          readOnly: true
-          type: boolean
-        toDate:
-          description: The date until which the transactions are considered for evaluating the attributes (Date of the latest transaction for the accountId)
-          readOnly: true
-          type: string
-        billPayments:
-          description: Indicates whether the account has any bill payments based on an implicit logic
-          readOnly: true
-          type: boolean
-        mortgagePayments:
-          description: Indicates whether the account has any mortgage payments based on an implicit logic
-          readOnly: true
-          type: boolean
-        salaryCredits:
-          description: Indicates whether the account has salary credits based on an implicit logic
-          readOnly: true
-          type: boolean
-        isActiveAccount:
-          description: Indicates whether the account is an active account based on an implicit logic
-          readOnly: true
-          type: boolean
-        latestTransactions:
-          description: An array that lists the details about the latest 3 transactions that occurred in the user's account
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassificationSummaryTransaction'
-        incomeCredits:
-          description: Indicates whether the account has any income credits based on an implicit logic
-          readOnly: true
-          type: boolean
-    VerificationRequest:
-      type: object
-      title: VerificationRequest
-      required:
-      - verification
-      properties:
-        verification:
-          $ref: '#/components/schemas/Verification'
     Money:
       type: object
       title: Money
@@ -1213,42 +936,34 @@ components:
           - VEF
           - SSP
           - ALK
-    VerificationStatusResponse:
+    Identifier:
       type: object
-      title: VerificationStatusResponse
+      title: Identifier
       properties:
-        verification:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/VerificationStatus'
-    VerificationHolder:
-      type: object
-      title: VerificationHolder
-      properties:
-        ownership:
-          description: Indicates the ownership of the account
-          readOnly: true
-          type: string
-        name:
-          description: The name of the account holder
-          readOnly: true
-          $ref: '#/components/schemas/Name'
-    BankTransferCode:
-      type: object
-      title: BankTransferCode
-      properties:
-        id:
-          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
-          type: string
         type:
-          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
+          description: Type of Identifier
+          readOnly: true
           type: string
           enum:
-          - BSB
-          - IFSC
-          - ROUTING_NUMBER
-          - SORT_CODE
+          - NIE
+          - DNI
+          - EIN
+          - BN
+          - AADHAR
+          - NIN
+          - NRIC
+        value:
+          description: Value of the identifier
+          readOnly: true
+          type: string
+    VerificationRequest:
+      type: object
+      title: VerificationRequest
+      required:
+      - verification
+      properties:
+        verification:
+          $ref: '#/components/schemas/Verification'
     AccountHolder:
       type: object
       title: AccountHolder
@@ -1284,92 +999,9 @@ components:
           description: 'Name of the account holder.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: bank<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
           readOnly: true
           $ref: '#/components/schemas/Name'
-    VerificationAccount:
+    Verification:
       type: object
-      title: VerificationAccount
-      required:
-      - accountNumber
-      - accountType
-      - bankTransferCode
-      properties:
-        accountName:
-          type: string
-        accountType:
-          type: string
-          enum:
-          - SAVINGS
-          - CHECKING
-        accountNumber:
-          minLength: 3
-          type: string
-          maxLength: 17
-        userClassification:
-          type: string
-          enum:
-          - BUSINESS
-          - PERSONAL
-        bankTransferCode:
-          $ref: '#/components/schemas/VerificationBankTransferCode'
-    ClassificationSummaryTransaction:
-      type: object
-      title: ClassificationSummaryTransaction
-      properties:
-        date:
-          description: The date the transaction happens in the account
-          readOnly: true
-          type: string
-        amount:
-          description: The amount of the transaction as it appears at the provider site
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        description:
-          description: The description of the transaction
-          readOnly: true
-          $ref: '#/components/schemas/Description'
-        merchant:
-          description: The name of the merchant corresponding to the transaction
-          readOnly: true
-          $ref: '#/components/schemas/ClassificationSummaryMerchant'
-        baseType:
-          description: Indicates if the transaction appears as a debit or a credit transaction in the account
-          readOnly: true
-          type: string
-          enum:
-          - CREDIT
-          - DEBIT
-    ClassificationSummaryResponse:
-      type: object
-      title: ClassificationSummaryResponse
-      properties:
-        accountSummary:
-          description: The account summary entity encapsulates the account-level summary information, and the transaction entity provides a transaction-level summary for an account passed.
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassificationSummaryAccountSummary'
-    Identifier:
-      type: object
-      title: Identifier
-      properties:
-        type:
-          description: Type of Identifier
-          readOnly: true
-          type: string
-          enum:
-          - NIE
-          - DNI
-          - EIN
-          - BN
-          - AADHAR
-          - NIN
-          - NRIC
-        value:
-          description: Value of the identifier
-          readOnly: true
-          type: string
-    VerificationStatus:
-      type: object
-      title: VerificationStatus
+      title: Verification
       properties:
         accountId:
           format: int64
@@ -1401,10 +1033,6 @@ components:
           format: int64
           description: Unique identifier for the provider account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
           type: integer
-        singleAchTxn:
-          description: As part of account verification, true for we initiate a single credit microentry of $1 for each request and false if we have not initiated single credit microentry of $1 for each request.<br>This field is exposed only for FL4 Users.
-          readOnly: true
-          type: boolean
         additionalMessage:
           description: The additional information of the status of account verification.<br><br><b>Endpoints</b>:<ul><li>GET verification</li></ul><br><b>Applicable Values</b>
           readOnly: true
@@ -1429,10 +1057,6 @@ components:
           - CHALLENGE_DEPOSIT
         account:
           $ref: '#/components/schemas/VerificationAccount'
-        remainingAttempts:
-          format: int64
-          readOnly: true
-          type: integer
         verificationDate:
           description: The date of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
           readOnly: true
@@ -1442,55 +1066,41 @@ components:
           description: Unique identifier for the verification request.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
           readOnly: true
           type: integer
-    VerificationBankTransferCode:
+    HolderProfileResponse:
       type: object
-      title: VerificationBankTransferCode
+      title: HolderProfileResponse
       properties:
-        id:
-          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
-          type: string
+        holderProfile:
+          description: The holder profile entity encapsulates all the user's details, such as the corresponding accounts and the userâ€™s profile data under it
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/VerificationHolderProfile'
+    ClassificationSummaryResponse:
+      type: object
+      title: ClassificationSummaryResponse
+      properties:
+        accountSummary:
+          description: The account summary entity encapsulates the account-level summary information, and the transaction entity provides a transaction-level summary for an account passed.
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassificationSummaryAccountSummary'
+    Email:
+      type: object
+      title: Email
+      properties:
         type:
-          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
+          readOnly: true
           type: string
           enum:
-          - BSB
-          - IFSC
-          - ROUTING_NUMBER
-          - SORT_CODE
-    Description:
-      type: object
-      title: Description
-      properties:
-        security:
-          description: 'The description will provide the actual name of the security.<br><br><b>Applicable containers</b>: investment<br>'
+          - PRIMARY
+          - SECONDARY
+          - PERSONAL
+          - WORK
+          - OTHERS
+        value:
           readOnly: true
-          type: string
-        original:
-          description: 'Original transaction description as it appears at the FI site.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
-          readOnly: true
-          type: string
-        simple:
-          description: 'The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of the transaction may not be evident. Yodlee attempts to simplify and make the transaction meaningful to the consumer, and this simplified transaction description is provided in the simple description field.Note: The simple description field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
-          readOnly: true
-          type: string
-        consumer:
-          description: The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field.<br><br>
-          type: string
-    Name:
-      type: object
-      title: Name
-      properties:
-        middle:
-          description: Middle name.
-          type: string
-        last:
-          description: Last name.
-          type: string
-        fullName:
-          description: Full name.
-          type: string
-        first:
-          description: First name.
           type: string
     VerifiedAccounts:
       type: object
@@ -1608,9 +1218,399 @@ components:
           enum:
           - REQUIRED_DATA_NOT_AVAILABLE
           - MATCHING_FAILED
+    VerificationAccount:
+      type: object
+      title: VerificationAccount
+      required:
+      - accountNumber
+      - accountType
+      - bankTransferCode
+      properties:
+        accountName:
+          type: string
+        accountType:
+          type: string
+          enum:
+          - SAVINGS
+          - CHECKING
+        accountNumber:
+          minLength: 3
+          type: string
+          maxLength: 17
+        userClassification:
+          type: string
+          enum:
+          - BUSINESS
+          - PERSONAL
+        bankTransferCode:
+          $ref: '#/components/schemas/VerificationBankTransferCode'
+    PhoneNumber:
+      type: object
+      title: PhoneNumber
+      properties:
+        type:
+          description: type of phone number
+          readOnly: true
+          type: string
+          enum:
+          - HOME
+          - WORK
+          - LANDLINE
+          - MOBILE
+        value:
+          description: Phone Number
+          readOnly: true
+          type: string
+    VerificationHolderProfile:
+      type: object
+      title: VerificationHolderProfile
+      properties:
+        accountId:
+          format: int64
+          description: The primary key of the account resource and the unique identifier for the account
+          readOnly: true
+          type: integer
+        address:
+          description: The account holder's address available at the profile and account levels
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AbstractAddress'
+        phoneNumber:
+          description: The account holder's phone number available at the profile and account levels
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+        providerAccountId:
+          format: int64
+          description: The primary key of the provider account resource
+          readOnly: true
+          type: integer
+        holder:
+          description: The holder entity is account-specific and captures the ownership status and the name details of the user
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/VerificationHolder'
+        email:
+          description: The account holder's email ID available at the profile and account levels
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+    VerificationStatusResponse:
+      type: object
+      title: VerificationStatusResponse
+      properties:
+        verification:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/VerificationStatus'
+    VerifiedAccountResponse:
+      type: object
+      title: VerifiedAccountResponse
+      properties:
+        requestId:
+          description: The unique identifier for the verification request that returns contextual data
+          readOnly: true
+          type: string
+        requestDate:
+          description: The date of the verification request
+          readOnly: true
+          type: string
+        state:
+          description: The overall status of the verification request
+          readOnly: true
+          type: string
+          enum:
+          - COMPLETED
+          - FAILED
+        verifiedAccount:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/VerifiedAccounts'
+        failedReason:
+          description: The reason for the failure of the verification request
+          readOnly: true
+          type: string
+          enum:
+          - ACCOUNT_LOCKED
+          - ADDL_AUTHENTICATION_REQUIRED
+          - CREDENTIALS_UPDATE_NEEDED
+          - INCORRECT_CREDENTIALS
+          - INVALID_ADDL_INFO_PROVIDED
+          - REQUEST_TIME_OUT
+          - SITE_BLOCKING_ERROR
+          - UNEXPECTED_SITE_ERROR
+          - SITE_NOT_SUPPORTED
+          - SITE_UNAVAILABLE
+          - TECH_ERROR
+          - USER_ACTION_NEEDED_AT_SITE
+          - SITE_SESSION_INVALIDATED
+          - NEW_AUTHENTICATION_REQUIRED
+          - CONSENT_REQUIRED
+          - CONSENT_EXPIRED
+          - CONSENT_REVOKED
+          - INCORRECT_OAUTH_TOKEN
+          - REQUIRED_DATA_NOT_AVAILABLE
+          - MATCHING_FAILED
+          - NO_ELIGIBLE_ACCOUNTS
+          - USER_INPUT_REQUIRED
+    VerificationResponse:
+      type: object
+      title: VerificationResponse
+      properties:
+        verification:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Verification'
     UpdateVerificationRequest:
       type: object
       title: UpdateVerificationRequest
       properties:
         verification:
           $ref: '#/components/schemas/UpdateVerification'
+    FullAccountNumberList:
+      type: object
+      title: FullAccountNumberList
+      properties:
+        paymentAccountNumber:
+          description: Payment Account Number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
+          readOnly: true
+          type: string
+        tokenizedAccountNumber:
+          description: Tokenized account number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
+          readOnly: true
+          type: string
+        unmaskedAccountNumber:
+          description: Unmasked account number of given account.<br><br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>
+          readOnly: true
+          type: string
+    VerificationTransaction:
+      type: object
+      title: VerificationTransaction
+      required:
+      - amount
+      - baseType
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+        baseType:
+          type: string
+          enum:
+          - CREDIT
+          - DEBIT
+    Name:
+      type: object
+      title: Name
+      properties:
+        middle:
+          description: Middle name.
+          type: string
+        last:
+          description: Last name.
+          type: string
+        fullName:
+          description: Full name.
+          type: string
+        first:
+          description: First name.
+          type: string
+    VerificationHolder:
+      type: object
+      title: VerificationHolder
+      properties:
+        ownership:
+          description: Indicates the ownership of the account
+          readOnly: true
+          type: string
+        name:
+          description: The name of the account holder
+          readOnly: true
+          $ref: '#/components/schemas/Name'
+    ClassificationSummaryTransaction:
+      type: object
+      title: ClassificationSummaryTransaction
+      properties:
+        date:
+          description: The date the transaction happens in the account
+          readOnly: true
+          type: string
+        amount:
+          description: The amount of the transaction as it appears at the provider site
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        description:
+          description: The description of the transaction
+          readOnly: true
+          $ref: '#/components/schemas/Description'
+        merchant:
+          description: The name of the merchant corresponding to the transaction
+          readOnly: true
+          $ref: '#/components/schemas/ClassificationSummaryMerchant'
+        baseType:
+          description: Indicates if the transaction appears as a debit or a credit transaction in the account
+          readOnly: true
+          type: string
+          enum:
+          - CREDIT
+          - DEBIT
+    Description:
+      type: object
+      title: Description
+      properties:
+        security:
+          description: 'The description will provide the actual name of the security.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        original:
+          description: 'Original transaction description as it appears at the FI site.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+          readOnly: true
+          type: string
+        simple:
+          description: 'The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of the transaction may not be evident. Yodlee attempts to simplify and make the transaction meaningful to the consumer, and this simplified transaction description is provided in the simple description field.Note: The simple description field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+          readOnly: true
+          type: string
+        consumer:
+          description: The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field.<br><br>
+          type: string
+    VerificationStatus:
+      type: object
+      title: VerificationStatus
+      properties:
+        accountId:
+          format: int64
+          description: Unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+          type: integer
+        reason:
+          description: The reason the account verification failed.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+          readOnly: true
+          type: string
+          enum:
+          - DATA_NOT_AVAILABLE
+          - ACCOUNT_HOLDER_MISMATCH
+          - FULL_ACCOUNT_NUMBER_AND_BANK_TRANSFER_CODE_NOT_AVAILABLE
+          - FULL_ACCOUNT_NUMBER_NOT_AVAILABLE
+          - BANK_TRANSFER_CODE_NOT_AVAILABLE
+          - EXPIRED
+          - DATA_MISMATCH
+          - INSTRUCTION_GENERATION_ERROR
+        verificationStatus:
+          description: The status of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+          readOnly: true
+          type: string
+          enum:
+          - INITIATED
+          - DEPOSITED
+          - SUCCESS
+          - FAILED
+        providerAccountId:
+          format: int64
+          description: Unique identifier for the provider account.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+          type: integer
+        singleAchTxn:
+          description: As part of account verification, true for we initiate a single credit microentry of $1 for each request and false if we have not initiated single credit microentry of $1 for each request.<br>This field is exposed only for FL4 Users.
+          readOnly: true
+          type: boolean
+        additionalMessage:
+          description: The additional information of the status of account verification.<br><br><b>Endpoints</b>:<ul><li>GET verification</li></ul><br><b>Applicable Values</b>
+          readOnly: true
+          type: string
+          enum:
+          - PENDING_PROCESSING
+          - PROCESSED
+          - DEPOSITED
+          - PENDING_VERIFICATION
+          - FAILED
+          - SUSPECTED_FRAUD
+          - RESTRICTED_RTN
+          - RESTRICTED_ACCOUNT
+          - PENDING_PROCESSING_EXPIRED
+          - RETURNED
+          - ACCOUNT_VERIFICATION_EXPIRED
+        verificationType:
+          description: The account verification type.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul><br><b>Applicable Values</b>
+          type: string
+          enum:
+          - MATCHING
+          - CHALLENGE_DEPOSIT
+        account:
+          $ref: '#/components/schemas/VerificationAccount'
+        remainingAttempts:
+          format: int64
+          readOnly: true
+          type: integer
+        verificationDate:
+          description: The date of the account verification.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+          readOnly: true
+          type: string
+        verificationId:
+          format: int64
+          description: Unique identifier for the verification request.<br><br><b>Endpoints</b>:<ul><li>POST verification</li><li>GET verification</li><li>PUT verification</li></ul>
+          readOnly: true
+          type: integer
+    ClassificationSummaryMerchant:
+      type: object
+      title: ClassificationSummaryMerchant
+      properties:
+        name:
+          description: The name of the merchant
+          readOnly: true
+          type: string
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    ClassificationSummaryAccountSummary:
+      type: object
+      title: ClassificationSummaryAccountSummary
+      properties:
+        accountId:
+          format: int64
+          description: 'The primary key of the account resource and the unique identifier for the account.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: bank'
+          readOnly: true
+          type: integer
+        lastUpdated:
+          description: The date-time the account information was last retrieved from the provider site and updated in the Yodlee system
+          readOnly: true
+          type: string
+        site:
+          description: The name of the provider site
+          readOnly: true
+          type: string
+        accountName:
+          description: The account name as it appears at the site
+          readOnly: true
+          type: string
+        accountType:
+          description: The type of account that is aggregated such as savings, checking, etc. The account type is derived based on the attributes of the account.
+          readOnly: true
+          type: string
+        accountOpenDate:
+          description: The date on which the user opened the account at the provider site
+          readOnly: true
+          type: string
+        transactionSummary:
+          description: The transaction summary entity encapsulates the transaction-level summary attributes and account specifics based on the nature of transactions
+          readOnly: true
+          $ref: '#/components/schemas/ClassificationSummaryTransactionSummary'
+        availableBalance:
+          description: 'The balance in the account that is available for spending. The value is aggregated from the provider site during the last refresh.<br><b>Note</b>: For checking accounts with overdraft, the available balance amount may include the overdraft amount if the provider site adds the overdraft balance to the available balance.'
+          readOnly: true
+          $ref: '#/components/schemas/Money'

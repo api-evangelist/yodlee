@@ -213,75 +213,6 @@ paths:
         required: true
 components:
   schemas:
-    CreateConfigsNotificationEvent:
-      type: object
-      title: CreateConfigsNotificationEvent
-      properties:
-        callbackUrl:
-          minLength: 1
-          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
-          type: string
-          maxLength: 2147483647
-    ConfigsNotificationEvent:
-      type: object
-      title: ConfigsNotificationEvent
-      properties:
-        name:
-          description: Name of the event for which the customers must subscribe to receive notifications.<br><b>Valid Value:</b> Notification Events Name<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul><b>Applicable Values</b><br>
-          type: string
-          enum:
-          - REFRESH
-          - DATA_UPDATES
-          - AUTO_REFRESH_UPDATES
-          - LATEST_BALANCE_UPDATES
-          - CREDIT_MATRIX_REPORT_UPDATES
-        callbackUrl:
-          minLength: 1
-          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
-          type: string
-          maxLength: 2147483647
-    UpdateConfigsNotificationEventRequest:
-      type: object
-      title: UpdateConfigsNotificationEventRequest
-      required:
-      - event
-      properties:
-        event:
-          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
-    ConfigsPublicKeyResponse:
-      type: object
-      title: ConfigsPublicKeyResponse
-      properties:
-        publicKey:
-          $ref: '#/components/schemas/ConfigsPublicKey'
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
-    ConfigsPublicKey:
-      type: object
-      title: ConfigsPublicKey
-      properties:
-        alias:
-          description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
-          readOnly: true
-          type: string
-        key:
-          description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
-          readOnly: true
-          type: string
     CreateConfigsNotificationEventRequest:
       type: object
       title: CreateConfigsNotificationEventRequest
@@ -308,3 +239,72 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ConfigsNotificationEvent'
+    CreateConfigsNotificationEvent:
+      type: object
+      title: CreateConfigsNotificationEvent
+      properties:
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647
+    UpdateConfigsNotificationEventRequest:
+      type: object
+      title: UpdateConfigsNotificationEventRequest
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
+    ConfigsPublicKey:
+      type: object
+      title: ConfigsPublicKey
+      properties:
+        alias:
+          description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
+          readOnly: true
+          type: string
+        key:
+          description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
+          readOnly: true
+          type: string
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    ConfigsPublicKeyResponse:
+      type: object
+      title: ConfigsPublicKeyResponse
+      properties:
+        publicKey:
+          $ref: '#/components/schemas/ConfigsPublicKey'
+    ConfigsNotificationEvent:
+      type: object
+      title: ConfigsNotificationEvent
+      properties:
+        name:
+          description: Name of the event for which the customers must subscribe to receive notifications.<br><b>Valid Value:</b> Notification Events Name<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul><b>Applicable Values</b><br>
+          type: string
+          enum:
+          - REFRESH
+          - DATA_UPDATES
+          - AUTO_REFRESH_UPDATES
+          - LATEST_BALANCE_UPDATES
+          - CREDIT_MATRIX_REPORT_UPDATES
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647

@@ -96,6 +96,33 @@ components:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string
+    DeleteDocumentsRequest:
+      type: object
+      title: DeleteDocumentsRequest
+      properties:
+        id:
+          description: List of document ids.
+          type: array
+          items:
+            format: int64
+            type: integer
+    GetDocumentsResponse:
+      type: object
+      title: GetDocumentsResponse
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetDocumentsList'
+    SuccessAssociations:
+      type: object
+      title: SuccessAssociations
+      properties:
+        accountId:
+          format: int64
+          description: The account Ids associated with the document Id.
+          readOnly: true
+          type: integer
     GetDocumentsRequest:
       type: object
       title: GetDocumentsRequest
@@ -112,23 +139,6 @@ components:
           items:
             format: int64
             type: integer
-    SuccessAssociations:
-      type: object
-      title: SuccessAssociations
-      properties:
-        accountId:
-          format: int64
-          description: The account Ids associated with the document Id.
-          readOnly: true
-          type: integer
-    GetDocumentsResponse:
-      type: object
-      title: GetDocumentsResponse
-      properties:
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetDocumentsList'
     GetDocumentsList:
       type: object
       title: GetDocumentsList
@@ -161,13 +171,3 @@ components:
           description: Indicates the status of the document download.
           readOnly: true
           type: string
-    DeleteDocumentsRequest:
-      type: object
-      title: DeleteDocumentsRequest
-      properties:
-        id:
-          description: List of document ids.
-          type: array
-          items:
-            format: int64
-            type: integer
