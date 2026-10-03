@@ -139,15 +139,6 @@ paths:
       - Institutions
 components:
   schemas:
-    InstitutionResponse:
-      type: object
-      title: InstitutionResponse
-      properties:
-        institution:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Institution'
     Institution:
       type: object
       title: Institution
@@ -230,3 +221,12 @@ components:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string
+    InstitutionResponse:
+      type: object
+      title: InstitutionResponse
+      properties:
+        institution:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Institution'

@@ -368,53 +368,81 @@ paths:
       - Provider Accounts
 components:
   schemas:
-    StatusLink:
+    Identifier:
       type: object
-      title: StatusLink
+      title: Identifier
       properties:
-        methodType:
+        type:
+          description: Type of Identifier
           readOnly: true
           type: string
-        rel:
+          enum:
+          - NIE
+          - DNI
+          - EIN
+          - BN
+          - AADHAR
+          - NIN
+          - NRIC
+        value:
+          description: Value of the identifier
           readOnly: true
           type: string
-        href:
-          readOnly: true
-          type: string
-    ProviderAccountDetailResponse:
+    AddedProviderAccountResponse:
       type: object
-      title: ProviderAccountDetailResponse
+      title: AddedProviderAccountResponse
       properties:
         providerAccount:
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/ProviderAccountDetail'
-    ProviderAccountRefreshRequest:
+            $ref: '#/components/schemas/AddedProviderAccount'
+    ProviderAccountRequest:
       type: object
-      title: ProviderAccountRefreshRequest
+      title: ProviderAccountRequest
       required:
-      - configName
-      - providerAccountIds
+      - field
       properties:
         configName:
           description: The name of configuration created at the time onboarding or configuration creation.
           type: string
-        providerAccountIds:
-          description: Comma separated providerAccountIds.
+        consentId:
+          format: int64
+          description: Consent Id generated for the request through POST Consent.<br><br><b>Endpoints</b>:<ul><li>POST Provider Account</li><li>PUT Provider Account</li></ul>
+          type: integer
+        preferences:
+          $ref: '#/components/schemas/ProviderAccountPreferences'
+        aggregationSource:
+          type: string
+          enum:
+          - SYSTEM
+          - USER
+        field:
           type: array
           items:
-            format: int64
-            type: integer
-    ProviderAccountUserProfileResponse:
+            $ref: '#/components/schemas/Field'
+        datasetName:
+          type: array
+          items:
+            type: string
+            enum:
+            - BASIC_AGG_DATA
+            - ADVANCE_AGG_DATA
+            - ACCT_PROFILE
+            - DOCUMENT
+        dataset:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvidersDataset'
+    ProviderAccountResponse:
       type: object
-      title: ProviderAccountUserProfileResponse
+      title: ProviderAccountResponse
       properties:
         providerAccount:
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/ProviderAccountProfile'
+            $ref: '#/components/schemas/ProviderAccount'
     ProviderAccountPreferences:
       type: object
       title: ProviderAccountPreferences
@@ -429,6 +457,198 @@ components:
         isAutoRefreshEnabled:
           description: Indicates if auto-refreshes have to be triggered for the provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts?include=preferences</li><li>GET providerAccounts/{providerAccountId}?include=preferences</li></ul>
           type: boolean
+    UpdatedProviderAccount:
+      type: object
+      title: UpdatedProviderAccount
+      properties:
+        lastUpdated:
+          description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
+          readOnly: true
+          type: string
+        loginForm:
+          description: This entity gets returned in the response for only MFA based provider accounts during the add/update account polling process. This indicates that the MFA information is expected from the user to complete the process. This represents the structure of MFA form that is displayed to the user in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/LoginForm'
+        createdDate:
+          description: The date on when the provider account is created in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: string
+        aggregationSource:
+          description: The source through which the providerAccount is added in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - SYSTEM
+          - USER
+        oauthMigrationStatus:
+          description: Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: string
+          enum:
+          - IN_PROGRESS
+          - TO_BE_MIGRATED
+          - COMPLETED
+          - MIGRATED
+        providerId:
+          format: int64
+          description: Unique identifier for the provider resource. This denotes the provider for which the provider account id is generated by the user.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: integer
+        requestId:
+          description: Unique id generated to indicate the request.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
+          readOnly: true
+          type: string
+        isManual:
+          description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: boolean
+        id:
+          format: int64
+          description: Unique identifier for the provider account resource. This is created during account addition.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: integer
+        authType:
+          description: The authentication type enabled at the provider site. <br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET /dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - OAUTH
+          - CREDENTIALS
+          - MFA_CREDENTIALS
+        dataset:
+          description: Logical grouping of dataset attributes into datasets such as Basic Aggregation Data, Account Profile and Documents.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountDataset'
+        status:
+          description: The status of last update attempted for the account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - LOGIN_IN_PROGRESS
+          - USER_INPUT_REQUIRED
+          - IN_PROGRESS
+          - PARTIAL_SUCCESS
+          - SUCCESS
+          - FAILED
+          - MIGRATION_IN_PROGRESS
+          - DATA_RETRIEVAL_FAILED
+    Name:
+      type: object
+      title: Name
+      properties:
+        middle:
+          description: Middle name.
+          type: string
+        last:
+          description: Last name.
+          type: string
+        fullName:
+          description: Full name.
+          type: string
+        first:
+          description: First name.
+          type: string
+    ProviderAccountProfile:
+      type: object
+      title: ProviderAccountProfile
+      properties:
+        profile:
+          description: PII related data like address, name, phoneNumber, identifier and email.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Profile'
+        id:
+          format: int64
+          description: Unique identifier for profile<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>
+          readOnly: true
+          type: integer
+    AddedProviderAccount:
+      type: object
+      title: AddedProviderAccount
+      properties:
+        lastUpdated:
+          description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
+          readOnly: true
+          type: string
+        aggregationSource:
+          description: The source through which the providerAccount is added in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - SYSTEM
+          - USER
+        oauthMigrationStatus:
+          description: Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: string
+          enum:
+          - IN_PROGRESS
+          - TO_BE_MIGRATED
+          - COMPLETED
+          - MIGRATED
+        providerId:
+          format: int64
+          description: Unique identifier for the provider resource. This denotes the provider for which the provider account id is generated by the user.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: integer
+        requestId:
+          description: Unique id generated to indicate the request.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
+          readOnly: true
+          type: string
+        isManual:
+          description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: boolean
+        id:
+          format: int64
+          description: Unique identifier for the provider account resource. This is created during account addition.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: integer
+        authType:
+          description: The authentication type enabled at the provider site. <br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET /dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - OAUTH
+          - CREDENTIALS
+          - MFA_CREDENTIALS
+        dataset:
+          description: Logical grouping of dataset attributes into datasets such as Basic Aggregation Data, Account Profile and Documents.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountDataset'
+        status:
+          description: The status of last update attempted for the account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - LOGIN_IN_PROGRESS
+          - USER_INPUT_REQUIRED
+          - IN_PROGRESS
+          - PARTIAL_SUCCESS
+          - SUCCESS
+          - FAILED
+          - MIGRATION_IN_PROGRESS
+          - DATA_RETRIEVAL_FAILED
+    StatusLink:
+      type: object
+      title: StatusLink
+      properties:
+        methodType:
+          readOnly: true
+          type: string
+        rel:
+          readOnly: true
+          type: string
+        href:
+          readOnly: true
+          type: string
     AccountDataset:
       type: object
       title: AccountDataset
@@ -500,9 +720,72 @@ components:
           description: 'The status error code of last update attempted for the dataset.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST providerAccounts</li><li>GET providerAccounts</li><li>GET dataExtracts/userData</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
           readOnly: true
           type: string
-    ProviderAccount:
+    PhoneNumber:
       type: object
-      title: ProviderAccount
+      title: PhoneNumber
+      properties:
+        type:
+          description: type of phone number
+          readOnly: true
+          type: string
+          enum:
+          - HOME
+          - WORK
+          - LANDLINE
+          - MOBILE
+        value:
+          description: Phone Number
+          readOnly: true
+          type: string
+    AccountAddress:
+      type: object
+      title: AccountAddress
+      properties:
+        zip:
+          description: Zip.
+          type: string
+        country:
+          description: Country.
+          type: string
+        address3:
+          description: Address Line 3.
+          type: string
+        address2:
+          description: Address Line 2.
+          type: string
+        city:
+          description: City.
+          type: string
+        sourceType:
+          type: string
+        address1:
+          description: Address Line 1.
+          type: string
+        street:
+          type: string
+        state:
+          description: State.
+          type: string
+        type:
+          type: string
+          enum:
+          - HOME
+          - BUSINESS
+          - POBOX
+          - RETAIL
+          - OFFICE
+          - SMALL_BUSINESS
+          - COMMUNICATION
+          - PERMANENT
+          - STATEMENT_ADDRESS
+          - PAYMENT
+          - PAYOFF
+          - UNKNOWN
+    ProviderAccountDetail:
+      type: object
+      title: ProviderAccountDetail
+      required:
+      - consentId
       properties:
         preferences:
           description: User preference values for Auto-Refresh and DataExtracts Notification<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>
@@ -521,10 +804,6 @@ components:
           description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
           readOnly: true
           type: boolean
-        isRealTimeMFA:
-          description: Attribute to specify whether the user has to input(credentials/MFA) for refreshing an account<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li>
-          readOnly: true
-          type: boolean
         lastUpdated:
           description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
           readOnly: true
@@ -533,6 +812,12 @@ components:
           format: int64
           description: Consent Id generated through POST Consent.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
           type: integer
+        loginForm:
+          description: This entity gets returned in the response for only MFA based provider accounts during the add/update account polling process. This indicates that the MFA information is expected from the user to complete the process. This represents the structure of MFA form that is displayed to the user in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/LoginForm'
         createdDate:
           description: The date on when the provider account is created in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
           readOnly: true
@@ -630,334 +915,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Row'
-    Identifier:
+    ProviderAccountRefreshRequest:
       type: object
-      title: Identifier
-      properties:
-        type:
-          description: Type of Identifier
-          readOnly: true
-          type: string
-          enum:
-          - NIE
-          - DNI
-          - EIN
-          - BN
-          - AADHAR
-          - NIN
-          - NRIC
-        value:
-          description: Value of the identifier
-          readOnly: true
-          type: string
-    ProvidersDataset:
-      type: object
-      title: ProvidersDataset
-      properties:
-        name:
-          description: 'The name of the dataset requested from the provider site<br><br><b>Account Type</b>: Manual<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li><li>GET providers</li></ul><b>Applicable Values</b><br>'
-          type: string
-          enum:
-          - BASIC_AGG_DATA
-          - ADVANCE_AGG_DATA
-          - ACCT_PROFILE
-          - DOCUMENT
-        attribute:
-          description: The name of the dataset attribute suported by the provider.<br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li></ul>
-          type: array
-          items:
-            $ref: '#/components/schemas/Attribute'
-    ProviderAccountPreferencesRequest:
-      type: object
-      title: ProviderAccountPreferencesRequest
-      properties:
-        preferences:
-          description: The preference set for the provider account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts?include=preferences</li><li>GET providerAccounts/{providerAccountId}?include=preferences</li></ul>
-          $ref: '#/components/schemas/ProviderAccountPreferences'
-    Row:
-      type: object
-      title: Row
-      properties:
-        fieldRowChoice:
-          description: 'Fields that belong to a particular choice are collected together using this field.<br><b>Recommendations</b>: All the field row choices label to be grouped and displayed as options to the customer. On choosing a particular choice field, we recommend displaying the fields relevant to them. First field choice could be selected by default.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>'
-          type: string
-        field:
-          description: Details of fields that belong to the row.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-        form:
-          description: Form denotes the set of the fields that are related. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
-          type: string
-        id:
-          description: Unique identifier of the row.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
-          type: string
-        label:
-          description: The label text displayed for a row in the form.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
-          type: string
-    UpdatedProviderAccountResponse:
-      type: object
-      title: UpdatedProviderAccountResponse
-      properties:
-        providerAccount:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdatedProviderAccount'
-    Email:
-      type: object
-      title: Email
-      properties:
-        type:
-          readOnly: true
-          type: string
-          enum:
-          - PRIMARY
-          - SECONDARY
-          - PERSONAL
-          - WORK
-          - OTHERS
-        value:
-          readOnly: true
-          type: string
-    PhoneNumber:
-      type: object
-      title: PhoneNumber
-      properties:
-        type:
-          description: type of phone number
-          readOnly: true
-          type: string
-          enum:
-          - HOME
-          - WORK
-          - LANDLINE
-          - MOBILE
-        value:
-          description: Phone Number
-          readOnly: true
-          type: string
-    TransactionDays:
-      type: object
-      title: TransactionDays
-      properties:
-        fullAccountNumberFields:
-          type: array
-          items:
-            type: string
-            enum:
-            - paymentAccountNumber
-            - unmaskedAccountNumber
-        numberOfTransactionDays:
-          format: int32
-          type: integer
-    Attribute:
-      type: object
-      title: Attribute
-      properties:
-        container:
-          description: Containers for which the attributes are supported.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
-          type: array
-          items:
-            type: string
-            enum:
-            - bank
-            - creditCard
-            - investment
-            - insurance
-            - loan
-            - reward
-            - bill
-            - realEstate
-            - otherAssets
-            - otherLiabilities
-        fromDate:
-          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        toFinYear:
-          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        fromFinYear:
-          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        containerAttributes:
-          description: Applicable only to TRANSACTIONS attributes of BASIC_AGG_DATA dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/ContainerAttributes'
-        toDate:
-          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        name:
-          description: Attributes that are supported for a dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
-          type: string
-          enum:
-          - BASIC_ACCOUNT_INFO
-          - TRANSACTIONS
-          - STATEMENTS
-          - HOLDINGS
-          - ACCOUNT_DETAILS
-          - TAX
-          - EBILLS
-          - FULL_ACCT_NUMBER
-          - BANK_TRANSFER_CODE
-          - HOLDER_NAME
-          - HOLDER_DETAILS
-          - PAYMENT_PROFILE
-          - PAYMENT_DETAILS
-          - INTEREST_DETAILS
-          - COVERAGE
-    ProviderAccountResponse:
-      type: object
-      title: ProviderAccountResponse
-      properties:
-        providerAccount:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ProviderAccount'
-    Profile:
-      type: object
-      title: Profile
-      properties:
-        identifier:
-          description: 'Identifiers available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-        address:
-          description: 'Address available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountAddress'
-        phoneNumber:
-          description: 'Phone number available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PhoneNumber'
-        gender:
-          description: 'Gender of the provider account holder.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>'
-          readOnly: true
-          type: string
-        name:
-          description: 'Name of the provider account holder.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>'
-          readOnly: true
-          $ref: '#/components/schemas/Name'
-        email:
-          description: 'Email Id available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Email'
-    ProviderAccountProfile:
-      type: object
-      title: ProviderAccountProfile
-      properties:
-        profile:
-          description: PII related data like address, name, phoneNumber, identifier and email.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Profile'
-        id:
-          format: int64
-          description: Unique identifier for profile<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>
-          readOnly: true
-          type: integer
-    AccountAddress:
-      type: object
-      title: AccountAddress
-      properties:
-        zip:
-          description: Zip.
-          type: string
-        country:
-          description: Country.
-          type: string
-        address3:
-          description: Address Line 3.
-          type: string
-        address2:
-          description: Address Line 2.
-          type: string
-        city:
-          description: City.
-          type: string
-        sourceType:
-          type: string
-        address1:
-          description: Address Line 1.
-          type: string
-        street:
-          type: string
-        state:
-          description: State.
-          type: string
-        type:
-          type: string
-          enum:
-          - HOME
-          - BUSINESS
-          - POBOX
-          - RETAIL
-          - OFFICE
-          - SMALL_BUSINESS
-          - COMMUNICATION
-          - PERMANENT
-          - STATEMENT_ADDRESS
-          - PAYMENT
-          - PAYOFF
-          - UNKNOWN
-    ContainerAttributes:
-      type: object
-      title: ContainerAttributes
-      properties:
-        BANK:
-          $ref: '#/components/schemas/TransactionDays'
-        LOAN:
-          $ref: '#/components/schemas/TransactionDays'
-        CREDITCARD:
-          $ref: '#/components/schemas/TransactionDays'
-        INVESTMENT:
-          $ref: '#/components/schemas/TransactionDays'
-        INSURANCE:
-          $ref: '#/components/schemas/TransactionDays'
-    RefreshProviderAccountResponse:
-      type: object
-      title: RefreshProviderAccountResponse
-      properties:
-        statusLink:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/StatusLink'
-    Name:
-      type: object
-      title: Name
-      properties:
-        middle:
-          description: Middle name.
-          type: string
-        last:
-          description: Last name.
-          type: string
-        fullName:
-          description: Full name.
-          type: string
-        first:
-          description: First name.
-          type: string
-    ProviderAccountDetail:
-      type: object
-      title: ProviderAccountDetail
+      title: ProviderAccountRefreshRequest
       required:
-      - consentId
+      - configName
+      - providerAccountIds
+      properties:
+        configName:
+          description: The name of configuration created at the time onboarding or configuration creation.
+          type: string
+        providerAccountIds:
+          description: Comma separated providerAccountIds.
+          type: array
+          items:
+            format: int64
+            type: integer
+    ProviderAccount:
+      type: object
+      title: ProviderAccount
       properties:
         preferences:
           description: User preference values for Auto-Refresh and DataExtracts Notification<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>
@@ -976,6 +952,10 @@ components:
           description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
           readOnly: true
           type: boolean
+        isRealTimeMFA:
+          description: Attribute to specify whether the user has to input(credentials/MFA) for refreshing an account<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li>
+          readOnly: true
+          type: boolean
         lastUpdated:
           description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
           readOnly: true
@@ -984,12 +964,6 @@ components:
           format: int64
           description: Consent Id generated through POST Consent.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
           type: integer
-        loginForm:
-          description: This entity gets returned in the response for only MFA based provider accounts during the add/update account polling process. This indicates that the MFA information is expected from the user to complete the process. This represents the structure of MFA form that is displayed to the user in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/LoginForm'
         createdDate:
           description: The date on when the provider account is created in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
           readOnly: true
@@ -1042,107 +1016,56 @@ components:
           - FAILED
           - MIGRATION_IN_PROGRESS
           - DATA_RETRIEVAL_FAILED
-    UpdatedProviderAccount:
+    UpdatedProviderAccountResponse:
       type: object
-      title: UpdatedProviderAccount
-      properties:
-        lastUpdated:
-          description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
-          readOnly: true
-          type: string
-        loginForm:
-          description: This entity gets returned in the response for only MFA based provider accounts during the add/update account polling process. This indicates that the MFA information is expected from the user to complete the process. This represents the structure of MFA form that is displayed to the user in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/LoginForm'
-        createdDate:
-          description: The date on when the provider account is created in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: string
-        aggregationSource:
-          description: The source through which the providerAccount is added in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - SYSTEM
-          - USER
-        oauthMigrationStatus:
-          description: Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: string
-          enum:
-          - IN_PROGRESS
-          - TO_BE_MIGRATED
-          - COMPLETED
-          - MIGRATED
-        providerId:
-          format: int64
-          description: Unique identifier for the provider resource. This denotes the provider for which the provider account id is generated by the user.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: integer
-        requestId:
-          description: Unique id generated to indicate the request.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
-          readOnly: true
-          type: string
-        isManual:
-          description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: boolean
-        id:
-          format: int64
-          description: Unique identifier for the provider account resource. This is created during account addition.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: integer
-        authType:
-          description: The authentication type enabled at the provider site. <br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET /dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - OAUTH
-          - CREDENTIALS
-          - MFA_CREDENTIALS
-        dataset:
-          description: Logical grouping of dataset attributes into datasets such as Basic Aggregation Data, Account Profile and Documents.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountDataset'
-        status:
-          description: The status of last update attempted for the account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - LOGIN_IN_PROGRESS
-          - USER_INPUT_REQUIRED
-          - IN_PROGRESS
-          - PARTIAL_SUCCESS
-          - SUCCESS
-          - FAILED
-          - MIGRATION_IN_PROGRESS
-          - DATA_RETRIEVAL_FAILED
-    AddedProviderAccountResponse:
-      type: object
-      title: AddedProviderAccountResponse
+      title: UpdatedProviderAccountResponse
       properties:
         providerAccount:
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/AddedProviderAccount'
-    Option:
+            $ref: '#/components/schemas/UpdatedProviderAccount'
+    TransactionDays:
       type: object
-      title: Option
+      title: TransactionDays
       properties:
-        displayText:
-          description: The text that is displayed to the user for that option in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
-          type: string
-        optionValue:
-          description: The value that is associated with the option.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
-          type: string
-        isSelected:
-          description: The option that is selected by default in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
-          type: boolean
+        fullAccountNumberFields:
+          type: array
+          items:
+            type: string
+            enum:
+            - paymentAccountNumber
+            - unmaskedAccountNumber
+        numberOfTransactionDays:
+          format: int32
+          type: integer
+    RefreshProviderAccountResponse:
+      type: object
+      title: RefreshProviderAccountResponse
+      properties:
+        statusLink:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusLink'
+    ProviderAccountDetailResponse:
+      type: object
+      title: ProviderAccountDetailResponse
+      properties:
+        providerAccount:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProviderAccountDetail'
+    ProviderAccountUserProfileResponse:
+      type: object
+      title: ProviderAccountUserProfileResponse
+      properties:
+        providerAccount:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProviderAccountProfile'
     Field:
       type: object
       title: Field
@@ -1210,112 +1133,162 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Option'
-    ProviderAccountRequest:
+    ProvidersDataset:
       type: object
-      title: ProviderAccountRequest
-      required:
-      - field
+      title: ProvidersDataset
       properties:
-        configName:
-          description: The name of configuration created at the time onboarding or configuration creation.
-          type: string
-        consentId:
-          format: int64
-          description: Consent Id generated for the request through POST Consent.<br><br><b>Endpoints</b>:<ul><li>POST Provider Account</li><li>PUT Provider Account</li></ul>
-          type: integer
-        preferences:
-          $ref: '#/components/schemas/ProviderAccountPreferences'
-        aggregationSource:
+        name:
+          description: 'The name of the dataset requested from the provider site<br><br><b>Account Type</b>: Manual<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li><li>GET providers</li></ul><b>Applicable Values</b><br>'
           type: string
           enum:
-          - SYSTEM
-          - USER
-        field:
+          - BASIC_AGG_DATA
+          - ADVANCE_AGG_DATA
+          - ACCT_PROFILE
+          - DOCUMENT
+        attribute:
+          description: The name of the dataset attribute suported by the provider.<br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li></ul>
           type: array
           items:
-            $ref: '#/components/schemas/Field'
-        datasetName:
+            $ref: '#/components/schemas/Attribute'
+    Attribute:
+      type: object
+      title: Attribute
+      properties:
+        container:
+          description: Containers for which the attributes are supported.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
           type: array
           items:
             type: string
             enum:
-            - BASIC_AGG_DATA
-            - ADVANCE_AGG_DATA
-            - ACCT_PROFILE
-            - DOCUMENT
-        dataset:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvidersDataset'
-    AddedProviderAccount:
+            - bank
+            - creditCard
+            - investment
+            - insurance
+            - loan
+            - reward
+            - bill
+            - realEstate
+            - otherAssets
+            - otherLiabilities
+        fromDate:
+          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        toFinYear:
+          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        fromFinYear:
+          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        containerAttributes:
+          description: Applicable only to TRANSACTIONS attributes of BASIC_AGG_DATA dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/ContainerAttributes'
+        toDate:
+          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        name:
+          description: Attributes that are supported for a dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
+          type: string
+          enum:
+          - BASIC_ACCOUNT_INFO
+          - TRANSACTIONS
+          - STATEMENTS
+          - HOLDINGS
+          - ACCOUNT_DETAILS
+          - TAX
+          - EBILLS
+          - FULL_ACCT_NUMBER
+          - BANK_TRANSFER_CODE
+          - HOLDER_NAME
+          - HOLDER_DETAILS
+          - PAYMENT_PROFILE
+          - PAYMENT_DETAILS
+          - INTEREST_DETAILS
+          - COVERAGE
+    ProviderAccountPreferencesRequest:
       type: object
-      title: AddedProviderAccount
+      title: ProviderAccountPreferencesRequest
       properties:
-        lastUpdated:
-          description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
-          readOnly: true
-          type: string
-        aggregationSource:
-          description: The source through which the providerAccount is added in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - SYSTEM
-          - USER
-        oauthMigrationStatus:
-          description: Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+        preferences:
+          description: The preference set for the provider account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts?include=preferences</li><li>GET providerAccounts/{providerAccountId}?include=preferences</li></ul>
+          $ref: '#/components/schemas/ProviderAccountPreferences'
+    Email:
+      type: object
+      title: Email
+      properties:
+        type:
           readOnly: true
           type: string
           enum:
-          - IN_PROGRESS
-          - TO_BE_MIGRATED
-          - COMPLETED
-          - MIGRATED
-        providerId:
-          format: int64
-          description: Unique identifier for the provider resource. This denotes the provider for which the provider account id is generated by the user.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: integer
-        requestId:
-          description: Unique id generated to indicate the request.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
+          - PRIMARY
+          - SECONDARY
+          - PERSONAL
+          - WORK
+          - OTHERS
+        value:
           readOnly: true
           type: string
-        isManual:
-          description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: boolean
-        id:
-          format: int64
-          description: Unique identifier for the provider account resource. This is created during account addition.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: integer
-        authType:
-          description: The authentication type enabled at the provider site. <br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET /dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - OAUTH
-          - CREDENTIALS
-          - MFA_CREDENTIALS
-        dataset:
-          description: Logical grouping of dataset attributes into datasets such as Basic Aggregation Data, Account Profile and Documents.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+    Profile:
+      type: object
+      title: Profile
+      properties:
+        identifier:
+          description: 'Identifiers available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/AccountDataset'
-        status:
-          description: The status of last update attempted for the account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
+            $ref: '#/components/schemas/Identifier'
+        address:
+          description: 'Address available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountAddress'
+        phoneNumber:
+          description: 'Phone number available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+        gender:
+          description: 'Gender of the provider account holder.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>'
           readOnly: true
           type: string
-          enum:
-          - LOGIN_IN_PROGRESS
-          - USER_INPUT_REQUIRED
-          - IN_PROGRESS
-          - PARTIAL_SUCCESS
-          - SUCCESS
-          - FAILED
-          - MIGRATION_IN_PROGRESS
-          - DATA_RETRIEVAL_FAILED
+        name:
+          description: 'Name of the provider account holder.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providerAccounts/profile</li></ul>'
+          readOnly: true
+          $ref: '#/components/schemas/Name'
+        email:
+          description: 'Email Id available in the profile page of the account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+    Row:
+      type: object
+      title: Row
+      properties:
+        fieldRowChoice:
+          description: 'Fields that belong to a particular choice are collected together using this field.<br><b>Recommendations</b>: All the field row choices label to be grouped and displayed as options to the customer. On choosing a particular choice field, we recommend displaying the fields relevant to them. First field choice could be selected by default.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>'
+          type: string
+        field:
+          description: Details of fields that belong to the row.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        form:
+          description: Form denotes the set of the fields that are related. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
+          type: string
+        id:
+          description: Unique identifier of the row.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
+          type: string
+        label:
+          description: The label text displayed for a row in the form.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
+          type: string
     YodleeError:
       type: object
       title: YodleeError
@@ -1332,3 +1305,30 @@ components:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string
+    ContainerAttributes:
+      type: object
+      title: ContainerAttributes
+      properties:
+        BANK:
+          $ref: '#/components/schemas/TransactionDays'
+        LOAN:
+          $ref: '#/components/schemas/TransactionDays'
+        CREDITCARD:
+          $ref: '#/components/schemas/TransactionDays'
+        INVESTMENT:
+          $ref: '#/components/schemas/TransactionDays'
+        INSURANCE:
+          $ref: '#/components/schemas/TransactionDays'
+    Option:
+      type: object
+      title: Option
+      properties:
+        displayText:
+          description: The text that is displayed to the user for that option in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
+          type: string
+        optionValue:
+          description: The value that is associated with the option.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
+          type: string
+        isSelected:
+          description: The option that is selected by default in the provider site.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li></ul>
+          type: boolean

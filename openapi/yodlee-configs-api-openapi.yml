@@ -230,32 +230,6 @@ components:
           description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
           type: string
           maxLength: 2147483647
-    ConfigsNotificationResponse:
-      type: object
-      title: ConfigsNotificationResponse
-      properties:
-        event:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigsNotificationEvent'
-    CreateConfigsNotificationEvent:
-      type: object
-      title: CreateConfigsNotificationEvent
-      properties:
-        callbackUrl:
-          minLength: 1
-          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
-          type: string
-          maxLength: 2147483647
-    UpdateConfigsNotificationEventRequest:
-      type: object
-      title: UpdateConfigsNotificationEventRequest
-      required:
-      - event
-      properties:
-        event:
-          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
     ConfigsPublicKey:
       type: object
       title: ConfigsPublicKey
@@ -268,28 +242,21 @@ components:
           description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
           readOnly: true
           type: string
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
     ConfigsPublicKeyResponse:
       type: object
       title: ConfigsPublicKeyResponse
       properties:
         publicKey:
           $ref: '#/components/schemas/ConfigsPublicKey'
+    CreateConfigsNotificationEvent:
+      type: object
+      title: CreateConfigsNotificationEvent
+      properties:
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647
     ConfigsNotificationEvent:
       type: object
       title: ConfigsNotificationEvent
@@ -308,3 +275,36 @@ components:
           description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
           type: string
           maxLength: 2147483647
+    ConfigsNotificationResponse:
+      type: object
+      title: ConfigsNotificationResponse
+      properties:
+        event:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigsNotificationEvent'
+    UpdateConfigsNotificationEventRequest:
+      type: object
+      title: UpdateConfigsNotificationEventRequest
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string

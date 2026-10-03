@@ -250,15 +250,6 @@ paths:
       - Auth
 components:
   schemas:
-    ApiKeyRequest:
-      type: object
-      title: ApiKeyRequest
-      properties:
-        publicKey:
-          minLength: 1
-          description: Public key uploaded by the customer while generating ApiKey.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
-          type: string
-          maxLength: 2147483647
     ApiKeyOutput:
       type: object
       title: ApiKeyOutput
@@ -287,6 +278,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiKeyOutput'
+    ApiKeyRequest:
+      type: object
+      title: ApiKeyRequest
+      properties:
+        publicKey:
+          minLength: 1
+          description: Public key uploaded by the customer while generating ApiKey.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
+          type: string
+          maxLength: 2147483647
     ClientCredentialTokenResponse:
       type: object
       title: ClientCredentialTokenResponse

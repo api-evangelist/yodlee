@@ -249,158 +249,6 @@ paths:
       - User
 components:
   schemas:
-    UpdateUserRequest:
-      type: object
-      title: UpdateUserRequest
-      required:
-      - user
-      properties:
-        user:
-          $ref: '#/components/schemas/UpdateUserRegistration'
-    UserDetail:
-      type: object
-      title: UserDetail
-      properties:
-        preferences:
-          description: Preferences of the user to be respected in the data provided through various API services.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/UserResponsePreferences'
-        address:
-          description: The address of the user.<br><br><b>Endpoints</b>:<ul><li>GET user</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/UserAddress'
-        phoneNumber:
-          type: string
-        loginName:
-          description: The login name of the user used for authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          type: string
-        name:
-          description: First, middle and last names of the user.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/Name'
-        id:
-          format: int64
-          description: The unique identifier of a consumer/user in Yodlee system for whom the API services would be accessed for.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          type: integer
-        roleType:
-          type: string
-          enum:
-          - INDIVIDUAL
-        email:
-          description: The email address of the user.<br><br><b>Endpoints</b>:<ul><li>GET user</li></ul>
-          readOnly: true
-          type: string
-        segmentName:
-          type: string
-    UserAddress:
-      type: object
-      title: UserAddress
-      properties:
-        zip:
-          description: Zip.
-          type: string
-        country:
-          description: Country.
-          type: string
-        address3:
-          description: Address Line 3.
-          type: string
-        address2:
-          description: Address Line 2.
-          type: string
-        city:
-          description: City.
-          type: string
-        address1:
-          description: Address Line 1.
-          type: string
-        state:
-          description: State.
-          type: string
-    UserSession:
-      type: object
-      title: UserSession
-      properties:
-        userSession:
-          description: Session provided for a valid user to access API services upon successful authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li></ul>
-          readOnly: true
-          type: string
-    UserRegistration:
-      type: object
-      title: UserRegistration
-      required:
-      - loginName
-      properties:
-        preferences:
-          $ref: '#/components/schemas/UserRequestPreferences'
-        address:
-          $ref: '#/components/schemas/UserAddress'
-        phoneNumber:
-          type: string
-        loginName:
-          minLength: 3
-          type: string
-          maxLength: 150
-        name:
-          $ref: '#/components/schemas/Name'
-        email:
-          type: string
-        segmentName:
-          type: string
-    UserAccessTokensResponse:
-      type: object
-      title: UserAccessTokensResponse
-      properties:
-        user:
-          readOnly: true
-          $ref: '#/components/schemas/UserAccessToken'
-    UserAccessToken:
-      type: object
-      title: UserAccessToken
-      properties:
-        accessTokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessTokens'
-    User:
-      type: object
-      title: User
-      properties:
-        preferences:
-          description: Preferences of the user to be respected in the data provided through various API services.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/UserResponsePreferences'
-        session:
-          description: Session token of the user using which other services are invoked in the system.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/UserSession'
-        loginName:
-          description: The login name of the user used for authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          type: string
-        name:
-          description: First, middle and last names of the user.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/Name'
-        id:
-          format: int64
-          description: The unique identifier of a consumer/user in Yodlee system for whom the API services would be accessed for.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
-          readOnly: true
-          type: integer
-        roleType:
-          type: string
-          enum:
-          - INDIVIDUAL
-    UserRequest:
-      type: object
-      title: UserRequest
-      required:
-      - user
-      properties:
-        user:
-          $ref: '#/components/schemas/UserRegistration'
     UserRequestPreferences:
       type: object
       title: UserRequestPreferences
@@ -711,27 +559,75 @@ components:
           - en_ZW
           - en_NL
           - nl_NL
-    UpdateUserRegistration:
+    UserDetail:
       type: object
-      title: UpdateUserRegistration
+      title: UserDetail
       properties:
-        configName:
-          description: The name of configuration created at the time onboarding or configuration creation.
-          type: string
         preferences:
-          $ref: '#/components/schemas/UserRequestPreferences'
+          description: Preferences of the user to be respected in the data provided through various API services.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/UserResponsePreferences'
         address:
+          description: The address of the user.<br><br><b>Endpoints</b>:<ul><li>GET user</li></ul>
+          readOnly: true
           $ref: '#/components/schemas/UserAddress'
         phoneNumber:
           type: string
         loginName:
+          description: The login name of the user used for authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
           type: string
         name:
+          description: First, middle and last names of the user.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
           $ref: '#/components/schemas/Name'
+        id:
+          format: int64
+          description: The unique identifier of a consumer/user in Yodlee system for whom the API services would be accessed for.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
+          type: integer
+        roleType:
+          type: string
+          enum:
+          - INDIVIDUAL
         email:
+          description: The email address of the user.<br><br><b>Endpoints</b>:<ul><li>GET user</li></ul>
+          readOnly: true
           type: string
         segmentName:
           type: string
+    UserAddress:
+      type: object
+      title: UserAddress
+      properties:
+        zip:
+          description: Zip.
+          type: string
+        country:
+          description: Country.
+          type: string
+        address3:
+          description: Address Line 3.
+          type: string
+        address2:
+          description: Address Line 2.
+          type: string
+        city:
+          description: City.
+          type: string
+        address1:
+          description: Address Line 1.
+          type: string
+        state:
+          description: State.
+          type: string
+    UserDetailResponse:
+      type: object
+      title: UserDetailResponse
+      properties:
+        user:
+          readOnly: true
+          $ref: '#/components/schemas/UserDetail'
     UserResponsePreferences:
       type: object
       title: UserResponsePreferences
@@ -1042,36 +938,130 @@ components:
           - en_ZW
           - en_NL
           - nl_NL
-    UserResponse:
+    UserRequest:
       type: object
-      title: UserResponse
+      title: UserRequest
+      required:
+      - user
+      properties:
+        user:
+          $ref: '#/components/schemas/UserRegistration'
+    UpdateUserRegistration:
+      type: object
+      title: UpdateUserRegistration
+      properties:
+        configName:
+          description: The name of configuration created at the time onboarding or configuration creation.
+          type: string
+        preferences:
+          $ref: '#/components/schemas/UserRequestPreferences'
+        address:
+          $ref: '#/components/schemas/UserAddress'
+        phoneNumber:
+          type: string
+        loginName:
+          type: string
+        name:
+          $ref: '#/components/schemas/Name'
+        email:
+          type: string
+        segmentName:
+          type: string
+    AccessTokens:
+      type: object
+      title: AccessTokens
+      properties:
+        appId:
+          description: The identifier of the application for which the access token is generated.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+          type: string
+        value:
+          description: Access token value used to invoke the widgets/apps.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+          type: string
+        url:
+          description: Base URL using which the application is accessed.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+          type: string
+    User:
+      type: object
+      title: User
+      properties:
+        preferences:
+          description: Preferences of the user to be respected in the data provided through various API services.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/UserResponsePreferences'
+        session:
+          description: Session token of the user using which other services are invoked in the system.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/UserSession'
+        loginName:
+          description: The login name of the user used for authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
+          type: string
+        name:
+          description: First, middle and last names of the user.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/Name'
+        id:
+          format: int64
+          description: The unique identifier of a consumer/user in Yodlee system for whom the API services would be accessed for.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li><li>GET user</li></ul>
+          readOnly: true
+          type: integer
+        roleType:
+          type: string
+          enum:
+          - INDIVIDUAL
+    UserAccessTokensResponse:
+      type: object
+      title: UserAccessTokensResponse
       properties:
         user:
           readOnly: true
-          $ref: '#/components/schemas/User'
-    UserDetailResponse:
+          $ref: '#/components/schemas/UserAccessToken'
+    UserRegistration:
       type: object
-      title: UserDetailResponse
+      title: UserRegistration
+      required:
+      - loginName
+      properties:
+        preferences:
+          $ref: '#/components/schemas/UserRequestPreferences'
+        address:
+          $ref: '#/components/schemas/UserAddress'
+        phoneNumber:
+          type: string
+        loginName:
+          minLength: 3
+          type: string
+          maxLength: 150
+        name:
+          $ref: '#/components/schemas/Name'
+        email:
+          type: string
+        segmentName:
+          type: string
+    UserSession:
+      type: object
+      title: UserSession
+      properties:
+        userSession:
+          description: Session provided for a valid user to access API services upon successful authentication.<br><br><b>Endpoints</b>:<ul><li>POST user/samlLogin</li><li>POST user/register</li></ul>
+          readOnly: true
+          type: string
+    UpdateUserRequest:
+      type: object
+      title: UpdateUserRequest
+      required:
+      - user
       properties:
         user:
-          readOnly: true
-          $ref: '#/components/schemas/UserDetail'
-    Name:
+          $ref: '#/components/schemas/UpdateUserRegistration'
+    UserAccessToken:
       type: object
-      title: Name
+      title: UserAccessToken
       properties:
-        middle:
-          description: Middle name.
-          type: string
-        last:
-          description: Last name.
-          type: string
-        fullName:
-          description: Full name.
-          type: string
-        first:
-          description: First name.
-          type: string
+        accessTokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessTokens'
     YodleeError:
       type: object
       title: YodleeError
@@ -1088,16 +1078,26 @@ components:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string
-    AccessTokens:
+    Name:
       type: object
-      title: AccessTokens
+      title: Name
       properties:
-        appId:
-          description: The identifier of the application for which the access token is generated.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+        middle:
+          description: Middle name.
           type: string
-        value:
-          description: Access token value used to invoke the widgets/apps.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+        last:
+          description: Last name.
           type: string
-        url:
-          description: Base URL using which the application is accessed.<br><br><b>Endpoints</b>:<ul><li>GET user/accessTokens</li></ul>
+        fullName:
+          description: Full name.
           type: string
+        first:
+          description: First name.
+          type: string
+    UserResponse:
+      type: object
+      title: UserResponse
+      properties:
+        user:
+          readOnly: true
+          $ref: '#/components/schemas/User'

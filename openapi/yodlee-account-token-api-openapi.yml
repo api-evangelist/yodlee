@@ -76,6 +76,19 @@ paths:
       - Account Token
 components:
   schemas:
+    AccountToken:
+      type: object
+      title: AccountToken
+      properties:
+        processorToken:
+          description: The unique token that the payment partner can use to make API request to the Yodlee system.
+          readOnly: true
+          type: string
+        accountId:
+          format: int64
+          description: The unique identifier for the user's account.
+          readOnly: true
+          type: integer
     PaymentProcessorTokenRequest:
       type: object
       title: PaymentProcessorTokenRequest
@@ -118,16 +131,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccountToken'
-    AccountToken:
-      type: object
-      title: AccountToken
-      properties:
-        processorToken:
-          description: The unique token that the payment partner can use to make API request to the Yodlee system.
-          readOnly: true
-          type: string
-        accountId:
-          format: int64
-          description: The unique identifier for the user's account.
-          readOnly: true
-          type: integer

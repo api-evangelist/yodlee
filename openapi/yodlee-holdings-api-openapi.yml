@@ -199,6 +199,174 @@ paths:
       - Holdings
 components:
   schemas:
+    HoldingTypeListResponse:
+      type: object
+      title: HoldingTypeListResponse
+      properties:
+        holdingType:
+          readOnly: true
+          type: array
+          items:
+            type: string
+            enum:
+            - stock
+            - mutualFund
+            - bond
+            - CD
+            - option
+            - moneyMarketFund
+            - other
+            - remic
+            - future
+            - commodity
+            - currency
+            - unitInvestmentTrust
+            - employeeStockOption
+            - insuranceAnnuity
+            - unknown
+            - preferredStock
+            - ETF
+            - warrants
+            - digitalAsset
+    HoldingRequestInfo:
+      type: object
+      title: HoldingRequestInfo
+      required:
+      - accountId
+      - description
+      - value
+      properties:
+        symbol:
+          type: string
+        exercisedQuantity:
+          format: double
+          type: number
+        cusipNumber:
+          type: string
+        vestedQuantity:
+          format: double
+          type: number
+        description:
+          minLength: 1
+          type: string
+          maxLength: 2147483647
+        unvestedValue:
+          $ref: '#/components/schemas/Money'
+        vestedValue:
+          $ref: '#/components/schemas/Money'
+        optionType:
+          type: string
+          enum:
+          - put
+          - call
+          - unknown
+          - other
+        holdingType:
+          type: string
+          enum:
+          - stock
+          - mutualFund
+          - bond
+          - CD
+          - option
+          - moneyMarketFund
+          - other
+          - remic
+          - future
+          - commodity
+          - currency
+          - unitInvestmentTrust
+          - employeeStockOption
+          - insuranceAnnuity
+          - unknown
+          - preferredStock
+          - ETF
+          - warrants
+          - digitalAsset
+        maturityDate:
+          type: string
+        price:
+          $ref: '#/components/schemas/Money'
+        term:
+          type: string
+        contractQuantity:
+          format: double
+          type: number
+        isShort:
+          type: boolean
+        value:
+          $ref: '#/components/schemas/Money'
+        expirationDate:
+          type: string
+        interestRate:
+          format: double
+          type: number
+        quantity:
+          format: double
+          type: number
+        grantDate:
+          type: string
+        sedol:
+          type: string
+        vestedSharesExercisable:
+          format: double
+          type: number
+        spread:
+          $ref: '#/components/schemas/Money'
+        accountId:
+          format: int64
+          type: integer
+        couponRate:
+          format: double
+          type: number
+        unvestedQuantity:
+          format: double
+          type: number
+        costBasis:
+          $ref: '#/components/schemas/Money'
+        vestingDate:
+          type: string
+        isin:
+          type: string
+        strikePrice:
+          $ref: '#/components/schemas/Money'
+    HoldingId:
+      type: object
+      title: HoldingId
+      properties:
+        id:
+          format: int64
+          description: 'Unique identifier for the security added in the system. This is the primary key of the holding resource.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: integer
+    SecurityHolding:
+      type: object
+      title: SecurityHolding
+      properties:
+        security:
+          readOnly: true
+          $ref: '#/components/schemas/Security'
+        id:
+          readOnly: true
+          type: string
+    HoldingResponse:
+      type: object
+      title: HoldingResponse
+      properties:
+        holding:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Holding'
+    HoldingIdListResponse:
+      type: object
+      title: HoldingIdListResponse
+      properties:
+        holding:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingId'
     Holding:
       type: object
       title: Holding
@@ -405,118 +573,23 @@ components:
           description: 'The strike (exercise) price for the option position.<br><b>Note</b>: The strike price field is only applicable to options and employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
           readOnly: true
           $ref: '#/components/schemas/Money'
-    SecurityHolding:
+    AssetClassification:
       type: object
-      title: SecurityHolding
+      title: AssetClassification
       properties:
-        security:
+        allocation:
+          format: double
+          description: 'The allocation percentage of the holding.<br><br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
           readOnly: true
-          $ref: '#/components/schemas/Security'
-        id:
+          type: number
+        classificationType:
+          description: 'The type of classification to which the investment belongs (assetClass, country, sector, and style).<br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
           readOnly: true
           type: string
-    HoldingRequestInfo:
-      type: object
-      title: HoldingRequestInfo
-      required:
-      - accountId
-      - description
-      - value
-      properties:
-        symbol:
+        classificationValue:
+          description: 'The value for each classificationType.<br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
           type: string
-        exercisedQuantity:
-          format: double
-          type: number
-        cusipNumber:
-          type: string
-        vestedQuantity:
-          format: double
-          type: number
-        description:
-          minLength: 1
-          type: string
-          maxLength: 2147483647
-        unvestedValue:
-          $ref: '#/components/schemas/Money'
-        vestedValue:
-          $ref: '#/components/schemas/Money'
-        optionType:
-          type: string
-          enum:
-          - put
-          - call
-          - unknown
-          - other
-        holdingType:
-          type: string
-          enum:
-          - stock
-          - mutualFund
-          - bond
-          - CD
-          - option
-          - moneyMarketFund
-          - other
-          - remic
-          - future
-          - commodity
-          - currency
-          - unitInvestmentTrust
-          - employeeStockOption
-          - insuranceAnnuity
-          - unknown
-          - preferredStock
-          - ETF
-          - warrants
-          - digitalAsset
-        maturityDate:
-          type: string
-        price:
-          $ref: '#/components/schemas/Money'
-        term:
-          type: string
-        contractQuantity:
-          format: double
-          type: number
-        isShort:
-          type: boolean
-        value:
-          $ref: '#/components/schemas/Money'
-        expirationDate:
-          type: string
-        interestRate:
-          format: double
-          type: number
-        quantity:
-          format: double
-          type: number
-        grantDate:
-          type: string
-        sedol:
-          type: string
-        vestedSharesExercisable:
-          format: double
-          type: number
-        spread:
-          $ref: '#/components/schemas/Money'
-        accountId:
-          format: int64
-          type: integer
-        couponRate:
-          format: double
-          type: number
-        unvestedQuantity:
-          format: double
-          type: number
-        costBasis:
-          $ref: '#/components/schemas/Money'
-        vestingDate:
-          type: string
-        isin:
-          type: string
-        strikePrice:
-          $ref: '#/components/schemas/Money'
     Money:
       type: object
       title: Money
@@ -981,101 +1054,6 @@ components:
           - VEF
           - SSP
           - ALK
-    HoldingResponse:
-      type: object
-      title: HoldingResponse
-      properties:
-        holding:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Holding'
-    HoldingSecuritiesResponse:
-      type: object
-      title: HoldingSecuritiesResponse
-      properties:
-        holding:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/SecurityHolding'
-    HoldingIdListResponse:
-      type: object
-      title: HoldingIdListResponse
-      properties:
-        holding:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingId'
-    HoldingRequest:
-      type: object
-      title: HoldingRequest
-      required:
-      - holding
-      properties:
-        holding:
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingRequestInfo'
-    StockExchangeDetail:
-      type: object
-      title: StockExchangeDetail
-      properties:
-        symbol:
-          description: 'Ticker symbol representing particular securities listed on an exchange.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        countryCode:
-          description: 'Country codes are geocodes developed to represent countries and dependent areas.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        currencyCode:
-          description: 'ISO codes of currency.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        exchangeCode:
-          description: 'An Exchange code is a four-character code used to identify stock markets and other trading exchanges within global trading.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-    HoldingId:
-      type: object
-      title: HoldingId
-      properties:
-        id:
-          format: int64
-          description: 'Unique identifier for the security added in the system. This is the primary key of the holding resource.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: integer
-    HoldingTypeListResponse:
-      type: object
-      title: HoldingTypeListResponse
-      properties:
-        holdingType:
-          readOnly: true
-          type: array
-          items:
-            type: string
-            enum:
-            - stock
-            - mutualFund
-            - bond
-            - CD
-            - option
-            - moneyMarketFund
-            - other
-            - remic
-            - future
-            - commodity
-            - currency
-            - unitInvestmentTrust
-            - employeeStockOption
-            - insuranceAnnuity
-            - unknown
-            - preferredStock
-            - ETF
-            - warrants
-            - digitalAsset
     Security:
       type: object
       title: Security
@@ -1241,6 +1219,45 @@ components:
           description: 'The International Securities Identification Number (ISIN) is used worldwide to identify specific securities. It is equivalent to CUSIP for international markets.<br><br><b>Applicable containers</b>: investment, insurance<br>'
           readOnly: true
           type: string
+    StockExchangeDetail:
+      type: object
+      title: StockExchangeDetail
+      properties:
+        symbol:
+          description: 'Ticker symbol representing particular securities listed on an exchange.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        countryCode:
+          description: 'Country codes are geocodes developed to represent countries and dependent areas.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        currencyCode:
+          description: 'ISO codes of currency.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        exchangeCode:
+          description: 'An Exchange code is a four-character code used to identify stock markets and other trading exchanges within global trading.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+    HoldingSecuritiesResponse:
+      type: object
+      title: HoldingSecuritiesResponse
+      properties:
+        holding:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityHolding'
+    HoldingRequest:
+      type: object
+      title: HoldingRequest
+      required:
+      - holding
+      properties:
+        holding:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingRequestInfo'
     AssetClassificationList:
       type: object
       title: AssetClassificationList
@@ -1255,23 +1272,6 @@ components:
           type: array
           items:
             type: string
-    AssetClassification:
-      type: object
-      title: AssetClassification
-      properties:
-        allocation:
-          format: double
-          description: 'The allocation percentage of the holding.<br><br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        classificationType:
-          description: 'The type of classification to which the investment belongs (assetClass, country, sector, and style).<br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        classificationValue:
-          description: 'The value for each classificationType.<br><b>Required Feature Enablement</b>: Asset classification feature<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
     YodleeError:
       type: object
       title: YodleeError

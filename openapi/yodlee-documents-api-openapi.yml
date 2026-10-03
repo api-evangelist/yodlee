@@ -145,18 +145,6 @@ paths:
       - Documents
 components:
   schemas:
-    DocumentDownload:
-      type: object
-      title: DocumentDownload
-      properties:
-        docContent:
-          description: 'Contents of the document in Base64 format.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        id:
-          description: 'The document''s primary key and unique identifier.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
     Document:
       type: object
       title: Document
@@ -198,6 +186,27 @@ components:
           description: 'Indicates the status of the document download.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
           readOnly: true
           type: string
+    DocumentDownloadResponse:
+      type: object
+      title: DocumentDownloadResponse
+      properties:
+        document:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentDownload'
+    DocumentDownload:
+      type: object
+      title: DocumentDownload
+      properties:
+        docContent:
+          description: 'Contents of the document in Base64 format.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        id:
+          description: 'The document''s primary key and unique identifier.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
     DocumentResponse:
       type: object
       title: DocumentResponse
@@ -223,12 +232,3 @@ components:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string
-    DocumentDownloadResponse:
-      type: object
-      title: DocumentDownloadResponse
-      properties:
-        document:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentDownload'
