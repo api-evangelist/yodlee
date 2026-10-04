@@ -56,88 +56,6 @@ paths:
       - Risk Analytics
 components:
   schemas:
-    Transfers:
-      type: object
-      title: Transfers
-      properties:
-        ageOfRecentOccurence:
-          format: int32
-          description: No. of days elapsed since latest occurrence date.
-          readOnly: true
-          type: integer
-        ageOfFirstOccurence:
-          format: int32
-          description: No. of days elapsed since first occurrence date.
-          readOnly: true
-          type: integer
-        amount:
-          format: double
-          description: Amount corresponding to the feature.
-          readOnly: true
-          type: number
-        featureName:
-          description: Risk analytics feature.
-          readOnly: true
-          type: string
-        countDistinctMonths:
-          format: int32
-          description: Months of feature.
-          readOnly: true
-          type: integer
-        countTxn:
-          format: int32
-          description: Total count of transactions for feature.
-          readOnly: true
-          type: integer
-    MajorCharges:
-      type: object
-      title: MajorCharges
-      properties:
-        ageOfRecentOccurence:
-          format: int32
-          description: No. of days elapsed since latest occurrence date.
-          readOnly: true
-          type: integer
-        ageOfFirstOccurence:
-          format: int32
-          description: No. of days elapsed since first occurrence date.
-          readOnly: true
-          type: integer
-        amount:
-          format: double
-          description: Amount corresponding to the feature.
-          readOnly: true
-          type: number
-        featureName:
-          description: Risk analytics feature.
-          readOnly: true
-          type: string
-        countDistinctMonths:
-          format: int32
-          description: Months of feature.
-          readOnly: true
-          type: integer
-        countTxn:
-          format: int32
-          description: Total count of transactions for feature.
-          readOnly: true
-          type: integer
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
     RiskAnalyticsResponse:
       type: object
       title: RiskAnalyticsResponse
@@ -245,5 +163,87 @@ components:
         transactionsCount:
           format: int32
           description: Total number of transactions.
+          readOnly: true
+          type: integer
+    Transfers:
+      type: object
+      title: Transfers
+      properties:
+        ageOfRecentOccurence:
+          format: int32
+          description: No. of days elapsed since latest occurrence date.
+          readOnly: true
+          type: integer
+        ageOfFirstOccurence:
+          format: int32
+          description: No. of days elapsed since first occurrence date.
+          readOnly: true
+          type: integer
+        amount:
+          format: double
+          description: Amount corresponding to the feature.
+          readOnly: true
+          type: number
+        featureName:
+          description: Risk analytics feature.
+          readOnly: true
+          type: string
+        countDistinctMonths:
+          format: int32
+          description: Months of feature.
+          readOnly: true
+          type: integer
+        countTxn:
+          format: int32
+          description: Total count of transactions for feature.
+          readOnly: true
+          type: integer
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    MajorCharges:
+      type: object
+      title: MajorCharges
+      properties:
+        ageOfRecentOccurence:
+          format: int32
+          description: No. of days elapsed since latest occurrence date.
+          readOnly: true
+          type: integer
+        ageOfFirstOccurence:
+          format: int32
+          description: No. of days elapsed since first occurrence date.
+          readOnly: true
+          type: integer
+        amount:
+          format: double
+          description: Amount corresponding to the feature.
+          readOnly: true
+          type: number
+        featureName:
+          description: Risk analytics feature.
+          readOnly: true
+          type: string
+        countDistinctMonths:
+          format: int32
+          description: Months of feature.
+          readOnly: true
+          type: integer
+        countTxn:
+          format: int32
+          description: Total count of transactions for feature.
           readOnly: true
           type: integer

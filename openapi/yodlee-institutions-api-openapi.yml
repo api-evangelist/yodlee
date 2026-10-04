@@ -139,6 +139,31 @@ paths:
       - Institutions
 components:
   schemas:
+    InstitutionResponse:
+      type: object
+      title: InstitutionResponse
+      properties:
+        institution:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Institution'
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
     Institution:
       type: object
       title: Institution
@@ -205,28 +230,3 @@ components:
           description: Determines when the provider information was updated by Yodlee. If the customer caches the data, the cache is recommended to be refreshed based on this field.<br><br><b>Endpoints</b>:<ul><li>GET institutions</li></ul>
           readOnly: true
           type: string
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
-    InstitutionResponse:
-      type: object
-      title: InstitutionResponse
-      properties:
-        institution:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Institution'

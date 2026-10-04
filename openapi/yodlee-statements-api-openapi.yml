@@ -95,6 +95,106 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Statement'
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    Statement:
+      type: object
+      title: Statement
+      properties:
+        apr:
+          format: double
+          description: 'The APR applied to the balance on the credit card account, as available in the statement.<br><b>Note:</b> In case of variable APR, the APR available on the statement might differ from the APR available at the account-level.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: number
+        cashApr:
+          format: double
+          description: 'The APR applicable to cash withdrawals on the credit card account.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: number
+        billingPeriodStart:
+          description: 'The start date of the statement period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        dueDate:
+          description: 'The date by when the minimum payment is due to be paid.<br><b>Note:</b> The due date that appears in the statement may differ from the due date at the account-level.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        interestAmount:
+          description: 'The interest amount that is part of the amount due or the payment amount.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        statementDate:
+          description: 'The date on which the statement is generated.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        cashAdvance:
+          description: 'Cash Advance is the amount that is withdrawn from credit card over the counter or from an ATM up to the available credit/cash limit.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        billingPeriodEnd:
+          description: 'The end date of the statement period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        principalAmount:
+          description: 'The principal amount that is part of the amount due or the payment amount.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        loanBalance:
+          description: 'The outstanding principal balance on the loan account.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        amountDue:
+          description: 'The total amount owed at the end of the billing period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        accountId:
+          format: int64
+          description: 'Account to which the statement belongs to.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: integer
+        lastUpdated:
+          description: 'The date when the account was last updated by Yodlee.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        isLatest:
+          description: 'The field is set to true if the statement is the latest generated statement.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: boolean
+        minimumPayment:
+          description: '<b>Credit Card:</b> The minimum amount that the consumer has to pay every month on the credit card account. Data provides an up-to-date information to the consumer.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        lastPaymentDate:
+          description: 'The date on which the last payment was done during the billing cycle.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        lastPaymentAmount:
+          description: 'The last payment done for the previous billing cycle in the current statement period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        id:
+          format: int64
+          description: 'Unique identifier for the statement.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          type: integer
+        newCharges:
+          description: 'New charges on the statement (i.e., charges since last statement to end of the billing period). Applicable to line of credit loan type.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
     Money:
       type: object
       title: Money
@@ -559,103 +659,3 @@ components:
           - VEF
           - SSP
           - ALK
-    Statement:
-      type: object
-      title: Statement
-      properties:
-        apr:
-          format: double
-          description: 'The APR applied to the balance on the credit card account, as available in the statement.<br><b>Note:</b> In case of variable APR, the APR available on the statement might differ from the APR available at the account-level.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: number
-        cashApr:
-          format: double
-          description: 'The APR applicable to cash withdrawals on the credit card account.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: number
-        billingPeriodStart:
-          description: 'The start date of the statement period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        dueDate:
-          description: 'The date by when the minimum payment is due to be paid.<br><b>Note:</b> The due date that appears in the statement may differ from the due date at the account-level.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        interestAmount:
-          description: 'The interest amount that is part of the amount due or the payment amount.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        statementDate:
-          description: 'The date on which the statement is generated.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        cashAdvance:
-          description: 'Cash Advance is the amount that is withdrawn from credit card over the counter or from an ATM up to the available credit/cash limit.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        billingPeriodEnd:
-          description: 'The end date of the statement period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        principalAmount:
-          description: 'The principal amount that is part of the amount due or the payment amount.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        loanBalance:
-          description: 'The outstanding principal balance on the loan account.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        amountDue:
-          description: 'The total amount owed at the end of the billing period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        accountId:
-          format: int64
-          description: 'Account to which the statement belongs to.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: integer
-        lastUpdated:
-          description: 'The date when the account was last updated by Yodlee.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        isLatest:
-          description: 'The field is set to true if the statement is the latest generated statement.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: boolean
-        minimumPayment:
-          description: '<b>Credit Card:</b> The minimum amount that the consumer has to pay every month on the credit card account. Data provides an up-to-date information to the consumer.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        lastPaymentDate:
-          description: 'The date on which the last payment was done during the billing cycle.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        lastPaymentAmount:
-          description: 'The last payment done for the previous billing cycle in the current statement period.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        id:
-          format: int64
-          description: 'Unique identifier for the statement.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          type: integer
-        newCharges:
-          description: 'New charges on the statement (i.e., charges since last statement to end of the billing period). Applicable to line of credit loan type.<br><br><b>Applicable containers</b>: creditCard, loan, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string

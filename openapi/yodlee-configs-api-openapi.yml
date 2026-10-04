@@ -213,14 +213,6 @@ paths:
         required: true
 components:
   schemas:
-    CreateConfigsNotificationEventRequest:
-      type: object
-      title: CreateConfigsNotificationEventRequest
-      required:
-      - event
-      properties:
-        event:
-          $ref: '#/components/schemas/CreateConfigsNotificationEvent'
     UpdateConfigsNotificationEvent:
       type: object
       title: UpdateConfigsNotificationEvent
@@ -230,33 +222,14 @@ components:
           description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
           type: string
           maxLength: 2147483647
-    ConfigsPublicKey:
+    UpdateConfigsNotificationEventRequest:
       type: object
-      title: ConfigsPublicKey
+      title: UpdateConfigsNotificationEventRequest
+      required:
+      - event
       properties:
-        alias:
-          description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
-          readOnly: true
-          type: string
-        key:
-          description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
-          readOnly: true
-          type: string
-    ConfigsPublicKeyResponse:
-      type: object
-      title: ConfigsPublicKeyResponse
-      properties:
-        publicKey:
-          $ref: '#/components/schemas/ConfigsPublicKey'
-    CreateConfigsNotificationEvent:
-      type: object
-      title: CreateConfigsNotificationEvent
-      properties:
-        callbackUrl:
-          minLength: 1
-          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
-          type: string
-          maxLength: 2147483647
+        event:
+          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
     ConfigsNotificationEvent:
       type: object
       title: ConfigsNotificationEvent
@@ -275,23 +248,15 @@ components:
           description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
           type: string
           maxLength: 2147483647
-    ConfigsNotificationResponse:
+    CreateConfigsNotificationEvent:
       type: object
-      title: ConfigsNotificationResponse
+      title: CreateConfigsNotificationEvent
       properties:
-        event:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigsNotificationEvent'
-    UpdateConfigsNotificationEventRequest:
-      type: object
-      title: UpdateConfigsNotificationEventRequest
-      required:
-      - event
-      properties:
-        event:
-          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647
     YodleeError:
       type: object
       title: YodleeError
@@ -306,5 +271,40 @@ components:
           type: string
         referenceCode:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    ConfigsPublicKeyResponse:
+      type: object
+      title: ConfigsPublicKeyResponse
+      properties:
+        publicKey:
+          $ref: '#/components/schemas/ConfigsPublicKey'
+    ConfigsNotificationResponse:
+      type: object
+      title: ConfigsNotificationResponse
+      properties:
+        event:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigsNotificationEvent'
+    CreateConfigsNotificationEventRequest:
+      type: object
+      title: CreateConfigsNotificationEventRequest
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/CreateConfigsNotificationEvent'
+    ConfigsPublicKey:
+      type: object
+      title: ConfigsPublicKey
+      properties:
+        alias:
+          description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
+          readOnly: true
+          type: string
+        key:
+          description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
           readOnly: true
           type: string

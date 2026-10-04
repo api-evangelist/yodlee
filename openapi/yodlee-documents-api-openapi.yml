@@ -145,6 +145,34 @@ paths:
       - Documents
 components:
   schemas:
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    DocumentDownload:
+      type: object
+      title: DocumentDownload
+      properties:
+        docContent:
+          description: 'Contents of the document in Base64 format.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
+        id:
+          description: 'The document''s primary key and unique identifier.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
+          readOnly: true
+          type: string
     Document:
       type: object
       title: Document
@@ -195,18 +223,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentDownload'
-    DocumentDownload:
-      type: object
-      title: DocumentDownload
-      properties:
-        docContent:
-          description: 'Contents of the document in Base64 format.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
-        id:
-          description: 'The document''s primary key and unique identifier.<br><br><b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>'
-          readOnly: true
-          type: string
     DocumentResponse:
       type: object
       title: DocumentResponse
@@ -216,19 +232,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Document'
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string

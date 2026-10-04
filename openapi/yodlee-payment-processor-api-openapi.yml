@@ -132,125 +132,6 @@ paths:
       - Payment Processor
 components:
   schemas:
-    Identifier:
-      type: object
-      title: Identifier
-      properties:
-        type:
-          description: Type of Identifier
-          readOnly: true
-          type: string
-          enum:
-          - NIE
-          - DNI
-          - EIN
-          - BN
-          - AADHAR
-          - NIN
-          - NRIC
-        value:
-          description: Value of the identifier
-          readOnly: true
-          type: string
-    PaymentAccount:
-      type: object
-      title: PaymentAccount
-      properties:
-        accountStatus:
-          description: The status of the account that is updated by the user through an application or an API.</li><ul><li><b>ACTIVE:</b> All the added aggregated accounts status will be made "ACTIVE" by default.</li><li><b>TO_BE_CLOSED:</b> If the aggregated accounts are not found or closed in the data provider site, Yodlee system marks the status as TO_BE_CLOSED.</li><li><b>INACTIVE:</b> Users can update the status as INACTIVE to stop updating and to stop considering the account in other services.</li><li><b>CLOSED:</b> Users can update the status as CLOSED, if the account is closed with the provider.</li></ul><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - TO_BE_CLOSED
-          - CLOSED
-          - DELETED
-        lastUpdated:
-          description: The date time the account information was last retrieved from the provider site and updated in the Yodlee system.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: string
-        accountName:
-          description: The account name as it appears at the site.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: string
-        accountType:
-          description: The type of account that is aggregated, i.e., savings, checking, charge, etc. The account type is derived based on the attributes of the account. <br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: string
-        currentBalance:
-          description: The balance in the account that is available at the beginning of the business day; it is equal to the ledger balance of the account.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        id:
-          format: int64
-          description: The primary key of the account resource and the unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: integer
-        bankTransferCode:
-          description: Bank and branch identification information.<br><br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentBankTransferCodeData'
-        availableBalance:
-          description: The balance in the account that is available for spending. For checking accounts with overdraft, available balance may include overdraft amount, if end site adds overdraft balance to available balance.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        fullAccountNumberList:
-          description: Full account number List of the account that is included only when include = fullAccountNumberList is provided in the request. <br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/FullAccountNumbers'
-    Name:
-      type: object
-      title: Name
-      properties:
-        middle:
-          description: Middle name.
-          type: string
-        last:
-          description: Last name.
-          type: string
-        fullName:
-          description: Full name.
-          type: string
-        first:
-          description: First name.
-          type: string
-    PaymentAccountHolderResponse:
-      type: object
-      title: PaymentAccountHolderResponse
-      properties:
-        account:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentAccountHolder'
-    Email:
-      type: object
-      title: Email
-      properties:
-        type:
-          readOnly: true
-          type: string
-          enum:
-          - PRIMARY
-          - SECONDARY
-          - PERSONAL
-          - WORK
-          - OTHERS
-        value:
-          readOnly: true
-          type: string
-    PaymentAccountBalanceResponse:
-      type: object
-      title: PaymentAccountBalanceResponse
-      properties:
-        account:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentAccountBalance'
     PaymentAccountBalance:
       type: object
       title: PaymentAccountBalance
@@ -754,51 +635,75 @@ components:
           - VEF
           - SSP
           - ALK
-    PhoneNumber:
+    Identifier:
       type: object
-      title: PhoneNumber
+      title: Identifier
       properties:
         type:
-          description: type of phone number
+          description: Type of Identifier
           readOnly: true
           type: string
           enum:
-          - HOME
-          - WORK
-          - LANDLINE
-          - MOBILE
+          - NIE
+          - DNI
+          - EIN
+          - BN
+          - AADHAR
+          - NIN
+          - NRIC
         value:
-          description: Phone Number
+          description: Value of the identifier
           readOnly: true
           type: string
-    AccountProfileDetail:
+    PaymentAccount:
       type: object
-      title: AccountProfileDetail
+      title: PaymentAccount
       properties:
-        identifier:
-          description: Identifiers available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+        accountStatus:
+          description: The status of the account that is updated by the user through an application or an API.</li><ul><li><b>ACTIVE:</b> All the added aggregated accounts status will be made "ACTIVE" by default.</li><li><b>TO_BE_CLOSED:</b> If the aggregated accounts are not found or closed in the data provider site, Yodlee system marks the status as TO_BE_CLOSED.</li><li><b>INACTIVE:</b> Users can update the status as INACTIVE to stop updating and to stop considering the account in other services.</li><li><b>CLOSED:</b> Users can update the status as CLOSED, if the account is closed with the provider.</li></ul><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - TO_BE_CLOSED
+          - CLOSED
+          - DELETED
+        lastUpdated:
+          description: The date time the account information was last retrieved from the provider site and updated in the Yodlee system.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: string
+        accountName:
+          description: The account name as it appears at the site.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: string
+        accountType:
+          description: The type of account that is aggregated, i.e., savings, checking, charge, etc. The account type is derived based on the attributes of the account. <br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: string
+        currentBalance:
+          description: The balance in the account that is available at the beginning of the business day; it is equal to the ledger balance of the account.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        id:
+          format: int64
+          description: The primary key of the account resource and the unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: integer
+        bankTransferCode:
+          description: Bank and branch identification information.<br><br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/Identifier'
-        address:
-          description: Address available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+            $ref: '#/components/schemas/PaymentBankTransferCodeData'
+        availableBalance:
+          description: The balance in the account that is available for spending. For checking accounts with overdraft, available balance may include overdraft amount, if end site adds overdraft balance to available balance.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
           readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountAddress'
-        phoneNumber:
-          description: Phone number available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          $ref: '#/components/schemas/Money'
+        fullAccountNumberList:
+          description: Full account number List of the account that is included only when include = fullAccountNumberList is provided in the request. <br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
           readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PhoneNumber'
-        email:
-          description: Email Id available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Email'
+          $ref: '#/components/schemas/FullAccountNumbers'
     AccountAddress:
       type: object
       title: AccountAddress
@@ -843,68 +748,6 @@ components:
           - PAYMENT
           - PAYOFF
           - UNKNOWN
-    PaymentBankTransferCodeData:
-      type: object
-      title: PaymentBankTransferCodeData
-      properties:
-        id:
-          description: The financial institution's branch identification number that is associated with the lender.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
-          type: string
-        type:
-          description: 'The payment bank transfer code type varies based on the region of the account originates from. <br>Valid Values: BSB, IFSC, ROUTING_NUMBER, SORT_CODE<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul><b>Applicable Values</b><br>'
-          type: string
-          enum:
-          - BSB
-          - IFSC
-          - ROUTING_NUMBER
-          - SORT_CODE
-    AccountHolderData:
-      type: object
-      title: AccountHolderData
-      properties:
-        identifier:
-          description: Identifiers of the account holder.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-        gender:
-          description: Identifiers of the account holder.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: string
-        ownership:
-          description: Indicates the ownership of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          type: string
-          enum:
-          - PRIMARY
-          - SECONDARY
-          - CUSTODIAN
-          - OTHERS
-          - POWER_OF_ATTORNEY
-          - TRUSTEE
-          - JOINT_OWNER
-          - BENEFICIARY
-          - AAS
-          - BUSINESS
-          - DBA
-          - TRUST
-        name:
-          description: Name of the account holder.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/Name'
-    FullAccountNumbers:
-      type: object
-      title: FullAccountNumbers
-      properties:
-        paymentAccountNumber:
-          description: The payment account number is used for payments in all regions, this may be looked as an ACH account number in the US.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
-          readOnly: true
-          type: string
-        unmaskedAccountNumber:
-          description: The unmasked account number is same as account number that is used to refer to an account and is not partial or masked.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
-          readOnly: true
-          type: string
     YodleeError:
       type: object
       title: YodleeError
@@ -919,6 +762,18 @@ components:
           type: string
         referenceCode:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    FullAccountNumbers:
+      type: object
+      title: FullAccountNumbers
+      properties:
+        paymentAccountNumber:
+          description: The payment account number is used for payments in all regions, this may be looked as an ACH account number in the US.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
+          readOnly: true
+          type: string
+        unmaskedAccountNumber:
+          description: The unmasked account number is same as account number that is used to refer to an account and is not partial or masked.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
           readOnly: true
           type: string
     PaymentAccountHolder:
@@ -962,6 +817,120 @@ components:
           description: The primary key of the account resource and the unique identifier for the account.<br><br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li><li>GET /partner/paymentProcessor/account/balance</li><li>GET /partner/paymentProcessor/account/holder</li></ul>
           readOnly: true
           type: integer
+    Email:
+      type: object
+      title: Email
+      properties:
+        type:
+          readOnly: true
+          type: string
+          enum:
+          - PRIMARY
+          - SECONDARY
+          - PERSONAL
+          - WORK
+          - OTHERS
+        value:
+          readOnly: true
+          type: string
+    PaymentAccountBalanceResponse:
+      type: object
+      title: PaymentAccountBalanceResponse
+      properties:
+        account:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentAccountBalance'
+    PaymentAccountHolderResponse:
+      type: object
+      title: PaymentAccountHolderResponse
+      properties:
+        account:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentAccountHolder'
+    AccountProfileDetail:
+      type: object
+      title: AccountProfileDetail
+      properties:
+        identifier:
+          description: Identifiers available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+        address:
+          description: Address available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountAddress'
+        phoneNumber:
+          description: Phone number available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+        email:
+          description: Email Id available in the profile page of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+    PhoneNumber:
+      type: object
+      title: PhoneNumber
+      properties:
+        type:
+          description: type of phone number
+          readOnly: true
+          type: string
+          enum:
+          - HOME
+          - WORK
+          - LANDLINE
+          - MOBILE
+        value:
+          description: Phone Number
+          readOnly: true
+          type: string
+    AccountHolderData:
+      type: object
+      title: AccountHolderData
+      properties:
+        identifier:
+          description: Identifiers of the account holder.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+        gender:
+          description: Identifiers of the account holder.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: string
+        ownership:
+          description: Indicates the ownership of the account.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          type: string
+          enum:
+          - PRIMARY
+          - SECONDARY
+          - CUSTODIAN
+          - OTHERS
+          - POWER_OF_ATTORNEY
+          - TRUSTEE
+          - JOINT_OWNER
+          - BENEFICIARY
+          - AAS
+          - BUSINESS
+          - DBA
+          - TRUST
+        name:
+          description: Name of the account holder.<br><b>Endpoints</b>:<li>GET /partner/paymentProcessor/account/holder</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/Name'
     PaymentAccountResponse:
       type: object
       title: PaymentAccountResponse
@@ -971,3 +940,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentAccount'
+    PaymentBankTransferCodeData:
+      type: object
+      title: PaymentBankTransferCodeData
+      properties:
+        id:
+          description: The financial institution's branch identification number that is associated with the lender.<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul>
+          type: string
+        type:
+          description: 'The payment bank transfer code type varies based on the region of the account originates from. <br>Valid Values: BSB, IFSC, ROUTING_NUMBER, SORT_CODE<br><b>Endpoints</b>:<ul><li>GET /partner/paymentProcessor/account</li></ul><b>Applicable Values</b><br>'
+          type: string
+          enum:
+          - BSB
+          - IFSC
+          - ROUTING_NUMBER
+          - SORT_CODE
+    Name:
+      type: object
+      title: Name
+      properties:
+        middle:
+          description: Middle name.
+          type: string
+        last:
+          description: Last name.
+          type: string
+        fullName:
+          description: Full name.
+          type: string
+        first:
+          description: First name.
+          type: string

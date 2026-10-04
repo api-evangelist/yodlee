@@ -250,6 +250,45 @@ paths:
       - Auth
 components:
   schemas:
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    ClientCredentialToken:
+      type: object
+      title: ClientCredentialToken
+      properties:
+        expiresIn:
+          format: int32
+          description: Time in seconds after which the issued accessToken expires.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
+          readOnly: true
+          type: integer
+        issuedAt:
+          description: The date and time on which accessToken was created for the customer.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
+          readOnly: true
+          type: string
+        accessToken:
+          description: Access Token to access YSL 1.1 services.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
+          readOnly: true
+          type: string
+    ClientCredentialTokenResponse:
+      type: object
+      title: ClientCredentialTokenResponse
+      properties:
+        token:
+          $ref: '#/components/schemas/ClientCredentialToken'
     ApiKeyOutput:
       type: object
       title: ApiKeyOutput
@@ -287,42 +326,3 @@ components:
           description: Public key uploaded by the customer while generating ApiKey.<br><br><b>Endpoints</b>:<ul><li>GET /auth/apiKey</li><li>POST /auth/apiKey</li></ul>
           type: string
           maxLength: 2147483647
-    ClientCredentialTokenResponse:
-      type: object
-      title: ClientCredentialTokenResponse
-      properties:
-        token:
-          $ref: '#/components/schemas/ClientCredentialToken'
-    ClientCredentialToken:
-      type: object
-      title: ClientCredentialToken
-      properties:
-        expiresIn:
-          format: int32
-          description: Time in seconds after which the issued accessToken expires.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
-          readOnly: true
-          type: integer
-        issuedAt:
-          description: The date and time on which accessToken was created for the customer.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
-          readOnly: true
-          type: string
-        accessToken:
-          description: Access Token to access YSL 1.1 services.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
-          readOnly: true
-          type: string
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string

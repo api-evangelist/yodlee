@@ -132,63 +132,6 @@ paths:
       - DataExtracts
 components:
   schemas:
-    LoanPayoffDetails:
-      type: object
-      title: LoanPayoffDetails
-      properties:
-        payByDate:
-          description: 'The date by which the payoff amount should be paid.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: loan<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: string
-        payoffAmount:
-          description: 'The loan payoff amount.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: loan<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        outstandingBalance:
-          description: 'The outstanding balance on the loan account. The outstanding balance amount may differ from the payoff amount. It is usually the sum of outstanding principal, unpaid interest, and fees, if any.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: loan<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-    Contact:
-      type: object
-      title: Contact
-      properties:
-        phone:
-          description: 'Phone number of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          type: string
-        email:
-          description: 'Email Id of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          type: string
-    DataExtractsUserData:
-      type: object
-      title: DataExtractsUserData
-      properties:
-        holding:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DataExtractsHolding'
-        totalTransactionsCount:
-          format: int64
-          readOnly: true
-          type: integer
-        user:
-          readOnly: true
-          $ref: '#/components/schemas/DataExtractsUser'
-        account:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DataExtractsAccount'
-        transaction:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DataExtractsTransaction'
-        providerAccount:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DataExtractsProviderAccount'
     DataExtractsEventLinks:
       type: object
       title: DataExtractsEventLinks
@@ -202,690 +145,19 @@ components:
         href:
           readOnly: true
           type: string
-    DataExtractsEventData:
+    BusinessCategory:
       type: object
-      title: DataExtractsEventData
+      title: BusinessCategory
       properties:
-        fromDate:
-          readOnly: true
-          type: string
-        userData:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DataExtractsEventUserData'
-        userCount:
-          format: int32
-          readOnly: true
-          type: integer
-        toDate:
-          readOnly: true
-          type: string
-    DataExtractsEvent:
-      type: object
-      title: DataExtractsEvent
-      properties:
-        data:
-          readOnly: true
-          $ref: '#/components/schemas/DataExtractsEventData'
-        info:
-          readOnly: true
-          type: string
-    DataExtractsEventUserData:
-      type: object
-      title: DataExtractsEventUserData
-      properties:
-        links:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DataExtractsEventLinks'
-        user:
-          readOnly: true
-          $ref: '#/components/schemas/DataExtractsUser'
-    AccountDataset:
-      type: object
-      title: AccountDataset
-      properties:
-        lastUpdated:
-          description: 'Indicate when the dataset is last updated successfully for the given provider account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
-          readOnly: true
-          type: string
-        updateEligibility:
-          description: 'Indicate whether the dataset is eligible for update or not.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - ALLOW_UPDATE
-          - ALLOW_UPDATE_WITH_CREDENTIALS
-          - DISALLOW_UPDATE
-        additionalStatus:
-          description: 'The status of last update attempted for the dataset. <br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - LOGIN_IN_PROGRESS
-          - DATA_RETRIEVAL_IN_PROGRESS
-          - ACCT_SUMMARY_RECEIVED
-          - AVAILABLE_DATA_RETRIEVED
-          - PARTIAL_DATA_RETRIEVED
-          - DATA_RETRIEVAL_FAILED
-          - DATA_NOT_AVAILABLE
-          - ACCOUNT_LOCKED
-          - ADDL_AUTHENTICATION_REQUIRED
-          - BETA_SITE_DEV_IN_PROGRESS
-          - CREDENTIALS_UPDATE_NEEDED
-          - INCORRECT_CREDENTIALS
-          - PROPERTY_VALUE_NOT_AVAILABLE
-          - INVALID_ADDL_INFO_PROVIDED
-          - REQUEST_TIME_OUT
-          - SITE_BLOCKING_ERROR
-          - UNEXPECTED_SITE_ERROR
-          - SITE_NOT_SUPPORTED
-          - SITE_UNAVAILABLE
-          - TECH_ERROR
-          - USER_ACTION_NEEDED_AT_SITE
-          - SITE_SESSION_INVALIDATED
-          - NEW_AUTHENTICATION_REQUIRED
-          - DATASET_NOT_SUPPORTED
-          - ENROLLMENT_REQUIRED_FOR_DATASET
-          - CONSENT_REQUIRED
-          - CONSENT_EXPIRED
-          - CONSENT_REVOKED
-          - INCORRECT_OAUTH_TOKEN
-          - MIGRATION_IN_PROGRESS
-        nextUpdateScheduled:
-          description: 'Indicates when the next attempt to update the dataset is scheduled.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
-          readOnly: true
-          type: string
-        name:
-          description: 'The name of the dataset requested from the provider site<br><br><b>Account Type</b>: Manual<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li><li>GET providers</li></ul><b>Applicable Values</b><br>'
-          type: string
-          enum:
-          - BASIC_AGG_DATA
-          - ADVANCE_AGG_DATA
-          - ACCT_PROFILE
-          - DOCUMENT
-        lastUpdateAttempt:
-          description: 'Indicate when the last attempt was performed to update the dataset for the given provider account<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
-          readOnly: true
-          type: string
-        additionalStatusErrorCode:
-          description: 'The status error code of last update attempted for the dataset.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST providerAccounts</li><li>GET providerAccounts</li><li>GET dataExtracts/userData</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
-          readOnly: true
-          type: string
-    Description:
-      type: object
-      title: Description
-      properties:
-        security:
-          description: 'The description will provide the actual name of the security.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        original:
-          description: 'Original transaction description as it appears at the FI site.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
-          readOnly: true
-          type: string
-        simple:
-          description: 'The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of the transaction may not be evident. Yodlee attempts to simplify and make the transaction meaningful to the consumer, and this simplified transaction description is provided in the simple description field.Note: The simple description field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
-          readOnly: true
-          type: string
-        consumer:
-          description: The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field.<br><br>
-          type: string
-    DataExtractsTransaction:
-      type: object
-      title: DataExtractsTransaction
-      properties:
-        date:
-          description: 'The value provided will be either postDate or transactionDate. postDate takes higher priority than transactionDate, except for the investment container as only transactionDate is available. The availability of postDate or transactionDate depends on the provider site.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        sourceId:
-          description: A unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts.<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts.
-          readOnly: true
-          type: string
-        symbol:
-          description: 'The symbol of the security being traded.<br><b>Note</b>: The settle date field applies only to trade-related transactions. <br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        cusipNumber:
-          description: 'The CUSIP (Committee on Uniform Securities Identification Procedures) identifies the financial instruments in the United States and Canada.<br><b><br><b>Note</b></b>: The CUSIP number field applies only to trade related transactions.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        sourceApcaNumber:
-          description: '6 Digit APCA number for the initiating institution. The field is fixed-width and padded with leading zeros if applicable. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
-          readOnly: true
-          type: string
-        highLevelCategoryId:
-          format: int64
-          description: 'The high level category assigned to the transaction. The supported values are provided by the GET transactions/categories. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: integer
-        memo:
-          description: 'Additional notes provided by the user for a particular  transaction through application or API services. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        type:
-          description: 'The nature of the transaction, i.e., deposit, refund, payment, etc.<br><b>Note</b>: The transaction type field is available only for the United States, Canada, United Kingdom, New Zealand and India based provider sites. <br><br><b>Applicable containers</b>: bank,creditCard,investment<br>'
-          readOnly: true
-          type: string
-        intermediary:
-          description: 'The intermediary of the transaction.<br><br><b>Applicable containers</b>:  bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: array
-          items:
-            type: string
-        frequency:
-          description: 'Frequency is set to MONTHLY if the Merchant type is BILLERS or SUBSCRIPTION.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        lastUpdated:
-          readOnly: true
-          type: string
-        price:
-          description: 'The price of the security for the transaction.<br><b>Note</b>: The price field applies only to the trade related transactions. <br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        sourceMerchantCategoryCode:
-          description: 'The merchant category code for an outgoing payment to a merchant. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card,Loan container<br>'
-          readOnly: true
-          type: string
-        id:
-          format: int64
-          description: 'An unique identifier for the transaction. The combination of the id and account container are unique in the system. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: integer
-        checkNumber:
-          description: 'The checkNumber of the transaction.<br><br><b>Applicable containers</b>: bank<br>'
-          readOnly: true
-          type: string
-        transactionDateTime:
-          description: 'The timestamp the transaction happens in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        typeAtSource:
-          description: 'The type of transaction. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card,Loan container<br>'
-          readOnly: true
-          type: string
-        valoren:
-          description: 'It is an identification number that is assigned to financial instruments such as stocks and bonds trading in Switzerland.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        isManual:
-          description: 'Indicates if the transaction is aggregated from the FI site or the consumer has manually created the transaction using the application or an API. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: boolean
-        sourceBillerName:
-          description: 'Name of the BPAY biller for the transaction (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
-          readOnly: true
-          type: string
-        merchant:
-          description: 'The name of the merchant associated with the transaction.<br><b>Note</b>: The merchant name field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Merchant'
-        sedol:
-          description: 'SEDOL stands for Stock Exchange Daily Official List, a list of security identifiers used in the United Kingdom and Ireland for clearing purposes.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        categoryType:
-          description: 'The categoryType of the category assigned to the transaction. This is the type field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-          enum:
-          - TRANSFER
-          - DEFERRED_COMPENSATION
-          - UNCATEGORIZE
-          - INCOME
-          - EXPENSE
-          - LOAN
-        accountId:
-          format: int64
-          description: 'The account from which the transaction was made. This is basically the primary key of the account resource. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: integer
-        sourceType:
-          description: 'The source through which the transaction is added to the Yodlee system.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loann<br><b>Applicable Values:</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - AGGREGATED
-          - MANUAL
-        subType:
-          description: 'The transaction subtype field provides a detailed transaction type. For example, purchase is a transaction type and the transaction subtype field indicates if the purchase was made using a debit or credit card.<br><b>Note</b>: The transaction subtype field is available only in the United States, Canada, United Kingdom, New Zealand and India.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-          enum:
-          - OVERDRAFT_CHARGE
-          - ONLINE_PURCHASE
-          - TAX_PAYMENT
-          - PAYMENT_BY_CHECK
-          - ATM_CASH_WITHDRAWAL
-          - SERVICE_CHARGE
-          - RETURNED_CHECK_CHARGE
-          - STOP_PAYMENT_CHARGE
-          - CONVENIENCE_FEE
-          - AUTO_LOAN
-          - HOME_LOAN_MORTGAGE
-          - RECURRING_SUBSCRIPTION_PAYMENT
-          - INTEREST
-          - PAYMENT
-          - PURCHASE
-          - REFUND
-          - TRANSFER
-          - FINANCE_CHARGE
-          - OTHER_CHARGES_FEES
-          - ANNUAL_FEE
-          - DEPOSIT
-          - DIRECT_DEPOSIT_SALARY
-          - INVESTMENT_INCOME_CASH
-          - SSA
-          - REWARDS
-          - TAX_REFUND
-          - CREDIT_CARD_PAYMENT
-          - INSURANCE_PAYMENT
-          - UTILITIES_PAYMENT
-          - CHILD_SUPPORT
-          - LOAN
-          - PERSONAL_LOAN
-          - STUDENT_LOAN
-          - REIMBURSEMENT
-          - BALANCE_TRANSFER
-          - OVERDRAFT_PROTECTION
-          - CREDIT
-          - NSF_FEES
-        holdingDescription:
-          description: 'For transactions involving securities, this captures the securities description.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        status:
-          description: 'The status of the transaction: pending or posted.<br><b>Note</b>: Most FI sites only display posted transactions. If the FI site displays transaction status, same will be aggregated.  <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - POSTED
-          - PENDING
-          - SCHEDULED
-          - FAILED
-          - CLEARED
-        detailCategoryId:
-          format: int64
-          description: 'The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard<br>'
-          readOnly: true
-          type: integer
-        description:
-          description: 'Description details<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Description'
-        settleDate:
-          description: 'It is the date on which the transaction is finalized, that is, the date the ownership of the security is transferred to the buyer. The settlement date is usually few days after the transaction date.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        postDateTime:
-          description: 'The timestamp on which the transaction is posted to the account.<br><br><b>Applicable containers</b>: bank,creditCard,insurance,loan<br>'
-          readOnly: true
-          type: string
-        baseType:
-          description: 'Indicates if the transaction appears as a debit or a credit transaction in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - CREDIT
-          - DEBIT
-        categorySource:
-          description: 'Indicates the source of the category, i.e., categories derived by the system or assigned/provided by the consumer. This is the source field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - SYSTEM
-          - USER
-        principal:
-          description: 'The portion of the principal in the transaction amount. The transaction amount can be the amount due, payment amount, minimum amount, repayment, etc.<br><br><b>Applicable containers</b>: loan<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        sourceBillerCode:
-          description: 'BPAY Biller Code for the transaction (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
-          readOnly: true
-          type: string
-        isDeleted:
-          description: 'Indicates if the transaction is marked as deleted.<b>Applicable containers</b>: All Containers<br><b>Aggregated / Manual</b>: Both <br><b>Endpoints</b>:<br><ul><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: boolean
-        interest:
-          description: 'The portion of interest in the transaction amount. The transaction amount can be the amount due, payment amount, minimum amount, repayment, etc.<br><br><b>Applicable containers</b>: loan<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        commission:
-          description: 'A commission or brokerage associated with a transaction.<br><br><br><b>Additional Details</b>:The commission only applies to trade-related transactions.<b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        merchantType:
-          description: 'Indicates the merchantType of the transaction.e.g:-BILLERS,SUBSCRIPTION,BNPL,OTHERS <br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: string
-        amount:
-          description: 'The amount of the transaction as it appears at the FI site. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        isPhysical:
-          description: 'Indicates if the transaction is happened online or in-store. <br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: boolean
-        quantity:
-          format: double
-          description: 'The quantity associated with the transaction.<br><b>Note</b>: The quantity field applies only to trade-related transactions.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        isRecurring:
-          description: 'If the transaction is done on a merchant with merchant type as BILLERS/SUBSCRIPTION, then such transactions are marked isRecurring to True or else it is marked as False.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        transactionDate:
-          description: 'The date the transaction happens in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        createdDate:
-          readOnly: true
-          type: string
-        CONTAINER:
-          description: 'The account''s container.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - bank
-          - creditCard
-          - investment
-          - insurance
-          - loan
-          - reward
-          - bill
-          - realEstate
-          - otherAssets
-          - otherLiabilities
-        businessCategory:
-          description: 'business category details for the SMB customers.<br><br><b>Applicable containers</b>: Bank container<br>'
-          readOnly: true
-          $ref: '#/components/schemas/BusinessCategory'
-        postDate:
-          description: 'The date on which the transaction is posted to the account.<br><br><b>Applicable containers</b>: bank,creditCard,insurance,loan<br>'
-          readOnly: true
-          type: string
-        parentCategoryId:
-          format: int64
-          description: 'The parentCategoryId of the category assigned to the transaction.<br><b>Note</b>: This field will be provided in the response if the transaction is assigned to a user-created category. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: integer
-        category:
+        categoryName:
           description: 'The name of the category assigned to the transaction. This is the category field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
           readOnly: true
           type: string
-        runningBalance:
-          description: 'The running balance in an account indicates the balance of the account after every transaction.<br><br><b>Applicable containers</b>: bank,creditCard,investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
         categoryId:
           format: int64
           description: 'The id of the category assigned to the transaction. This is the id field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
           readOnly: true
           type: integer
-        isin:
-          description: 'International Securities Identification Number (ISIN) standard is used worldwide to identify specific securities.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-    AccountAddress:
-      type: object
-      title: AccountAddress
-      properties:
-        zip:
-          description: Zip.
-          type: string
-        country:
-          description: Country.
-          type: string
-        address3:
-          description: Address Line 3.
-          type: string
-        address2:
-          description: Address Line 2.
-          type: string
-        city:
-          description: City.
-          type: string
-        sourceType:
-          type: string
-        address1:
-          description: Address Line 1.
-          type: string
-        street:
-          type: string
-        state:
-          description: State.
-          type: string
-        type:
-          type: string
-          enum:
-          - HOME
-          - BUSINESS
-          - POBOX
-          - RETAIL
-          - OFFICE
-          - SMALL_BUSINESS
-          - COMMUNICATION
-          - PERMANENT
-          - STATEMENT_ADDRESS
-          - PAYMENT
-          - PAYOFF
-          - UNKNOWN
-    Merchant:
-      type: object
-      title: Merchant
-      properties:
-        website:
-          description: 'The website of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: string
-        address:
-          description: 'The address of the merchant associated with the transaction is populated in the merchant address field.<br><b>Note</b>: The merchant address field is not available by default and customers will have to specifically request the merchant''s address (that includes city, state, and ZIP of the merchant). The merchant address field is available only for merchants in the United States.<br><br><b>Applicable containers</b>: bank,creditCard<br>'
-          readOnly: true
-          $ref: '#/components/schemas/AccountAddress'
-        logoURLs:
-          description: 'The logoURL of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/LogoURLs'
-        contact:
-          description: 'The merchant contact information like phone and email.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          $ref: '#/components/schemas/Contact'
-        categoryLabel:
-          description: 'The business categories of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard<br><b>Applicable Values</b><br>'
-          readOnly: true
-          type: array
-          items:
-            type: string
-        coordinates:
-          description: 'The merchant geolocation coordinates like latitude and longitude.<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
-          $ref: '#/components/schemas/Coordinates'
-        name:
-          description: 'The name of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        id:
-          description: 'Identifier of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
-          readOnly: true
-          type: string
-        source:
-          description: 'The source through which merchant information is retrieved.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - YODLEE
-          - FACTUAL
-          - FOURSQUARE
-        logoURL:
-          description: 'The logoURL of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: string
-    DataExtractsProviderAccount:
-      type: object
-      title: DataExtractsProviderAccount
-      properties:
-        destinationProviderAccountId:
-          format: int64
-          description: The providerAccountId that is retained as part of the many-to-one OAuth migration process.<br><b>Endpoints</b>:<ul><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: integer
-        oauthMigrationStatus:
-          description: Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: string
-          enum:
-          - IN_PROGRESS
-          - TO_BE_MIGRATED
-          - COMPLETED
-          - MIGRATED
-        isManual:
-          description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: boolean
-        lastUpdated:
-          description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
-          readOnly: true
-          type: string
-        createdDate:
-          description: The date on when the provider account is created in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
-          readOnly: true
-          type: string
-        aggregationSource:
-          description: The source through which the providerAccount is added in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - SYSTEM
-          - USER
-        isDeleted:
-          description: 'Indicates if the provider account is deleted from the system.<b>Applicable containers</b>: All Containers<br><b>Aggregated / Manual</b>: Both <br><b>Endpoints</b>:<br><ul><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: boolean
-        providerId:
-          format: int64
-          description: Unique identifier for the provider resource. This denotes the provider for which the provider account id is generated by the user.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: integer
-        requestId:
-          description: Unique id generated to indicate the request.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
-          readOnly: true
-          type: string
-        sourceProviderAccountIds:
-          description: The providerAccountIds that are deleted and merged into the destinationProviderAccountId as part of the many-to-one OAuth migration process.<br><b>Endpoints</b>:<ul><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: array
-          items:
-            format: int64
-            type: integer
-        id:
-          format: int64
-          description: Unique identifier for the provider account resource. This is created during account addition.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: integer
-        authType:
-          description: The authentication type enabled at the provider site. <br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET /dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - OAUTH
-          - CREDENTIALS
-          - MFA_CREDENTIALS
-        dataset:
-          description: Logical grouping of dataset attributes into datasets such as Basic Aggregation Data, Account Profile and Documents.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountDataset'
-        status:
-          description: The status of last update attempted for the account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
-          readOnly: true
-          type: string
-          enum:
-          - LOGIN_IN_PROGRESS
-          - USER_INPUT_REQUIRED
-          - IN_PROGRESS
-          - PARTIAL_SUCCESS
-          - SUCCESS
-          - FAILED
-          - MIGRATION_IN_PROGRESS
-          - DATA_RETRIEVAL_FAILED
-    RewardBalance:
-      type: object
-      title: RewardBalance
-      properties:
-        expiryDate:
-          description: 'The date on which the balance expires.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-        balanceToReward:
-          description: 'The balance required to qualify for a reward such as retaining membership, business reward, etc.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-        balanceType:
-          description: 'The type of reward balance.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - EXPIRING_BALANCE
-          - BALANCE_TO_LEVEL
-          - BALANCE_TO_REWARD
-          - BALANCE
-          - TOTAL_BALANCE
-        balance:
-          format: double
-          description: 'The actual reward balance.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: number
-        description:
-          description: 'The description for the reward balance as available at provider source.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-        balanceToLevel:
-          description: 'The balance required to reach a reward level.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-        units:
-          description: 'Unit of reward balance - miles, points, segments, dollars, credits.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-    LogoURLs:
-      type: object
-      title: LogoURLs
-      properties:
-        type:
-          description: 'The merchant type of the logo url (SVG/PNG)<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: string
-        url:
-          description: 'The logo url of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
-          readOnly: true
-          type: string
-    BusinessInformation:
-      type: object
-      title: BusinessInformation
-      properties:
-        legalName:
-          description: 'Legal name of the business (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-        businessName:
-          description: 'Name of the business (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-        abn:
-          description: 'Australian business number issued by Australian authority for businesses. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
-        acn:
-          description: 'Australian company number issued by Australian authority for companies. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
-          readOnly: true
-          type: string
     DataExtractsAccount:
       type: object
       title: DataExtractsAccount
@@ -1469,66 +741,974 @@ components:
           description: 'Minimum amount of funds that can be redrawn. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated <br><b>Applicable containers</b>: Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
           readOnly: true
           $ref: '#/components/schemas/Money'
-    CoverageAmount:
+    DataExtractsEventUserData:
       type: object
-      title: CoverageAmount
+      title: DataExtractsEventUserData
       properties:
-        cover:
-          description: 'The maximum amount that will be paid to an individual or an entity for a covered loss<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+        links:
           readOnly: true
-          $ref: '#/components/schemas/Money'
-        unitType:
-          description: 'The type of coverage unit indicates if the coverage is for an individual or a family.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
+          type: array
+          items:
+            $ref: '#/components/schemas/DataExtractsEventLinks'
+        user:
+          readOnly: true
+          $ref: '#/components/schemas/DataExtractsUser'
+    RewardBalance:
+      type: object
+      title: RewardBalance
+      properties:
+        expiryDate:
+          description: 'The date on which the balance expires.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+        balanceToReward:
+          description: 'The balance required to qualify for a reward such as retaining membership, business reward, etc.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+        balanceType:
+          description: 'The type of reward balance.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>'
           readOnly: true
           type: string
           enum:
-          - PER_FAMILY
-          - PER_MEMBER
+          - EXPIRING_BALANCE
+          - BALANCE_TO_LEVEL
+          - BALANCE_TO_REWARD
+          - BALANCE
+          - TOTAL_BALANCE
+        balance:
+          format: double
+          description: 'The actual reward balance.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: number
+        description:
+          description: 'The description for the reward balance as available at provider source.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+        balanceToLevel:
+          description: 'The balance required to reach a reward level.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+        units:
+          description: 'Unit of reward balance - miles, points, segments, dollars, credits.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: reward<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+    Coverage:
+      type: object
+      title: Coverage
+      properties:
+        amount:
+          description: 'The coverage amount-related details.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageAmount'
+        planType:
+          description: 'The plan type for an insurance provided to an individual or an entity.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - PPO
+          - HMO
+          - UNKNOWN
+        endDate:
+          description: 'The date on which the coverage for the account ends or expires.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: string
         type:
           description: 'The type of coverage provided to an individual or an entity.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
           readOnly: true
           type: string
           enum:
-          - DEDUCTIBLE
-          - OUT_OF_POCKET
-          - ANNUAL_BENEFIT
-          - MAX_BENEFIT
-          - COVERAGE_AMOUNT
-          - MONTHLY_BENEFIT
+          - VISION
+          - DENTAL
+          - MEDICAL
+          - HEALTH
+          - DEATH_COVER
+          - TOTAL_PERMANENT_DISABILITY
+          - ACCIDENTAL_DEATH_COVER
+          - INCOME_PROTECTION
+          - DEATH_TOTAL_PERMANENT_DISABILITY
           - OTHER
-        limitType:
-          description: 'The type of coverage limit indicates if the coverage is in-network or out-of-network.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
+        startDate:
+          description: 'The date on which the coverage for the account starts.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: string
+    BusinessInformation:
+      type: object
+      title: BusinessInformation
+      properties:
+        legalName:
+          description: 'Legal name of the business (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+        businessName:
+          description: 'Name of the business (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+        abn:
+          description: 'Australian business number issued by Australian authority for businesses. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+        acn:
+          description: 'Australian company number issued by Australian authority for companies. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: Bank,Card,Loan container<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: string
+    DataExtractsEventData:
+      type: object
+      title: DataExtractsEventData
+      properties:
+        fromDate:
+          readOnly: true
+          type: string
+        userData:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DataExtractsEventUserData'
+        userCount:
+          format: int32
+          readOnly: true
+          type: integer
+        toDate:
+          readOnly: true
+          type: string
+    LogoURLs:
+      type: object
+      title: LogoURLs
+      properties:
+        type:
+          description: 'The merchant type of the logo url (SVG/PNG)<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: string
+        url:
+          description: 'The logo url of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: string
+    DataExtractsHolding:
+      type: object
+      title: DataExtractsHolding
+      properties:
+        symbol:
+          description: 'The symbol of the security.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        exercisedQuantity:
+          format: double
+          description: 'The quantity of the employee stock options that are already exercised or bought by the employee.<br><b>Note</b>: Once the employee stock options is exercised, they are either converted to cash value or equity positions depending on the FI. The exercised quantity field is only applicable to employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        cusipNumber:
+          description: 'The CUSIP (Committee on Uniform Securities Identification Procedures) identifies most the financial instruments in the United States and Canada.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        vestedQuantity:
+          format: double
+          description: 'The quantity of units or shares that are already vested on a vest date.<br><b>Note</b>: The vested quantity field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        description:
+          description: 'The description (name) for the holding (E.g., Cisco Systems)<br>For insurance container, the field is only applicable for insurance annuity and variable life insurance types. <br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        unvestedValue:
+          description: 'Indicates the estimated market value of the unvested units.<br><b>Note</b>: FIs usually calculates the unvested value as the market price unvested quantity. The unvested value field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        securityStyle:
+          description: 'Indicates the security style of holding identified through the security service.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        vestedValue:
+          description: 'Indicates the estimated market value of the vested units.<br><b>Note</b>: FIs usually calculates the vested value as the market price vested quantity. The vested value field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        optionType:
+          description: 'The type of the option position (i.e., put or call).<br><b>Note</b>: The option type field is only applicable to options.<br><br><b>Applicable containers</b>: investment<br><b>Applicable Values</b><br>'
           readOnly: true
           type: string
           enum:
-          - IN_NETWORK
-          - OUT_NETWORK
-        met:
-          description: 'The amount the insurance company paid for the incurred medical expenses.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          - put
+          - call
+          - unknown
+          - other
+        lastUpdated:
+          description: 'The date when the information was last updated in the system.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        matchStatus:
+          description: 'Indicates the security match status id of the investment option identified during security normalization.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        holdingType:
+          description: 'Type of holding<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+          enum:
+          - stock
+          - mutualFund
+          - bond
+          - CD
+          - option
+          - moneyMarketFund
+          - other
+          - remic
+          - future
+          - commodity
+          - currency
+          - unitInvestmentTrust
+          - employeeStockOption
+          - insuranceAnnuity
+          - unknown
+          - preferredStock
+          - ETF
+          - warrants
+          - digitalAsset
+        maturityDate:
+          description: 'The stated maturity date of a bond or CD.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        price:
+          description: 'The current price of the security.<br><b>Note</b>: Only for bonds the price field indicates the normalized price and not the price aggregated from the site. For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
           readOnly: true
           $ref: '#/components/schemas/Money'
-    BusinessCategory:
+        term:
+          description: 'The fixed duration for which the bond or CD is issued.<br><b>Note</b>: The term field is only applicable to CD.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        contractQuantity:
+          format: double
+          description: 'The quantity of tradeable units in a contract.<br><b>Note</b>: The contract quantity field is only applicable to commodity and currency.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        id:
+          format: int64
+          description: 'Unique identifier for the security added in the system. This is the primary key of the holding resource.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: integer
+        isShort:
+          description: 'Indicates that the holding is a short trading.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: boolean
+        value:
+          description: 'The total market value of the security. For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        expirationDate:
+          description: 'The date on which an option, right or warrant expires.<br><b>Note</b>: The expiration date field is only applicable to options and employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        interestRate:
+          format: double
+          description: 'The interest rate on a CD.<br><b>Note</b>: The interest rate field is only applicable to CD.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        quantity:
+          format: double
+          description: 'The quantity held for the holding.<br><b>Note</b>: Only for bonds the quantity field indicates the normalized quantity and not the quantity aggregated from the site. The quantity field is only applicable to restricted stock units/awards, performance units, currency, and commodity.<br>For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: number
+        accruedInterest:
+          description: 'The accruedInterest of the  holding.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        grantDate:
+          description: 'The date on which equity awards like ESOP, RSU, etc., are issued or granted.<br><b>Note</b>: The grant date field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        sedol:
+          description: 'The SEDOL (Stock Exchange Daily Official List) is a set of security identifiers used in the United Kingdom and Ireland for clearing purposes.<br><b>Note</b>: The SEDOL field is only applicable to the trade related transactions<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        vestedSharesExercisable:
+          format: double
+          description: 'The number of vested shares that can be exercised by the employee. It is usually equal to the vested quantity.<br><b>Note</b>: The vested shares exercisable field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        spread:
+          description: 'The difference between the current market value of a stock and the strike price of the employee stock option, when the market value of the shares are greater than the stock price.<br><b>Note</b>: The spread field is only applicable to employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        accountId:
+          format: int64
+          description: 'Unique identifier of the account to which the security is linked.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: integer
+        enrichedDescription:
+          description: 'The enrichedDescription is the security description of the normalized holding<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        couponRate:
+          format: double
+          description: 'The stated interest rate for a bond.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        createdDate:
+          description: 'The date on which the holding is created in the Yodlee system.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        accruedIncome:
+          description: 'The accruedIncome of the  holding.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        securityType:
+          description: 'Indicates the security type of holding identified through the security service.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: string
+        providerAccountId:
+          format: int64
+          description: 'Unique identifier for the user''s association with the provider.<br><br><b>Applicable containers</b>: investment, insurance<br>'
+          readOnly: true
+          type: integer
+        unvestedQuantity:
+          format: double
+          description: 'Indicates the number of unvested quantity or units.<br><b>Note</b>: The unvested quantity field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        costBasis:
+          description: 'In a one-off security purchase, the cost basis is the quantity acquired multiplied by the price per unit paid plus any commission paid. In case, the same position is acquired in different lots on different days at different prices, the sum total of the cost incurred is divided by the total units acquired to arrive at the average cost basis.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        vestingDate:
+          description: 'The date on which a RSU, RSA, or an employee stock options become vested.<br><b>Note</b>: The vesting date field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        isin:
+          description: 'The ISIN (International Securities Identification Number) is used worldwide to identify specific securities. It is equivalent to CUSIP for international markets.<br><br><b>Note</b>: The ISIN field is only applicable to the trade related transactions<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        strikePrice:
+          description: 'The strike (exercise) price for the option position.<br><b>Note</b>: The strike price field is only applicable to options and employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+    Merchant:
       type: object
-      title: BusinessCategory
+      title: Merchant
       properties:
-        categoryName:
+        website:
+          description: 'The website of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: string
+        address:
+          description: 'The address of the merchant associated with the transaction is populated in the merchant address field.<br><b>Note</b>: The merchant address field is not available by default and customers will have to specifically request the merchant''s address (that includes city, state, and ZIP of the merchant). The merchant address field is available only for merchants in the United States.<br><br><b>Applicable containers</b>: bank,creditCard<br>'
+          readOnly: true
+          $ref: '#/components/schemas/AccountAddress'
+        logoURLs:
+          description: 'The logoURL of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/LogoURLs'
+        contact:
+          description: 'The merchant contact information like phone and email.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          $ref: '#/components/schemas/Contact'
+        categoryLabel:
+          description: 'The business categories of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard<br><b>Applicable Values</b><br>'
+          readOnly: true
+          type: array
+          items:
+            type: string
+        coordinates:
+          description: 'The merchant geolocation coordinates like latitude and longitude.<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+          $ref: '#/components/schemas/Coordinates'
+        name:
+          description: 'The name of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        id:
+          description: 'Identifier of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        source:
+          description: 'The source through which merchant information is retrieved.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - YODLEE
+          - FACTUAL
+          - FOURSQUARE
+        logoURL:
+          description: 'The logoURL of the merchant.<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: string
+    LoanPayoffDetails:
+      type: object
+      title: LoanPayoffDetails
+      properties:
+        payByDate:
+          description: 'The date by which the payoff amount should be paid.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: loan<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          type: string
+        payoffAmount:
+          description: 'The loan payoff amount.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: loan<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        outstandingBalance:
+          description: 'The outstanding balance on the loan account. The outstanding balance amount may differ from the payoff amount. It is usually the sum of outstanding principal, unpaid interest, and fees, if any.<br><br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: loan<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+    DataExtractsEventResponse:
+      type: object
+      title: DataExtractsEventResponse
+      properties:
+        event:
+          readOnly: true
+          $ref: '#/components/schemas/DataExtractsEvent'
+    DataExtractsEvent:
+      type: object
+      title: DataExtractsEvent
+      properties:
+        data:
+          readOnly: true
+          $ref: '#/components/schemas/DataExtractsEventData'
+        info:
+          readOnly: true
+          type: string
+    DataExtractsUserData:
+      type: object
+      title: DataExtractsUserData
+      properties:
+        holding:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DataExtractsHolding'
+        totalTransactionsCount:
+          format: int64
+          readOnly: true
+          type: integer
+        user:
+          readOnly: true
+          $ref: '#/components/schemas/DataExtractsUser'
+        account:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DataExtractsAccount'
+        transaction:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DataExtractsTransaction'
+        providerAccount:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DataExtractsProviderAccount'
+    DataExtractsProviderAccount:
+      type: object
+      title: DataExtractsProviderAccount
+      properties:
+        destinationProviderAccountId:
+          format: int64
+          description: The providerAccountId that is retained as part of the many-to-one OAuth migration process.<br><b>Endpoints</b>:<ul><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: integer
+        oauthMigrationStatus:
+          description: Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: string
+          enum:
+          - IN_PROGRESS
+          - TO_BE_MIGRATED
+          - COMPLETED
+          - MIGRATED
+        isManual:
+          description: Indicates whether account is a manual or aggregated provider account.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: boolean
+        lastUpdated:
+          description: 'Indicate when the providerAccount is last updated successfully.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
+          readOnly: true
+          type: string
+        createdDate:
+          description: The date on when the provider account is created in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
+          readOnly: true
+          type: string
+        aggregationSource:
+          description: The source through which the providerAccount is added in the system.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - SYSTEM
+          - USER
+        isDeleted:
+          description: 'Indicates if the provider account is deleted from the system.<b>Applicable containers</b>: All Containers<br><b>Aggregated / Manual</b>: Both <br><b>Endpoints</b>:<br><ul><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: boolean
+        providerId:
+          format: int64
+          description: Unique identifier for the provider resource. This denotes the provider for which the provider account id is generated by the user.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: integer
+        requestId:
+          description: Unique id generated to indicate the request.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>
+          readOnly: true
+          type: string
+        sourceProviderAccountIds:
+          description: The providerAccountIds that are deleted and merged into the destinationProviderAccountId as part of the many-to-one OAuth migration process.<br><b>Endpoints</b>:<ul><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: array
+          items:
+            format: int64
+            type: integer
+        id:
+          format: int64
+          description: Unique identifier for the provider account resource. This is created during account addition.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: integer
+        authType:
+          description: The authentication type enabled at the provider site. <br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li><li>GET /dataExtracts/userData</li><li>GET providerAccounts</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - OAUTH
+          - CREDENTIALS
+          - MFA_CREDENTIALS
+        dataset:
+          description: Logical grouping of dataset attributes into datasets such as Basic Aggregation Data, Account Profile and Documents.<br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul>
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountDataset'
+        status:
+          description: The status of last update attempted for the account. <br><br><b>Endpoints</b>:<ul><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET dataExtracts/userData</li></ul><b>Applicable Values</b><br>
+          readOnly: true
+          type: string
+          enum:
+          - LOGIN_IN_PROGRESS
+          - USER_INPUT_REQUIRED
+          - IN_PROGRESS
+          - PARTIAL_SUCCESS
+          - SUCCESS
+          - FAILED
+          - MIGRATION_IN_PROGRESS
+          - DATA_RETRIEVAL_FAILED
+    Description:
+      type: object
+      title: Description
+      properties:
+        security:
+          description: 'The description will provide the actual name of the security.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        original:
+          description: 'Original transaction description as it appears at the FI site.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+          readOnly: true
+          type: string
+        simple:
+          description: 'The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of the transaction may not be evident. Yodlee attempts to simplify and make the transaction meaningful to the consumer, and this simplified transaction description is provided in the simple description field.Note: The simple description field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: creditCard, insurance, loan<br>'
+          readOnly: true
+          type: string
+        consumer:
+          description: The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field.<br><br>
+          type: string
+    Contact:
+      type: object
+      title: Contact
+      properties:
+        phone:
+          description: 'Phone number of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          type: string
+        email:
+          description: 'Email Id of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          type: string
+    AccountDataset:
+      type: object
+      title: AccountDataset
+      properties:
+        lastUpdated:
+          description: 'Indicate when the dataset is last updated successfully for the given provider account.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
+          readOnly: true
+          type: string
+        updateEligibility:
+          description: 'Indicate whether the dataset is eligible for update or not.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - ALLOW_UPDATE
+          - ALLOW_UPDATE_WITH_CREDENTIALS
+          - DISALLOW_UPDATE
+        additionalStatus:
+          description: 'The status of last update attempted for the dataset. <br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - LOGIN_IN_PROGRESS
+          - DATA_RETRIEVAL_IN_PROGRESS
+          - ACCT_SUMMARY_RECEIVED
+          - AVAILABLE_DATA_RETRIEVED
+          - PARTIAL_DATA_RETRIEVED
+          - DATA_RETRIEVAL_FAILED
+          - DATA_NOT_AVAILABLE
+          - ACCOUNT_LOCKED
+          - ADDL_AUTHENTICATION_REQUIRED
+          - BETA_SITE_DEV_IN_PROGRESS
+          - CREDENTIALS_UPDATE_NEEDED
+          - INCORRECT_CREDENTIALS
+          - PROPERTY_VALUE_NOT_AVAILABLE
+          - INVALID_ADDL_INFO_PROVIDED
+          - REQUEST_TIME_OUT
+          - SITE_BLOCKING_ERROR
+          - UNEXPECTED_SITE_ERROR
+          - SITE_NOT_SUPPORTED
+          - SITE_UNAVAILABLE
+          - TECH_ERROR
+          - USER_ACTION_NEEDED_AT_SITE
+          - SITE_SESSION_INVALIDATED
+          - NEW_AUTHENTICATION_REQUIRED
+          - DATASET_NOT_SUPPORTED
+          - ENROLLMENT_REQUIRED_FOR_DATASET
+          - CONSENT_REQUIRED
+          - CONSENT_EXPIRED
+          - CONSENT_REVOKED
+          - INCORRECT_OAUTH_TOKEN
+          - MIGRATION_IN_PROGRESS
+        nextUpdateScheduled:
+          description: 'Indicates when the next attempt to update the dataset is scheduled.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
+          readOnly: true
+          type: string
+        name:
+          description: 'The name of the dataset requested from the provider site<br><br><b>Account Type</b>: Manual<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li><li>GET providers</li></ul><b>Applicable Values</b><br>'
+          type: string
+          enum:
+          - BASIC_AGG_DATA
+          - ADVANCE_AGG_DATA
+          - ACCT_PROFILE
+          - DOCUMENT
+        lastUpdateAttempt:
+          description: 'Indicate when the last attempt was performed to update the dataset for the given provider account<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
+          readOnly: true
+          type: string
+        additionalStatusErrorCode:
+          description: 'The status error code of last update attempted for the dataset.<br><br><b>Account Type</b>: Aggregated<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST providerAccounts</li><li>GET providerAccounts</li><li>GET dataExtracts/userData</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li></ul>'
+          readOnly: true
+          type: string
+    BankTransferCode:
+      type: object
+      title: BankTransferCode
+      properties:
+        id:
+          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
+          type: string
+        type:
+          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
+          type: string
+          enum:
+          - BSB
+          - IFSC
+          - ROUTING_NUMBER
+          - SORT_CODE
+    DataExtractsTransaction:
+      type: object
+      title: DataExtractsTransaction
+      properties:
+        date:
+          description: 'The value provided will be either postDate or transactionDate. postDate takes higher priority than transactionDate, except for the investment container as only transactionDate is available. The availability of postDate or transactionDate depends on the provider site.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        sourceId:
+          description: A unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts.<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts.
+          readOnly: true
+          type: string
+        symbol:
+          description: 'The symbol of the security being traded.<br><b>Note</b>: The settle date field applies only to trade-related transactions. <br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        cusipNumber:
+          description: 'The CUSIP (Committee on Uniform Securities Identification Procedures) identifies the financial instruments in the United States and Canada.<br><b><br><b>Note</b></b>: The CUSIP number field applies only to trade related transactions.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        sourceApcaNumber:
+          description: '6 Digit APCA number for the initiating institution. The field is fixed-width and padded with leading zeros if applicable. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
+          readOnly: true
+          type: string
+        highLevelCategoryId:
+          format: int64
+          description: 'The high level category assigned to the transaction. The supported values are provided by the GET transactions/categories. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: integer
+        memo:
+          description: 'Additional notes provided by the user for a particular  transaction through application or API services. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        type:
+          description: 'The nature of the transaction, i.e., deposit, refund, payment, etc.<br><b>Note</b>: The transaction type field is available only for the United States, Canada, United Kingdom, New Zealand and India based provider sites. <br><br><b>Applicable containers</b>: bank,creditCard,investment<br>'
+          readOnly: true
+          type: string
+        intermediary:
+          description: 'The intermediary of the transaction.<br><br><b>Applicable containers</b>:  bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: array
+          items:
+            type: string
+        frequency:
+          description: 'Frequency is set to MONTHLY if the Merchant type is BILLERS or SUBSCRIPTION.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        lastUpdated:
+          readOnly: true
+          type: string
+        price:
+          description: 'The price of the security for the transaction.<br><b>Note</b>: The price field applies only to the trade related transactions. <br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        sourceMerchantCategoryCode:
+          description: 'The merchant category code for an outgoing payment to a merchant. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card,Loan container<br>'
+          readOnly: true
+          type: string
+        id:
+          format: int64
+          description: 'An unique identifier for the transaction. The combination of the id and account container are unique in the system. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: integer
+        checkNumber:
+          description: 'The checkNumber of the transaction.<br><br><b>Applicable containers</b>: bank<br>'
+          readOnly: true
+          type: string
+        transactionDateTime:
+          description: 'The timestamp the transaction happens in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        typeAtSource:
+          description: 'The type of transaction. This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card,Loan container<br>'
+          readOnly: true
+          type: string
+        valoren:
+          description: 'It is an identification number that is assigned to financial instruments such as stocks and bonds trading in Switzerland.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        isManual:
+          description: 'Indicates if the transaction is aggregated from the FI site or the consumer has manually created the transaction using the application or an API. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: boolean
+        sourceBillerName:
+          description: 'Name of the BPAY biller for the transaction (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
+          readOnly: true
+          type: string
+        merchant:
+          description: 'The name of the merchant associated with the transaction.<br><b>Note</b>: The merchant name field is available only in the United States, Canada, United Kingdom, and India.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Merchant'
+        sedol:
+          description: 'SEDOL stands for Stock Exchange Daily Official List, a list of security identifiers used in the United Kingdom and Ireland for clearing purposes.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        categoryType:
+          description: 'The categoryType of the category assigned to the transaction. This is the type field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+          enum:
+          - TRANSFER
+          - DEFERRED_COMPENSATION
+          - UNCATEGORIZE
+          - INCOME
+          - EXPENSE
+          - LOAN
+        accountId:
+          format: int64
+          description: 'The account from which the transaction was made. This is basically the primary key of the account resource. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: integer
+        sourceType:
+          description: 'The source through which the transaction is added to the Yodlee system.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loann<br><b>Applicable Values:</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - AGGREGATED
+          - MANUAL
+        subType:
+          description: 'The transaction subtype field provides a detailed transaction type. For example, purchase is a transaction type and the transaction subtype field indicates if the purchase was made using a debit or credit card.<br><b>Note</b>: The transaction subtype field is available only in the United States, Canada, United Kingdom, New Zealand and India.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+          enum:
+          - OVERDRAFT_CHARGE
+          - ONLINE_PURCHASE
+          - TAX_PAYMENT
+          - PAYMENT_BY_CHECK
+          - ATM_CASH_WITHDRAWAL
+          - SERVICE_CHARGE
+          - RETURNED_CHECK_CHARGE
+          - STOP_PAYMENT_CHARGE
+          - CONVENIENCE_FEE
+          - AUTO_LOAN
+          - HOME_LOAN_MORTGAGE
+          - RECURRING_SUBSCRIPTION_PAYMENT
+          - INTEREST
+          - PAYMENT
+          - PURCHASE
+          - REFUND
+          - TRANSFER
+          - FINANCE_CHARGE
+          - OTHER_CHARGES_FEES
+          - ANNUAL_FEE
+          - DEPOSIT
+          - DIRECT_DEPOSIT_SALARY
+          - INVESTMENT_INCOME_CASH
+          - SSA
+          - REWARDS
+          - TAX_REFUND
+          - CREDIT_CARD_PAYMENT
+          - INSURANCE_PAYMENT
+          - UTILITIES_PAYMENT
+          - CHILD_SUPPORT
+          - LOAN
+          - PERSONAL_LOAN
+          - STUDENT_LOAN
+          - REIMBURSEMENT
+          - BALANCE_TRANSFER
+          - OVERDRAFT_PROTECTION
+          - CREDIT
+          - NSF_FEES
+        holdingDescription:
+          description: 'For transactions involving securities, this captures the securities description.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        status:
+          description: 'The status of the transaction: pending or posted.<br><b>Note</b>: Most FI sites only display posted transactions. If the FI site displays transaction status, same will be aggregated.  <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - POSTED
+          - PENDING
+          - SCHEDULED
+          - FAILED
+          - CLEARED
+        detailCategoryId:
+          format: int64
+          description: 'The id of the detail category that is assigned to the transaction. This is a premium attribute which will be returned in the response only if the Detail Category feature is enabled. The supported values are provided by GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard<br>'
+          readOnly: true
+          type: integer
+        description:
+          description: 'Description details<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Description'
+        settleDate:
+          description: 'It is the date on which the transaction is finalized, that is, the date the ownership of the security is transferred to the buyer. The settlement date is usually few days after the transaction date.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: string
+        postDateTime:
+          description: 'The timestamp on which the transaction is posted to the account.<br><br><b>Applicable containers</b>: bank,creditCard,insurance,loan<br>'
+          readOnly: true
+          type: string
+        baseType:
+          description: 'Indicates if the transaction appears as a debit or a credit transaction in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - CREDIT
+          - DEBIT
+        categorySource:
+          description: 'Indicates the source of the category, i.e., categories derived by the system or assigned/provided by the consumer. This is the source field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - SYSTEM
+          - USER
+        principal:
+          description: 'The portion of the principal in the transaction amount. The transaction amount can be the amount due, payment amount, minimum amount, repayment, etc.<br><br><b>Applicable containers</b>: loan<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        sourceBillerCode:
+          description: 'BPAY Biller Code for the transaction (if available). This field will be primarily be available for AU Open Banking sites, and for other regions/providers, the population will depend on the availability of data.<br><br><b>Applicable containers</b>: Bank,Card container<br>'
+          readOnly: true
+          type: string
+        isDeleted:
+          description: 'Indicates if the transaction is marked as deleted.<b>Applicable containers</b>: All Containers<br><b>Aggregated / Manual</b>: Both <br><b>Endpoints</b>:<br><ul><li>GET dataExtracts/userData</li></ul>'
+          readOnly: true
+          type: boolean
+        interest:
+          description: 'The portion of interest in the transaction amount. The transaction amount can be the amount due, payment amount, minimum amount, repayment, etc.<br><br><b>Applicable containers</b>: loan<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        commission:
+          description: 'A commission or brokerage associated with a transaction.<br><br><br><b>Additional Details</b>:The commission only applies to trade-related transactions.<b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        merchantType:
+          description: 'Indicates the merchantType of the transaction.e.g:-BILLERS,SUBSCRIPTION,BNPL,OTHERS <br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: string
+        amount:
+          description: 'The amount of the transaction as it appears at the FI site. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        isPhysical:
+          description: 'Indicates if the transaction is happened online or in-store. <br><br><b>Applicable containers</b>: bank,creditCard,investment,loan<br>'
+          readOnly: true
+          type: boolean
+        quantity:
+          format: double
+          description: 'The quantity associated with the transaction.<br><b>Note</b>: The quantity field applies only to trade-related transactions.<br><br><b>Applicable containers</b>: investment<br>'
+          readOnly: true
+          type: number
+        isRecurring:
+          description: 'If the transaction is done on a merchant with merchant type as BILLERS/SUBSCRIPTION, then such transactions are marked isRecurring to True or else it is marked as False.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        transactionDate:
+          description: 'The date the transaction happens in the account. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: string
+        createdDate:
+          readOnly: true
+          type: string
+        CONTAINER:
+          description: 'The account''s container.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br><b>Applicable Values</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - bank
+          - creditCard
+          - investment
+          - insurance
+          - loan
+          - reward
+          - bill
+          - realEstate
+          - otherAssets
+          - otherLiabilities
+        businessCategory:
+          description: 'business category details for the SMB customers.<br><br><b>Applicable containers</b>: Bank container<br>'
+          readOnly: true
+          $ref: '#/components/schemas/BusinessCategory'
+        postDate:
+          description: 'The date on which the transaction is posted to the account.<br><br><b>Applicable containers</b>: bank,creditCard,insurance,loan<br>'
+          readOnly: true
+          type: string
+        parentCategoryId:
+          format: int64
+          description: 'The parentCategoryId of the category assigned to the transaction.<br><b>Note</b>: This field will be provided in the response if the transaction is assigned to a user-created category. <br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
+          readOnly: true
+          type: integer
+        category:
           description: 'The name of the category assigned to the transaction. This is the category field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
           readOnly: true
           type: string
+        runningBalance:
+          description: 'The running balance in an account indicates the balance of the account after every transaction.<br><br><b>Applicable containers</b>: bank,creditCard,investment<br>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
         categoryId:
           format: int64
           description: 'The id of the category assigned to the transaction. This is the id field of the transaction category resource. The supported values are provided by the GET transactions/categories.<br><br><b>Applicable containers</b>: bank,creditCard,investment,insurance,loan<br>'
           readOnly: true
           type: integer
-    DataExtractsUserDataResponse:
-      type: object
-      title: DataExtractsUserDataResponse
-      properties:
-        userData:
+        isin:
+          description: 'International Securities Identification Number (ISIN) standard is used worldwide to identify specific securities.<br><br><b>Applicable containers</b>: investment<br>'
           readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DataExtractsUserData'
+          type: string
+    Coordinates:
+      type: object
+      title: Coordinates
+      properties:
+        latitude:
+          format: double
+          description: 'Latitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+          type: number
+        longitude:
+          format: double
+          description: 'Longitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
+          type: number
     Money:
       type: object
       title: Money
@@ -1993,277 +2173,50 @@ components:
           - VEF
           - SSP
           - ALK
-    BankTransferCode:
+    AccountAddress:
       type: object
-      title: BankTransferCode
+      title: AccountAddress
       properties:
-        id:
-          description: 'The FI''s branch identification number.Additional Details: The routing number of the bank account in the United States. For non-United States accounts, it is the IFSC code (India), BSB number (Australia), and sort code (United Kingdom). <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul>'
+        zip:
+          description: Zip.
+          type: string
+        country:
+          description: Country.
+          type: string
+        address3:
+          description: Address Line 3.
+          type: string
+        address2:
+          description: Address Line 2.
+          type: string
+        city:
+          description: City.
+          type: string
+        sourceType:
+          type: string
+        address1:
+          description: Address Line 1.
+          type: string
+        street:
+          type: string
+        state:
+          description: State.
           type: string
         type:
-          description: 'The bank transfer code type varies depending on the region of the account origination. <br><b>Account Type</b>: Aggregated<br><b>Applicable containers</b>: bank, investment<br><b>Endpoints</b>:<br><ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>POST verification</li></ul><b>Applicable Values</b><br>'
           type: string
           enum:
-          - BSB
-          - IFSC
-          - ROUTING_NUMBER
-          - SORT_CODE
-    Coverage:
-      type: object
-      title: Coverage
-      properties:
-        amount:
-          description: 'The coverage amount-related details.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageAmount'
-        planType:
-          description: 'The plan type for an insurance provided to an individual or an entity.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - PPO
-          - HMO
+          - HOME
+          - BUSINESS
+          - POBOX
+          - RETAIL
+          - OFFICE
+          - SMALL_BUSINESS
+          - COMMUNICATION
+          - PERMANENT
+          - STATEMENT_ADDRESS
+          - PAYMENT
+          - PAYOFF
           - UNKNOWN
-        endDate:
-          description: 'The date on which the coverage for the account ends or expires.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: string
-        type:
-          description: 'The type of coverage provided to an individual or an entity.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - VISION
-          - DENTAL
-          - MEDICAL
-          - HEALTH
-          - DEATH_COVER
-          - TOTAL_PERMANENT_DISABILITY
-          - ACCIDENTAL_DEATH_COVER
-          - INCOME_PROTECTION
-          - DEATH_TOTAL_PERMANENT_DISABILITY
-          - OTHER
-        startDate:
-          description: 'The date on which the coverage for the account starts.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
-          readOnly: true
-          type: string
-    DataExtractsEventResponse:
-      type: object
-      title: DataExtractsEventResponse
-      properties:
-        event:
-          readOnly: true
-          $ref: '#/components/schemas/DataExtractsEvent'
-    DataExtractsHolding:
-      type: object
-      title: DataExtractsHolding
-      properties:
-        symbol:
-          description: 'The symbol of the security.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        exercisedQuantity:
-          format: double
-          description: 'The quantity of the employee stock options that are already exercised or bought by the employee.<br><b>Note</b>: Once the employee stock options is exercised, they are either converted to cash value or equity positions depending on the FI. The exercised quantity field is only applicable to employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        cusipNumber:
-          description: 'The CUSIP (Committee on Uniform Securities Identification Procedures) identifies most the financial instruments in the United States and Canada.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        vestedQuantity:
-          format: double
-          description: 'The quantity of units or shares that are already vested on a vest date.<br><b>Note</b>: The vested quantity field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        description:
-          description: 'The description (name) for the holding (E.g., Cisco Systems)<br>For insurance container, the field is only applicable for insurance annuity and variable life insurance types. <br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        unvestedValue:
-          description: 'Indicates the estimated market value of the unvested units.<br><b>Note</b>: FIs usually calculates the unvested value as the market price unvested quantity. The unvested value field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        securityStyle:
-          description: 'Indicates the security style of holding identified through the security service.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        vestedValue:
-          description: 'Indicates the estimated market value of the vested units.<br><b>Note</b>: FIs usually calculates the vested value as the market price vested quantity. The vested value field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        optionType:
-          description: 'The type of the option position (i.e., put or call).<br><b>Note</b>: The option type field is only applicable to options.<br><br><b>Applicable containers</b>: investment<br><b>Applicable Values</b><br>'
-          readOnly: true
-          type: string
-          enum:
-          - put
-          - call
-          - unknown
-          - other
-        lastUpdated:
-          description: 'The date when the information was last updated in the system.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        matchStatus:
-          description: 'Indicates the security match status id of the investment option identified during security normalization.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        holdingType:
-          description: 'Type of holding<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-          enum:
-          - stock
-          - mutualFund
-          - bond
-          - CD
-          - option
-          - moneyMarketFund
-          - other
-          - remic
-          - future
-          - commodity
-          - currency
-          - unitInvestmentTrust
-          - employeeStockOption
-          - insuranceAnnuity
-          - unknown
-          - preferredStock
-          - ETF
-          - warrants
-          - digitalAsset
-        maturityDate:
-          description: 'The stated maturity date of a bond or CD.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        price:
-          description: 'The current price of the security.<br><b>Note</b>: Only for bonds the price field indicates the normalized price and not the price aggregated from the site. For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        term:
-          description: 'The fixed duration for which the bond or CD is issued.<br><b>Note</b>: The term field is only applicable to CD.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        contractQuantity:
-          format: double
-          description: 'The quantity of tradeable units in a contract.<br><b>Note</b>: The contract quantity field is only applicable to commodity and currency.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        id:
-          format: int64
-          description: 'Unique identifier for the security added in the system. This is the primary key of the holding resource.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: integer
-        isShort:
-          description: 'Indicates that the holding is a short trading.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: boolean
-        value:
-          description: 'The total market value of the security. For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        expirationDate:
-          description: 'The date on which an option, right or warrant expires.<br><b>Note</b>: The expiration date field is only applicable to options and employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        interestRate:
-          format: double
-          description: 'The interest rate on a CD.<br><b>Note</b>: The interest rate field is only applicable to CD.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        quantity:
-          format: double
-          description: 'The quantity held for the holding.<br><b>Note</b>: Only for bonds the quantity field indicates the normalized quantity and not the quantity aggregated from the site. The quantity field is only applicable to restricted stock units/awards, performance units, currency, and commodity.<br>For insurance container, the field is only applicable for insurance annuity and variable life insurance types.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: number
-        accruedInterest:
-          description: 'The accruedInterest of the  holding.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        grantDate:
-          description: 'The date on which equity awards like ESOP, RSU, etc., are issued or granted.<br><b>Note</b>: The grant date field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        sedol:
-          description: 'The SEDOL (Stock Exchange Daily Official List) is a set of security identifiers used in the United Kingdom and Ireland for clearing purposes.<br><b>Note</b>: The SEDOL field is only applicable to the trade related transactions<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        vestedSharesExercisable:
-          format: double
-          description: 'The number of vested shares that can be exercised by the employee. It is usually equal to the vested quantity.<br><b>Note</b>: The vested shares exercisable field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        spread:
-          description: 'The difference between the current market value of a stock and the strike price of the employee stock option, when the market value of the shares are greater than the stock price.<br><b>Note</b>: The spread field is only applicable to employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        accountId:
-          format: int64
-          description: 'Unique identifier of the account to which the security is linked.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: integer
-        enrichedDescription:
-          description: 'The enrichedDescription is the security description of the normalized holding<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        couponRate:
-          format: double
-          description: 'The stated interest rate for a bond.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        createdDate:
-          description: 'The date on which the holding is created in the Yodlee system.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        accruedIncome:
-          description: 'The accruedIncome of the  holding.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        securityType:
-          description: 'Indicates the security type of holding identified through the security service.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: string
-        providerAccountId:
-          format: int64
-          description: 'Unique identifier for the user''s association with the provider.<br><br><b>Applicable containers</b>: investment, insurance<br>'
-          readOnly: true
-          type: integer
-        unvestedQuantity:
-          format: double
-          description: 'Indicates the number of unvested quantity or units.<br><b>Note</b>: The unvested quantity field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: number
-        costBasis:
-          description: 'In a one-off security purchase, the cost basis is the quantity acquired multiplied by the price per unit paid plus any commission paid. In case, the same position is acquired in different lots on different days at different prices, the sum total of the cost incurred is divided by the total units acquired to arrive at the average cost basis.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-        vestingDate:
-          description: 'The date on which a RSU, RSA, or an employee stock options become vested.<br><b>Note</b>: The vesting date field is only applicable to employee stock options, restricted stock units/awards, performance units, etc.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        isin:
-          description: 'The ISIN (International Securities Identification Number) is used worldwide to identify specific securities. It is equivalent to CUSIP for international markets.<br><br><b>Note</b>: The ISIN field is only applicable to the trade related transactions<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          type: string
-        strikePrice:
-          description: 'The strike (exercise) price for the option position.<br><b>Note</b>: The strike price field is only applicable to options and employee stock options.<br><br><b>Applicable containers</b>: investment<br>'
-          readOnly: true
-          $ref: '#/components/schemas/Money'
-    Coordinates:
-      type: object
-      title: Coordinates
-      properties:
-        latitude:
-          format: double
-          description: 'Latitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
-          type: number
-        longitude:
-          format: double
-          description: 'Longitude of the merchant<br><br><b>Applicable containers</b>: bank,creditCard,loan<br>'
-          type: number
     YodleeError:
       type: object
       title: YodleeError
@@ -2287,3 +2240,50 @@ components:
         loginName:
           readOnly: true
           type: string
+    DataExtractsUserDataResponse:
+      type: object
+      title: DataExtractsUserDataResponse
+      properties:
+        userData:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DataExtractsUserData'
+    CoverageAmount:
+      type: object
+      title: CoverageAmount
+      properties:
+        cover:
+          description: 'The maximum amount that will be paid to an individual or an entity for a covered loss<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
+        unitType:
+          description: 'The type of coverage unit indicates if the coverage is for an individual or a family.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - PER_FAMILY
+          - PER_MEMBER
+        type:
+          description: 'The type of coverage provided to an individual or an entity.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - DEDUCTIBLE
+          - OUT_OF_POCKET
+          - ANNUAL_BENEFIT
+          - MAX_BENEFIT
+          - COVERAGE_AMOUNT
+          - MONTHLY_BENEFIT
+          - OTHER
+        limitType:
+          description: 'The type of coverage limit indicates if the coverage is in-network or out-of-network.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul><b>Applicable Values:</b><br>'
+          readOnly: true
+          type: string
+          enum:
+          - IN_NETWORK
+          - OUT_NETWORK
+        met:
+          description: 'The amount the insurance company paid for the incurred medical expenses.<br><br><b>Aggregated / Manual</b>: Aggregated<br><b>Applicable containers</b>: insurance,investment<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li></ul>'
+          readOnly: true
+          $ref: '#/components/schemas/Money'
