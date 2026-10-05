@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/yodlee/OpenAPI/HEAD/swagger.yaml",
+ "requested_url": "https://raw.githubusercontent.com/yodlee/OpenAPI/HEAD/swagger.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 728301,
+ "sha256": "57198fdd2a792dc663d16d5d18128539bb425f5e770f09ed58bc498103d2c478",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
