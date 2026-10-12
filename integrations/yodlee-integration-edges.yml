@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/yodlee/integrations
+- https://n8n.io/integrations/yodlee/
+- https://composio.dev/toolkits/yodlee
+- https://monid.ai/tools/yodlee
+checked:
+- https://composio.dev/toolkits/yodlee
+- https://monid.ai/tools/yodlee
+- https://n8n.io/integrations/yodlee/
+- https://zapier.com/apps/yodlee/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
