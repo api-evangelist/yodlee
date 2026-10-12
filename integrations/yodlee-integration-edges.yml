@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/yodlee/integrations
 - https://n8n.io/integrations/yodlee/
@@ -9,8 +9,26 @@ checked:
 - https://composio.dev/toolkits/yodlee
 - https://monid.ai/tools/yodlee
 - https://n8n.io/integrations/yodlee/
+- https://www.openbanking.org.uk/regulated-providers/yodlee-inc-uk-branch/
 - https://zapier.com/apps/yodlee/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: UK Open Banking
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.openbanking.org.uk/regulated-providers/yodlee-inc-uk-branch/
+  contract_reference:
+    register: UK Open Banking regulated providers (OBL directory)
+    spec_file: null
+    role: Third Party Providers
+    registered_name: Yodlee Inc. UK Branch
+    register_id: https://register.fca.org.uk/s/firm?id=0010X00004G2F4WQAV
+    matched_domain: yodlee.com
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
 templates: []
