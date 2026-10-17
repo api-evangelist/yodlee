@@ -381,32 +381,183 @@ paths:
       - Consents
 components:
   schemas:
-    CreatedConsentResponse:
+    RenewConsentRequest:
       type: object
-      title: CreatedConsentResponse
+      title: RenewConsentRequest
       properties:
-        consent:
+        preferences:
+          description: preferences for consent renewal.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
+          $ref: '#/components/schemas/RenewConsentPreferences'
+        cdrInsightsDisclosure:
+          description: Describes the information of the CDR Insights
+          $ref: '#/components/schemas/CDRInsightsDisclosure'
+        renewal:
+          description: renewal entity from consent details service, containing default consent duration and reauthorization eligibility.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
+          $ref: '#/components/schemas/RenewalConsent'
+        businessUserDetail:
+          description: Describes the information of the Business user consent disclosure
+          $ref: '#/components/schemas/BusinessUserDetail'
+        clientTrustedAdvisor:
+          description: describes information of client trusted advisor.
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientTrustedAdvisor'
+    TotalCount:
+      type: object
+      title: TotalCount
+      properties:
+        count:
+          format: int64
+          readOnly: true
+          type: integer
+    UpdateConsentRequest:
+      type: object
+      title: UpdateConsentRequest
+      properties:
+        preferences:
+          description: preferences for consent renewal.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
+          $ref: '#/components/schemas/RenewConsentPreferences'
+        scopeId:
+          description: Applicable Open Banking data cluster values.<br><br><b>Endpoints</b>:<ul><li>PUT Consent</li></ul>
+          type: array
+          items:
+            type: string
+            enum:
+            - ACCOUNT_DETAILS
+            - TRANSACTION_DETAILS
+            - STATEMENT_DETAILS
+            - CONTACT_DETAILS
+        cdrInsightsDisclosure:
+          description: Describes the information of the CDR Insights<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
+          $ref: '#/components/schemas/CDRInsightsDisclosure'
+        clientTrustedAdvisor:
+          description: describes information of client trusted advisor
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientTrustedAdvisor'
+    RenewConsentResponse:
+      type: object
+      title: RenewConsentResponse
+      properties:
+        consentId:
+          format: int64
+          description: Unique identifier for consent. This is created during consent creation.
+          type: integer
+        authorizationUrl:
+          description: Authorization url generated for the request through PUT Consent to reach endsite.
+          type: string
+        providerId:
+          format: int64
+          description: Unique identifier for the provider account resource. This is created during account addition.
+          type: integer
+    ConsentPreferencesResponse:
+      type: object
+      title: ConsentPreferencesResponse
+      required:
+      - consentId
+      - customDisplayData
+      - preferences
+      properties:
+        consentId:
+          format: int64
+          description: Consent Id generated through POST Consent.
+          type: integer
+        preferences:
+          description: User chosen preference value for consent expiration
+          $ref: '#/components/schemas/Preferences'
+        customDisplayData:
+          description: custom display data
+          $ref: '#/components/schemas/CustomDisplayData'
+    ConsentHistoryCountResponse:
+      type: object
+      title: ConsentHistoryCountResponse
+      properties:
+        consentHistory:
+          readOnly: true
+          $ref: '#/components/schemas/ConsentHistoryCount'
+    DataHandling:
+      type: object
+      title: DataHandling
+      required:
+      - dataList
+      - headerDescription
+      properties:
+        dataList:
+          description: We will apply the CDR de-identificatiion process. <br/> De-identificatied data will be used without further consent.<br/> De-identification of CDR data means your data cannot be associated with your identity after de-identification process takes place.
+          type: array
+          items:
+            type: string
+        headerDescription:
+          description: De-identification of data
+          type: string
+    ProvidersDataset:
+      type: object
+      title: ProvidersDataset
+      properties:
+        name:
+          description: 'The name of the dataset requested from the provider site<br><br><b>Account Type</b>: Manual<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li><li>GET providers</li></ul><b>Applicable Values</b><br>'
+          type: string
+          enum:
+          - BASIC_AGG_DATA
+          - ADVANCE_AGG_DATA
+          - ACCT_PROFILE
+          - DOCUMENT
+        attribute:
+          description: The name of the dataset attribute suported by the provider.<br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li></ul>
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+    ConsentHistoryResponse:
+      type: object
+      title: ConsentHistoryResponse
+      properties:
+        consentHistory:
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/CreateConsent'
-    UserDataTreatment:
+            $ref: '#/components/schemas/ConsentHistory'
+    ConsentHistory:
       type: object
-      title: UserDataTreatment
+      title: ConsentHistory
       required:
-      - cdrPolicy
-      - dataHandling
-      - description
+      - consentStatus
+      - eventDateTime
+      - startDateTime
       properties:
-        dataHandling:
-          description: Details of CDR Data Handling
-          $ref: '#/components/schemas/DataHandling'
-        cdrPolicy:
-          description: Details of CDR Policy
-          $ref: '#/components/schemas/CdrPolicy'
-        description:
-          description: After we have finished using your data or you have withdraw your consent to use the data, it will be de-identified as per our
+        eventDateTime:
+          description: History logged datetime.
           type: string
+        expirationDateTime:
+          description: Consent expiry datetime where supported by the provider.
+          type: string
+        userDataPurge:
+          format: int64
+          description: Applicable data deletion preference for consent as per AU OB onboarding model and user's &quot;delete my data instead&quot; option. This data point is applicable for AU Open Banking region only.
+          type: integer
+        deidentificationPreference:
+          description: whether user has given consent to use deidentified data or not. This data point is applicable for AU Open Banking region only. Oauthpref id = 4
+          type: boolean
+        startDateTime:
+          description: Consent start datetime.
+          type: string
+        renewedDateTime:
+          description: Consent renewed datetime.
+          type: string
+        consentStatus:
+          description: Status of the consent in each history event. Statuses will be shown as applicable for Open Banking regions.
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - REVOKED
+          - CONSENT_REPEALED
+        revokedDateTime:
+          description: Revoked datetime for the consent if consent is revoked.
+          type: string
+        consentCollectionPeriod:
+          format: int32
+          description: Consent duration period selected by user for recurring consents during the new account addition or consent renewal. This data point is applicable for AU Open Banking region only. Oauthpref id = 6
+          type: integer
     BusinessUserDetail:
       type: object
       title: BusinessUserDetail
@@ -438,16 +589,137 @@ components:
         isReauthorizationRequired:
           description: Consent eligibility for reauthorization.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
           type: boolean
-    CDRInsights:
+    UpdatedConsentResponse:
       type: object
-      title: CDRInsights
+      title: UpdatedConsentResponse
+      properties:
+        consent:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateConsent'
+    TransactionDays:
+      type: object
+      title: TransactionDays
+      properties:
+        fullAccountNumberFields:
+          type: array
+          items:
+            type: string
+            enum:
+            - paymentAccountNumber
+            - unmaskedAccountNumber
+        numberOfTransactionDays:
+          format: int32
+          type: integer
+    ThirdParty:
+      type: object
+      title: ThirdParty
+      required:
+      - description
+      - header
       properties:
         description:
-          description: name of the insight
+          description: Third Party Description
           type: string
-        detail:
-          description: usage of the data for the insight
+        header:
+          description: Third Party Header
           type: string
+    Renewal:
+      type: object
+      title: Renewal
+      required:
+      - defaultRenewalDuration
+      - isReauthorizationRequired
+      properties:
+        defaultRenewalDuration:
+          format: int64
+          description: Shows the duration in days of consent renewal
+          type: integer
+        isReauthorizationRequired:
+          description: Shows if the consent renewal need reauthorization
+          type: boolean
+    DeletePreference:
+      type: object
+      title: DeletePreference
+      properties:
+        description:
+          description: Delete Preference Descritption
+          type: string
+        alternateDescription:
+          description: Delete Preference Alternate Descritption
+          type: string
+        labelDescription:
+          description: Delete Preference LabelDescritption
+          type: string
+    ClientTrustedAdvisor:
+      type: object
+      title: ClientTrustedAdvisor
+      required:
+      - email
+      - name
+      - role
+      properties:
+        role:
+          description: '<b>Role of the Client Trusted Advisor</b>: Example : Lawyer , Accountant , etc...'
+          type: string
+        name:
+          description: Name of the client trusted advisor
+          type: string
+        email:
+          description: '<b>Email Id of the Client Trusted Advisor</b>: PRIMARY , SECONDARY , PERSONAL , WORK and OTHERS'
+          type: string
+    Links:
+      type: object
+      title: Links
+      required:
+      - href
+      - methodType
+      - rel
+      properties:
+        methodType:
+          description: Type of the HTTP method <br/> GET , PUT , POST , DELETE , ...
+          type: string
+        rel:
+          description: Get Consent preference
+          type: string
+        href:
+          description: Get Consent preference Endpoint
+          type: string
+    ClientTrustedAdvisorTxt:
+      type: object
+      title: ClientTrustedAdvisorTxt
+      required:
+      - description
+      properties:
+        description:
+          description: ClientTrustedAdvisorTxt Description
+          type: string
+    CustomDisplayData:
+      type: object
+      title: CustomDisplayData
+      required:
+      - clientTrustedAdvisorTxt
+      - consentConfirmation
+      - deletePreference
+      - thirdParty
+      - userDataTreatment
+      properties:
+        consentConfirmation:
+          description: Details of ConsentConfirmation
+          $ref: '#/components/schemas/ConsentConfirmation'
+        deletePreference:
+          description: Details of DeletePreference
+          $ref: '#/components/schemas/DeletePreference'
+        thirdParty:
+          description: Details of ThirdParty
+          $ref: '#/components/schemas/ThirdParty'
+        clientTrustedAdvisorTxt:
+          description: Details of ClientTrustedAdvisorTxt
+          $ref: '#/components/schemas/ClientTrustedAdvisorTxt'
+        userDataTreatment:
+          description: Details of UserDataTreatment
+          $ref: '#/components/schemas/UserDataTreatment'
     Consent:
       type: object
       title: Consent
@@ -580,195 +852,6 @@ components:
         startDate:
           description: Consent start date.
           type: string
-    UpdatedConsentResponse:
-      type: object
-      title: UpdatedConsentResponse
-      properties:
-        consent:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateConsent'
-    ConsentResponse:
-      type: object
-      title: ConsentResponse
-      properties:
-        consent:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Consent'
-    RenewConsentPreferences:
-      type: object
-      title: RenewConsentPreferences
-      required:
-      - id
-      - value
-      properties:
-        id:
-          format: int64
-          description: preference id for AU Open Banking only.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
-          type: integer
-        value:
-          description: preference value for AU Open Banking only.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
-          type: string
-    ConsentConfirmation:
-      type: object
-      title: ConsentConfirmation
-      required:
-      - description
-      - header
-      properties:
-        description:
-          description: Consent confirmation Description
-          type: string
-        header:
-          description: Consent confirmation Header
-          type: string
-    ConsentHistoryCountResponse:
-      type: object
-      title: ConsentHistoryCountResponse
-      properties:
-        consentHistory:
-          readOnly: true
-          $ref: '#/components/schemas/ConsentHistoryCount'
-    CDRInsightsDisclosure:
-      type: object
-      title: CDRInsightsDisclosure
-      properties:
-        purpose:
-          description: purpose of the insights
-          type: string
-        nonAPName:
-          description: non accredited party name
-          type: string
-        cdrInsights:
-          type: array
-          items:
-            $ref: '#/components/schemas/CDRInsights'
-    UpdateConsent:
-      type: object
-      title: UpdateConsent
-      properties:
-        consentId:
-          format: int64
-          description: Unique identifier for consent. This is created during consent creation.
-          type: integer
-        authorizationUrl:
-          description: Authorization url generated for the request through PUT Consent to reach endsite.
-          type: string
-        providerId:
-          format: int64
-          description: Unique identifier for the provider account resource. This is created during account addition.
-          type: integer
-    ConsentHistoryCount:
-      type: object
-      title: ConsentHistoryCount
-      properties:
-        TOTAL:
-          readOnly: true
-          $ref: '#/components/schemas/TotalCount'
-    ConsentHistoryResponse:
-      type: object
-      title: ConsentHistoryResponse
-      properties:
-        consentHistory:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ConsentHistory'
-    RenewConsentResponse:
-      type: object
-      title: RenewConsentResponse
-      properties:
-        consentId:
-          format: int64
-          description: Unique identifier for consent. This is created during consent creation.
-          type: integer
-        authorizationUrl:
-          description: Authorization url generated for the request through PUT Consent to reach endsite.
-          type: string
-        providerId:
-          format: int64
-          description: Unique identifier for the provider account resource. This is created during account addition.
-          type: integer
-    CdrPolicy:
-      type: object
-      title: CdrPolicy
-      required:
-      - description
-      - url
-      properties:
-        description:
-          description: Consumer Data Right Policy
-          type: string
-        url:
-          description: https://solutions.yodlee.com/au-cdr.html
-          type: string
-    ThirdParty:
-      type: object
-      title: ThirdParty
-      required:
-      - description
-      - header
-      properties:
-        description:
-          description: Third Party Description
-          type: string
-        header:
-          description: Third Party Header
-          type: string
-    ClientTrustedAdvisorTxt:
-      type: object
-      title: ClientTrustedAdvisorTxt
-      required:
-      - description
-      properties:
-        description:
-          description: ClientTrustedAdvisorTxt Description
-          type: string
-    Links:
-      type: object
-      title: Links
-      required:
-      - href
-      - methodType
-      - rel
-      properties:
-        methodType:
-          description: Type of the HTTP method <br/> GET , PUT , POST , DELETE , ...
-          type: string
-        rel:
-          description: Get Consent preference
-          type: string
-        href:
-          description: Get Consent preference Endpoint
-          type: string
-    TotalCount:
-      type: object
-      title: TotalCount
-      properties:
-        count:
-          format: int64
-          readOnly: true
-          type: integer
-    ProvidersDataset:
-      type: object
-      title: ProvidersDataset
-      properties:
-        name:
-          description: 'The name of the dataset requested from the provider site<br><br><b>Account Type</b>: Manual<br><b>Endpoints</b>:<ul><li>GET accounts</li><li>GET accounts/{accountId}</li><li>GET providerAccounts</li><li>POST providerAccounts</li><li>PUT providerAccounts/{providerAccountId}</li><li>GET providerAccounts/{providerAccountId}</li><li>GET providers/{providerId}</li><li>GET providers</li></ul><b>Applicable Values</b><br>'
-          type: string
-          enum:
-          - BASIC_AGG_DATA
-          - ADVANCE_AGG_DATA
-          - ACCT_PROFILE
-          - DOCUMENT
-        attribute:
-          description: The name of the dataset attribute suported by the provider.<br><br><b>Endpoints</b>:<ul><li>GET providers/{providerId}</li><li>GET providers</li></ul>
-          type: array
-          items:
-            $ref: '#/components/schemas/Attribute'
     Scope:
       type: object
       title: Scope
@@ -798,365 +881,6 @@ components:
         title:
           description: Title for the Data Cluster.
           type: string
-    TransactionDays:
-      type: object
-      title: TransactionDays
-      properties:
-        fullAccountNumberFields:
-          type: array
-          items:
-            type: string
-            enum:
-            - paymentAccountNumber
-            - unmaskedAccountNumber
-        numberOfTransactionDays:
-          format: int32
-          type: integer
-    Preferences:
-      type: object
-      title: Preferences
-      required:
-      - id
-      - title
-      - type
-      - value
-      properties:
-        id:
-          format: int32
-          description: Id of the preference
-          type: integer
-        label:
-          description: Detailed description for each preference
-          type: string
-        title:
-          description: Type of the preferences <br/> additionalUseOfData<br/> userDataPurge
-          type: string
-        type:
-          description: Visual Type of the preference selection
-          type: string
-        value:
-          description: Value of the preference
-          type: string
-    RenewConsentRequest:
-      type: object
-      title: RenewConsentRequest
-      properties:
-        preferences:
-          description: preferences for consent renewal.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
-          $ref: '#/components/schemas/RenewConsentPreferences'
-        cdrInsightsDisclosure:
-          description: Describes the information of the CDR Insights
-          $ref: '#/components/schemas/CDRInsightsDisclosure'
-        renewal:
-          description: renewal entity from consent details service, containing default consent duration and reauthorization eligibility.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
-          $ref: '#/components/schemas/RenewalConsent'
-        businessUserDetail:
-          description: Describes the information of the Business user consent disclosure
-          $ref: '#/components/schemas/BusinessUserDetail'
-        clientTrustedAdvisor:
-          description: describes information of client trusted advisor.
-          type: array
-          items:
-            $ref: '#/components/schemas/ClientTrustedAdvisor'
-    ClientTrustedAdvisor:
-      type: object
-      title: ClientTrustedAdvisor
-      required:
-      - email
-      - name
-      - role
-      properties:
-        role:
-          description: '<b>Role of the Client Trusted Advisor</b>: Example : Lawyer , Accountant , etc...'
-          type: string
-        name:
-          description: Name of the client trusted advisor
-          type: string
-        email:
-          description: '<b>Email Id of the Client Trusted Advisor</b>: PRIMARY , SECONDARY , PERSONAL , WORK and OTHERS'
-          type: string
-    Attribute:
-      type: object
-      title: Attribute
-      properties:
-        container:
-          description: Containers for which the attributes are supported.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
-          type: array
-          items:
-            type: string
-            enum:
-            - bank
-            - creditCard
-            - investment
-            - insurance
-            - loan
-            - reward
-            - bill
-            - realEstate
-            - otherAssets
-            - otherLiabilities
-        fromDate:
-          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        toFinYear:
-          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        fromFinYear:
-          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        containerAttributes:
-          description: Applicable only to TRANSACTIONS attributes of BASIC_AGG_DATA dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          $ref: '#/components/schemas/ContainerAttributes'
-        toDate:
-          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
-          readOnly: true
-          type: string
-        name:
-          description: Attributes that are supported for a dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
-          type: string
-          enum:
-          - BASIC_ACCOUNT_INFO
-          - TRANSACTIONS
-          - STATEMENTS
-          - HOLDINGS
-          - ACCOUNT_DETAILS
-          - TAX
-          - EBILLS
-          - FULL_ACCT_NUMBER
-          - BANK_TRANSFER_CODE
-          - HOLDER_NAME
-          - HOLDER_DETAILS
-          - PAYMENT_PROFILE
-          - PAYMENT_DETAILS
-          - INTEREST_DETAILS
-          - COVERAGE
-    ThirdPartyADR:
-      type: object
-      title: ThirdPartyADR
-      required:
-      - name
-      - url
-      properties:
-        name:
-          description: name of ADR
-          type: string
-        url:
-          description: Unique Id of ADR
-          type: string
-    ConsentHistory:
-      type: object
-      title: ConsentHistory
-      required:
-      - consentStatus
-      - eventDateTime
-      - startDateTime
-      properties:
-        eventDateTime:
-          description: History logged datetime.
-          type: string
-        expirationDateTime:
-          description: Consent expiry datetime where supported by the provider.
-          type: string
-        userDataPurge:
-          format: int64
-          description: Applicable data deletion preference for consent as per AU OB onboarding model and user's &quot;delete my data instead&quot; option. This data point is applicable for AU Open Banking region only.
-          type: integer
-        deidentificationPreference:
-          description: whether user has given consent to use deidentified data or not. This data point is applicable for AU Open Banking region only. Oauthpref id = 4
-          type: boolean
-        startDateTime:
-          description: Consent start datetime.
-          type: string
-        renewedDateTime:
-          description: Consent renewed datetime.
-          type: string
-        consentStatus:
-          description: Status of the consent in each history event. Statuses will be shown as applicable for Open Banking regions.
-          type: string
-          enum:
-          - ACTIVE
-          - EXPIRED
-          - REVOKED
-          - CONSENT_REPEALED
-        revokedDateTime:
-          description: Revoked datetime for the consent if consent is revoked.
-          type: string
-        consentCollectionPeriod:
-          format: int32
-          description: Consent duration period selected by user for recurring consents during the new account addition or consent renewal. This data point is applicable for AU Open Banking region only. Oauthpref id = 6
-          type: integer
-    ConsentPreferencesResponse:
-      type: object
-      title: ConsentPreferencesResponse
-      required:
-      - consentId
-      - customDisplayData
-      - preferences
-      properties:
-        consentId:
-          format: int64
-          description: Consent Id generated through POST Consent.
-          type: integer
-        preferences:
-          description: User chosen preference value for consent expiration
-          $ref: '#/components/schemas/Preferences'
-        customDisplayData:
-          description: custom display data
-          $ref: '#/components/schemas/CustomDisplayData'
-    ContainerAttributes:
-      type: object
-      title: ContainerAttributes
-      properties:
-        BANK:
-          $ref: '#/components/schemas/TransactionDays'
-        LOAN:
-          $ref: '#/components/schemas/TransactionDays'
-        CREDITCARD:
-          $ref: '#/components/schemas/TransactionDays'
-        INVESTMENT:
-          $ref: '#/components/schemas/TransactionDays'
-        INSURANCE:
-          $ref: '#/components/schemas/TransactionDays'
-    DataHandling:
-      type: object
-      title: DataHandling
-      required:
-      - dataList
-      - headerDescription
-      properties:
-        dataList:
-          description: We will apply the CDR de-identificatiion process. <br/> De-identificatied data will be used without further consent.<br/> De-identification of CDR data means your data cannot be associated with your identity after de-identification process takes place.
-          type: array
-          items:
-            type: string
-        headerDescription:
-          description: De-identification of data
-          type: string
-    DeletePreference:
-      type: object
-      title: DeletePreference
-      properties:
-        description:
-          description: Delete Preference Descritption
-          type: string
-        alternateDescription:
-          description: Delete Preference Alternate Descritption
-          type: string
-        labelDescription:
-          description: Delete Preference LabelDescritption
-          type: string
-    Renewal:
-      type: object
-      title: Renewal
-      required:
-      - defaultRenewalDuration
-      - isReauthorizationRequired
-      properties:
-        defaultRenewalDuration:
-          format: int64
-          description: Shows the duration in days of consent renewal
-          type: integer
-        isReauthorizationRequired:
-          description: Shows if the consent renewal need reauthorization
-          type: boolean
-    CreateConsentRequest:
-      type: object
-      title: CreateConsentRequest
-      properties:
-        providerId:
-          format: int64
-          description: Unique identifier for the provider site.(e.g., financial institution sites, biller sites, lender sites, etc.).<br><br><b>Endpoints</b>:<ul><li>POST Consent</li></ul>
-          type: integer
-        businessUserDetail:
-          description: Describes the information of the Business user consent disclosure
-          $ref: '#/components/schemas/BusinessUserDetailForCreateConsent'
-        dataset:
-          description: The name of the dataset attribute supported by the provider.If no dataset value is provided, the datasets that are configured for the customer will be considered.The configured dataset can be overridden by providing the dataset as an input.<br><br><b>Endpoints</b>:<ul><li>POST Consent</li></ul>
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvidersDataset'
-        applicationName:
-          description: The name of the application.If no applicationName is provided in the input, the default applicationName will be considered<br><br><b>Endpoints</b>:<ul><li>POST Consent</li></ul>
-          type: string
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
-    BusinessUserDetailForCreateConsent:
-      type: object
-      title: BusinessUserDetailForCreateConsent
-      required:
-      - abn
-      properties:
-        abn:
-          description: Australian Business number issued by ABR
-          type: string
-    UpdateConsentRequest:
-      type: object
-      title: UpdateConsentRequest
-      properties:
-        preferences:
-          description: preferences for consent renewal.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
-          $ref: '#/components/schemas/RenewConsentPreferences'
-        scopeId:
-          description: Applicable Open Banking data cluster values.<br><br><b>Endpoints</b>:<ul><li>PUT Consent</li></ul>
-          type: array
-          items:
-            type: string
-            enum:
-            - ACCOUNT_DETAILS
-            - TRANSACTION_DETAILS
-            - STATEMENT_DETAILS
-            - CONTACT_DETAILS
-        cdrInsightsDisclosure:
-          description: Describes the information of the CDR Insights<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
-          $ref: '#/components/schemas/CDRInsightsDisclosure'
-        clientTrustedAdvisor:
-          description: describes information of client trusted advisor
-          type: array
-          items:
-            $ref: '#/components/schemas/ClientTrustedAdvisor'
-    CustomDisplayData:
-      type: object
-      title: CustomDisplayData
-      required:
-      - clientTrustedAdvisorTxt
-      - consentConfirmation
-      - deletePreference
-      - thirdParty
-      - userDataTreatment
-      properties:
-        consentConfirmation:
-          description: Details of ConsentConfirmation
-          $ref: '#/components/schemas/ConsentConfirmation'
-        deletePreference:
-          description: Details of DeletePreference
-          $ref: '#/components/schemas/DeletePreference'
-        thirdParty:
-          description: Details of ThirdParty
-          $ref: '#/components/schemas/ThirdParty'
-        clientTrustedAdvisorTxt:
-          description: Details of ClientTrustedAdvisorTxt
-          $ref: '#/components/schemas/ClientTrustedAdvisorTxt'
-        userDataTreatment:
-          description: Details of UserDataTreatment
-          $ref: '#/components/schemas/UserDataTreatment'
     CreateConsent:
       type: object
       title: CreateConsent
@@ -1274,4 +998,280 @@ components:
           type: string
         expirationDate:
           description: Consent expiry date.
+          type: string
+    ContainerAttributes:
+      type: object
+      title: ContainerAttributes
+      properties:
+        BANK:
+          $ref: '#/components/schemas/TransactionDays'
+        LOAN:
+          $ref: '#/components/schemas/TransactionDays'
+        CREDITCARD:
+          $ref: '#/components/schemas/TransactionDays'
+        INVESTMENT:
+          $ref: '#/components/schemas/TransactionDays'
+        INSURANCE:
+          $ref: '#/components/schemas/TransactionDays'
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    Attribute:
+      type: object
+      title: Attribute
+      properties:
+        container:
+          description: Containers for which the attributes are supported.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
+          type: array
+          items:
+            type: string
+            enum:
+            - bank
+            - creditCard
+            - investment
+            - insurance
+            - loan
+            - reward
+            - bill
+            - realEstate
+            - otherAssets
+            - otherLiabilities
+        fromDate:
+          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        toFinYear:
+          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        fromFinYear:
+          description: Applicable only to TAX attribute of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        containerAttributes:
+          description: Applicable only to TRANSACTIONS attributes of BASIC_AGG_DATA dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          $ref: '#/components/schemas/ContainerAttributes'
+        toDate:
+          description: Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.<br><br><b>Endpoints</b>:<ul><li>POST providerAccounts</li><li>PUT providerAccounts</li></ul>
+          readOnly: true
+          type: string
+        name:
+          description: Attributes that are supported for a dataset.<br><br><b>Endpoints</b>:<ul><li>GET providers</li><li>GET providers/{providerId}</li></ul>
+          type: string
+          enum:
+          - BASIC_ACCOUNT_INFO
+          - TRANSACTIONS
+          - STATEMENTS
+          - HOLDINGS
+          - ACCOUNT_DETAILS
+          - TAX
+          - EBILLS
+          - FULL_ACCT_NUMBER
+          - BANK_TRANSFER_CODE
+          - HOLDER_NAME
+          - HOLDER_DETAILS
+          - PAYMENT_PROFILE
+          - PAYMENT_DETAILS
+          - INTEREST_DETAILS
+          - COVERAGE
+    UserDataTreatment:
+      type: object
+      title: UserDataTreatment
+      required:
+      - cdrPolicy
+      - dataHandling
+      - description
+      properties:
+        dataHandling:
+          description: Details of CDR Data Handling
+          $ref: '#/components/schemas/DataHandling'
+        cdrPolicy:
+          description: Details of CDR Policy
+          $ref: '#/components/schemas/CdrPolicy'
+        description:
+          description: After we have finished using your data or you have withdraw your consent to use the data, it will be de-identified as per our
+          type: string
+    CDRInsights:
+      type: object
+      title: CDRInsights
+      properties:
+        description:
+          description: name of the insight
+          type: string
+        detail:
+          description: usage of the data for the insight
+          type: string
+    ConsentResponse:
+      type: object
+      title: ConsentResponse
+      properties:
+        consent:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Consent'
+    ConsentHistoryCount:
+      type: object
+      title: ConsentHistoryCount
+      properties:
+        TOTAL:
+          readOnly: true
+          $ref: '#/components/schemas/TotalCount'
+    ConsentConfirmation:
+      type: object
+      title: ConsentConfirmation
+      required:
+      - description
+      - header
+      properties:
+        description:
+          description: Consent confirmation Description
+          type: string
+        header:
+          description: Consent confirmation Header
+          type: string
+    UpdateConsent:
+      type: object
+      title: UpdateConsent
+      properties:
+        consentId:
+          format: int64
+          description: Unique identifier for consent. This is created during consent creation.
+          type: integer
+        authorizationUrl:
+          description: Authorization url generated for the request through PUT Consent to reach endsite.
+          type: string
+        providerId:
+          format: int64
+          description: Unique identifier for the provider account resource. This is created during account addition.
+          type: integer
+    CreateConsentRequest:
+      type: object
+      title: CreateConsentRequest
+      properties:
+        providerId:
+          format: int64
+          description: Unique identifier for the provider site.(e.g., financial institution sites, biller sites, lender sites, etc.).<br><br><b>Endpoints</b>:<ul><li>POST Consent</li></ul>
+          type: integer
+        businessUserDetail:
+          description: Describes the information of the Business user consent disclosure
+          $ref: '#/components/schemas/BusinessUserDetailForCreateConsent'
+        dataset:
+          description: The name of the dataset attribute supported by the provider.If no dataset value is provided, the datasets that are configured for the customer will be considered.The configured dataset can be overridden by providing the dataset as an input.<br><br><b>Endpoints</b>:<ul><li>POST Consent</li></ul>
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvidersDataset'
+        applicationName:
+          description: The name of the application.If no applicationName is provided in the input, the default applicationName will be considered<br><br><b>Endpoints</b>:<ul><li>POST Consent</li></ul>
+          type: string
+    CreatedConsentResponse:
+      type: object
+      title: CreatedConsentResponse
+      properties:
+        consent:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateConsent'
+    CDRInsightsDisclosure:
+      type: object
+      title: CDRInsightsDisclosure
+      properties:
+        purpose:
+          description: purpose of the insights
+          type: string
+        nonAPName:
+          description: non accredited party name
+          type: string
+        cdrInsights:
+          type: array
+          items:
+            $ref: '#/components/schemas/CDRInsights'
+    RenewConsentPreferences:
+      type: object
+      title: RenewConsentPreferences
+      required:
+      - id
+      - value
+      properties:
+        id:
+          format: int64
+          description: preference id for AU Open Banking only.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
+          type: integer
+        value:
+          description: preference value for AU Open Banking only.<br><br><b>Endpoints</b>:<ul><li>PUT consents/{consentId}/renewal</li></ul>
+          type: string
+    BusinessUserDetailForCreateConsent:
+      type: object
+      title: BusinessUserDetailForCreateConsent
+      required:
+      - abn
+      properties:
+        abn:
+          description: Australian Business number issued by ABR
+          type: string
+    Preferences:
+      type: object
+      title: Preferences
+      required:
+      - id
+      - title
+      - type
+      - value
+      properties:
+        id:
+          format: int32
+          description: Id of the preference
+          type: integer
+        label:
+          description: Detailed description for each preference
+          type: string
+        title:
+          description: Type of the preferences <br/> additionalUseOfData<br/> userDataPurge
+          type: string
+        type:
+          description: Visual Type of the preference selection
+          type: string
+        value:
+          description: Value of the preference
+          type: string
+    CdrPolicy:
+      type: object
+      title: CdrPolicy
+      required:
+      - description
+      - url
+      properties:
+        description:
+          description: Consumer Data Right Policy
+          type: string
+        url:
+          description: https://solutions.yodlee.com/au-cdr.html
+          type: string
+    ThirdPartyADR:
+      type: object
+      title: ThirdPartyADR
+      required:
+      - name
+      - url
+      properties:
+        name:
+          description: name of ADR
+          type: string
+        url:
+          description: Unique Id of ADR
           type: string

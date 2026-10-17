@@ -273,34 +273,46 @@ paths:
       - Cobrand
 components:
   schemas:
-    CobrandPublicKeyResponse:
+    CreateCobrandNotificationEvent:
       type: object
-      title: CobrandPublicKeyResponse
+      title: CreateCobrandNotificationEvent
       properties:
-        keyAlias:
-          description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/publicKey</li></ul>
-          readOnly: true
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul>
           type: string
-        keyAsPemString:
-          description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add & update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/publicKey</li></ul>
-          readOnly: true
-          type: string
-    UpdateCobrandNotificationEventRequest:
+          maxLength: 2147483647
+    CobrandSession:
       type: object
-      title: UpdateCobrandNotificationEventRequest
-      required:
-      - event
+      title: CobrandSession
+      properties:
+        cobSession:
+          type: string
+    CobrandNotificationEvent:
+      type: object
+      title: CobrandNotificationEvent
+      properties:
+        name:
+          description: Name of the event for which the customers must subscribe to receive notifications.<br><b>Valid Value:</b> Notification Events Name<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul><b>Applicable Values</b><br>
+          type: string
+          enum:
+          - REFRESH
+          - DATA_UPDATES
+          - AUTO_REFRESH_UPDATES
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647
+    CobrandNotificationResponse:
+      type: object
+      title: CobrandNotificationResponse
       properties:
         event:
-          $ref: '#/components/schemas/UpdateCobrandNotificationEvent'
-    CobrandLoginRequest:
-      type: object
-      title: CobrandLoginRequest
-      required:
-      - cobrand
-      properties:
-        cobrand:
-          $ref: '#/components/schemas/Cobrand'
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CobrandNotificationEvent'
     Cobrand:
       type: object
       title: Cobrand
@@ -320,23 +332,14 @@ components:
           pattern: '[a-z]{2}_[A-Z]{2}'
           description: The customer's locale that will be considered for the localization functionality.<br><br><b>Endpoints</b>:<ul><li>POST cobrand/login</li></ul>
           type: string
-    CreateCobrandNotificationEventRequest:
+    UpdateCobrandNotificationEventRequest:
       type: object
-      title: CreateCobrandNotificationEventRequest
+      title: UpdateCobrandNotificationEventRequest
       required:
       - event
       properties:
         event:
-          $ref: '#/components/schemas/CreateCobrandNotificationEvent'
-    UpdateCobrandNotificationEvent:
-      type: object
-      title: UpdateCobrandNotificationEvent
-      properties:
-        callbackUrl:
-          minLength: 1
-          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul>
-          type: string
-          maxLength: 2147483647
+          $ref: '#/components/schemas/UpdateCobrandNotificationEvent'
     YodleeError:
       type: object
       title: YodleeError
@@ -353,36 +356,33 @@ components:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string
-    CreateCobrandNotificationEvent:
+    CobrandLoginRequest:
       type: object
-      title: CreateCobrandNotificationEvent
+      title: CobrandLoginRequest
+      required:
+      - cobrand
       properties:
-        callbackUrl:
-          minLength: 1
-          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul>
-          type: string
-          maxLength: 2147483647
-    CobrandNotificationEvent:
+        cobrand:
+          $ref: '#/components/schemas/Cobrand'
+    CreateCobrandNotificationEventRequest:
       type: object
-      title: CobrandNotificationEvent
+      title: CreateCobrandNotificationEventRequest
+      required:
+      - event
       properties:
-        name:
-          description: Name of the event for which the customers must subscribe to receive notifications.<br><b>Valid Value:</b> Notification Events Name<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul><b>Applicable Values</b><br>
-          type: string
-          enum:
-          - REFRESH
-          - DATA_UPDATES
-          - AUTO_REFRESH_UPDATES
-        callbackUrl:
-          minLength: 1
-          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul>
-          type: string
-          maxLength: 2147483647
-    CobrandSession:
+        event:
+          $ref: '#/components/schemas/CreateCobrandNotificationEvent'
+    CobrandPublicKeyResponse:
       type: object
-      title: CobrandSession
+      title: CobrandPublicKeyResponse
       properties:
-        cobSession:
+        keyAlias:
+          description: The key name used for encryption.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/publicKey</li></ul>
+          readOnly: true
+          type: string
+        keyAsPemString:
+          description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add & update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/publicKey</li></ul>
+          readOnly: true
           type: string
     CobrandLoginResponse:
       type: object
@@ -403,12 +403,12 @@ components:
           description: The customer's locale that will be considered for the localization functionality.<br><br><b>Endpoints</b>:<ul><li>POST cobrand/login</li></ul>
           readOnly: true
           type: string
-    CobrandNotificationResponse:
+    UpdateCobrandNotificationEvent:
       type: object
-      title: CobrandNotificationResponse
+      title: UpdateCobrandNotificationEvent
       properties:
-        event:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/CobrandNotificationEvent'
+        callbackUrl:
+          minLength: 1
+          description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET cobrand/config/notifications/events</li></ul>
+          type: string
+          maxLength: 2147483647

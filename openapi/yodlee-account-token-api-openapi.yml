@@ -76,6 +76,35 @@ paths:
       - Account Token
 components:
   schemas:
+    AccountToken:
+      type: object
+      title: AccountToken
+      properties:
+        processorToken:
+          description: The unique token that the payment partner can use to make API request to the Yodlee system.
+          readOnly: true
+          type: string
+        accountId:
+          format: int64
+          description: The unique identifier for the user's account.
+          readOnly: true
+          type: integer
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
     PaymentProcessorTokenRequest:
       type: object
       title: PaymentProcessorTokenRequest
@@ -102,32 +131,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccountToken'
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
-    AccountToken:
-      type: object
-      title: AccountToken
-      properties:
-        processorToken:
-          description: The unique token that the payment partner can use to make API request to the Yodlee system.
-          readOnly: true
-          type: string
-        accountId:
-          format: int64
-          description: The unique identifier for the user's account.
-          readOnly: true
-          type: integer

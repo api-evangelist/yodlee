@@ -213,23 +213,15 @@ paths:
         required: true
 components:
   schemas:
-    UpdateConfigsNotificationEvent:
+    CreateConfigsNotificationEvent:
       type: object
-      title: UpdateConfigsNotificationEvent
+      title: CreateConfigsNotificationEvent
       properties:
         callbackUrl:
           minLength: 1
           description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
           type: string
           maxLength: 2147483647
-    UpdateConfigsNotificationEventRequest:
-      type: object
-      title: UpdateConfigsNotificationEventRequest
-      required:
-      - event
-      properties:
-        event:
-          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
     ConfigsNotificationEvent:
       type: object
       title: ConfigsNotificationEvent
@@ -248,15 +240,32 @@ components:
           description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
           type: string
           maxLength: 2147483647
-    CreateConfigsNotificationEvent:
+    UpdateConfigsNotificationEvent:
       type: object
-      title: CreateConfigsNotificationEvent
+      title: UpdateConfigsNotificationEvent
       properties:
         callbackUrl:
           minLength: 1
           description: URL to which the notification should be posted.<br><br><b>Endpoints</b>:<ul><li>GET configs/notifications/events</li></ul>
           type: string
           maxLength: 2147483647
+    ConfigsNotificationResponse:
+      type: object
+      title: ConfigsNotificationResponse
+      properties:
+        event:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigsNotificationEvent'
+    UpdateConfigsNotificationEventRequest:
+      type: object
+      title: UpdateConfigsNotificationEventRequest
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/UpdateConfigsNotificationEvent'
     YodleeError:
       type: object
       title: YodleeError
@@ -273,29 +282,6 @@ components:
           description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
           readOnly: true
           type: string
-    ConfigsPublicKeyResponse:
-      type: object
-      title: ConfigsPublicKeyResponse
-      properties:
-        publicKey:
-          $ref: '#/components/schemas/ConfigsPublicKey'
-    ConfigsNotificationResponse:
-      type: object
-      title: ConfigsNotificationResponse
-      properties:
-        event:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigsNotificationEvent'
-    CreateConfigsNotificationEventRequest:
-      type: object
-      title: CreateConfigsNotificationEventRequest
-      required:
-      - event
-      properties:
-        event:
-          $ref: '#/components/schemas/CreateConfigsNotificationEvent'
     ConfigsPublicKey:
       type: object
       title: ConfigsPublicKey
@@ -308,3 +294,17 @@ components:
           description: Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs.<br><br><b>Endpoints</b>:<ul><li>GET configs/publicKey</li></ul>
           readOnly: true
           type: string
+    CreateConfigsNotificationEventRequest:
+      type: object
+      title: CreateConfigsNotificationEventRequest
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/CreateConfigsNotificationEvent'
+    ConfigsPublicKeyResponse:
+      type: object
+      title: ConfigsPublicKeyResponse
+      properties:
+        publicKey:
+          $ref: '#/components/schemas/ConfigsPublicKey'

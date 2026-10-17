@@ -80,16 +80,6 @@ paths:
         required: true
 components:
   schemas:
-    DeleteDocumentsRequest:
-      type: object
-      title: DeleteDocumentsRequest
-      properties:
-        id:
-          description: List of document ids.
-          type: array
-          items:
-            format: int64
-            type: integer
     GetDocumentsRequest:
       type: object
       title: GetDocumentsRequest
@@ -106,31 +96,6 @@ components:
           items:
             format: int64
             type: integer
-    SuccessAssociations:
-      type: object
-      title: SuccessAssociations
-      properties:
-        accountId:
-          format: int64
-          description: The account Ids associated with the document Id.
-          readOnly: true
-          type: integer
-    YodleeError:
-      type: object
-      title: YodleeError
-      properties:
-        errorMessage:
-          description: The descriptive message that explains the error scenario.
-          readOnly: true
-          type: string
-        errorCode:
-          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
-          readOnly: true
-          type: string
-        referenceCode:
-          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
-          readOnly: true
-          type: string
     GetDocumentsList:
       type: object
       title: GetDocumentsList
@@ -171,3 +136,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GetDocumentsList'
+    YodleeError:
+      type: object
+      title: YodleeError
+      properties:
+        errorMessage:
+          description: The descriptive message that explains the error scenario.
+          readOnly: true
+          type: string
+        errorCode:
+          description: The error code follows the format YNNN. The error codes do not change. New error codes may be added as we introduce new features and enhance functionalities.
+          readOnly: true
+          type: string
+        referenceCode:
+          description: Unique Yodlee identifier used to troubleshoot issues at Yodlee's end.
+          readOnly: true
+          type: string
+    DeleteDocumentsRequest:
+      type: object
+      title: DeleteDocumentsRequest
+      properties:
+        id:
+          description: List of document ids.
+          type: array
+          items:
+            format: int64
+            type: integer
+    SuccessAssociations:
+      type: object
+      title: SuccessAssociations
+      properties:
+        accountId:
+          format: int64
+          description: The account Ids associated with the document Id.
+          readOnly: true
+          type: integer
