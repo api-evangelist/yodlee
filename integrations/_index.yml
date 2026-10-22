@@ -81,3 +81,45 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: yodlee-apis-guru-openapi-directory
+  label: APIs.guru OpenAPI Directory
+  partner: apis-guru
+  partner_name: APIs.guru OpenAPI Directory
+  category: API definition directory listing (OpenAPI)
+  type: register
+  channel: standard-directory
+  evidence: https://apis.guru/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: APIs.guru OpenAPI Directory
+    spec_file: null
+    standard: APIs.guru OpenAPI Directory
+    role: listed-in-directory
+    directory_provider: yodlee.com
+    matched_domain: yodlee.com
+    matched_by: domain
+    apis_listed: 1
+    version_count: 1
+    first_added: '2021-06-07'
+    last_updated: '2021-06-21'
+    origin_publisher_hosted: true
+    origin_hosts:
+    - developer.yodlee.com
+    categories:
+    - financial
+    own_openapi_files: 21
+    listings:
+    - key: yodlee.com
+      title: Yodlee Core APIs
+      preferred: 1.1.0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/yodlee.com/1.1.0/openapi.json
+      origin_url: https://developer.yodlee.com/sites/default/files/api_spec/coreapisoas3.yml
+      openapi_version: 3.0.1
+    signal_note: 'participation only: a community directory listing (APIs.guru collects definitions; the provider
+      did not file them). Signals: version_count, apis_listed, origin_publisher_hosted.'
+    detected_by: sweep-openapi-directory-apis-guru.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
