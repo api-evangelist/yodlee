@@ -326,3 +326,9 @@ components:
           description: Access Token to access YSL 1.1 services.<br><br><b>Endpoints</b>:<ul><li>POST /auth/token</li></ul>
           readOnly: true
           type: string
+x-provenance:
+  method: harvested
+  publisher: Yodlee
+  source: https://raw.githubusercontent.com/yodlee/OpenAPI/HEAD/swagger.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
