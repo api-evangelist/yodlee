@@ -1,4 +1,4 @@
-# Yodlee (yodlee)
+# Yodlee
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,102 +66,171 @@
 
 Yodlee (Envestnet | Yodlee) is a financial data aggregation platform providing unified API access to bank accounts, credit card transactions, investments, loans, and insurance data across thousands of financial institutions. The Yodlee Core APIs v1.1 enable secure account aggregation, transaction enrichment, risk analytics, consent management, and account verification for fintech applications.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/apis.yml)
+**Areas:** Financial Data · Data Aggregation · Banking · Fintech · Open Finance
 
-## Scope
+## Yodlee on APIs.io
 
-- **Type:** Index
+Everything profiled for Yodlee is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/yodlee/](https://apis.io/providers/yodlee/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (23)
 
-- Financial Data
-- Data Aggregation
-- Banking
-- Fintech
-- Open Finance
+- [Yodlee Account Verification API](https://apis.io/apis/yodlee/yodlee-account-verification-api/) — The Yodlee Account Verification API enables real-time verification of bank account ownership and balance. Supports verification workflows via FastLink 4,…
+- [Yodlee FastLink](https://apis.io/apis/yodlee/yodlee-fastlink/) — FastLink 4 is Yodlee's white-label account aggregation widget that enables users to securely link their financial accounts. Provides a customizable embedded…
+- [Yodlee Account Token API](https://apis.io/apis/yodlee/yodlee-account-token-api/) — Account verification customers looking to integrate with one of our payment partners can use the Account Token endpoints. These APIs allow creating a secure…
+- [Yodlee Accounts API](https://apis.io/apis/yodlee/yodlee-accounts-api/) — Accounts API
+- [Yodlee Auth API](https://apis.io/apis/yodlee/yodlee-auth-api/) — Auth API
+- [Yodlee Cobrand API](https://apis.io/apis/yodlee/yodlee-cobrand-api/) — Cobrand API
+- [Yodlee Configs API](https://apis.io/apis/yodlee/yodlee-configs-api/) — Configs API
+- [Yodlee Consents API](https://apis.io/apis/yodlee/yodlee-consents-api/) — Consents API
+- [Yodlee DataExtracts API](https://apis.io/apis/yodlee/yodlee-dataextracts-api/) — DataExtracts API
+- [Yodlee Derived API](https://apis.io/apis/yodlee/yodlee-derived-api/) — Derived API
+- [Yodlee Documents API](https://apis.io/apis/yodlee/yodlee-documents-api/) — Documents API
+- [Yodlee Holdings API](https://apis.io/apis/yodlee/yodlee-holdings-api/) — Holdings API
+- [Yodlee Institutions API](https://apis.io/apis/yodlee/yodlee-institutions-api/) — Institutions API
+- [Yodlee Payment Processor API](https://apis.io/apis/yodlee/yodlee-payment-processor-api/) — Yodlee's payment processor partners can use the Payment Processor endpoints to access verified account details using the <code>processorToken</code> created…
+- [Yodlee Providers API](https://apis.io/apis/yodlee/yodlee-providers-api/) — Providers API
+- [Yodlee Risk Analytics API](https://apis.io/apis/yodlee/yodlee-risk-analytics-api/) — Risk Analytics API
+- [Yodlee Statements API](https://apis.io/apis/yodlee/yodlee-statements-api/) — Statements API
+- [Yodlee Transactions API](https://apis.io/apis/yodlee/yodlee-transactions-api/) — Transactions API
+- [Yodlee User API](https://apis.io/apis/yodlee/yodlee-user-api/) — Users API
+- [Yodlee User Documents API](https://apis.io/apis/yodlee/yodlee-user-documents-api/) — User Documents API
+- [Yodlee Verification API](https://apis.io/apis/yodlee/yodlee-verification-api/) — Verification API
+- [Yodlee Verify Account API](https://apis.io/apis/yodlee/yodlee-verify-account-api/) — Verify Account API
+- [Yodlee Provider Accounts API](https://apis.io/apis/yodlee/yodlee-provider-accounts-api/) — Provider Accounts API
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-27
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Yodlee Core API
+GraphQL schemas.
 
-The Yodlee Core APIs v1.1 provide a flexible RESTful API for accessing personal financial data. Key capabilities include account aggregation across banks and brokerages, transaction history and enrichment, holdings and investment data, consent and provider account management, documents, statements, data extracts, risk analytics, and account verification. Supports 90% of top US, UK, Australia, and India financial institutions.
+- [Moved to /providers/yodlee/](https://apis.io/graphqls/yodlee/yodlee-graphql/)
 
-- **Human URL:** [https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview](https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview)
-- **Base URL:** `https://production.api.yodlee.com/ysl`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Financial Data
-- Aggregation
-- Transactions
-- Accounts
-- Banking
-- Investments
+- [Yodlee Agentic Access](https://apis.io/agentic-access/yodlee/yodlee-agentic-access/)
 
-#### Properties
+#### Examples (1)
 
-- [Documentation](https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs/overview)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://developer.yodlee.com/docs/getting-started)
-- [Postman Collection](collections/yodlee-core.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/yodlee-core.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Example requests and responses.
 
-### Yodlee Account Verification API
+- [Yodlee Core Get Transactions Example](https://apis.io/examples/yodlee/yodlee-core-get-transactions-example/)
 
-The Yodlee Account Verification API enables real-time verification of bank account ownership and balance. Supports verification workflows via FastLink 4, holder profile retrieval, verified account status, and account classification summaries.
+#### Collections (22)
 
-- **Human URL:** [https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference](https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference)
-- **Base URL:** `https://production.api.yodlee.com/ysl`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Yodlee Core APIs Account Token API](https://apis.io/collections/yodlee/open-yodlee-account-token-api/)
+- [Yodlee Core APIs Account Token Accounts API](https://apis.io/collections/yodlee/open-yodlee-accounts-api/)
+- [Yodlee Core APIs Account Token Auth API](https://apis.io/collections/yodlee/open-yodlee-auth-api/)
+- [Yodlee Core APIs Account Token Cobrand API](https://apis.io/collections/yodlee/open-yodlee-cobrand-api/)
+- [Yodlee Core APIs Account Token Configs API](https://apis.io/collections/yodlee/open-yodlee-configs-api/)
+- [Yodlee Core APIs Account Token Consents API](https://apis.io/collections/yodlee/open-yodlee-consents-api/)
+- [Yodlee Core APIs](https://apis.io/collections/yodlee/open-yodlee-core/)
+- [Yodlee Core APIs Account Token DataExtracts API](https://apis.io/collections/yodlee/open-yodlee-dataextracts-api/)
+- [Yodlee Core APIs Account Token Derived API](https://apis.io/collections/yodlee/open-yodlee-derived-api/)
+- [Yodlee Core APIs Account Token Documents API](https://apis.io/collections/yodlee/open-yodlee-documents-api/)
+- [Yodlee Core APIs Account Token Holdings API](https://apis.io/collections/yodlee/open-yodlee-holdings-api/)
+- [Yodlee Core APIs Account Token Institutions API](https://apis.io/collections/yodlee/open-yodlee-institutions-api/)
+- [Yodlee Core APIs Account Token Payment Processor API](https://apis.io/collections/yodlee/open-yodlee-payment-processor-api/)
+- [Yodlee Core APIs Account Token ProviderAccounts API](https://apis.io/collections/yodlee/open-yodlee-provideraccounts-api/)
+- [Yodlee Core APIs Account Token Providers API](https://apis.io/collections/yodlee/open-yodlee-providers-api/)
+- [Yodlee Core APIs Account Token Risk Analytics API](https://apis.io/collections/yodlee/open-yodlee-risk-analytics-api/)
+- [Yodlee Core APIs Account Token Statements API](https://apis.io/collections/yodlee/open-yodlee-statements-api/)
+- [Yodlee Core APIs Account Token Transactions API](https://apis.io/collections/yodlee/open-yodlee-transactions-api/)
+- [Yodlee Core APIs Account Token User API](https://apis.io/collections/yodlee/open-yodlee-user-api/)
+- [Yodlee Core APIs Account Token User Documents API](https://apis.io/collections/yodlee/open-yodlee-user-documents-api/)
+- [Yodlee Core APIs Account Token Verification API](https://apis.io/collections/yodlee/open-yodlee-verification-api/)
+- [Yodlee Core APIs Account Token Verify Account API](https://apis.io/collections/yodlee/open-yodlee-verify-account-api/)
 
-- Account Verification
-- Banking
-- Fintech
-- KYC
+#### Security (1)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://developer.yodlee.com/products/yodlee/account-aggregation/docs/api-reference)
-- [Postman Collection](collections/yodlee-core.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/yodlee-core.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Yodlee Domain Security](https://apis.io/security/yodlee/yodlee-domain-security/)
 
-### Yodlee FastLink
+#### Plans and pricing (1)
 
-FastLink 4 is Yodlee's white-label account aggregation widget that enables users to securely link their financial accounts. Provides a customizable embedded UI for account login, MFA, account selection, verification, and consent management.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://developer.yodlee.com/](https://developer.yodlee.com/)
+- [Yodlee Plans Pricing](https://apis.io/plans/yodlee/yodlee-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Account Linking
-- Widget
-- Embedded Finance
+Published request limits.
 
-#### Properties
+- [Yodlee Rate Limits](https://apis.io/rate-limits/yodlee/yodlee-rate-limits/)
 
-- [Documentation](https://developer.yodlee.com/)
-- [Postman Collection](collections/yodlee-core.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/yodlee-core.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### FinOps (1)
 
-## Common Properties
+What the API costs to run, by operation.
 
-- [LinkedIn](https://www.linkedin.com/company/yodlee)
+- [Yodlee Finops](https://apis.io/finops/yodlee/yodlee-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.yodlee.com/)
-- [Developer  Portal](https://developer.yodlee.com/)
 - [Documentation](https://developer.yodlee.com/resources/yodlee/yodlee-api-overview/docs)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/openapi/yodlee-core-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [GitHub Organization](https://github.com/yodlee)
-- [SDK](https://github.com/Yodlee/java-sdk)
-- [Getting Started](https://developer.yodlee.com/docs/getting-started)
-- [Vocabulary](https://raw.githubusercontent.com/api-evangelist/yodlee/refs/heads/main/vocabulary/yodlee-vocabulary.yml)
+- [Getting started](https://developer.yodlee.com/docs/getting-started)
+- [Blog](https://www.yodlee.com/company/blog)
+- [Privacy policy](https://www.yodlee.com/legal/privacy-notice)
+- [GitHub](https://github.com/yodlee)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 48.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 28.9 |
+
+**Agent readiness 21.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/yodlee/](https://apis.io/providers/yodlee/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Yodlee: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/yodlee/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
